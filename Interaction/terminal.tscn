@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cm6ykl166jgjo"]
+
+[ext_resource type="Material" uid="uid://csys848nfygqe" path="res://Materials/purple.tres" id="1_4jg27"]
+[ext_resource type="Script" uid="uid://cnow6egpspsap" path="res://Interaction/terminal.gd" id="1_jaww5"]
+[ext_resource type="PackedScene" uid="uid://bky5aipqtxurn" path="res://Interaction/InteractionArea.tscn" id="1_viu7s"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jaww5"]
+radius = 3.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4jg27"]
+
+[node name="Terminal" type="CSGBox3D" unique_id=1538996098]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+use_collision = true
+collision_layer = 0
+collision_mask = 0
+material = ExtResource("1_4jg27")
+script = ExtResource("1_jaww5")
+
+[node name="InteractionArea" parent="." unique_id=353202805 node_paths=PackedStringArray("label") instance=ExtResource("1_viu7s")]
+label = NodePath("../InteractLabel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=1242070519]
+shape = SubResource("SphereShape3D_jaww5")
+
+[node name="InteractLabel" type="Label3D" parent="." unique_id=1536543575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0170814, 0)
+billboard = 1
+text = "[E] to Interact"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1329322682]
+replication_config = SubResource("SceneReplicationConfig_4jg27")

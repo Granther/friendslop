@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://be8qbmt0fe144"]
+
+[ext_resource type="Script" uid="uid://cugl3nsf5vtlu" path="res://Scripts/Player/player.gd" id="1_xpcdj"]
+[ext_resource type="PackedScene" uid="uid://d3xlqucrpd30n" path="res://Scenes/Player/stonehead.tscn" id="2_mtuoh"]
+[ext_resource type="PackedScene" uid="uid://cmig72j5xmifs" path="res://Scenes/Player/stoneman.tscn" id="3_htcer"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fo5ed"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8j60k"]
+size = Vector3(0.49902344, 0.9880371, 0.8925781)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fo5ed"]
+radius = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5ukr8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o06y3"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6t5aa"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Head/Camera3D:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Head:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Head/Stoneman/Left Arm Target:position")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Head/Stoneman/Right Arm Target:position")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+
+[node name="Player" type="CharacterBody3D" unique_id=1288706838]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_xpcdj")
+
+[node name="Nametag" type="Label3D" parent="." unique_id=1452559245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1281512, 0)
+billboard = 1
+shaded = true
+text = "
+"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=112410639]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0193906, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_fo5ed")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1932185389]
+transform = Transform3D(0.6625481, 0, 0, 0, 1.7481909, 0, 0, 0, 0.2394429, 0, 0.90595007, -0.017046168)
+shape = SubResource("BoxShape3D_8j60k")
+
+[node name="Head" type="Node3D" parent="." unique_id=310455427]
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1606156339]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6523324, -0.019332029)
+v_offset = 0.085
+
+[node name="Stonehead" parent="Head/Camera3D" unique_id=1469678934 instance=ExtResource("2_mtuoh")]
+
+[node name="ObjectGrabberShapeCast" type="ShapeCast3D" parent="Head/Camera3D" unique_id=1360882520]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.011269331, 0)
+shape = SubResource("SphereShape3D_fo5ed")
+target_position = Vector3(0, 0, -2)
+collision_mask = 5
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Head/Camera3D" unique_id=79056542]
+transform = Transform3D(1, 0, 0, 0, -0.9396926, -0.34202015, 0, 0.34202015, -0.9396926, 0, 0.08156812, 0)
+shape = SubResource("SphereShape3D_5ukr8")
+spring_length = 0.6
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Head/Camera3D/SpringArm3D" unique_id=452235644]
+visible = false
+radius = 0.05
+material = SubResource("StandardMaterial3D_o06y3")
+
+[node name="GrabbedAnchor" type="Marker3D" parent="Head/Camera3D/SpringArm3D" unique_id=1598422682]
+
+[node name="Stoneman" parent="Head" unique_id=316174631 instance=ExtResource("3_htcer")]
+transform = Transform3D(-0.091, 0, -7.955473e-09, 0, 0.091, 0, 7.955473e-09, 0, -0.091, 0, 0.042, 0)
+
+[node name="Hand_l" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 111352344) index="2" unique_id=1665941007]
+transform = Transform3D(-0.9973332, -0.006122954, -0.07272431, 0.0008015551, -0.9973331, 0.07297722, -0.07297722, 0.07272432, 0.99467856, 2.9291205, -1.747721, -0.75672823)
+
+[node name="Lower Arm_l" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 111352344) index="3" unique_id=1161562038]
+transform = Transform3D(-0.9973332, -0.006122954, -0.07272431, 0.0008015551, -0.9973331, 0.07297722, -0.07297722, 0.07272432, 0.99467856, 2.9470873, 1.1789613, -0.9701384)
+
+[node name="Upper Arm_l" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 111352344) index="4" unique_id=755652617]
+transform = Transform3D(-0.8975619, 0.43600345, -0.06544912, -0.4389864, -0.8975618, 0.040908482, -0.040908404, 0.06544918, 0.997017, 1.3811173, 4.402683, -1.2052085)
+
+[node name="Hand_r" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 111352344) index="5" unique_id=238697896]
+transform = Transform3D(0.07272194, 0.010456532, 0.9972972, 0.073291525, -0.9972971, 0.0051121414, 0.9946555, 0.07272169, -0.07329176, -2.9386911, -1.753216, -0.7563279)
+
+[node name="Lower Arm_r" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 111352344) index="6" unique_id=466613719]
+transform = Transform3D(0.07272194, 0.010456532, 0.9972972, 0.073291525, -0.9972971, 0.0051121414, 0.9946555, 0.07272169, -0.07329176, -2.9693751, 1.1733592, -0.96973026)
+
+[node name="Upper Arm_r" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 111352344) index="7" unique_id=716232589]
+transform = Transform3D(0.06556307, -0.43276075, 0.8991214, 0.04114347, -0.8991212, -0.43576086, 0.99699974, 0.06556279, -0.04114387, -1.4150515, 4.402683, -1.2052085)
+
+[node name="Foot_l" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 111352344) index="9" unique_id=457221350]
+transform = Transform3D(0.0023015384, 0.005211385, -0.9999838, -0.4324856, -0.9016241, -0.005694026, -0.90165687, 0.43249148, 0.00017938297, 1.5123955, -9.219891, -2.340009)
+
+[node name="Lower Leg_l" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 111352344) index="10" unique_id=1402989357]
+transform = Transform3D(-0.0030032992, 0.03441124, -0.99940336, 0.5002569, -0.8653124, -0.03129741, -0.8658829, -0.5000673, -0.014615451, 1.3372065, -4.8145514, 0.20585299)
+
+[node name="Upper Leg_l" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 111352344) index="11" unique_id=1590819314]
+transform = Transform3D(0.021504905, 0.0895023, -0.9957545, -0.23262809, -0.9682009, -0.09204949, -0.9723464, 0.23361582, -3.5762787e-07, 0.93789095, -0.4949112, -0.83642685)
+
+[node name="Foot_r" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 111352344) index="12" unique_id=1588531440]
+transform = Transform3D(-0.00051353686, -0.002447689, -0.99999684, -0.5925354, -0.8055419, 0.0022759438, -0.80556154, 0.5925409, -0.0010371031, -1.5382208, -9.696201, -1.8957103)
+
+[node name="Lower Leg_r" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 111352344) index="13" unique_id=938822076]
+transform = Transform3D(0.0017305035, -0.031377424, -0.9995061, 0.33061206, -0.9432843, 0.030184794, -0.9437801, -0.3305114, 0.008741268, -1.3784771, -4.893905, -0.21306407)
+
+[node name="Upper Leg_r" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 111352344) index="14" unique_id=1681100318]
+transform = Transform3D(-0.012861243, -0.09114655, -0.9957544, -0.13912939, -0.9859872, 0.092049435, -0.99020875, 0.13972007, -1.1920929e-07, -0.9718256, -0.4949112, -0.83642685)
+
+[node name="Left Leg Target" parent="Head/Stoneman" index="8" unique_id=134990272]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.82080007, 3.8617525, -0.52690125)
+
+[node name="Right Leg Target" parent="Head/Stoneman" index="9" unique_id=921146363]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.82080007, 3.6150272, -0.45478687)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=91604768]
+replication_config = SubResource("SceneReplicationConfig_6t5aa")
+
+[connection signal="grabbed" from="." to="Head/Stoneman" method="_on_character_body_3d_grabbed"]
+
+[editable path="Head/Stoneman"]
