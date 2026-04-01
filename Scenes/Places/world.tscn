@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://coar0w52ewb50"]
 
-[ext_resource type="PackedScene" uid="uid://cm6ykl166jgjo" path="res://Interaction/terminal.tscn" id="1_xs3tu"]
+[ext_resource type="PackedScene" uid="uid://cm6ykl166jgjo" path="res://Scenes/Items/terminal.tscn" id="1_xs3tu"]
 [ext_resource type="Material" uid="uid://68rij120hx4a" path="res://Materials/light_blue.tres" id="2_2qjrm"]
 [ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Textures/tiled-bg.png" id="3_nfdff"]
 [ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Items/ball.tscn" id="4_sj6h3"]
-[ext_resource type="PackedScene" uid="uid://xwjcwb2sf4sf" path="res://Scenes/UI/in_game_ui.tscn" id="5_iffac"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_go701"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)
@@ -67,5 +66,3 @@ transform = Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, 0, 1.0193995, -1.160
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1568990526]
 _spawnable_scenes = PackedStringArray("uid://be8qbmt0fe144")
 spawn_path = NodePath("..")
-
-[node name="MainUI" parent="." unique_id=1330095474 instance=ExtResource("5_iffac")]

@@ -17,9 +17,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-HlNetHandler="*uid://cowea4n1065io"
-InteractionManager="*uid://dfxaqib48vgsx"
 LocalMultiplayerHandler="*uid://c1l2ypux1tsfs"
+InteractionManager="*uid://bmgxp4u2na6nn"
+RemoteMultiplayerHandler="*uid://cowea4n1065io"
+UIHandler="*uid://cel5867yqym8h"
 
 [editor]
 

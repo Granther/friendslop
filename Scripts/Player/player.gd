@@ -13,14 +13,10 @@ var PUSH_FORCE = 0.0025
 @onready var grabbed_anchor = $Head/Camera3D/SpringArm3D/GrabbedAnchor
 @onready var object_grabber_shape_cast = $Head/Camera3D/ObjectGrabberShapeCast
 @onready var camera = $Head/Camera3D
-@onready var animations = $AnimationPlayer
 @onready var nametag = $Nametag
 @export var grabbed_object:RigidBody3D = null
 @onready var stoneman = $Head/Stoneman
-# Is this ok? With godot I feel like I'm a fricken monkey electrician, just wiring up stuff as I go
-# Is there any real best practice here? Is it modular? Does it matter if it isnt?
-@onready var ui = get_parent().find_child("MainUI")
-# "$World/MainUI"
+@onready var ui = UIHandler.get_ui()
 @onready var sync = $MultiplayerSynchronizer
 
 func _enter_tree() -> void:

@@ -1,5 +1,7 @@
 extends PanelContainer
 
+# Instantiate, we are "starting" the world before we load it
+var World = preload("res://Scenes/Places/world.tscn").instantiate()
 const Player = preload("res://Scenes/Player/player.tscn")
 # Whats a better way to do this? Not very scalable! What if the root lies 3 up, not 2
 # @onready var parent_node = 
@@ -13,6 +15,7 @@ func _ready():
 func _on_local_btn_pressed() -> void:
 	hide()
 	var status = LocalMultiplayerHandler.start_server()
+	ui_parent.add_child(World)
 	if status == LocalMultiplayerHandler.IS_SERVER:
 		_setup_peer_host_signals()
 		add_player(multiplayer.get_unique_id())
@@ -22,11 +25,11 @@ func _on_join_btn_pressed() -> void:
 	if room_id_box.text == null or room_id_box.text == "":
 		return
 	hide()
-	await HlNetHandler.start_client(room_id_box.text)
+	await RemoteMultiplayerHandler.start_client(room_id_box.text)
 
 func _on_host_btn_pressed() -> void:
 	hide()
-	var room_id: String = await HlNetHandler.start_server()
+	var room_id: String = await RemoteMultiplayerHandler.start_server()
 	set_room_id_ui(room_id)
 	_setup_peer_host_signals()
 	add_player(multiplayer.get_unique_id())
@@ -34,7 +37,7 @@ func _on_host_btn_pressed() -> void:
 func add_player(peer_id):
 	var player = Player.instantiate()
 	player.name = str(peer_id)
-	ui_parent.add_child(player)
+	World.add_child(player)
 	
 func set_room_id_ui(room_id: String):
 	room_id_label.text = room_id

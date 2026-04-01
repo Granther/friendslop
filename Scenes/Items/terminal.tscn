@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cm6ykl166jgjo"]
 
 [ext_resource type="Material" uid="uid://csys848nfygqe" path="res://Materials/purple.tres" id="1_4jg27"]
-[ext_resource type="Script" uid="uid://cnow6egpspsap" path="res://Interaction/terminal.gd" id="1_jaww5"]
-[ext_resource type="PackedScene" uid="uid://bky5aipqtxurn" path="res://Interaction/InteractionArea.tscn" id="1_viu7s"]
+[ext_resource type="Script" uid="uid://cnow6egpspsap" path="res://Scripts/Items/terminal.gd" id="1_jaww5"]
+[ext_resource type="PackedScene" uid="uid://bky5aipqtxurn" path="res://Interaction/interaction_area.tscn" id="1_viu7s"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jaww5"]
 radius = 3.0

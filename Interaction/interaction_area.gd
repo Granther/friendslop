@@ -15,7 +15,6 @@ func _on_body_entered(body: Node3D) -> void:
 	# Pass in InteractionArea
 	InteractionManager.register_area(self, label)
 
-
 func _on_body_exited(body: Node3D) -> void:
 	InteractionManager.unregister_area(self)
 
