@@ -208,40 +208,40 @@ visible = false
 visible = false
 
 [node name="Hand_l" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(111352344) index="2" unique_id=1665941007]
-transform = Transform3D(-0.9925849, -0.087645285, -0.0842248, 0.07987002, -0.9925847, 0.09163135, -0.091631316, 0.08422485, 0.99222463, 3.011883, -1.5545313, -0.69971466)
+transform = Transform3D(-0.99754864, 0.01701667, -0.06787636, -0.021546792, -0.99754846, 0.06657716, -0.06657705, 0.06787646, 0.9954699, 2.872853, -1.8065894, -0.78270954)
 
 [node name="Lower Arm_l" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(111352344) index="3" unique_id=1161562038]
-transform = Transform3D(-0.9925849, -0.087645285, -0.0842248, 0.07987002, -0.9925847, 0.09163135, -0.091631316, 0.08422485, 0.99222463, 3.2690778, 1.3582168, -0.9468732)
+transform = Transform3D(-0.99754864, 0.01701667, -0.06787636, -0.021546792, -0.99754846, 0.06657716, -0.06657705, 0.06787646, 0.9954699, 2.8229165, 1.1207249, -0.98189354)
 
 [node name="Upper Arm_l" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(111352344) index="4" unique_id=755652617]
-transform = Transform3D(-0.8476528, 0.52565336, -0.07192673, -0.52904433, -0.84765273, 0.039962515, -0.039962456, 0.07192677, 0.996609, 1.3811173, 4.402683, -1.2052085)
+transform = Transform3D(-0.9137763, 0.40143132, -0.062176205, -0.4041898, -0.91377616, 0.040540844, -0.040540777, 0.062176246, 0.9972415, 1.3811173, 4.402683, -1.2052085)
 
 [node name="Hand_r" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(111352344) index="5" unique_id=238697896]
-transform = Transform3D(0.08418371, 0.09303847, 0.992097, 0.09208544, -0.99209696, 0.0852246, 0.99218595, 0.084183246, -0.09208585, -3.018014, -1.5604403, -0.6992134)
+transform = Transform3D(0.06788076, -0.0130598545, 0.9976079, 0.066845104, -0.99760777, -0.017608196, 0.9954515, 0.06788043, -0.06684548, -2.8838713, -1.8116832, -0.7823628)
 
 [node name="Lower Arm_r" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(111352344) index="6" unique_id=466613719]
-transform = Transform3D(0.08418371, 0.09303847, 0.992097, 0.09208544, -0.99209696, 0.0852246, 0.99218595, 0.084183246, -0.09208585, -3.2910352, 1.3508751, -0.9462498)
+transform = Transform3D(0.06788076, -0.0130598545, 0.9976079, 0.066845104, -0.99760777, -0.017608196, 0.9954515, 0.06788043, -0.06684548, -2.8455462, 1.1158037, -0.98155844)
 
 [node name="Upper Arm_r" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(111352344) index="7" unique_id=716232589]
-transform = Transform3D(0.072100505, -0.52231866, 0.84969664, 0.04024337, -0.8496965, -0.5257335, 0.99658495, 0.07210033, -0.04024363, -1.4150515, 4.402683, -1.2052085)
+transform = Transform3D(0.062269796, -0.3982838, 0.91514605, 0.040753957, -0.915146, -0.40105677, 0.99722683, 0.062269554, -0.040754415, -1.4150515, 4.402683, -1.2052085)
 
 [node name="Foot_l" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(111352344) index="9" unique_id=457221350]
-transform = Transform3D(-0.00019573048, 0.0010236539, -0.9999994, -0.7172143, -0.6968525, -0.0005729459, -0.6968667, 0.7172251, 0.00087086717, 1.5003301, -9.94178, -1.406801)
+transform = Transform3D(-0.00023926608, 0.0008539818, -0.9999997, -0.73602086, -0.676959, -0.00040200911, -0.6769723, 0.73603237, 0.00079059997, 1.4999484, -9.966803, -1.3205003)
 
 [node name="Lower Leg_l" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(111352344) index="10" unique_id=1402989357]
-transform = Transform3D(-0.00095547456, 0.029988725, -0.9995498, 0.17052507, -0.98490524, -0.029712353, -0.98537004, -0.17048205, -0.0041726413, 1.3476563, -4.92759, -0.53887033)
+transform = Transform3D(-0.0008399738, 0.029857099, -0.999554, 0.14348881, -0.98920727, -0.029668622, -0.989669, -0.1434542, -0.0034533043, 1.3479446, -4.93071, -0.5901694)
 
 [node name="Upper Leg_l" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(111352344) index="11" unique_id=1590819314]
-transform = Transform3D(0.0061396863, 0.0918445, -0.9957544, -0.0664121, -0.9935373, -0.09204947, -0.9977913, 0.0666941, -3.5762787e-07, 0.93789095, -0.4949112, -0.83642685)
+transform = Transform3D(0.0050810887, 0.09190914, -0.99575454, -0.05496256, -0.9942366, -0.09204949, -0.9984935, 0.05519595, -3.5762787e-07, 0.93789095, -0.4949112, -0.83642685)
 
 [node name="Foot_r" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(111352344) index="12" unique_id=1588531440]
-transform = Transform3D(-0.006738879, -0.011402, -0.9999123, -0.22446798, -0.9744026, 0.0126233995, -0.9744761, 0.2245238, 0.004005939, -1.5625529, -8.33559, -2.56986)
+transform = Transform3D(-0.008013245, -0.013154006, -0.9998813, -0.18605438, -0.9824371, 0.014415018, -0.98252386, 0.1861366, 0.0054241233, -1.5664257, -8.126622, -2.5529048)
 
 [node name="Lower Leg_r" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(111352344) index="13" unique_id=938822076]
-transform = Transform3D(0.005609397, -0.04156305, -0.99912024, 0.67773014, -0.7345112, 0.03435991, -0.7352936, -0.6773445, 0.024047835, -1.3509538, -4.5961657, 0.87852716)
+transform = Transform3D(0.006336566, -0.043602012, -0.9990289, 0.7060414, -0.7072923, 0.035347003, -0.70814526, -0.7055976, 0.026302524, -1.3444462, -4.5257697, 1.0393198)
 
 [node name="Upper Leg_r" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(111352344) index="14" unique_id=1681100318]
-transform = Transform3D(-0.03538326, -0.08497749, -0.9957545, -0.38276345, -0.91925216, 0.09204945, -0.92318803, 0.3843885, -2.3841858e-07, -0.9718256, -0.4949112, -0.83642685)
+transform = Transform3D(-0.038700677, -0.08351886, -0.9957544, -0.418651, -0.9034736, 0.092049405, -0.9073419, 0.42042845, -2.3841858e-07, -0.9718256, -0.4949112, -0.83642685)
 
 [node name="Left Arm IK" type="CCDIK3D" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(111352344) index="16" unique_id=149266175]
 angular_delta_limit = 3.141592653589793
@@ -343,10 +343,10 @@ shape = SubResource("BoxShape3D_e2y4b")
 [node name="Right Arm Target" type="Node3D" parent="." index="7" unique_id=617302750]
 
 [node name="Left Leg Target" type="Node3D" parent="." index="8" unique_id=134990272]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.82080007, 3.3189192, -0.36823875)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.82080007, 3.2524943, -0.3488237)
 
 [node name="Right Leg Target" type="Node3D" parent="." index="9" unique_id=921146363]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.82080007, 4.1578608, -0.61344934)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.82080007, 4.2242856, -0.63286436)
 
 [node name="LegAnimPlayer" type="AnimationPlayer" parent="." index="10" unique_id=423592346]
 deterministic = true
@@ -357,7 +357,7 @@ autoplay = &"Idle"
 [node name="LegAnimTree" type="AnimationTree" parent="." index="11" unique_id=305721246]
 tree_root = SubResource("AnimationNodeBlendTree_t3qha")
 anim_player = NodePath("../LegAnimPlayer")
-parameters/WalkSpeed/scale = 12.700000000000003
+parameters/WalkSpeed/scale = 12.700000000000005
 parameters/JumpBlend/blend_amount = 0.27
 parameters/Blend2/blend_amount = 0.6
 

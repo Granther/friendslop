@@ -5,18 +5,24 @@ var SPEED = 0
 const SPRINT = false
 const JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.003
-var BASE_FOV = 90.0
+var BASE_FOV = 120.0
 var FOV_CHANGE = 1
-var PUSH_FORCE = 0.0025
+var PUSH_FORCE = 4
 
 @onready var head = $Head
 @onready var grabbed_anchor = $Head/Camera3D/SpringArm3D/GrabbedAnchor
 @onready var object_grabber_shape_cast = $Head/Camera3D/ObjectGrabberShapeCast
 @onready var camera = $Head/Camera3D
+@onready var animations = $AnimationPlayer
 @onready var nametag = $Nametag
 @export var grabbed_object:RigidBody3D = null
 @onready var stoneman = $Head/Stoneman
+@onready var springarm = $Head/Camera3D/SpringArm3D
+# Is this ok? With godot I feel like I'm a fricken monkey electrician, just wiring up stuff as I go
+# Is there any real best practice here? Is it modular? Does it matter if it isnt?
 @onready var ui = UIHandler.get_ui()
+# get_parent().find_child("MainUI")
+#  # "$World/MainUI"
 @onready var sync = $MultiplayerSynchronizer
 
 func _enter_tree() -> void:
@@ -45,10 +51,18 @@ func _input(event: InputEvent) -> void:
 						try_grabbing(collided)
 func try_grabbing(collided:RigidBody3D):
 	grabbed_object = collided
+	grabbed_object.set_collision_layer_value(3,0)
+	grabbed_object.set_collision_mask_value(2,0)
 	emit_signal("grabbed",grabbed_object)
-	pass
-	
 func throw_object():
+	# Alright, got something working for a sort of lob effect with the ball.
+	# Two factors are considered for how far and what angle the item can be thrown: 
+	# - Player Velocity
+	# - Camera Y Angle
+	var throw_angle = clamp(velocity.length() * (camera.rotation.x * 3), -50, 50)
+	grabbed_object.apply_impulse((-head.global_basis.z * velocity.length()*2) + Vector3(0,throw_angle,0))
+	grabbed_object.set_collision_layer_value(3,1)
+	grabbed_object.set_collision_mask_value(2,1)
 	grabbed_object = null
 	emit_signal("grabbed",grabbed_object)
 	pass
@@ -64,6 +78,8 @@ func _unhandled_input(event):
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
 func _physics_process(delta: float) -> void:
+	springarm.set("spring_length", clamp(-camera.rotation.x,0.6,0.7))
+	
 	if not is_multiplayer_authority(): return
 	# Bug: Opening menu pauses you in game. Turns off physics lol
 	if ui.is_menu_open(): return
