@@ -1,0 +1,13 @@
+# Interaction system
+- Singleton autoload
+- Acts as node as child of main
+- Only for client, although, probably should hook into multiplayer
+
+# Manages
+- What client is holding (direct reference)
+	- Does this make sense? 
+	- Pick up box, set box as item in hand, set blend for animation/hand state
+	- Fix state machine
+		- not allow picking up
+		- expect drop
+		- handle interact via some kind of method on main object

@@ -29,6 +29,7 @@ var val: Vector3
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
+	assert(get_collision_layer_value(4), "must be on 'Expodables' (4) collision layer")
 
 func _ready():
 	# Setting nametag of player, be sure to enable billboarding in the flags so it follows the camera
@@ -51,7 +52,7 @@ func _input(event: InputEvent) -> void:
 				if collided is Ball:
 					if !grabbed_object:
 						try_grabbing(collided)
-						
+
 func try_grabbing(collided:RigidBody3D):
 	grabbed_object = collided
 	grabbed_object.set_collision_layer_value(3,0)
@@ -119,11 +120,11 @@ func _physics_process(delta: float) -> void:
 	
 	# Hmmm, so, we essentially have a state machine, but I'm not into that, 
 	# So, 
-	if grenade_expl:
-		grenade_expl = false
-		print("Player val: ", velocity, " Val: ", val, " Total: ", (velocity + val))
-		velocity = (velocity + val*5)
-		
+	#if grenade_expl:
+		#grenade_expl = false
+		#print("Player val: ", velocity, " Val: ", val, " Total: ", (velocity + val))
+		#velocity = (velocity + val*5)
+		#
 	move_and_slide()
 	
 	for i in get_slide_collision_count():
@@ -152,5 +153,11 @@ func proc_anims(velocity):
 	stoneman.play_walk_anims(animationScale, animationSpeed)
 
 func get_exploded(source: Vector3):
-	val = (global_transform.origin - source).normalized() * 1
-	grenade_expl = true
+	# Get difference between player pos and grenade pos (this is our direction relative to grenade)
+	var force = (global_transform.origin - source).normalized()*5
+	print(force.length())
+	velocity = (velocity + force)
+	
+# So, our force is the [0,1] of the difference 
+# If a = [0.5]
+# and b = [0.2]. c = [0.3], cn = 0.3/1 = 0.3 
