@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bqg3la1etwp7o"]
+
+[ext_resource type="Script" uid="uid://j42nvonb3hvh" path="res://Scripts/Items/grenade.gd" id="1_i6qap"]
+[ext_resource type="PackedScene" uid="uid://bbns3sc7l3glg" path="res://Blender/Items/Grenade/gernade.glb" id="2_n8nsm"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_22lk0"]
+radius = 0.06183773
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_n8nsm"]
+radius = 2.1379
+
+[node name="Grenade" type="RigidBody3D" unique_id=186504985]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_i6qap")
+
+[node name="gernade" parent="." unique_id=50507065 instance=ExtResource("2_n8nsm")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=697895492]
+shape = SubResource("SphereShape3D_22lk0")
+
+[node name="BlastRadius" type="Area3D" parent="." unique_id=807987311]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlastRadius" unique_id=573024537]
+shape = SubResource("SphereShape3D_n8nsm")
+
+[node name="FuseTimer" type="Timer" parent="." unique_id=281090178]
+one_shot = true
+
+[connection signal="timeout" from="FuseTimer" to="." method="_on_fuse_timer_timeout"]

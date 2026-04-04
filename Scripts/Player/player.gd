@@ -24,6 +24,8 @@ var PUSH_FORCE = 4
 # get_parent().find_child("MainUI")
 #  # "$World/MainUI"
 @onready var sync = $MultiplayerSynchronizer
+var grenade_expl: bool = false
+var val: Vector3
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
@@ -49,11 +51,13 @@ func _input(event: InputEvent) -> void:
 				if collided is Ball:
 					if !grabbed_object:
 						try_grabbing(collided)
+						
 func try_grabbing(collided:RigidBody3D):
 	grabbed_object = collided
 	grabbed_object.set_collision_layer_value(3,0)
 	grabbed_object.set_collision_mask_value(2,0)
 	emit_signal("grabbed",grabbed_object)
+	
 func throw_object():
 	# Alright, got something working for a sort of lob effect with the ball.
 	# Two factors are considered for how far and what angle the item can be thrown: 
@@ -86,7 +90,6 @@ func _physics_process(delta: float) -> void:
 	var velocity_clamp = clamp(velocity.length(), SPEED/4.5, SPEED/4.5)
 	var target_fov = BASE_FOV * FOV_CHANGE * velocity_clamp
 	camera.fov = lerp(camera.fov, target_fov, delta * 4)
-	# if not ui.is_menu_open():
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	if Input.is_action_pressed("ToggleMouseFocus"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -94,7 +97,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		velocity.y += JUMP_VELOCITY
 		
 	if Input.is_action_pressed("sprint"):
 		SPEED = 5
@@ -113,6 +116,14 @@ func _physics_process(delta: float) -> void:
 	elif not is_on_floor():
 		velocity.x = lerp(velocity.x, move_direction.x * SPEED, delta * 0.5) 
 		velocity.z = lerp(velocity.z, move_direction.z * SPEED, delta * 0.5) 
+	
+	# Hmmm, so, we essentially have a state machine, but I'm not into that, 
+	# So, 
+	if grenade_expl:
+		grenade_expl = false
+		print("Player val: ", velocity, " Val: ", val, " Total: ", (velocity + val))
+		velocity = (velocity + val*5)
+		
 	move_and_slide()
 	
 	for i in get_slide_collision_count():
@@ -139,3 +150,7 @@ func proc_anims(velocity):
 	var animationScale = clamp(velocity.length()*2, 0, 15)
 	var animationSpeed = clamp(velocity.length()/2, 0, 1)
 	stoneman.play_walk_anims(animationScale, animationSpeed)
+
+func get_exploded(source: Vector3):
+	val = (global_transform.origin - source).normalized() * 1
+	grenade_expl = true
