@@ -33,6 +33,9 @@ uv2_scale = Vector3(5, 5, 5)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2qjrm"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nfdff"]
+bounce = 0.9
+
 [node name="World" type="Node3D" unique_id=2063905397]
 
 [node name="Terminal" parent="." unique_id=1538996098 instance=ExtResource("1_xs3tu")]
@@ -94,6 +97,8 @@ physics_material_override = SubResource("PhysicsMaterial_2qjrm")
 
 [node name="Ball" parent="." unique_id=1482215681 instance=ExtResource("4_sj6h3")]
 transform = Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, -0.4562235, 1.8685468, -2.0439994)
+mass = 1.0
+physics_material_override = SubResource("PhysicsMaterial_nfdff")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1568990526]
 _spawnable_scenes = PackedStringArray("uid://be8qbmt0fe144")
