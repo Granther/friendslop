@@ -11,3 +11,18 @@
 		- not allow picking up
 		- expect drop
 		- handle interact via some kind of method on main object
+
+# Can only interact if the spring arm is touching it
+# The interact radius only shows as close as the springarm is 
+
+# Should interact distance be specific per item
+	- Yes, because, some items may want to be more "visible"
+	- ... such a terminal from ball etc
+	- But, should everything be interactable from the same distance?
+		- Probably, frustrating if not
+	- Player has collisionshape
+	- Interactables are all on same layer
+	- On body entered, show label, vice versa exit
+	- 
+# Singlton?
+# API to interact with player items?

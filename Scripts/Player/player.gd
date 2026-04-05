@@ -18,14 +18,12 @@ var PUSH_FORCE = 4
 @export var grabbed_object:RigidBody3D = null
 @onready var stoneman = $Head/Stoneman
 @onready var springarm = $Head/Camera3D/SpringArm3D
-# Is this ok? With godot I feel like I'm a fricken monkey electrician, just wiring up stuff as I go
-# Is there any real best practice here? Is it modular? Does it matter if it isnt?
 @onready var ui = UIHandler.get_ui()
-# get_parent().find_child("MainUI")
-#  # "$World/MainUI"
+@onready var interaction_area = $InteractionArea
+@onready var interaction_collision_shape = $InteractionArea/CollisionShape3D
 @onready var sync = $MultiplayerSynchronizer
-var grenade_expl: bool = false
-var val: Vector3
+
+@export var interact_dist: float
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
@@ -157,7 +155,3 @@ func get_exploded(source: Vector3):
 	var force = (global_transform.origin - source).normalized()*5
 	print(force.length())
 	velocity = (velocity + force)
-	
-# So, our force is the [0,1] of the difference 
-# If a = [0.5]
-# and b = [0.2]. c = [0.3], cn = 0.3/1 = 0.3 

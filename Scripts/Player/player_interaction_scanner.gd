@@ -1,0 +1,32 @@
+extends Node3D
+
+var can_interact: bool = true
+var interactables: Array[Area3D]
+
+@export var root_player: CharacterBody3D
+
+# Could we always be sorting the list to be the closest object at the front?
+# Probably too much compute
+
+func _on_area_3d_area_entered(area: Area3D) -> void:
+	if area is InteractionArea:
+		area.set_label_visible(true)
+		interactables.append(area)
+
+func _on_area_3d_area_exited(area: Area3D) -> void:
+	if area is InteractionArea:
+		area.set_label_visible(false)
+		interactables.erase(area)
+
+func _sort_by_distance_to_player(area1, area2):
+	var area1_to_player = global_position.distance_to(area1.global_position)
+	var area2_to_player = global_position.distance_to(area2.global_position)
+	return area1_to_player < area2_to_player
+
+func _input(event):
+	# This kind of assumes pick up
+	if event.is_action_pressed("interact1") and can_interact and len(interactables) > 0:
+		can_interact = false
+		interactables.sort_custom(_sort_by_distance_to_player)
+		await interactables[0].interact(root_player)
+		can_interact = true

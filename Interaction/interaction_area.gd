@@ -1,31 +1,21 @@
 extends Area3D
 class_name InteractionArea
 
-@export var action_name: String = "interact"
-# Label, located uniquly in space for particular item
 @export var label: Label3D
+@export var root_object: Node3D
 
-func _ready():
-	label.hide()
+signal entered_inter_zone 
+signal exited_inter_zone
+signal interacted_with
 
-var interact: Callable = func():
-	pass
+func set_label_visible(setting: bool):
+	if setting:
+		entered_inter_zone.emit()
+	else: 
+		exited_inter_zone.emit()
 
-func _on_body_entered(body: Node3D) -> void:
-	# Pass in InteractionArea
-	InteractionManager.register_area(self, label)
+func interact(player):
+	interacted_with.emit(player)
 
-func _on_body_exited(body: Node3D) -> void:
-	InteractionManager.unregister_area(self)
-
-# Note about collision areas and masks
-# ... formum: "
-	#Collision layer is what the body lies in. It’s its little world, it just exists in that layer.
-	#Collision mask is what the object looks towards when searching for collisions. It’s what it’s interested in.
-#Some examples:
-	#Terrain has collision layer of 1 and player has collision mask of 1. The player is looking for terrain to collide with and when it sees some, it stops."
-
-# So, the terminal does not have a layer. ie, it doesnt exist to collide with in any world
-# The mask is what the terminal is listening on for the body_{exit, entered} func. 
-
-# It also seems like items inhereit the collision layers from their parents
+func get_root_obj() -> Node3D:
+	return root_object

@@ -11,17 +11,17 @@ config_version=5
 [application]
 
 config/name="New Game Project"
-run/main_scene="res://Scenes/Places/world.tscn"
+run/main_scene="uid://155xx7s6y6ta"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 LocalMultiplayerHandler="*uid://c1l2ypux1tsfs"
-InteractionManager="*uid://bmgxp4u2na6nn"
+InteractionManager="uid://bmgxp4u2na6nn"
 RemoteMultiplayerHandler="*uid://cowea4n1065io"
 UIHandler="*uid://cel5867yqym8h"
-ItemManager="*uid://bnhwjxr5qhokv"
+ItemManager="uid://bnhwjxr5qhokv"
 
 [editor]
 
@@ -31,6 +31,10 @@ version_control/autoload_on_startup=true
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/nodetunnel/plugin.cfg")
+
+[global_group]
+
+interactable=""
 
 [input]
 
@@ -91,6 +95,7 @@ interact1={
 3d_physics/layer_2="Players"
 3d_physics/layer_3="Items"
 3d_physics/layer_4="Explodables"
+3d_physics/layer_5="Interactables"
 
 [physics]
 

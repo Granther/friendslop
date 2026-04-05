@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dxlqy8p40fmfy"]
+
+[ext_resource type="Script" uid="uid://mibr0h44t4uk" path="res://Scripts/Items/bomb.gd" id="1_uivoi"]
+[ext_resource type="PackedScene" uid="uid://d0ckmp3w751wl" path="res://Blender/Items/Bomb/Bomb.glb" id="2_grk2n"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uivoi"]
+radius = 0.21840389
+
+[node name="Bomb" type="RigidBody3D" unique_id=2022619359]
+script = ExtResource("1_uivoi")
+
+[node name="Bomb" parent="." unique_id=1850064570 instance=ExtResource("2_grk2n")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1983562216]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22312519, 0)
+shape = SubResource("SphereShape3D_uivoi")

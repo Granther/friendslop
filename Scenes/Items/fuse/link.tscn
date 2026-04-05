@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c00i5np48yikr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6rai2"]
+height = 4.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qeevr"]
+height = 4.0
+
+[node name="Link" type="RigidBody3D" unique_id=2032462071]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1816289444]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.5155953, 0)
+shape = SubResource("CapsuleShape3D_6rai2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=254293247]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.5, 0)
+mesh = SubResource("CapsuleMesh_qeevr")

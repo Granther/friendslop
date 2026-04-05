@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://j42nvonb3hvh" path="res://Scripts/Items/grenade.gd" id="1_i6qap"]
 [ext_resource type="PackedScene" uid="uid://bbns3sc7l3glg" path="res://Blender/Items/Grenade/gernade.glb" id="2_n8nsm"]
-[ext_resource type="PackedScene" uid="uid://bky5aipqtxurn" path="res://Interaction/interaction_area.tscn" id="3_22lk0"]
+[ext_resource type="PackedScene" uid="uid://bky5aipqtxurn" path="res://Old/interaction_area.tscn" id="3_22lk0"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_22lk0"]
 radius = 0.06183773
