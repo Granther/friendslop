@@ -12,7 +12,7 @@ func _on_fuse_timer_timeout() -> void:
 	var bodies = blast_radius.get_overlapping_bodies()
 	for bod in bodies:
 		bod.get_exploded(global_transform.origin)
-
+##yo
 func _ready():
 	interaction_area.interact = Callable(self, "_on_interact")
 	fuse_timer.start()
