@@ -6,7 +6,8 @@ var purple_mat = preload("res://Materials/purple.tres")
 var blue_mat = preload("res://Materials/light_blue.tres")
 
 func _ready() -> void:
-	interaction_area.interact = Callable(self, "_on_interact")
+	# interaction_area.interact = Callable(self, "_on_interact")
+	pass
 
 func _on_interact() -> void:
 	if get_material() == purple_mat:

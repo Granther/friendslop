@@ -26,3 +26,6 @@
 	- 
 # Singlton?
 # API to interact with player items?
+
+# Maybe separate items into things that can be picked up and stationary interactibles like NPCs
+# This would make it easier to assume certain methods etc

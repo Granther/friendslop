@@ -32,6 +32,7 @@ func _enter_tree() -> void:
 func _ready():
 	# Setting nametag of player, be sure to enable billboarding in the flags so it follows the camera
 	nametag.text = "Player: " + str(name)
+	ItemManager.register_player(self)
 	# Ensures that the spawned characters have default animation blends when spawned in
 	stoneman.set_default_anim_blends()
 	if not is_multiplayer_authority(): return
@@ -41,21 +42,21 @@ func _ready():
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
 	if ui.is_menu_open(): return
-	if event is InputEventMouseButton:
-		if Input.is_action_just_pressed("interact"):
-			if grabbed_object:
-				throw_object()
-			elif object_grabber_shape_cast.is_colliding():
-				var collided = object_grabber_shape_cast.get_collision_result()[0]["collider"]
-				if collided is Ball:
-					if !grabbed_object:
-						try_grabbing(collided)
+	# if event is InputEventMouseButton:
+		#if Input.is_action_just_pressed("interact"):
 
-func try_grabbing(collided:RigidBody3D):
-	grabbed_object = collided
+func pickup(item: RigidBody3D):
+	grabbed_object = item
 	grabbed_object.set_collision_layer_value(3,0)
 	grabbed_object.set_collision_mask_value(2,0)
 	emit_signal("grabbed",grabbed_object)
+	
+func drop():
+	if grabbed_object != null:
+		grabbed_object.set_collision_layer_value(3,1)
+		grabbed_object.set_collision_mask_value(2,1)
+		grabbed_object = null
+		emit_signal("grabbed",grabbed_object)
 	
 func throw_object():
 	# Alright, got something working for a sort of lob effect with the ball.

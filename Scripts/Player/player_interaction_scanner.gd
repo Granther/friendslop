@@ -4,6 +4,7 @@ var can_interact: bool = true
 var interactables: Array[Area3D]
 
 @export var root_player: CharacterBody3D
+@export var object_shape_cast: ShapeCast3D
 
 # Could we always be sorting the list to be the closest object at the front?
 # Probably too much compute
@@ -18,15 +19,21 @@ func _on_area_3d_area_exited(area: Area3D) -> void:
 		area.set_label_visible(false)
 		interactables.erase(area)
 
+# interactables.sort_custom(_sort_by_distance_to_player)
 func _sort_by_distance_to_player(area1, area2):
 	var area1_to_player = global_position.distance_to(area1.global_position)
 	var area2_to_player = global_position.distance_to(area2.global_position)
 	return area1_to_player < area2_to_player
 
+# Should some signal fire here from the item_manager to scoop up the object and handle it from there?
 func _input(event):
 	# This kind of assumes pick up
-	if event.is_action_pressed("interact1") and can_interact and len(interactables) > 0:
-		can_interact = false
-		interactables.sort_custom(_sort_by_distance_to_player)
-		await interactables[0].interact(root_player)
-		can_interact = true
+	if event.is_action_pressed("interact1"):
+		if can_interact and len(interactables) > 0 and object_shape_cast.is_colliding():
+			var object_collided = object_shape_cast.get_collision_result()[0]["collider"]
+			if object_collided in interactables:
+				can_interact = false
+				await object_collided.interact(root_player)
+				can_interact = true
+	elif event.is_action_pressed("drop"):
+		pass

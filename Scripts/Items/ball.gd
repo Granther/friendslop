@@ -11,7 +11,7 @@ func _ready():
 	label.text = base_text + action_name
 	interaction_area.entered_inter_zone.connect(_on_in_range)
 	interaction_area.exited_inter_zone.connect(_on_out_range)
-	interaction_area.interacted_with.connect(_interact_ball)
+	interaction_area.interacted_with.connect(_pickup_ball)
 
 func get_exploded(source: Vector3):
 	apply_central_force((global_transform.origin - source).normalized() * 1)
@@ -22,11 +22,14 @@ func _on_in_range():
 func _on_out_range():
 	label.hide()
 
-func _interact_ball(player):
-	print(player.name + " interacted with ball")
+func _pickup_ball(player):
+	label.hide()
 	var err = ItemManager.pickup_item(self)
 	if err != OK:
 		push_error(err)
+		
+func _drop_ball(player):
+	ItemManager.drop_item()
 	
 func _process(delta):
 	# Ensure label stays above ball at all times
