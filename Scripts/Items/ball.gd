@@ -24,7 +24,9 @@ func _on_out_range():
 
 func _interact_ball(player):
 	print(player.name + " interacted with ball")
-	player.pickup_item()
+	var err = ItemManager.pickup_item(self)
+	if err != OK:
+		push_error(err)
 	
 func _process(delta):
 	# Ensure label stays above ball at all times
