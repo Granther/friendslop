@@ -80,6 +80,7 @@ func set_anim_players(setting: bool):
 	#animation_player.active = setting
 	arm_animations.active = setting
 
+# Ok, I see, this is ... not exactly cohesive
 func _on_character_body_3d_grabbed(object: Variant) -> void:
 	if not is_multiplayer_authority(): return
 	grabbed_object = object

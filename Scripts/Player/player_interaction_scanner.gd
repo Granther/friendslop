@@ -1,5 +1,8 @@
 extends Node3D
 
+signal interacted_external_item(item: Node3D)
+signal drop_item
+
 var can_interact: bool = true
 var interactables: Array[Area3D]
 
@@ -33,7 +36,8 @@ func _input(event):
 			var object_collided = object_shape_cast.get_collision_result()[0]["collider"]
 			if object_collided in interactables:
 				can_interact = false
-				await object_collided.interact(root_player)
+				# await object_collided.interact(root_player)
+				emit_signal("interacted_external_item", object_collided)
 				can_interact = true
 	elif event.is_action_pressed("drop"):
-		pass
+		emit_signal("drop_item")

@@ -16,8 +16,6 @@ func set_label_visible(setting: bool):
 
 func interact(player):
 	interacted_with.emit(player)
-	
-
 
 func get_root_obj() -> Node3D:
 	return root_object

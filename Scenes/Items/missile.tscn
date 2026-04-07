@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://degd4kdf6uqye"]
+
+[ext_resource type="Script" uid="uid://df10nom417bsf" path="res://Scripts/Items/missile.gd" id="1_100jy"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_100jy"]
+top_radius = 0.1
+bottom_radius = 0.1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rfm16"]
+radius = 0.1
+
+[node name="Missile" type="RigidBody3D" unique_id=1578848079]
+script = ExtResource("1_100jy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=879993632]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_100jy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2011571635]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_rfm16")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=577532061]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1441557, 0)
+
+[node name="GetLockTimer" type="Timer" parent="." unique_id=63521060]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="GetLockTimer" to="." method="_on_get_lock_timer_timeout"]

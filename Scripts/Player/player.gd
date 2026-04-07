@@ -23,6 +23,10 @@ var PUSH_FORCE = 4
 @onready var interaction_collision_shape = $InteractionArea/CollisionShape3D
 @onready var sync = $MultiplayerSynchronizer
 
+@onready var interaction_manager = $PlayerInteractionScanner
+@onready var item_manager = $PlayerItemManager
+@onready var anim_manager = $PlayerAnimationHandler
+
 @export var interact_dist: float
 
 func _enter_tree() -> void:
@@ -32,9 +36,9 @@ func _enter_tree() -> void:
 func _ready():
 	# Setting nametag of player, be sure to enable billboarding in the flags so it follows the camera
 	nametag.text = "Player: " + str(name)
-	ItemManager.register_player(self)
+	# ItemManager.register_player(self)
 	# Ensures that the spawned characters have default animation blends when spawned in
-	stoneman.set_default_anim_blends()
+	anim_manager.set_default_anims()
 	if not is_multiplayer_authority(): return
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.current = true
@@ -142,14 +146,11 @@ func _physics_process(delta: float) -> void:
 		
 		var velocity_correction = required_velocity - grabbed_object.linear_velocity
 		grabbed_object.linear_velocity = required_velocity
-	proc_anims(velocity)
-
-# This eventually leads to an all-peer rpc call which notifies all peers
-func proc_anims(velocity):
-	# Interesting, so we get the hypotenuse, want to know how extreme, returns scalar then
-	var animationScale = clamp(velocity.length()*2, 0, 15)
-	var animationSpeed = clamp(velocity.length()/2, 0, 1)
-	stoneman.play_walk_anims(animationScale, animationSpeed)
+	
+	if is_on_floor():
+		anim_manager.play_walk_anims(velocity.length())
+	else:
+		anim_manager.play_jump_anims(velocity.length())
 
 func get_exploded(source: Vector3):
 	# Get difference between player pos and grenade pos (this is our direction relative to grenade)

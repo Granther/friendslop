@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://coar0w52ewb50"]
 
 [ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Textures/tiled-bg.png" id="3_nfdff"]
+[ext_resource type="PackedScene" uid="uid://degd4kdf6uqye" path="res://Scenes/Items/missile.tscn" id="4_mynff"]
 [ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Items/ball.tscn" id="4_sj6h3"]
 [ext_resource type="PackedScene" uid="uid://xwjcwb2sf4sf" path="res://Scenes/UI/in_game_ui.tscn" id="5_iffac"]
 
@@ -90,6 +91,10 @@ physics_material_override = SubResource("PhysicsMaterial_nfdff")
 transform = Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, -3.8926554, 1.8685468, -2.0439994)
 mass = 1.0
 physics_material_override = SubResource("PhysicsMaterial_nfdff")
+
+[node name="Missile" parent="." unique_id=1433423186 node_paths=PackedStringArray("target") instance=ExtResource("4_mynff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.2294, 0, 0)
+target = NodePath("../Ball2")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1568990526]
 _spawnable_scenes = PackedStringArray("uid://be8qbmt0fe144")

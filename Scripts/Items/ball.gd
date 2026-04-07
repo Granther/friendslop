@@ -24,12 +24,13 @@ func _on_out_range():
 
 func _pickup_ball(player):
 	label.hide()
-	var err = ItemManager.pickup_item(self)
-	if err != OK:
-		push_error(err)
+	#var err = ItemManager.pickup_item(self)
+	#if err != OK:
+		#push_error(err)
 		
 func _drop_ball(player):
-	ItemManager.drop_item()
+	#ItemManager.drop_item()
+	pass
 	
 func _process(delta):
 	# Ensure label stays above ball at all times
