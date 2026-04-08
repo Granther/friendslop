@@ -24,6 +24,7 @@ var start_dist
 @onready var mesh_inst = $MeshInstance3D
 @onready var rng = RandomNumberGenerator.new()
 @onready var kill_area = $KillArea
+@onready var item_comp = $ItemComp
 
 func _ready():
 	launch_timer.wait_time = launch_time
@@ -31,14 +32,25 @@ func _ready():
 	anim_player.hide()
 	if target == null:
 		get_tree().node_added.connect(node_added)
-	set_physics_process(false)
-	launch_timer.start()
+	# set_physics_process(false)
+	# launch_timer.start()
+	kill_area.set_deferred("disabled", true)
+
+	item_comp.prep_grab = Callable(self, "_prep_grab")
+	item_comp.prep_drop = Callable(self, "_prep_drop")
+
+func _prep_grab():
+	pass
+	
+func _prep_drop():
+	pass
 
 func get_motor_accel():
 	#var motor_accel = pow(9.8, ((motor_timer.wait_time - motor_timer.time_left)/4))
 	#print("Notor accel: ", motor_accel, motor_timer.wait_time - motor_timer.time_left)
 	#return Vector3(0, motor_accel, 0)
-	return Vector3(0,9.8*5.5,0)
+	# return Vector3(0,9.8*5.5,0)
+	return Vector3(0,0,0)
 
 func node_added(node: Node3D):
 	if node is CharacterBody3D:

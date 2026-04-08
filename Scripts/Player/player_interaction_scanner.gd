@@ -4,7 +4,7 @@ signal interacted_external_item(item: Node3D)
 signal drop_item
 
 var can_interact: bool = true
-var interactables: Array[Area3D]
+var interactables: Array[Node3D]
 
 @export var root_player: CharacterBody3D
 @export var object_shape_cast: ShapeCast3D
@@ -15,12 +15,12 @@ var interactables: Array[Area3D]
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	if area is InteractionArea:
 		area.set_label_visible(true)
-		interactables.append(area)
+		interactables.append(area.get_root_obj())
 
 func _on_area_3d_area_exited(area: Area3D) -> void:
 	if area is InteractionArea:
 		area.set_label_visible(false)
-		interactables.erase(area)
+		interactables.erase(area.get_root_obj())
 
 # interactables.sort_custom(_sort_by_distance_to_player)
 func _sort_by_distance_to_player(area1, area2):
@@ -35,9 +35,8 @@ func _input(event):
 		if can_interact and len(interactables) > 0 and object_shape_cast.is_colliding():
 			var object_collided = object_shape_cast.get_collision_result()[0]["collider"]
 			if object_collided in interactables:
-				can_interact = false
 				print("Fired: interacted w/ external item")
-				# await object_collided.interact(root_player)
 				emit_signal("interacted_external_item", object_collided)
-	#elif event.is_action_pressed("drop"):
-		#emit_signal("drop_item")
+	elif event.is_action_pressed("drop"):
+		emit_signal("drop_item")
+		
