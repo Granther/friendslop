@@ -115,7 +115,7 @@ animations = [{
 }]
 
 [node name="missile2" type="RigidBody3D" unique_id=888320288]
-collision_mask = 0
+collision_layer = 4
 script = ExtResource("1_swpy0")
 
 [node name="MeshInstance3D" parent="." unique_id=213959946 instance=ExtResource("2_17a6g")]
@@ -124,7 +124,7 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 [node name="KillArea" type="Area3D" parent="." unique_id=1965504657]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 collision_layer = 0
-collision_mask = 7
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="KillArea" unique_id=88631015]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
@@ -138,8 +138,15 @@ shape = SubResource("CylinderShape3D_7id33")
 wait_time = 0.5
 one_shot = true
 
+[node name="LaunchTimer" type="Timer" parent="." unique_id=505544726]
+
+[node name="MotorTimer" type="Timer" parent="." unique_id=1609214050]
+wait_time = 3.0
+one_shot = true
+
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1141618551]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+visible = false
 billboard = 1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_rkkyk")
@@ -147,3 +154,4 @@ animation = &"explosion2"
 
 [connection signal="body_entered" from="KillArea" to="." method="_on_kill_area_body_entered"]
 [connection signal="timeout" from="LockTimer" to="." method="_on_lock_timer_timeout"]
+[connection signal="timeout" from="LaunchTimer" to="." method="_on_launch_timer_timeout"]
