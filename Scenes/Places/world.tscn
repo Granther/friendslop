@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://coar0w52ewb50"]
 
+[ext_resource type="PackedScene" uid="uid://n3oq7tlymf2k" path="res://Scenes/Items/missile_2.tscn" id="2_xs3tu"]
 [ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Textures/tiled-bg.png" id="3_nfdff"]
-[ext_resource type="PackedScene" uid="uid://d3broa5l3l7w6" path="res://Scenes/Items/missile.tscn" id="4_mynff"]
 [ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Items/ball.tscn" id="4_sj6h3"]
-[ext_resource type="PackedScene" uid="uid://bxes5jjlk117g" path="res://Scenes/Items/aiming_box.tscn" id="4_xs3tu"]
 [ext_resource type="PackedScene" uid="uid://xwjcwb2sf4sf" path="res://Scenes/UI/in_game_ui.tscn" id="5_iffac"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_go701"]
@@ -29,6 +28,8 @@ albedo_texture = ExtResource("3_nfdff")
 uv1_scale = Vector3(40, 15, 1)
 uv1_triplanar_sharpness = 1.6245052
 uv2_scale = Vector3(5, 5, 5)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xs3tu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nfdff"]
 bounce = 0.9
@@ -83,6 +84,14 @@ use_collision = true
 size = Vector3(1, 3.2016602, 6.44812)
 material = SubResource("StandardMaterial3D_8j60k")
 
+[node name="missile2" parent="." unique_id=888320288 instance=ExtResource("2_xs3tu")]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, -24.519135, 1.9329834, -1.7818604)
+mass = 5.0
+physics_material_override = SubResource("PhysicsMaterial_xs3tu")
+gravity_scale = 0.0
+speed = 4.0
+steer_force = 70.0
+
 [node name="Ball" parent="." unique_id=1482215681 instance=ExtResource("4_sj6h3")]
 transform = Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, -0.4562235, 1.8685468, -2.0439994)
 mass = 1.0
@@ -92,13 +101,6 @@ physics_material_override = SubResource("PhysicsMaterial_nfdff")
 transform = Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, -3.8926554, 1.8685468, -2.0439994)
 mass = 1.0
 physics_material_override = SubResource("PhysicsMaterial_nfdff")
-
-[node name="Missile" parent="." unique_id=1578848079 node_paths=PackedStringArray("target") instance=ExtResource("4_mynff")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.778248, 2.0945945, -0.49805355)
-target = NodePath("../CSGBox3D2")
-
-[node name="AimingBox" parent="." unique_id=503899103 instance=ExtResource("4_xs3tu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.068706, 0.9828594, 2.1749232)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1568990526]
 _spawnable_scenes = PackedStringArray("uid://be8qbmt0fe144")

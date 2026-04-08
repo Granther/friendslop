@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://n3oq7tlymf2k"]
+
+[ext_resource type="Script" uid="uid://godx5d4xqyeu" path="res://Scripts/Items/missile_2.gd" id="1_swpy0"]
+[ext_resource type="Texture2D" uid="uid://ecg54whw7gtp" path="res://Animations/Explosions pack/explosion-1-g/spritesheet.png" id="2_tbgkt"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_swpy0"]
+radius = 0.1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7id33"]
+radius = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_swpy0"]
+top_radius = 0.1
+bottom_radius = 0.1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17a6g"]
+atlas = ExtResource("2_tbgkt")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e60hh"]
+atlas = ExtResource("2_tbgkt")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6p5m"]
+atlas = ExtResource("2_tbgkt")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqm20"]
+atlas = ExtResource("2_tbgkt")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sx7xb"]
+atlas = ExtResource("2_tbgkt")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ew4g"]
+atlas = ExtResource("2_tbgkt")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbgkt"]
+atlas = ExtResource("2_tbgkt")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkkyk"]
+atlas = ExtResource("2_tbgkt")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmum5"]
+atlas = ExtResource("2_tbgkt")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3h07b"]
+atlas = ExtResource("2_tbgkt")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebupb"]
+atlas = ExtResource("2_tbgkt")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0ae1"]
+atlas = ExtResource("2_tbgkt")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyfd6"]
+atlas = ExtResource("2_tbgkt")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rkkyk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17a6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e60hh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6p5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqm20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx7xb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ew4g")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 11.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tbgkt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkkyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmum5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3h07b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebupb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0ae1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyfd6")
+}],
+"loop": false,
+"name": &"explosion2",
+"speed": 11.0
+}]
+
+[node name="missile2" type="RigidBody3D" unique_id=888320288]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_swpy0")
+
+[node name="KillArea" type="Area3D" parent="." unique_id=1965504657]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+collision_layer = 0
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillArea" unique_id=88631015]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_swpy0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1814370024]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_7id33")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=178164688]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_swpy0")
+
+[node name="LockTimer" type="Timer" parent="." unique_id=1737233200]
+wait_time = 0.5
+one_shot = true
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1141618551]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_rkkyk")
+animation = &"explosion2"
+
+[connection signal="body_entered" from="KillArea" to="." method="_on_kill_area_body_entered"]
+[connection signal="timeout" from="LockTimer" to="." method="_on_lock_timer_timeout"]
