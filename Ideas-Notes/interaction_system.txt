@@ -33,3 +33,6 @@
 # Player presses interact while looking at something interactible etc
 # We catch in scanner and we have the object 
 # We pass the item to 
+
+# What if we pass over key inputs to the item being interacted with?
+# So, when a ball is held, it begins listening for inputs that are relavent to itself, then uses an API to interact with the anim_player 

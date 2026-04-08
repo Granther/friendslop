@@ -40,38 +40,38 @@ func seek():
 
 func _physics_process(delta: float) -> void:
 	if target != null and locked:
-		var dir = target.position - position
-		
-		
-		# If zero, we do no course correction
-		accel += seek()
-	velocity += accel * delta
-	position += velocity * delta
+		#var dir = target.position - position
+		#
+		#
+		## If zero, we do no course correction
+		#accel += seek()
+	#velocity += accel * delta
+	#position += velocity * delta
 		# We want the vector to be in the direction of the target
 		# target, but remove the direction of our position
-		#direction = target.position - position
-		#direction = direction.normalized()
-		#var rotAmount = direction.cross(global_transform.basis.z)
-		#rot.y = rotAmount.y * steer_force * delta
-		#rot.x = rotAmount.x * steer_force * delta
-		#rotate(Vector3.UP, rot.y)
-		#rotate(Vector3.RIGHT, rot.x)
-		#
-	## -global_transform.basis.z is our forward, so we are merely setting vclocity
-	#global_translate(-global_transform.basis.z * velocity * delta)
+		direction = target.position - position
+		direction = direction.normalized()
+		var rotAmount = direction.cross(global_transform.basis.z)
+		rot.y = rotAmount.y * steer_force * delta
+		rot.x = rotAmount.x * steer_force * delta
+		rotate(Vector3.UP, rot.y)
+		rotate(Vector3.RIGHT, rot.x)
+		
+	# -global_transform.basis.z is our forward, so we are merely setting vclocity
+	global_translate(-global_transform.basis.z * speed * delta)
 
 func _on_lock_timer_timeout() -> void:
 	locked = true
 	start_dist = (target.position - position).length()
 
 func _on_kill_area_body_entered(body: Node3D) -> void:
-	mesh_inst.hide()
+	# mesh_inst.hide()
 	set_physics_process(false)
-	coll_shape.set_deferred("disabled", true)
+	# coll_shape.set_deferred("disabled", true)
 	anim_player.show()
 	anim_player.play("explosion2")
 	await anim_player.animation_finished
-	queue_free()
+	# queue_free()
 
 #extends RigidBody3D
 #

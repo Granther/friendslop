@@ -36,8 +36,8 @@ func _input(event):
 			var object_collided = object_shape_cast.get_collision_result()[0]["collider"]
 			if object_collided in interactables:
 				can_interact = false
+				print("Fired: interacted w/ external item")
 				# await object_collided.interact(root_player)
 				emit_signal("interacted_external_item", object_collided)
-				can_interact = true
-	elif event.is_action_pressed("drop"):
-		emit_signal("drop_item")
+	#elif event.is_action_pressed("drop"):
+		#emit_signal("drop_item")

@@ -27,7 +27,7 @@ func _pickup_ball(player):
 	#var err = ItemManager.pickup_item(self)
 	#if err != OK:
 		#push_error(err)
-		
+
 func _drop_ball(player):
 	#ItemManager.drop_item()
 	pass

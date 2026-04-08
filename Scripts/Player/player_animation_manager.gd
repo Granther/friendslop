@@ -18,7 +18,6 @@ func set_idle_anims():
 	is_holding = false
 	cur_item.set_collision_layer_value(3,1)
 	cur_item.set_collision_mask_value(2,1)
-	#springarm.remove_child(cur_item)
 	cur_item = null
 
 func set_grabbed_item_anims(item: Node3D):
@@ -26,13 +25,12 @@ func set_grabbed_item_anims(item: Node3D):
 	is_holding = true
 	cur_item.set_collision_layer_value(3,0)
 	cur_item.set_collision_mask_value(2,0)
-	#springarm.add_child(cur_item)
 
 func _physics_process(delta: float) -> void:
 	if is_holding:
 		left_arm.global_position = cur_item.global_position
 		right_arm.global_position = cur_item.global_position
-		cur_item.get_parent().get_parent().global_position = arm_end.global_position
+		#cur_item.get_parent().get_parent().global_position = arm_end.global_position
 		set_anim_players.rpc(false)
 		set_anim.rpc("parameters/Idle/blend_amount", 1)
 	else:

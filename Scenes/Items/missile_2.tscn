@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://n3oq7tlymf2k"]
 
 [ext_resource type="Script" uid="uid://godx5d4xqyeu" path="res://Scripts/Items/missile_2.gd" id="1_swpy0"]
+[ext_resource type="PackedScene" uid="uid://cy0t0fgw0lxr3" path="res://Blender/Items/Missile/Missile.glb" id="2_17a6g"]
 [ext_resource type="Texture2D" uid="uid://ecg54whw7gtp" path="res://Animations/Explosions pack/explosion-1-g/spritesheet.png" id="2_tbgkt"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_swpy0"]
@@ -8,10 +9,6 @@ radius = 0.1
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7id33"]
 radius = 0.1
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_swpy0"]
-top_radius = 0.1
-bottom_radius = 0.1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_17a6g"]
 atlas = ExtResource("2_tbgkt")
@@ -118,9 +115,11 @@ animations = [{
 }]
 
 [node name="missile2" type="RigidBody3D" unique_id=888320288]
-collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_swpy0")
+
+[node name="MeshInstance3D" parent="." unique_id=213959946 instance=ExtResource("2_17a6g")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 
 [node name="KillArea" type="Area3D" parent="." unique_id=1965504657]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -134,10 +133,6 @@ shape = SubResource("CylinderShape3D_swpy0")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1814370024]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_7id33")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=178164688]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-mesh = SubResource("CylinderMesh_swpy0")
 
 [node name="LockTimer" type="Timer" parent="." unique_id=1737233200]
 wait_time = 0.5

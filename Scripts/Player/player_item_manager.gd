@@ -19,10 +19,11 @@ func _on_int_scan_drop_item() -> void:
 
 func set_item(item: Node):
 	cur_item = item
-	# cur_item.interact()
+	cur_item.get_root_obj().reparent(root_player.springarm)
 	emit_signal("grabbed_item", cur_item)
 
 func drop_item():
+	cur_item.get_root_obj().reparent(get_tree().root)
 	cur_item = null
 	emit_signal("dropped_item")
 
