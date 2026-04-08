@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://degd4kdf6uqye"]
+[gd_scene format=3 uid="uid://d3broa5l3l7w6"]
 
 [ext_resource type="Script" uid="uid://df10nom417bsf" path="res://Scripts/Items/missile.gd" id="1_100jy"]
 
@@ -10,14 +10,14 @@ bottom_radius = 0.1
 radius = 0.1
 
 [node name="Missile" type="RigidBody3D" unique_id=1578848079]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, 0, 0, 0)
 script = ExtResource("1_100jy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=879993632]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CylinderMesh_100jy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2011571635]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+rotation_edit_mode = 1
 shape = SubResource("CylinderShape3D_rfm16")
 
 [node name="RayCast3D" type="RayCast3D" parent="." unique_id=577532061]
