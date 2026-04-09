@@ -14,6 +14,9 @@ var locked: bool = false
 var rot = Vector3()
 var distance
 var start_dist
+var in_hand: bool = false
+var rot_in_hand: Vector3
+var armed: bool = false
 
 @onready var ray = $RayCast3D
 @onready var lock_timer = $LockTimer
@@ -25,6 +28,7 @@ var start_dist
 @onready var rng = RandomNumberGenerator.new()
 @onready var kill_area = $KillArea
 @onready var item_comp = $ItemComp
+@onready var interact_area = $InteractionArea
 
 func _ready():
 	launch_timer.wait_time = launch_time
@@ -36,14 +40,25 @@ func _ready():
 	# launch_timer.start()
 	kill_area.set_deferred("disabled", true)
 
-	item_comp.prep_grab = Callable(self, "_prep_grab")
-	item_comp.prep_drop = Callable(self, "_prep_drop")
+	item_comp.on_drop_key_hit = Callable(self, "_on_drop")
+	item_comp.on_inter_key_hit = Callable(self, "on_inter")
 
-func _prep_grab():
-	pass
+#func _prep_grab():
+	#interact_area.set_collision_layer_value(5, false)
+	#interact_area.set_label_visible(false)
+	#in_hand = true
+	#rot_in_hand = rotation
+	##lock_rotation = true
+	#pass
 	
-func _prep_drop():
+func _on_interact():
 	pass
+
+func _on_drop():
+	item_comp.item_manager.drop_item()
+	item_comp.phys_func = func(): pass
+	interact_area.set_collision_layer_value(5, true)
+	interact_area.set_label_visible(true)
 
 func get_motor_accel():
 	#var motor_accel = pow(9.8, ((motor_timer.wait_time - motor_timer.time_left)/4))
@@ -75,6 +90,7 @@ func seek():
 # We have a target and are locked, so we get the accel 
 
 func _physics_process(delta: float) -> void:
+	item_comp.phys_func.call()
 	#if target != null and locked:
 		#var dir = target.position - position
 		#
@@ -108,6 +124,7 @@ func _on_lock_timer_timeout() -> void:
 	start_dist = (target.position - position).length()
 
 func _on_kill_area_body_entered(body: Node3D) -> void:
+	item_comp.prep_drop.call()
 	mesh_inst.hide()
 	set_physics_process(false)
 	coll_shape.set_deferred("disabled", true)

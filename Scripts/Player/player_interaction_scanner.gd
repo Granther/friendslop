@@ -1,5 +1,13 @@
 extends Node3D
 
+# This module deals with interacting with things that are "global"
+# Ie. they are not on the player and are to be taken in and processes
+# outside -> player
+
+# ItemManager
+# Takes items/interactions given to it be the scanner and manages them
+# outside -> player -> holds -> 
+
 signal interacted_external_item(item: Node3D)
 signal drop_item
 
@@ -28,15 +36,16 @@ func _sort_by_distance_to_player(area1, area2):
 	var area2_to_player = global_position.distance_to(area2.global_position)
 	return area1_to_player < area2_to_player
 
+func _allow_interaction():
+	can_interact = true
+
 # Should some signal fire here from the item_manager to scoop up the object and handle it from there?
 func _input(event):
-	# This kind of assumes pick up
 	if event.is_action_pressed("interact1"):
 		if can_interact and len(interactables) > 0 and object_shape_cast.is_colliding():
 			var object_collided = object_shape_cast.get_collision_result()[0]["collider"]
 			if object_collided in interactables:
-				print("Fired: interacted w/ external item")
+				can_interact = false
+				print("interacted in scanner")
+				# As in, we can't fire this signal again until we recieve another signal to fix this lock
 				emit_signal("interacted_external_item", object_collided)
-	elif event.is_action_pressed("drop"):
-		emit_signal("drop_item")
-		

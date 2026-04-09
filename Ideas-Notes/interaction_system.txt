@@ -36,3 +36,9 @@
 
 # What if we pass over key inputs to the item being interacted with?
 # So, when a ball is held, it begins listening for inputs that are relavent to itself, then uses an API to interact with the anim_player 
+
+# Each item can have its own phys process, so we can keep specific phys stuffs therte
+# And each item def NEEDS some kind of api to interact with the player (velocity, pos, rot, head/cam rot/pos) 
+# 	So all of these can just be top level components in the player and we just have some kind of singleton to deliver it globally
+# I like the idea of giving objects a lot of control over their interaction, then it makes it easier to make very custom objects later
+# Nothing is completely locked in place
