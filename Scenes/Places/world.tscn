@@ -32,6 +32,8 @@ uv2_scale = Vector3(5, 5, 5)
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nfdff"]
 bounce = 0.5
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mynff"]
+
 [node name="World" type="Node3D" unique_id=2063905397]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=989076872]
@@ -89,35 +91,19 @@ mass = 1.0
 physics_material_override = SubResource("PhysicsMaterial_nfdff")
 
 [node name="Ball2" parent="." unique_id=1769440648 instance=ExtResource("4_sj6h3")]
-transform = Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, -3.8926554, 1.8685468, -2.0439994)
+transform = Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, -61.648315, 16.326128, -2.0439994)
 mass = 1.0
 physics_material_override = SubResource("PhysicsMaterial_nfdff")
 
 [node name="missile2" parent="." unique_id=888320288 node_paths=PackedStringArray("target") instance=ExtResource("2_xs3tu")]
-transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, -55.411, 1, 1.931)
-visible = false
-speed = 40.0
-steer_force = 100.0
-target = NodePath("../CSGBox3D2")
-lock_time = 0.8
-launch_time = 1.0
-
-[node name="missile3" parent="." unique_id=269588938 node_paths=PackedStringArray("target") instance=ExtResource("2_xs3tu")]
-transform = Transform3D(1, 0, 4.371139e-08, 4.371139e-08, 1.9106855e-15, -1, 0, 1, 1.9106855e-15, -55.714428, 1, -5.6223125)
-visible = false
-speed = 50.0
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, -6.6716194, 2.0438843, 1.931)
+physics_material_override = SubResource("PhysicsMaterial_mynff")
+gravity_scale = 1.0
+speed = 20.0
 steer_force = 90.0
-target = NodePath("../CSGBox3D2")
+target = NodePath("../Ball2")
 lock_time = 0.5
-launch_time = 1.0
-
-[node name="missile4" parent="." unique_id=667831194 node_paths=PackedStringArray("target") instance=ExtResource("2_xs3tu")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -4.1365814, 1, 0.9475603)
-speed = 50.0
-steer_force = 90.0
-target = NodePath("../CSGBox3D2")
-lock_time = 0.7
-launch_time = 1.5
+motor_accel = Vector3(0, 70, 0)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1568990526]
 _spawnable_scenes = PackedStringArray("uid://be8qbmt0fe144")

@@ -23,7 +23,12 @@ var PUSH_FORCE = 4
 @onready var interaction_collision_shape = $InteractionArea/CollisionShape3D
 @onready var sync = $MultiplayerSynchronizer
 
-@onready var interaction_manager = $PlayerInteractionScanner
+@onready var leg_anim_tree = $Head/Stoneman/LegAnimTree
+@onready var arm_anim_tree = $Head/Stoneman/ArmAnimTree
+@onready var left_arm = $"Head/Stoneman/Left Arm Target"
+@onready var right_arm = $"Head/Stoneman/Right Arm Target"
+
+@onready var inter_manager = $PlayerInteractionScanner
 @onready var item_manager = $PlayerItemManager
 @onready var anim_manager = $PlayerAnimationHandler
 
@@ -48,32 +53,6 @@ func _input(event: InputEvent) -> void:
 	if ui.is_menu_open(): return
 	# if event is InputEventMouseButton:
 		#if Input.is_action_just_pressed("interact"):
-
-func pickup(item: RigidBody3D):
-	grabbed_object = item
-	grabbed_object.set_collision_layer_value(3,0)
-	grabbed_object.set_collision_mask_value(2,0)
-	emit_signal("grabbed",grabbed_object)
-	
-func drop():
-	if grabbed_object != null:
-		grabbed_object.set_collision_layer_value(3,1)
-		grabbed_object.set_collision_mask_value(2,1)
-		grabbed_object = null
-		emit_signal("grabbed",grabbed_object)
-	
-func throw_object():
-	# Alright, got something working for a sort of lob effect with the ball.
-	# Two factors are considered for how far and what angle the item can be thrown: 
-	# - Player Velocity
-	# - Camera Y Angle
-	var throw_angle = clamp(velocity.length() * (camera.rotation.x * 3), -50, 50)
-	grabbed_object.apply_impulse((-head.global_basis.z * velocity.length()*2) + Vector3(0,throw_angle,0))
-	grabbed_object.set_collision_layer_value(3,1)
-	grabbed_object.set_collision_mask_value(2,1)
-	grabbed_object = null
-	emit_signal("grabbed",grabbed_object)
-	pass
 
 # Why does head move on y but camera on x
 # Oh! Cause we dont want the whole player to point downward, but we want him to spin
@@ -134,18 +113,6 @@ func _physics_process(delta: float) -> void:
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody3D:
 			c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)
-			
-	if grabbed_object:
-		var target_pos:Vector3 = grabbed_anchor.global_position
-		
-		var current_pos:Vector3 = grabbed_object.global_position
-		
-		var direction = target_pos - current_pos
-		
-		var required_velocity = direction / delta
-		
-		var velocity_correction = required_velocity - grabbed_object.linear_velocity
-		grabbed_object.linear_velocity = required_velocity
 	
 	if is_on_floor():
 		anim_manager.play_walk_anims(velocity.length())

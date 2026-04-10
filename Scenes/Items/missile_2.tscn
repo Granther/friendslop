@@ -122,7 +122,10 @@ radius = 0.1
 [node name="missile2" type="RigidBody3D" unique_id=888320288]
 collision_layer = 24
 collision_mask = 7
+gravity_scale = 0.3
 script = ExtResource("1_swpy0")
+motor_time = 4.0
+motor_accel = Vector3(0, 50, 0)
 
 [node name="MeshInstance3D" parent="." unique_id=213959946 instance=ExtResource("2_17a6g")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
@@ -179,3 +182,4 @@ billboard = 1
 [connection signal="body_entered" from="KillArea" to="." method="_on_kill_area_body_entered"]
 [connection signal="timeout" from="LockTimer" to="." method="_on_lock_timer_timeout"]
 [connection signal="timeout" from="LaunchTimer" to="." method="_on_launch_timer_timeout"]
+[connection signal="timeout" from="MotorTimer" to="." method="_on_motor_timer_timeout"]

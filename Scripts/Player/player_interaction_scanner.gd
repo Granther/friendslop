@@ -14,7 +14,7 @@ signal drop_item
 var can_interact: bool = true
 var interactables: Array[Node3D]
 
-@export var root_player: CharacterBody3D
+@export var player_ref: CharacterBody3D
 @export var object_shape_cast: ShapeCast3D
 
 # Could we always be sorting the list to be the closest object at the front?
@@ -46,6 +46,5 @@ func _input(event):
 			var object_collided = object_shape_cast.get_collision_result()[0]["collider"]
 			if object_collided in interactables:
 				can_interact = false
-				print("interacted in scanner")
-				# As in, we can't fire this signal again until we recieve another signal to fix this lock
+				get_viewport().set_input_as_handled()
 				emit_signal("interacted_external_item", object_collided)

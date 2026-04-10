@@ -6,6 +6,8 @@ extends RigidBody3D
 @export var target: Node3D = null
 @export var lock_time: float
 @export var launch_time: float 
+@export var motor_time: float = 2
+@export var motor_accel = Vector3(0,9.8*5.5,0)
 
 var velocity = Vector3.ZERO
 var accel = Vector3(0, 0, 0)
@@ -17,6 +19,7 @@ var start_dist
 var in_hand: bool = false
 var rot_in_hand: Vector3
 var armed: bool = false
+var whitelist: Array[Node3D]
 
 @onready var ray = $RayCast3D
 @onready var lock_timer = $LockTimer
@@ -28,37 +31,21 @@ var armed: bool = false
 @onready var rng = RandomNumberGenerator.new()
 @onready var kill_area = $KillArea
 @onready var item_comp = $ItemComp
-@onready var interact_area = $InteractionArea
+@onready var interaction_area = $InteractionArea
+
+
+# Beignin at ready 
+# Once launched, starts lock timer, which means i
 
 func _ready():
+	setup_interact_callables()
 	launch_timer.wait_time = launch_time
 	lock_timer.wait_time = lock_time
+	motor_timer.wait_time = motor_time
 	anim_player.hide()
 	if target == null:
 		get_tree().node_added.connect(node_added)
-	# set_physics_process(false)
-	# launch_timer.start()
-	kill_area.set_deferred("disabled", true)
-
-	item_comp.on_drop_key_hit = Callable(self, "_on_drop")
-	item_comp.on_inter_key_hit = Callable(self, "on_inter")
-
-#func _prep_grab():
-	#interact_area.set_collision_layer_value(5, false)
-	#interact_area.set_label_visible(false)
-	#in_hand = true
-	#rot_in_hand = rotation
-	##lock_rotation = true
-	#pass
-	
-func _on_interact():
-	pass
-
-func _on_drop():
-	item_comp.item_manager.drop_item()
-	item_comp.phys_func = func(): pass
-	interact_area.set_collision_layer_value(5, true)
-	interact_area.set_label_visible(true)
+	# kill_area.set_deferred("disabled", true)
 
 func get_motor_accel():
 	#var motor_accel = pow(9.8, ((motor_timer.wait_time - motor_timer.time_left)/4))
@@ -71,8 +58,16 @@ func node_added(node: Node3D):
 	if node is CharacterBody3D:
 		target = node
 
+func launch():
+	armed = true
+	lock_timer.start()
+	velocity = Vector3.ZERO
+	start_motor()
+
+func start_motor():
+	motor_timer.start()
+
 func seek():
-	# var motor_accel = Vector3(0,9.8*5.5,0)
 	var steer_vec = Vector3.ZERO
 	if locked:
 		var desired = (target.position - position).normalized() * speed
@@ -83,19 +78,16 @@ func seek():
 		# This is our "Course correction"
 		# We grow the magnitude based off the steer force
 		steer_vec = (desired - velocity).normalized() * steer_force
-		return steer_vec + get_motor_accel()
+		return steer_vec + motor_accel
+	elif armed:
+		return motor_accel
 	else:
-		return get_motor_accel()
+		return Vector3.ZERO
 
 # We have a target and are locked, so we get the accel 
 
 func _physics_process(delta: float) -> void:
 	item_comp.phys_func.call()
-	#if target != null and locked:
-		#var dir = target.position - position
-		#
-		#
-		## If zero, we do no course correction
 	velocity += seek() * delta
 	# position += velocity * delta
 	global_translate(velocity * delta)
@@ -121,17 +113,50 @@ func _on_launch_timer_timeout() -> void:
 func _on_lock_timer_timeout() -> void:
 	kill_area.set_collision_mask_value(1, true)
 	locked = true
-	start_dist = (target.position - position).length()
+
+func _on_motor_timer_timeout() -> void:
+	motor_accel = Vector3.ZERO
 
 func _on_kill_area_body_entered(body: Node3D) -> void:
-	item_comp.prep_drop.call()
-	mesh_inst.hide()
-	set_physics_process(false)
-	coll_shape.set_deferred("disabled", true)
-	anim_player.show()
-	anim_player.play("explosion2")
-	await anim_player.animation_finished
-	queue_free()
+	if armed and (body not in whitelist):
+		mesh_inst.hide()
+		set_physics_process(false)
+		coll_shape.set_deferred("disabled", true)
+		anim_player.show()
+		anim_player.play("explosion2")
+		await anim_player.animation_finished
+		queue_free()
+
+func setup_interact_callables():
+	item_comp.on_drop_key_hit = Callable(self, "_on_drop")
+	item_comp.on_inter_key_hit = Callable(self, "_on_inter")
+	item_comp.on_register = Callable(self, "_on_register")
+	item_comp.on_deregister = Callable(self, "_on_deregister")
+
+func get_exploded(source: Vector3):
+	apply_central_force((global_transform.origin - source).normalized() * 1)
+
+func _on_register():
+	rot_in_hand = global_rotation
+	item_comp.phys_func = func():
+		rotation.z = rot_in_hand.z
+		rotation.y = 0;
+		item_comp.player_ref.left_arm.global_position = global_position
+		item_comp.player_ref.right_arm.global_position = global_position
+
+func _on_deregister():
+	item_comp.phys_func = func(): pass
+
+func _on_inter():
+	whitelist.append(item_comp.player_ref)
+	item_comp.player_ref.item_manager.drop_item()
+	interaction_area.set_collision_layer_value(5, true)
+	launch()
+
+func _on_drop():
+	interaction_area.set_label_visible(true)
+	interaction_area.set_collision_layer_value(5, true)
+	item_comp.player_ref.item_manager.drop_item()
 
 #extends RigidBody3D
 #

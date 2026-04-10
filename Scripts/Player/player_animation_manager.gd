@@ -1,12 +1,7 @@
 extends Node3D
 
-@onready var leg_anim_tree = $"../Head/Stoneman/LegAnimTree"
-@onready var arm_anim_tree= $"../Head/Stoneman/ArmAnimTree"
-@onready var leg_anim_player = $"../Head/Stoneman/LegAnimPlayer"
-
-var is_holding: bool = false
-var cur_item = null
 var anim_func = func(): pass
+@export var player_ref: CharacterBody3D
 
 func set_default_anims():
 	set_anim.rpc("parameters/WalkSpeed/scale", 0)
@@ -49,8 +44,8 @@ func set_movement_anims(scale: float, speed: float):
 
 @rpc("any_peer", "call_local")
 func set_anim(path, arg):
-	leg_anim_tree.set(path, arg)
+	player_ref.leg_anim_tree.set(path, arg)
 
 @rpc("any_peer", "call_local")
 func set_anim_players(setting: bool):
-	arm_anim_tree.active = setting
+	player_ref.arm_anim_tree.active = setting
