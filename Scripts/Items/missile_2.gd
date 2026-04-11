@@ -37,7 +37,8 @@ var whitelist: Array[Node3D]
 # Once launched, starts lock timer, which means i
 
 # Accel ~4, speed 5, steer_force = 50. Accurate at close range but drifts over time with large miss
-# Possible over velocity? 
+# Possible over velocity? Velocity must grow over time, what about steer_force?
+# Also, animated sprite cuts into mesh of what it collided with 
 
 func _ready():
 	setup_interact_callables()
