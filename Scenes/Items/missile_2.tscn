@@ -125,7 +125,6 @@ collision_mask = 7
 gravity_scale = 0.3
 script = ExtResource("1_swpy0")
 motor_time = 4.0
-motor_accel = Vector3(0, 50, 0)
 
 [node name="MeshInstance3D" parent="." unique_id=213959946 instance=ExtResource("2_17a6g")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)

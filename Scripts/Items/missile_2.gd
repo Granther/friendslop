@@ -1,13 +1,12 @@
 extends RigidBody3D
 
 @export var speed: float = 3
-# Maybe get more accurate as it gets closer??
 @export var steer_force: float = 1
 @export var target: Node3D = null
 @export var lock_time: float
 @export var launch_time: float 
 @export var motor_time: float = 2
-@export var motor_accel = Vector3(0,9.8*5.5,0)
+@export var motor_gs: float = 3
 
 var velocity = Vector3.ZERO
 var accel = Vector3(0, 0, 0)
@@ -37,6 +36,9 @@ var whitelist: Array[Node3D]
 # Beignin at ready 
 # Once launched, starts lock timer, which means i
 
+# Accel ~4, speed 5, steer_force = 50. Accurate at close range but drifts over time with large miss
+# Possible over velocity? 
+
 func _ready():
 	setup_interact_callables()
 	launch_timer.wait_time = launch_time
@@ -45,14 +47,9 @@ func _ready():
 	anim_player.hide()
 	if target == null:
 		get_tree().node_added.connect(node_added)
-	# kill_area.set_deferred("disabled", true)
 
 func get_motor_accel():
-	#var motor_accel = pow(9.8, ((motor_timer.wait_time - motor_timer.time_left)/4))
-	#print("Notor accel: ", motor_accel, motor_timer.wait_time - motor_timer.time_left)
-	#return Vector3(0, motor_accel, 0)
-	# return Vector3(0,9.8*5.5,0)
-	return Vector3(0,0,0)
+	return motor_gs * 9.8
 
 func node_added(node: Node3D):
 	if node is CharacterBody3D:
@@ -67,44 +64,27 @@ func launch():
 func start_motor():
 	motor_timer.start()
 
-func seek():
-	var steer_vec = Vector3.ZERO
-	if locked:
-		var desired = (target.position - position).normalized() * speed
-		#if rng.randf_range(0, 100) > 60:
-			#var r = 60
-			#var rand_vec = Vector3(rng.randf_range(-r, r), rng.randf_range(-r, r), rng.randf_range(-r, r))
-			#desired += rand_vec
-		# This is our "Course correction"
-		# We grow the magnitude based off the steer force
-		steer_vec = (desired - velocity).normalized() * steer_force
-		return steer_vec + motor_accel
-	elif armed:
-		return motor_accel
+func update_motor_const_force():
+	# F = ma, end line.
+	if not motor_timer.is_stopped(): # Motor is currently firing
+		constant_force = -global_transform.basis.z * (mass * get_motor_accel())
 	else:
-		return Vector3.ZERO
-
-# We have a target and are locked, so we get the accel 
+		constant_force = Vector3.ZERO
 
 func _physics_process(delta: float) -> void:
 	item_comp.phys_func.call()
-	velocity += seek() * delta
-	# position += velocity * delta
-	global_translate(velocity * delta)
-		# We want the vector to be in the direction of the target
-		# target, but remove the direction of our position
 	if locked:
-		var desired = (target.position - position).normalized() * speed
+		var desired = (target.global_position - global_position).normalized() * speed
 		var steer_vec = (desired - velocity).normalized() * steer_force
 		var rotAmount = velocity.normalized().cross(global_transform.basis.z)
 		rot.y = rotAmount.y
 		rot.x = rotAmount.x
 		rotate(Vector3.UP, rot.y)
 		rotate(Vector3.RIGHT, rot.x)
-		#
-	## -global_transform.basis.z is our forward, so we are merely setting vclocity
-	#global_translate(-global_transform.basis.z * speed * delta)
-
+		velocity += steer_vec * delta
+		global_translate(velocity * delta)
+	update_motor_const_force()
+		
 func _on_launch_timer_timeout() -> void:
 	lock_timer.start()
 	motor_timer.start()
@@ -115,15 +95,18 @@ func _on_lock_timer_timeout() -> void:
 	locked = true
 
 func _on_motor_timer_timeout() -> void:
-	motor_accel = Vector3.ZERO
+	# motor_accel = Vector3.ZERO
+	pass
 
 func _on_kill_area_body_entered(body: Node3D) -> void:
 	if armed and (body not in whitelist):
-		mesh_inst.hide()
 		set_physics_process(false)
-		coll_shape.set_deferred("disabled", true)
+		anim_player.top_level = true
+		anim_player.global_position = global_position
 		anim_player.show()
 		anim_player.play("explosion2")
+		mesh_inst.hide()
+		coll_shape.set_deferred("disabled", true)
 		await anim_player.animation_finished
 		queue_free()
 

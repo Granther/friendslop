@@ -50,7 +50,7 @@ size = Vector3(127.00293, 0.037902832, 20.154541)
 material = SubResource("StandardMaterial3D_a02cp")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1493753472]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.120139, 16.834839, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.947067, 11.529518, -3)
 use_collision = true
 collision_layer = 5
 collision_mask = 0
@@ -91,7 +91,7 @@ mass = 1.0
 physics_material_override = SubResource("PhysicsMaterial_nfdff")
 
 [node name="Ball2" parent="." unique_id=1769440648 instance=ExtResource("4_sj6h3")]
-transform = Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, -61.648315, 16.326128, -2.0439994)
+transform = Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, -8.634556, 16.326128, -2.0439994)
 mass = 1.0
 physics_material_override = SubResource("PhysicsMaterial_nfdff")
 
@@ -99,11 +99,12 @@ physics_material_override = SubResource("PhysicsMaterial_nfdff")
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, -6.6716194, 2.0438843, 1.931)
 physics_material_override = SubResource("PhysicsMaterial_mynff")
 gravity_scale = 1.0
-speed = 20.0
-steer_force = 90.0
-target = NodePath("../Ball2")
+speed = 5.0
+steer_force = 110.0
+target = NodePath("../CSGBox3D2")
 lock_time = 0.5
-motor_accel = Vector3(0, 70, 0)
+motor_time = 3.0
+motor_gs = 2.0
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1568990526]
 _spawnable_scenes = PackedStringArray("uid://be8qbmt0fe144")
