@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b153lkf8vm6v1"]
+
+[ext_resource type="PackedScene" uid="uid://db8thg2b4ee4r" path="res://Blender/Items/Duck/Duck-colonly(1).glb" id="1_o4ox7"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_7jcfa"]
+radius = 0.01
+
+[node name="Node3D" type="RigidBody3D" unique_id=612556304]
+
+[node name="Duck-colonly(1)" parent="." unique_id=1968190421 instance=ExtResource("1_o4ox7")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1205432094]
+mesh = SubResource("SphereMesh_7jcfa")

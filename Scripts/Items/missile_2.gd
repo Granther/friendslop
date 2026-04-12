@@ -75,6 +75,8 @@ func update_motor_const_force():
 func _physics_process(delta: float) -> void:
 	item_comp.phys_func.call()
 	if locked:
+		# Missile gets more accurate as time goes on
+		steer_force += delta**(1/3)
 		var desired = (target.global_position - global_position).normalized() * speed
 		var steer_vec = (desired - velocity).normalized() * steer_force
 		var rotAmount = velocity.normalized().cross(global_transform.basis.z)
@@ -96,8 +98,7 @@ func _on_lock_timer_timeout() -> void:
 	locked = true
 
 func _on_motor_timer_timeout() -> void:
-	# motor_accel = Vector3.ZERO
-	pass
+	steer_force = steer_force/2
 
 func _on_kill_area_body_entered(body: Node3D) -> void:
 	if armed and (body not in whitelist):

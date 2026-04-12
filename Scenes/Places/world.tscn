@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://n3oq7tlymf2k" path="res://Scenes/Items/missile_2.tscn" id="2_xs3tu"]
 [ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Textures/tiled-bg.png" id="3_nfdff"]
 [ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Items/ball.tscn" id="4_sj6h3"]
+[ext_resource type="PackedScene" uid="uid://b153lkf8vm6v1" path="res://Scenes/Items/duck.tscn" id="4_xs3tu"]
 [ext_resource type="PackedScene" uid="uid://xwjcwb2sf4sf" path="res://Scenes/UI/in_game_ui.tscn" id="5_iffac"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_go701"]
@@ -50,7 +51,7 @@ size = Vector3(127.00293, 0.037902832, 20.154541)
 material = SubResource("StandardMaterial3D_a02cp")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1493753472]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.947067, 11.529518, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.075478, 15.346161, -3)
 use_collision = true
 collision_layer = 5
 collision_mask = 0
@@ -99,12 +100,15 @@ physics_material_override = SubResource("PhysicsMaterial_nfdff")
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, -6.6716194, 2.0438843, 1.931)
 physics_material_override = SubResource("PhysicsMaterial_mynff")
 gravity_scale = 1.0
-speed = 5.0
-steer_force = 110.0
+speed = 15.0
+steer_force = 50.0
 target = NodePath("../CSGBox3D2")
-lock_time = 0.5
-motor_time = 3.0
-motor_gs = 2.0
+lock_time = 0.3
+motor_time = 1.0
+motor_gs = 4.8
+
+[node name="Node3D" parent="." unique_id=612556304 instance=ExtResource("4_xs3tu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.1944065, 1.336133, 0)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1568990526]
 _spawnable_scenes = PackedStringArray("uid://be8qbmt0fe144")

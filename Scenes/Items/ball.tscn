@@ -35,6 +35,7 @@ script = ExtResource("1_d60mj")
 shape = SubResource("SphereShape3D_fo5ed")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=45361601]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.022)
 mesh = SubResource("SphereMesh_8j60k")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1379193455]
