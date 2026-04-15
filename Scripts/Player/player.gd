@@ -34,6 +34,12 @@ var PUSH_FORCE = 4
 
 @export var interact_dist: float
 
+# Player state machine
+var STATE: int
+const SPRINTING = 0
+const CROUCHING = 1
+const WALKING = 2
+
 func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
 	assert(get_collision_layer_value(4), "must be on 'Expodables' (4) collision layer")
@@ -74,21 +80,33 @@ func _physics_process(delta: float) -> void:
 	var target_fov = BASE_FOV * FOV_CHANGE * velocity_clamp
 	camera.fov = lerp(camera.fov, target_fov, delta * 4)
 	var input_dir = Input.get_vector("left", "right", "up", "down")
+	
 	if Input.is_action_pressed("ToggleMouseFocus"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y += JUMP_VELOCITY
 		
-	if Input.is_action_pressed("sprint"):
-		SPEED = 5
-		FOV_CHANGE = 0.7
+	if Input.is_action_pressed("crouch"):
+		STATE = CROUCHING
+	elif Input.is_action_pressed("sprint"):
+		STATE = SPRINTING
 	else:
-		SPEED = 3
-		FOV_CHANGE = 1
-		
+		STATE = WALKING
+	
+	match(STATE):
+		SPRINTING:
+			SPEED = 5
+#			FOV_CHANGE = 0.7
+		WALKING:
+			SPEED = 3
+#			FOV_CHANGE = 1
+		CROUCHING:
+			SPEED = 1.5
+
 	var move_direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if move_direction and is_on_floor():
 		velocity.x = lerp(velocity.x, move_direction.x * SPEED, delta * 6) 

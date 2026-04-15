@@ -1,24 +1,29 @@
 extends RigidBody3D
+class_name Grenade
 
-@onready var blast_radius = $BlastRadius
-@onready var fuse_timer = $FuseTimer
-@onready var interaction_area: InteractionArea = $InteractionArea
+@onready var interaction_area = $InteractionArea
+@onready var item_comp = $ItemComp
 
-func _on_fuse_timer_timeout() -> void:
-	hide()
-	# Uses Area3D's child CollisionShape to search for all bodies
-	# Also, we are reading from the "Explodable" phys layer, so we only see things that can be
-	# ie, we dont need to check that is is explodable
-	var bodies = blast_radius.get_overlapping_bodies()
-	for bod in bodies:
-		bod.get_exploded(global_transform.origin)
-##yo
 func _ready():
-	interaction_area.interact = Callable(self, "_on_interact")
-	fuse_timer.start()
+	item_comp.on_drop_key_hit = Callable(self, "_on_drop")
+	item_comp.on_inter_key_hit = Callable(self, "_on_inter")
+	item_comp.on_register = Callable(self, "_on_register")
+	item_comp.on_deregister = Callable(self, "_on_deregister")
 
-func _on_interact() -> void:
-	if ItemManager.has_item():
-		ItemManager.drop_item()
-	else:
-		ItemManager.set_item(self)
+func get_exploded(source: Vector3):
+	apply_central_force((global_transform.origin - source).normalized() * 1)
+
+func _on_register():
+	item_comp.phys_func = func():
+		item_comp.player_ref.left_arm.global_position = global_position
+		item_comp.player_ref.right_arm.global_position = global_position
+
+func _on_deregister():
+	item_comp.phys_func = func(): pass
+
+func _on_inter():
+	print("would throw")
+
+func _on_drop():
+	interaction_area.set_label_visible(true)
+	item_comp.player_ref.item_manager.drop_item()

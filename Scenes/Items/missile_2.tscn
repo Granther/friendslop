@@ -127,7 +127,6 @@ script = ExtResource("1_swpy0")
 motor_time = 4.0
 
 [node name="MeshInstance3D" parent="." unique_id=321914883 instance=ExtResource("2_17a6g")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 
 [node name="KillArea" type="Area3D" parent="." unique_id=1965504657]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -135,7 +134,6 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="KillArea" unique_id=88631015]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_swpy0")
 
 [node name="LockTimer" type="Timer" parent="." unique_id=1737233200]
@@ -168,14 +166,12 @@ root_object = NodePath("..")
 action_name = "pickup"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=195068136]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_sx7xb")
 
 [node name="InteractionLabel" type="Label3D" parent="." unique_id=1940920765]
 billboard = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=203334683]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_q6p5m")
 
 [connection signal="body_entered" from="KillArea" to="." method="_on_kill_area_body_entered"]

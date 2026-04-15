@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://j42nvonb3hvh" path="res://Scripts/Items/grenade.gd" id="1_i6qap"]
 [ext_resource type="PackedScene" uid="uid://bbns3sc7l3glg" path="res://Blender/Items/Grenade/gernade.glb" id="2_n8nsm"]
-[ext_resource type="PackedScene" uid="uid://bky5aipqtxurn" path="res://Old/interaction_area.tscn" id="3_22lk0"]
+[ext_resource type="PackedScene" uid="uid://b3hcbfg4kp5bq" path="res://Interaction/InteractionArea.tscn" id="3_jinu1"]
+[ext_resource type="PackedScene" uid="uid://dd6wj0xef6dol" path="res://Interaction/Items/item_comp.tscn" id="4_83e7e"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_22lk0"]
 radius = 0.06183773
@@ -10,8 +11,8 @@ radius = 0.06183773
 [sub_resource type="SphereShape3D" id="SphereShape3D_n8nsm"]
 radius = 2.1098068
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_jinu1"]
-radius = 2.1084533
+[sub_resource type="SphereShape3D" id="SphereShape3D_dkxgq"]
+radius = 2.0
 
 [node name="Grenade" type="RigidBody3D" unique_id=186504985]
 collision_layer = 4
@@ -30,17 +31,23 @@ collision_mask = 8
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BlastRadius" unique_id=573024537]
 shape = SubResource("SphereShape3D_n8nsm")
 
-[node name="InteractionArea" parent="." unique_id=353202805 node_paths=PackedStringArray("label") instance=ExtResource("3_22lk0")]
-label = NodePath("../InteractLabel")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=1069467141]
-shape = SubResource("SphereShape3D_jinu1")
-
 [node name="FuseTimer" type="Timer" parent="." unique_id=281090178]
 wait_time = 10.0
 one_shot = true
 
 [node name="InteractLabel" type="Label3D" parent="." unique_id=1005970161]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3690272, 0)
+visible = false
+
+[node name="InteractionArea" parent="." unique_id=151811882 node_paths=PackedStringArray("label", "root_object") instance=ExtResource("3_jinu1")]
+collision_layer = 16
+collision_mask = 0
+label = NodePath("../InteractLabel")
+root_object = NodePath("..")
+action_name = "pickup"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=2104238357]
+shape = SubResource("SphereShape3D_dkxgq")
+
+[node name="ItemComp" parent="." unique_id=1873508656 instance=ExtResource("4_83e7e")]
 
 [connection signal="timeout" from="FuseTimer" to="." method="_on_fuse_timer_timeout"]

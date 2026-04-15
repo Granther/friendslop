@@ -14,6 +14,7 @@ var lock: bool = false
 
 func _ready():
 	# get_tree().node_added.connect(node_added)
+	
 	timer.start()
 
 func node_added(node: Node3D):

@@ -27,22 +27,28 @@ func _on_int_scan_interacted_external_item(item: Node3D) -> void:
 	item.item_comp.register(player_ref)
 	# This is all happening in our hand
 	if not has_item():
-		register_key_connects(item)
-		if item.item_comp.is_grabbable():
-			grab_item(item)
-		elif item.item_comp.is_npc():
+		cur_item = item
+		register_key_connects()
+		if cur_item.item_comp.is_grabbable():
+			grab_item()
+		elif cur_item.item_comp.is_npc():
 			print("npc interact etc")
 		else:
 			push_error("item is not grabbable: ", item.name)
 
-func register_key_connects(item):
-	drop_key_hit.connect(item.item_comp.on_drop_key_hit)
-	leftm_key_hit.connect(item.item_comp.on_leftm_key_hit)
-	rightm_key_hit.connect(item.item_comp.on_rightm_key_hit)
-	interact_key_hit.connect(item.item_comp.on_inter_key_hit)
+func register_key_connects():
+	drop_key_hit.connect(cur_item.item_comp.on_drop_key_hit)
+	leftm_key_hit.connect(cur_item.item_comp.on_leftm_key_hit)
+	rightm_key_hit.connect(cur_item.item_comp.on_rightm_key_hit)
+	interact_key_hit.connect(cur_item.item_comp.on_inter_key_hit)
 
-func grab_item(item: Node):
-	cur_item = item
+func deregister_key_connects():
+	drop_key_hit.disconnect(cur_item.item_comp.on_drop_key_hit)
+	leftm_key_hit.disconnect(cur_item.item_comp.on_leftm_key_hit)
+	rightm_key_hit.disconnect(cur_item.item_comp.on_rightm_key_hit)
+	interact_key_hit.disconnect(cur_item.item_comp.on_inter_key_hit)
+
+func grab_item():
 	# Check if cur_item has interaction_component
 	cur_item.reparent(player_ref.springarm)
 	grabbed_item.emit(cur_item)
@@ -50,6 +56,7 @@ func grab_item(item: Node):
 func drop_item():
 	cur_item.reparent(get_tree().root)
 	cur_item.item_comp.deregister()
+	deregister_key_connects()
 	cur_item = null
 	dropped_item.emit()
 	done_interacting.emit()

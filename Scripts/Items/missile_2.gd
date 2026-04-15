@@ -31,6 +31,7 @@ var whitelist: Array[Node3D]
 @onready var kill_area = $KillArea
 @onready var item_comp = $ItemComp
 @onready var interaction_area = $InteractionArea
+@onready var label = $InteractionLabel
 
 
 # Beignin at ready 
@@ -41,6 +42,7 @@ var whitelist: Array[Node3D]
 # Also, animated sprite cuts into mesh of what it collided with 
 
 func _ready():
+	label.scale = Vector3(0.5,0.5,0.5)
 	setup_interact_callables()
 	launch_timer.wait_time = launch_time
 	lock_timer.wait_time = lock_time
@@ -79,10 +81,10 @@ func _physics_process(delta: float) -> void:
 		steer_force += delta**(1/3)
 		var desired = (target.global_position - global_position).normalized() * speed
 		var steer_vec = (desired - velocity).normalized() * steer_force
-		var rotAmount = velocity.normalized().cross(global_transform.basis.z)
-		rot.y = rotAmount.y
+		var rotAmount = velocity.normalized().cross(global_transform.basis.y)
+		rot.z = rotAmount.z
 		rot.x = rotAmount.x
-		rotate(Vector3.UP, rot.y)
+		rotate(Vector3.BACK, rot.z)
 		rotate(Vector3.RIGHT, rot.x)
 		velocity += steer_vec * delta
 		global_translate(velocity * delta)
@@ -122,15 +124,19 @@ func get_exploded(source: Vector3):
 	apply_central_force((global_transform.origin - source).normalized() * 1)
 
 func _on_register():
-	rot_in_hand = global_rotation
+	# rot_in_hand = global_transform
+	# rotation_degrees
+	freeze = true
+	global_rotation_degrees.x = 180
+	global_rotation_degrees.z = 0
+	global_rotation_degrees.y = 0
 	item_comp.phys_func = func():
-		rotation.z = rot_in_hand.z
-		rotation.y = 0;
 		item_comp.player_ref.left_arm.global_position = global_position
 		item_comp.player_ref.right_arm.global_position = global_position
 
 func _on_deregister():
 	item_comp.phys_func = func(): pass
+	freeze = false
 
 func _on_inter():
 	whitelist.append(item_comp.player_ref)
