@@ -12,6 +12,13 @@ func set_idle_anims():
 		set_anim_players.rpc(true)
 		set_anim.rpc("parameters/Idle/blend_amount", 0)
 
+func set_crouch_anims(vel_magnitude: float):
+	anim_func = func():
+		var scale = clamp(vel_magnitude*2, 0, 15)
+		set_anim_players.rpc(true)
+		set_anim.rpc("parameters/JumpBlend/blend_amount", 0.2)
+		set_movement_anims(scale, 1)
+
 func set_grabbed_item_anims(item: Node3D):
 	anim_func = func():
 		set_anim_players.rpc(false)

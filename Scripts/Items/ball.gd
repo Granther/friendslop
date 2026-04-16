@@ -21,19 +21,23 @@ func _set_freeze(setting: bool):
 	else:
 		freeze = false
 
+func _set_col_layers(setting: bool):
+	# Remove from Items and Interactibles. So it wont collide with player and be picked up as item from scanner
+	set_collision_layer_value(3, not setting)
+	interaction_area.set_collision_layer_value(5, not setting)
+
 func _on_register():
-	interaction_area.set_collision_layer_value(5, false)
+	_set_col_layers(true)
 	interaction_area.set_label_visible(false)
 	_set_freeze(true)
 	item_comp.phys_func = func():
 		global_rotation = Vector3.ZERO
-		print(linear_velocity, angular_velocity)
 		item_comp.player_ref.left_arm.global_position = global_position
 		item_comp.player_ref.right_arm.global_position = global_position
 
 func _on_deregister():
 	_set_freeze(false)
-	interaction_area.set_collision_layer_value(5, true)
+	_set_col_layers(false)
 	item_comp.phys_func = func(): pass
 
 func _on_inter():
@@ -43,6 +47,5 @@ func _on_inter():
 	print("would throw")
 
 func _on_drop():
-	print("got drop")
 	interaction_area.set_label_visible(true)
 	item_comp.player_ref.item_manager.drop_item()

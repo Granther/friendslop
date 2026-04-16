@@ -5,9 +5,11 @@ var SPEED = 0
 const SPRINT = false
 const JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.003
-var BASE_FOV = 120.0
+var BASE_FOV = 100.0
 var FOV_CHANGE = 1
 var PUSH_FORCE = 4
+
+@export var DEFAULT_SPEED: float = 3
 
 @onready var head = $Head
 @onready var grabbed_anchor = $Head/Camera3D/SpringArm3D/GrabbedAnchor
@@ -35,14 +37,18 @@ var PUSH_FORCE = 4
 @export var interact_dist: float
 
 # Player state machine
-var STATE: int
-const SPRINTING = 0
-const CROUCHING = 1
+var MOVE_STATE: int
+const IDLE = 0
+const SPRINTING = 1
 const WALKING = 2
+
+var STAND_STATE: int
+const CROUCHING = 0
+const STANDING = 1
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
-	assert(get_collision_layer_value(4), "must be on 'Expodables' (4) collision layer")
+	#assert(get_collision_layer_value(4), "must be on 'Expodables' (4) collision layer")
 
 func _ready():
 	# Setting nametag of player, be sure to enable billboarding in the flags so it follows the camera
@@ -70,14 +76,19 @@ func _unhandled_input(event):
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
+func get_targ_fov(degrees: float) -> float:
+	return 0
+
 func _physics_process(delta: float) -> void:
 	springarm.set("spring_length", clamp(-camera.rotation.x,0.6,0.7))
 	
 	if not is_multiplayer_authority(): return
 	# Bug: Opening menu pauses you in game. Turns off physics lol
 	if ui.is_menu_open(): return
-	var velocity_clamp = clamp(velocity.length(), SPEED/4.5, SPEED/4.5)
-	var target_fov = BASE_FOV * FOV_CHANGE * velocity_clamp
+	var velocity_clamp = clamp(velocity.length(), FOV_CHANGE, velocity.length())
+	var target_fov = BASE_FOV * FOV_CHANGE + velocity_clamp
+	print(target_fov)
+	#(SPEED/DEFAULT_SPEED)
 	camera.fov = lerp(camera.fov, target_fov, delta * 4)
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	
@@ -91,21 +102,36 @@ func _physics_process(delta: float) -> void:
 		velocity.y += JUMP_VELOCITY
 		
 	if Input.is_action_pressed("crouch"):
-		STATE = CROUCHING
-	elif Input.is_action_pressed("sprint"):
-		STATE = SPRINTING
+		STAND_STATE = CROUCHING
 	else:
-		STATE = WALKING
+		STAND_STATE = STANDING
+
+	if Input.is_action_pressed("sprint"):
+		MOVE_STATE = SPRINTING
+	elif input_dir != Vector2.ZERO: # sees if we are actually giving input from keyboard
+		MOVE_STATE = WALKING
+	else:
+		MOVE_STATE = IDLE
 	
-	match(STATE):
+	match(MOVE_STATE):
 		SPRINTING:
-			SPEED = 5
-#			FOV_CHANGE = 0.7
+			if STAND_STATE == CROUCHING:
+				SPEED = 2.25
+				FOV_CHANGE = 1.4
+			else: # standing
+				SPEED = 5
+				FOV_CHANGE = 0.7
+				# FOV = BASE_FOV * 1.2 *  
 		WALKING:
-			SPEED = 3
-#			FOV_CHANGE = 1
-		CROUCHING:
-			SPEED = 1.5
+			if STAND_STATE == CROUCHING:
+				SPEED = 1.5
+				FOV_CHANGE = 1.8
+			else: # standing
+				SPEED = DEFAULT_SPEED
+				FOV_CHANGE = 1
+		IDLE:
+			SPEED = DEFAULT_SPEED
+			FOV_CHANGE = 1
 
 	var move_direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if move_direction and is_on_floor():
