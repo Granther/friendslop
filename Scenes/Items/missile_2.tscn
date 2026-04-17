@@ -119,11 +119,13 @@ radius = 0.1
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_q6p5m"]
 radius = 0.1
 
-[node name="missile2" type="RigidBody3D" unique_id=888320288]
+[node name="missile2" type="RigidBody3D" unique_id=888320288 node_paths=PackedStringArray("interaction_area", "item_comp")]
 collision_layer = 24
 collision_mask = 7
 gravity_scale = 0.3
 script = ExtResource("1_swpy0")
+interaction_area = NodePath("InteractionArea")
+item_comp = NodePath("ItemComp")
 
 [node name="MeshInstance3D" parent="." unique_id=321914883 instance=ExtResource("2_17a6g")]
 

@@ -24,12 +24,14 @@ properties/1/replication_mode = 1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_scegs"]
 
-[node name="Ball" type="RigidBody3D" unique_id=1482215681 groups=["interactable"]]
-collision_layer = 24
+[node name="Ball" type="RigidBody3D" unique_id=1482215681 node_paths=PackedStringArray("interaction_area", "item_comp") groups=["interactable"]]
+collision_layer = 16
 collision_mask = 7
 mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_8j60k")
 script = ExtResource("1_d60mj")
+interaction_area = NodePath("InteractionArea")
+item_comp = NodePath("ItemComp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=536040832]
 shape = SubResource("SphereShape3D_fo5ed")

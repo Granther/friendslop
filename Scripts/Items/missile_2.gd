@@ -221,13 +221,14 @@
 	##await anim_player.animation_finished
 	##queue_free()
 
-extends RigidBody3D
+extends Grabbable
+class_name Missile
 
 @export var speed: float = 3
 @export var steer_force: float = 1
 @export var target: Node3D = null
-@export var lock_time: float
-@export var launch_time: float 
+@export var lock_time: float = 1
+@export var launch_time: float = 1
 @export var motor_time: float = 2
 @export var motor_gs: float = 3
 
@@ -243,7 +244,6 @@ var rot_in_hand: Vector3
 var armed: bool = false
 var whitelist: Array[Node3D]
 
-@onready var ray = $RayCast3D
 @onready var lock_timer = $LockTimer
 @onready var launch_timer = $LaunchTimer
 @onready var motor_timer = $MotorTimer
@@ -252,8 +252,8 @@ var whitelist: Array[Node3D]
 @onready var mesh_inst = $MeshInstance3D
 @onready var rng = RandomNumberGenerator.new()
 @onready var kill_area = $KillArea
-@onready var item_comp = $ItemComp
-@onready var interaction_area = $InteractionArea
+#@onready var item_comp = $ItemComp
+#@onready var interaction_area = $InteractionArea
 
 
 # Beignin at ready 
@@ -341,14 +341,10 @@ func setup_interact_callables():
 	item_comp.on_register = Callable(self, "_on_register")
 	item_comp.on_deregister = Callable(self, "_on_deregister")
 
-func get_exploded(source: Vector3):
-	apply_central_force((global_transform.origin - source).normalized() * 1)
-
 func _on_register():
 	rot_in_hand = global_rotation
 	item_comp.phys_func = func():
 		look_at(Vector3.UP)
-		# rotation_degrees.y = rot_in_hand.y
 		item_comp.player_ref.left_arm.global_position = global_position
 		item_comp.player_ref.right_arm.global_position = global_position
 

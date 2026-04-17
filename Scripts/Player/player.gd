@@ -5,7 +5,7 @@ var SPEED = 0
 const SPRINT = false
 const JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.003
-var BASE_FOV = 100.0
+var BASE_FOV = 90
 var FOV_CHANGE = 1
 var PUSH_FORCE = 4
 
@@ -15,14 +15,11 @@ var PUSH_FORCE = 4
 @onready var grabbed_anchor = $Head/Camera3D/SpringArm3D/GrabbedAnchor
 @onready var object_grabber_shape_cast = $Head/Camera3D/ObjectGrabberShapeCast
 @onready var camera = $Head/Camera3D
-@onready var animations = $AnimationPlayer
 @onready var nametag = $Nametag
 @export var grabbed_object:RigidBody3D = null
 @onready var stoneman = $Head/Stoneman
 @onready var springarm = $Head/Camera3D/SpringArm3D
 @onready var ui = UIHandler.get_ui()
-@onready var interaction_area = $InteractionArea
-@onready var interaction_collision_shape = $InteractionArea/CollisionShape3D
 @onready var sync = $MultiplayerSynchronizer
 
 @onready var leg_anim_tree = $Head/Stoneman/LegAnimTree
@@ -79,16 +76,17 @@ func _unhandled_input(event):
 func get_targ_fov(degrees: float) -> float:
 	return 0
 
+# We want to set FOV_CHANGE in such a way that it reaches the max fov for the particular state
+# ... when we are at the max speed
+
 func _physics_process(delta: float) -> void:
 	springarm.set("spring_length", clamp(-camera.rotation.x,0.6,0.7))
 	
 	if not is_multiplayer_authority(): return
 	# Bug: Opening menu pauses you in game. Turns off physics lol
 	if ui.is_menu_open(): return
-	var velocity_clamp = clamp(velocity.length(), FOV_CHANGE, velocity.length())
+	var velocity_clamp = clamp(velocity.length(), SPEED/DEFAULT_SPEED, SPEED/DEFAULT_SPEED)
 	var target_fov = BASE_FOV * FOV_CHANGE + velocity_clamp
-	print(target_fov)
-	#(SPEED/DEFAULT_SPEED)
 	camera.fov = lerp(camera.fov, target_fov, delta * 4)
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	
@@ -117,15 +115,14 @@ func _physics_process(delta: float) -> void:
 		SPRINTING:
 			if STAND_STATE == CROUCHING:
 				SPEED = 2.25
-				FOV_CHANGE = 1.4
+				FOV_CHANGE = 1
 			else: # standing
 				SPEED = 5
-				FOV_CHANGE = 0.7
-				# FOV = BASE_FOV * 1.2 *  
+				FOV_CHANGE = 1.1
 		WALKING:
 			if STAND_STATE == CROUCHING:
-				SPEED = 1.5
-				FOV_CHANGE = 1.8
+				SPEED = DEFAULT_SPEED/2
+				FOV_CHANGE = 1
 			else: # standing
 				SPEED = DEFAULT_SPEED
 				FOV_CHANGE = 1

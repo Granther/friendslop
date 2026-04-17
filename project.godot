@@ -22,6 +22,7 @@ InteractionManager="uid://bmgxp4u2na6nn"
 RemoteMultiplayerHandler="*uid://cowea4n1065io"
 UIHandler="*uid://cel5867yqym8h"
 ItemManager="uid://b7hwknpwt0q0e"
+Err="*uid://cthij08lfg15p"
 
 [editor]
 
@@ -106,6 +107,7 @@ crouch={
 3d_physics/layer_3="Items"
 3d_physics/layer_4="Explodables"
 3d_physics/layer_5="Interactables"
+3d_physics/layer_6="AOE"
 
 [physics]
 

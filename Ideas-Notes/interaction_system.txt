@@ -42,3 +42,14 @@
 # 	So all of these can just be top level components in the player and we just have some kind of singleton to deliver it globally
 # I like the idea of giving objects a lot of control over their interaction, then it makes it easier to make very custom objects later
 # Nothing is completely locked in place
+
+# Maybe a health handler? Can everything have one?
+# I like the idea of a component that handles the HUD with player health data
+# But, maybe a component that allows for applying effects etc, can/should we use signals
+# We implement specifically for the item
+# So, on missile impact, it gets all items in the aoe and c
+
+# I'm inmagining an AEO recieving component and and AOE dishing one
+# So, a grenade goes off and it has an AEO sphere for which the effects are applied
+# It gets everything in that interaction area (its assumed that everything on that collision layer ...)
+# It then calls the method 
