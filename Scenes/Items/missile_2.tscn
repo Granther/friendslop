@@ -158,6 +158,8 @@ billboard = 1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_rkkyk")
 animation = &"explosion2"
+frame = 6
+frame_progress = 1.0
 
 [node name="InteractionArea" parent="." unique_id=151811882 node_paths=PackedStringArray("label", "root_object") instance=ExtResource("5_iqm20")]
 collision_layer = 16

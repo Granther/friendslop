@@ -222,7 +222,7 @@
 	##queue_free()
 
 extends Grabbable
-class_name Missile
+class_name Missile3
 
 @export var speed: float = 3
 @export var steer_force: float = 1

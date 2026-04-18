@@ -160,8 +160,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		anim_manager.play_jump_anims(velocity.length())
 
-func get_exploded(source: Vector3):
+func get_blasted(source: Vector3, force_mag: float):
 	# Get difference between player pos and grenade pos (this is our direction relative to grenade)
-	var force = (global_transform.origin - source).normalized()*5
-	print(force.length())
+	print("got blasted")
+	var force = (global_transform.origin - source).normalized()*force_mag
 	velocity = (velocity + force)

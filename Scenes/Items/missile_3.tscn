@@ -1,0 +1,193 @@
+[gd_scene format=3 uid="uid://bfieqcv8uud4x"]
+
+[ext_resource type="PackedScene" uid="uid://buehajivrqfrp" path="res://Blender/Items/Missile/2/NewMissile.glb" id="1_g262i"]
+[ext_resource type="Script" uid="uid://godx5d4xqyeu" path="res://Scripts/Items/missile_2.gd" id="2_58p3e"]
+[ext_resource type="PackedScene" uid="uid://dd6wj0xef6dol" path="res://Interaction/Items/item_comp.tscn" id="2_ktd68"]
+[ext_resource type="Texture2D" uid="uid://ecg54whw7gtp" path="res://Animations/Explosions pack/explosion-1-g/spritesheet.png" id="3_58p3e"]
+[ext_resource type="PackedScene" uid="uid://b3hcbfg4kp5bq" path="res://Interaction/InteractionArea.tscn" id="4_gnm7u"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_t5r3k"]
+points = PackedVector3Array(-1.2382671, -0.053664938, -0.67798567, 1.3846503, 0.07126033, 0.8206164, 1.2593583, 0.07126033, 1.5700703, 1.3846503, -0.67814463, 0.07116253, 1.2593583, 0.07126033, -1.5524504, -1.2382671, -0.67814463, 0.07116253, -1.2382671, 0.07126033, 0.6956055, 0.3853948, -0.053664938, 1.5700703, 0.3853948, -0.053664938, -1.5524504, -1.2382671, 0.07126033, -0.67798567, -1.2382671, -0.67814463, -0.05354268, 1.3846503, -0.67814463, -0.05354268, -1.2382671, -0.30344215, 0.57059467, 1.2593583, -0.053664938, 1.5700703, 1.2593583, -0.053664938, -1.5524504, 1.3846503, 0.07126033, -0.8029966, -1.2382671, -0.42822072, -0.42826962, 0.3853948, 0.07126033, 1.5700703, 0.3853948, 0.07126033, -1.5524504, -1.112975, -0.053664938, -0.8029966, -1.2382671, -0.5532194, 0.3208786, -0.61360395, -0.053664938, 1.0703325, -1.2382671, -0.5532194, -0.30325875, -1.2382671, -0.30344215, -0.5529748, 1.3846503, -0.053664938, 0.8206164, 1.3846503, -0.053664938, -0.8029966, -1.2382671, -0.053664938, 0.6956055, 1.3846503, -0.5532194, 0.3208786, 1.3846503, -0.5532194, -0.30325875)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_p503d"]
+points = PackedVector3Array(0.38529697, -1.5522792, -0.0536405, 1.3846502, -0.6781447, 0.071260326, 1.3846502, -0.8031677, 0.071260326, -1.1133661, -0.6781447, 0.071260326, 1.3846502, -0.6781447, -0.0536405, 1.2597004, -1.5522792, 0.071260326, -1.1133661, -0.6781447, -0.0536405, 1.2597004, -1.5522792, -0.0536405, 0.38529697, -1.5522792, 0.071260326, -1.1133661, -0.8031677, 0.071260326, -1.1133661, -0.8031677, -0.0536405)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_l5oud"]
+points = PackedVector3Array(-0.61360395, 1.0702224, -0.053579357, 1.2593583, 1.5700703, 0.07108916, 1.2593583, 1.5700703, -0.053579357, 1.3846503, 0.07126033, 0.5708636, 1.3846503, 0.07126033, -0.55324376, -1.2382671, 0.07126033, 0.5708636, -1.2382671, 0.32111087, -0.55324376, -1.2382671, 0.32111087, 0.5708636, -1.2382671, 0.07126033, -0.55324376, 0.3853948, 1.5700703, -0.053579357, 1.3846503, 0.32111087, 0.5708636, 1.3846503, 0.32111087, -0.55324376, -1.2382671, 0.69581336, 0.07108916, 0.3853948, 1.5700703, 0.07108916, 1.3846503, 0.8206653, 0.07108916, -1.2382671, 0.57110816, -0.30335653, -1.2382671, 0.57110816, 0.32086635, -0.61360395, 1.0702224, 0.07108916, -1.2382671, 0.69581336, -0.053579357, 1.3846503, 0.8206653, -0.053579357)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_eugsm"]
+points = PackedVector3Array(-13.602422, -0.17846794, -0.17846794, -1.238267, 0.5708636, 0.32086635, -1.238267, 0.5708636, -0.30335653, -1.238267, -0.55324376, 0.32086635, -10.978722, 0.32086635, 0.5708636, -1.238267, -0.30335653, -0.55324376, -11.604693, 0.44575495, -0.42824513, -11.229355, -0.55324376, 0.32086635, -11.35406, -0.55324376, -0.30335653, -1.238267, -0.30335653, 0.5708636, -11.35406, 0.5708636, 0.19597776, -11.35406, -0.30335653, -0.55324376, -1.238267, 0.32086635, -0.55324376, -11.103427, -0.30335653, 0.5708636, -13.602422, 0.19597776, 0.19597776, -1.238267, -0.55324376, -0.30335653, -1.238267, 0.32086635, 0.5708636, -11.229355, 0.32086635, -0.55324376, -11.103427, 0.5708636, -0.30335653, -13.602422, -0.17846794, 0.19597776, -13.602422, 0.19597776, -0.17846794, -10.978722, 0.5708636, 0.32086635, -12.354147, 0.19597776, 0.44575495, -12.478852, 0.19597776, -0.42824513, -12.478852, -0.42824513, 0.19597776, -12.354147, 0.44575495, -0.17846794, -13.228306, -0.17846794, -0.30335653, -12.102291, 0.44575495, 0.32086635, -12.102291, -0.30335653, 0.44575495, -13.228306, -0.30335653, -0.17846794, -11.729399, -0.42824513, -0.42824513, -13.103601, 0.32086635, 0.19597776)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_n3ohu"]
+radius = 0.1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17a6g"]
+atlas = ExtResource("3_58p3e")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e60hh"]
+atlas = ExtResource("3_58p3e")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6p5m"]
+atlas = ExtResource("3_58p3e")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqm20"]
+atlas = ExtResource("3_58p3e")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sx7xb"]
+atlas = ExtResource("3_58p3e")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ew4g"]
+atlas = ExtResource("3_58p3e")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbgkt"]
+atlas = ExtResource("3_58p3e")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkkyk"]
+atlas = ExtResource("3_58p3e")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmum5"]
+atlas = ExtResource("3_58p3e")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3h07b"]
+atlas = ExtResource("3_58p3e")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebupb"]
+atlas = ExtResource("3_58p3e")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0ae1"]
+atlas = ExtResource("3_58p3e")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyfd6"]
+atlas = ExtResource("3_58p3e")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_os2j5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17a6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e60hh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6p5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqm20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx7xb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ew4g")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 11.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tbgkt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkkyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmum5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3h07b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebupb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0ae1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyfd6")
+}],
+"loop": false,
+"name": &"explosion2",
+"speed": 11.0
+}]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sjbmg"]
+radius = 0.1
+
+[node name="Missile3" unique_id=2076838577 instance=ExtResource("1_g262i")]
+collision_layer = 24
+collision_mask = 7
+script = ExtResource("2_58p3e")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." index="1" unique_id=2125250938]
+transform = Transform3D(0, 0.1435678, 0, -0.1435678, 0, 0, 0, 0, 0.1435678, 0, -0.81999993, 0)
+shape = SubResource("ConvexPolygonShape3D_t5r3k")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." index="2" unique_id=489541323]
+transform = Transform3D(0, 0.1435678, 0, -0.1435678, 0, 0, 0, 0, 0.1435678, 0, -0.81999993, 0)
+shape = SubResource("ConvexPolygonShape3D_p503d")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="3" unique_id=95241396]
+transform = Transform3D(0, 0.1435678, 0, -0.1435678, 0, 0, 0, 0, 0.1435678, 0, -0.81999993, 0)
+shape = SubResource("ConvexPolygonShape3D_l5oud")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="4" unique_id=1858809162]
+transform = Transform3D(0, 0.1435678, 0, -0.1435678, 0, 0, 0, 0, 0.1435678, 0, -0.81999993, 0)
+shape = SubResource("ConvexPolygonShape3D_eugsm")
+
+[node name="KillArea" type="Area3D" parent="." index="5" unique_id=1603356487]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillArea" index="0" unique_id=961622003]
+shape = SubResource("CylinderShape3D_n3ohu")
+
+[node name="LockTimer" type="Timer" parent="." index="6" unique_id=676383217]
+wait_time = 0.5
+one_shot = true
+
+[node name="LaunchTimer" type="Timer" parent="." index="7" unique_id=1880721918]
+
+[node name="MotorTimer" type="Timer" parent="." index="8" unique_id=752414291]
+wait_time = 3.0
+one_shot = true
+
+[node name="ItemComp" parent="." index="9" unique_id=1873508656 instance=ExtResource("2_ktd68")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+is_grab = true
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." index="10" unique_id=1200776578]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+visible = false
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_os2j5")
+animation = &"explosion2"
+
+[node name="InteractionArea" parent="." index="11" unique_id=151811882 node_paths=PackedStringArray("label", "root_object") instance=ExtResource("4_gnm7u")]
+collision_layer = 16
+collision_mask = 0
+label = NodePath("../InteractionLabel")
+root_object = NodePath("..")
+action_name = "pickup"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" index="0" unique_id=1394275791]
+shape = SubResource("CylinderShape3D_sjbmg")
+
+[node name="InteractionLabel" type="Label3D" parent="." index="12" unique_id=1968903543]
+billboard = 1

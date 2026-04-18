@@ -42,8 +42,9 @@ func _on_inter():
 func _on_fuse_timer_timeout() -> void:
 	item_comp.player_ref.item_manager.remove_item()
 	var aoe_effect = aoe_effect_scene.instantiate()
+	aoe_effect.global_position = global_position
 	WorldAPI.get_world().add_child(aoe_effect)
-	aoe_effect.area_blast(Vector3.ZERO, 1)
+	aoe_effect.area_blast(1)
 	queue_free()
 
 func _on_drop():

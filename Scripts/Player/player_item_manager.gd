@@ -61,7 +61,7 @@ func _deregister_item():
 	done_interacting.emit()
 
 func drop_item():
-	cur_item.reparent(get_tree().root)
+	cur_item.reparent(WorldAPI.get_world())
 	_deregister_item()
 
 func remove_item():
