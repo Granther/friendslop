@@ -5,11 +5,12 @@ var World = preload("res://Scenes/Places/world.tscn").instantiate()
 const Player = preload("res://Scenes/Player/player.tscn")
 # Whats a better way to do this? Not very scalable! What if the root lies 3 up, not 2
 # @onready var parent_node = 
-@onready var ui_parent = get_parent().get_parent()
+@onready var ui_parent = get_tree().root
 @onready var room_id_box = $MarginContainer/VBoxContainer/RoomID
 @onready var room_id_label = $"../RoomIDLabel"
 
 func _ready():
+	WorldAPI.set_world(World)
 	room_id_label.hide()
 
 func _on_local_btn_pressed() -> void:

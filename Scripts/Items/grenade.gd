@@ -2,11 +2,11 @@ extends Grabbable
 class_name Grenade
 
 @export var fuse_time: float
-@export var aoe_source: Node3D
 
 @onready var fuse_timer = $FuseTimer
 
 var armed: bool = false
+var aoe_effect_scene = preload("res://Scenes/Gameplay/AOE/AOEEffect.tscn")
 
 func _ready():
 	_runtime_checks()
@@ -40,10 +40,10 @@ func _on_inter():
 		armed = true
 
 func _on_fuse_timer_timeout() -> void:
-	print("explode")
-	item_comp.on_drop_key_hit.call()
-	aoe_source.area_blast()
-	# await anims
+	item_comp.player_ref.item_manager.remove_item()
+	var aoe_effect = aoe_effect_scene.instantiate()
+	WorldAPI.get_world().add_child(aoe_effect)
+	aoe_effect.area_blast(Vector3.ZERO, 1)
 	queue_free()
 
 func _on_drop():

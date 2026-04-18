@@ -2,25 +2,20 @@
 
 [ext_resource type="Script" uid="uid://j42nvonb3hvh" path="res://Scripts/Items/grenade.gd" id="1_i6qap"]
 [ext_resource type="PackedScene" uid="uid://bbns3sc7l3glg" path="res://Blender/Items/Grenade/gernade.glb" id="2_n8nsm"]
-[ext_resource type="PackedScene" uid="uid://csveegcns6swl" path="res://Interaction/Items/AOE/AOESource.tscn" id="3_83e7e"]
 [ext_resource type="PackedScene" uid="uid://b3hcbfg4kp5bq" path="res://Interaction/InteractionArea.tscn" id="3_jinu1"]
 [ext_resource type="PackedScene" uid="uid://dd6wj0xef6dol" path="res://Interaction/Items/item_comp.tscn" id="4_83e7e"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dkxgq"]
 radius = 2.0
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_n8nsm"]
-radius = 2.1098068
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_22lk0"]
 radius = 0.06183773
 
-[node name="Grenade" type="RigidBody3D" unique_id=186504985 node_paths=PackedStringArray("aoe_source", "interaction_area", "item_comp")]
+[node name="Grenade" type="RigidBody3D" unique_id=186504985 node_paths=PackedStringArray("interaction_area", "item_comp")]
 collision_layer = 16
 collision_mask = 7
 script = ExtResource("1_i6qap")
 fuse_time = 1.0
-aoe_source = NodePath("AoeSource")
 interaction_area = NodePath("InteractionArea")
 item_comp = NodePath("ItemComp")
 
@@ -36,11 +31,6 @@ action_name = "pickup"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=2104238357]
 shape = SubResource("SphereShape3D_dkxgq")
-
-[node name="AoeSource" parent="." unique_id=1091330402 instance=ExtResource("3_83e7e")]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AoeSource" unique_id=573024537]
-shape = SubResource("SphereShape3D_n8nsm")
 
 [node name="gernade" parent="." unique_id=50507065 instance=ExtResource("2_n8nsm")]
 

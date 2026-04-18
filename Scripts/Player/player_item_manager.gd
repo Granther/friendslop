@@ -53,13 +53,19 @@ func grab_item():
 	cur_item.reparent(player_ref.springarm)
 	grabbed_item.emit(cur_item)
 
-func drop_item():
-	cur_item.reparent(get_tree().root)
+func _deregister_item():
 	cur_item.item_comp.deregister()
 	deregister_key_connects()
 	cur_item = null
 	dropped_item.emit()
 	done_interacting.emit()
+
+func drop_item():
+	cur_item.reparent(get_tree().root)
+	_deregister_item()
+
+func remove_item():
+	_deregister_item()
 
 func has_item() -> bool:
 	return (cur_item != null)

@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://csveegcns6swl"]
-
-[ext_resource type="Script" uid="uid://d3ulbfw64fkfx" path="res://Scripts/Other/AOE/aeo_source.gd" id="1_0pe7m"]
-
-[node name="AoeSource" type="Area3D" unique_id=1091330402]
-collision_layer = 0
-collision_mask = 32
-script = ExtResource("1_0pe7m")
