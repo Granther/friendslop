@@ -21,9 +21,14 @@ func _play_scaled_anim(name: String, scale: float):
 	anims_sprite.hide()
 
 func area_blast(force_mag: float = 1):
+	await get_tree().physics_frame
+	print("got area blast")
 	var bodies = area3d.get_overlapping_bodies()
 	for bod in bodies:
 		print(bod.name)
 		bod.get_blasted(global_position, force_mag)
 	await _play_scaled_anim("area_blast", force_mag)
 	queue_free()
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	print("entered")

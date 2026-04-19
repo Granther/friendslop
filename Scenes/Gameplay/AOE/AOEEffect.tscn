@@ -119,3 +119,5 @@ sprite_frames = SubResource("SpriteFrames_x46oy")
 animation = &"area_blast"
 frame = 12
 frame_progress = 1.0
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
