@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Items/ball.tscn" id="4_sj6h3"]
 [ext_resource type="PackedScene" uid="uid://bqg3la1etwp7o" path="res://Scenes/Items/grenade.tscn" id="4_xs3tu"]
 [ext_resource type="PackedScene" uid="uid://dgmk2ha5tbjx3" path="res://Scenes/Items/pistol.tscn" id="5_xs3tu"]
+[ext_resource type="PackedScene" uid="uid://csveegcns6swl" path="res://Scenes/Gameplay/AOE/AOEEffect.tscn" id="6_2qjrm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_go701"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)
@@ -87,7 +88,7 @@ size = Vector3(1, 3.2016602, 6.44812)
 material = SubResource("StandardMaterial3D_8j60k")
 
 [node name="Ball" parent="." unique_id=1482215681 instance=ExtResource("4_sj6h3")]
-transform = Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, -0.4562235, 1.8685468, 2.0116646)
+transform = Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, -6.7860794, 0.6832148, 2.0116646)
 collision_layer = 52
 mass = 1.0
 physics_material_override = SubResource("PhysicsMaterial_nfdff")
@@ -112,6 +113,9 @@ collision_layer = 20
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.222229, 0.11463298, -4.4526367)
 collision_layer = 20
 collision_mask = 7
+
+[node name="AoeEffect" parent="." unique_id=1291121906 instance=ExtResource("6_2qjrm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.745315, 0.2494483, -0.1295166)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1568990526]
 _spawnable_scenes = PackedStringArray("uid://be8qbmt0fe144")

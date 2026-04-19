@@ -11,8 +11,9 @@ extends Node3D
 func _ready() -> void:
 	Err.push_err_if(not area3d.get_collision_mask_value(6), "AOEEffect must be listening on AOE layer")
 	Err.push_err_if(effect_area == null, "AOEEffect must have effect_area CollisionShape3D")
-	print(area3d.get_overlapping_bodies(), area3d.get_overlapping_areas())
-
+	await get_tree().physics_frame
+	print("bodies: ", area3d.get_overlapping_bodies(), " areas: ", area3d.get_overlapping_areas())
+	
 func _play_scaled_anim(name: String, scale: float):
 	# anims_sprite.scale = Vector3(scale, scale, scale)
 	anims_sprite.show()
@@ -21,9 +22,8 @@ func _play_scaled_anim(name: String, scale: float):
 	anims_sprite.hide()
 
 func area_blast(force_mag: float = 1):
-	await get_tree().physics_frame
-	print("got area blast")
 	var bodies = area3d.get_overlapping_bodies()
+	print(bodies)
 	for bod in bodies:
 		print(bod.name)
 		bod.get_blasted(global_position, force_mag)
@@ -31,4 +31,7 @@ func area_blast(force_mag: float = 1):
 	queue_free()
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	print("entered")
+	#area_blast()
+	#print("area entered")
+	print("bodies: ", area3d.get_overlapping_bodies(), " areas: ", area3d.get_overlapping_areas())
+	pass
