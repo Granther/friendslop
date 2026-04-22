@@ -18,7 +18,7 @@ func _ready():
 func _on_local_btn_pressed() -> void:
 	hide()
 	var status = LocalMultiplayerHandler.start_server()
-	ui_parent.add_child(World)
+	ui_parent.add_child(WorldAPI.get_world())
 	if status == LocalMultiplayerHandler.IS_SERVER:
 		_setup_peer_host_signals()
 		add_player(multiplayer.get_unique_id())
@@ -49,27 +49,27 @@ func set_room_id_ui(room_id: String):
 	room_id_label.text = room_id
 	room_id_label.show()
 
-func host_peer_connected(peer_id: int):
+func peer_connected(peer_id: int):
 	add_player(peer_id)
 
 # I think we want to call this on the server somehow, but, also on all clients to remove the specific player
-func host_peer_disconnected(peer_id: int):
+func peer_disconnected(peer_id: int):
 	print("Peer disconnected called for peer: ", peer_id)
 	remove_player(peer_id)
 
-func client_peer_disconnected(peer_id: int):
-	print("Peer disconnected called for peer: ", peer_id)
-	if peer_id == 0:
-		print("Server peer disconnected")
-		get_tree().quit()
-
-func client_peer_connected(peer_id: int):
-	add_player(peer_id)
+#func client_peer_disconnected(peer_id: int):
+	#print("Peer disconnected called for peer: ", peer_id)
+	#if peer_id == 0:
+		#print("Server peer disconnected")
+		#get_tree().quit()
+#
+#func client_peer_connected(peer_id: int):
+	#add_player(peer_id)
 
 func _setup_peer_host_signals():
-	multiplayer.peer_connected.connect(host_peer_connected)
-	multiplayer.peer_disconnected.connect(host_peer_disconnected)
+	multiplayer.peer_connected.connect(peer_connected)
+	multiplayer.peer_disconnected.connect(peer_disconnected)
 	
-func _setup_peer_client_signals():
-	multiplayer.peer_connected.connect(client_peer_connected)
-	multiplayer.peer_disconnected.connect(client_peer_disconnected)
+#func _setup_peer_client_signals():
+	#multiplayer.peer_connected.connect(client_peer_connected)
+	#multiplayer.peer_disconnected.connect(client_peer_disconnected)

@@ -44,6 +44,7 @@ const CROUCHING = 0
 const STANDING = 1
 
 func _enter_tree() -> void:
+	print("id: ", str(name).to_int())
 	set_multiplayer_authority(str(name).to_int())
 	#assert(get_collision_layer_value(4), "must be on 'Expodables' (4) collision layer")
 
@@ -53,9 +54,10 @@ func _ready():
 	# ItemManager.register_player(self)
 	# Ensures that the spawned characters have default animation blends when spawned in
 	anim_manager.set_default_anims()
+	print(" in ",  str(name).to_int(), " mul: ", get_multiplayer_authority())
 	if not is_multiplayer_authority(): return
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	camera.current = true
+	self.camera.current = true
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
@@ -82,7 +84,15 @@ func get_targ_fov(degrees: float) -> float:
 func _physics_process(delta: float) -> void:
 	springarm.set("spring_length", clamp(-camera.rotation.x,0.6,0.7))
 		
-	if not is_multiplayer_authority(): return
+	if not is_multiplayer_authority():
+		#move_and_collide
+		#if get_multiplayer_authority() != 1:
+			#print(get_slide_collision_count())
+		#for i in get_slide_collision_count():
+			#var c = get_slide_collision(i)
+			#if c.get_collider() is RigidBody3D:
+				#c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)
+		return
 	# Bug: Opening menu pauses you in game. Turns off physics lol
 	if ui.is_menu_open(): return
 	var velocity_clamp = clamp(velocity.length(), SPEED/DEFAULT_SPEED, SPEED/DEFAULT_SPEED)
@@ -153,12 +163,17 @@ func _physics_process(delta: float) -> void:
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody3D:
+			if get_multiplayer_authority() != 1:
+				print("not server and hit body")
 			c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)
 	
 	if is_on_floor():
 		anim_manager.play_walk_anims(velocity.length())
 	else:
 		anim_manager.play_jump_anims(velocity.length())
+
+@rpc("any_peer", "call_local", "reliable")
+func 
 
 func get_blasted(source: Vector3, force_mag: float):
 	# Get difference between player pos and grenade pos (this is our direction relative to grenade)
