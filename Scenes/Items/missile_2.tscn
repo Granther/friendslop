@@ -119,6 +119,14 @@ radius = 0.1
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_q6p5m"]
 radius = 0.1
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_q6p5m"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="missile2" type="RigidBody3D" unique_id=888320288 node_paths=PackedStringArray("interaction_area", "item_comp")]
 collision_layer = 24
 collision_mask = 7
@@ -176,6 +184,9 @@ billboard = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=203334683]
 shape = SubResource("CylinderShape3D_q6p5m")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1184356014]
+replication_config = SubResource("SceneReplicationConfig_q6p5m")
 
 [connection signal="body_entered" from="KillArea" to="." method="_on_kill_area_body_entered"]
 [connection signal="timeout" from="LockTimer" to="." method="_on_lock_timer_timeout"]

@@ -4,15 +4,13 @@ extends Node3D
 
 # Area for which all items in it will get the affect applied
 
-@onready var effect_area = $Area3D/CollisionShape3D
+@onready var effect_coll = $Area3D/CollisionShape3D
 @onready var anims_sprite = $AnimatedSprite3D 
-@onready var area3d = $Area3D
+var effect_area: Area3D = null
 
 func _ready() -> void:
-	Err.push_err_if(not area3d.get_collision_mask_value(6), "AOEEffect must be listening on AOE layer")
-	Err.push_err_if(effect_area == null, "AOEEffect must have effect_area CollisionShape3D")
-	await get_tree().physics_frame
-	print("bodies: ", area3d.get_overlapping_bodies(), " areas: ", area3d.get_overlapping_areas())
+	Err.push_err_if(not effect_area.get_collision_mask_value(6), "AOEEffect must be listening on AOE layer")
+	Err.push_err_if(effect_coll == null, "AOEEffect must have effect_area CollisionShape3D")
 	
 func _play_scaled_anim(name: String, scale: float):
 	# anims_sprite.scale = Vector3(scale, scale, scale)
@@ -22,16 +20,9 @@ func _play_scaled_anim(name: String, scale: float):
 	anims_sprite.hide()
 
 func area_blast(force_mag: float = 1):
-	var bodies = area3d.get_overlapping_bodies()
-	print(bodies)
+	var bodies = effect_area.get_overlapping_bodies()
 	for bod in bodies:
-		print(bod.name)
-		bod.get_blasted(global_position, force_mag)
+		if bod is RigidBody3D:
+			bod.apply_central_impulse((bod.global_transform.origin - global_position).normalized()*force_mag)
 	await _play_scaled_anim("area_blast", force_mag)
 	queue_free()
-
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	#area_blast()
-	#print("area entered")
-	print("bodies: ", area3d.get_overlapping_bodies(), " areas: ", area3d.get_overlapping_areas())
-	pass

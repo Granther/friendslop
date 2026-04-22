@@ -11,16 +11,30 @@ radius = 2.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_22lk0"]
 radius = 0.06183773
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_jinu1"]
+radius = 3.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jinu1"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="Grenade" type="RigidBody3D" unique_id=186504985 node_paths=PackedStringArray("interaction_area", "item_comp")]
 collision_layer = 16
 collision_mask = 7
 script = ExtResource("1_i6qap")
 fuse_time = 1.0
+blast_force = 5.0
 interaction_area = NodePath("InteractionArea")
 item_comp = NodePath("ItemComp")
 
-[node name="ItemComp" parent="." unique_id=1873508656 instance=ExtResource("4_83e7e")]
+[node name="ItemComp" parent="." unique_id=1873508656 node_paths=PackedStringArray("left_hand_anchor", "right_hand_anchor") instance=ExtResource("4_83e7e")]
 is_grab = true
+left_hand_anchor = NodePath("../LeftGrabAnchor")
+right_hand_anchor = NodePath("../RightGrabAnchor")
 
 [node name="InteractionArea" parent="." unique_id=151811882 node_paths=PackedStringArray("label", "root_object") instance=ExtResource("3_jinu1")]
 collision_layer = 16
@@ -44,5 +58,21 @@ billboard = 1
 [node name="FuseTimer" type="Timer" parent="." unique_id=281090178]
 wait_time = 10.0
 one_shot = true
+
+[node name="KillArea" type="Area3D" parent="." unique_id=238932045]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="KillArea" unique_id=805512672]
+shape = SubResource("SphereShape3D_jinu1")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=849249975]
+replication_config = SubResource("SceneReplicationConfig_jinu1")
+
+[node name="LeftGrabAnchor" type="Node3D" parent="." unique_id=631840650]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.091842905)
+
+[node name="RightGrabAnchor" type="Node3D" parent="." unique_id=537268620]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.11743641)
 
 [connection signal="timeout" from="FuseTimer" to="." method="_on_fuse_timer_timeout"]

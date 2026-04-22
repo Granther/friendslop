@@ -81,7 +81,7 @@ func get_targ_fov(degrees: float) -> float:
 
 func _physics_process(delta: float) -> void:
 	springarm.set("spring_length", clamp(-camera.rotation.x,0.6,0.7))
-	
+		
 	if not is_multiplayer_authority(): return
 	# Bug: Opening menu pauses you in game. Turns off physics lol
 	if ui.is_menu_open(): return

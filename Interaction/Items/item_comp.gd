@@ -1,6 +1,8 @@
 extends Node3D
 
 @export var is_grab: bool
+@export var left_hand_anchor: Node3D
+@export var right_hand_anchor: Node3D
 
 var player_ref
 
@@ -20,7 +22,7 @@ func register(_player_ref):
 	
 func deregister():
 	on_deregister.call()
-	player_ref = null
+	# player_ref = null Should we be able to hand onto this player_ref
 
 func is_grabbable():
 	return is_grab

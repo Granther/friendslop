@@ -101,6 +101,14 @@ animations = [{
 "speed": 13.0
 }]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yjcwf"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="AoeEffect" type="Node3D" unique_id=1291121906]
 script = ExtResource("1_yjcwf")
 
@@ -119,5 +127,8 @@ sprite_frames = SubResource("SpriteFrames_x46oy")
 animation = &"area_blast"
 frame = 12
 frame_progress = 1.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=687903891]
+replication_config = SubResource("SceneReplicationConfig_yjcwf")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

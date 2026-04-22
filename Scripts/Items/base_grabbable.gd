@@ -7,6 +7,8 @@ class_name Grabbable
 @export var interaction_area: Area3D
 @export var item_comp: Node3D
 
+var in_hand_rot = null
+
 func _runtime_checks():
 	# For picking up
 	Err.push_err_if(not interaction_area.get_collision_layer_value(5), "grabbable object's InteractionArea must be on the Interactables layer")
@@ -30,10 +32,16 @@ func _on_register():
 	_set_col_layers(true)
 	interaction_area.set_label_visible(false)
 	_set_freeze(true)
+	# rotation = Vector3.ZERO
+	in_hand_rot = global_rotation
+	# rotation.y = global_rotation.y
 	item_comp.phys_func = func():
-		global_rotation = Vector3.ZERO
-		item_comp.player_ref.left_arm.global_position = global_position
-		item_comp.player_ref.right_arm.global_position = global_position
+		#global_rotation.y = item_comp.player_ref.global_rotation.y
+		#global_rotation.z = in_hand_rot.z
+		#global_rotation.x = in_hand_rot.x
+		look_at(item_comp.player_ref.global_position, Vector3.RIGHT)
+		item_comp.player_ref.left_arm.global_position = item_comp.left_hand_anchor.global_position
+		item_comp.player_ref.right_arm.global_position = item_comp.right_hand_anchor.global_position
 
 func _on_deregister():
 	_set_freeze(false)

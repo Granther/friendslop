@@ -14,6 +14,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_quit_btn_pressed() -> void:
+	multiplayer.peer_disconnected.emit()
 	get_tree().quit()
 
 func _on_quit_menu_btn_pressed() -> void:
