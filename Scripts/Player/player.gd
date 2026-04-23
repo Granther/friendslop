@@ -159,21 +159,33 @@ func _physics_process(delta: float) -> void:
 		#velocity = (velocity + val*5)
 		#
 	move_and_slide()
-	
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody3D:
-			if get_multiplayer_authority() != 1:
-				print("not server and hit body")
-			c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)
+			# c.get_collider().set_multiplayer_authority(get_multiplayer_authority())
+			if multiplayer.is_server(): # ie, player is server
+				c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)
+			else:
+				# call as if you are the server
+				apply_force_rpc.rpc_id(1, c.get_collider())
 	
 	if is_on_floor():
 		anim_manager.play_walk_anims(velocity.length())
 	else:
 		anim_manager.play_jump_anims(velocity.length())
 
+#@rpc("any_peer", "call_remote", "reliable")
+@rpc
+func apply_force_rpc(r: RigidBody3D):
+	r.apply_central_impulse(-r.get_normal() * PUSH_FORCE)
+
 @rpc("any_peer", "call_local", "reliable")
-func 
+func do_hit():
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody3D:
+			c.get_collider().set_multiplayer_authority(get_multiplayer_authority())
+			c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)
 
 func get_blasted(source: Vector3, force_mag: float):
 	# Get difference between player pos and grenade pos (this is our direction relative to grenade)
