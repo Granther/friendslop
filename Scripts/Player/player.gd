@@ -159,33 +159,56 @@ func _physics_process(delta: float) -> void:
 		#velocity = (velocity + val*5)
 		#
 	move_and_slide()
+	
+	# returns collisions in the last move_and_slide call
 	for i in get_slide_collision_count():
-		var c = get_slide_collision(i)
-		if c.get_collider() is RigidBody3D:
-			# c.get_collider().set_multiplayer_authority(get_multiplayer_authority())
-			if multiplayer.is_server(): # ie, player is server
-				c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)
-			else:
-				# call as if you are the server
-				apply_force_rpc.rpc_id(1, c.get_collider())
+		var col = get_slide_collision(i)
+		var body = col.get_collider()
+	
+		if body is RigidBody3D:
+			# a normal is a unit vector point perpendicular the surface of the object in the direction of collision
+			var impulse = -col.get_normal() * PUSH_FORCE
+			# And, a path is relative to our running scene, this makes sense since we cant serialize with RPC
+			server_push_object.rpc_id(1, body.get_path(), impulse)
+
+	#for i in get_slide_collision_count():
+		#var c = get_slide_collision(i)
+		#if c.get_collider() is RigidBody3D:
+			## c.get_collider().set_multiplayer_authority(get_multiplayer_authority())
+			#if multiplayer.is_server(): # ie, player is server
+				#c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)
+			#else:
+				## call as if you are the server
+				#apply_force_rpc.rpc_id(1, c.get_collider())
 	
 	if is_on_floor():
 		anim_manager.play_walk_anims(velocity.length())
 	else:
 		anim_manager.play_jump_anims(velocity.length())
 
-#@rpc("any_peer", "call_remote", "reliable")
-@rpc
-func apply_force_rpc(r: RigidBody3D):
-	r.apply_central_impulse(-r.get_normal() * PUSH_FORCE)
+# call local, pusher could be server
+@rpc("any_peer", "call_local")
+func server_push_object(path, impulse):
+	if multiplayer.is_server():
+		var obj = get_node(path)
+		if obj is RigidBody3D:
+			print("applied inpusle")
+			#obj.apply_central_impulse(impulse)
+			obj.apply_central_force(impulse)
+			await get_tree().create_timer(0.5).timeout
 
-@rpc("any_peer", "call_local", "reliable")
-func do_hit():
-	for i in get_slide_collision_count():
-		var c = get_slide_collision(i)
-		if c.get_collider() is RigidBody3D:
-			c.get_collider().set_multiplayer_authority(get_multiplayer_authority())
-			c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)
+#@rpc("any_peer", "call_remote", "reliable")
+#@rpc
+#func apply_force_rpc(r: RigidBody3D):
+	#r.apply_central_impulse(-r.get_normal() * PUSH_FORCE)
+#
+#@rpc("any_peer", "call_local", "reliable")
+#func do_hit():
+	#for i in get_slide_collision_count():
+		#var c = get_slide_collision(i)
+		#if c.get_collider() is RigidBody3D:
+			#c.get_collider().set_multiplayer_authority(get_multiplayer_authority())
+			#c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)
 
 func get_blasted(source: Vector3, force_mag: float):
 	# Get difference between player pos and grenade pos (this is our direction relative to grenade)
