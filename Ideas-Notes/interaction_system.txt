@@ -53,3 +53,5 @@
 # So, a grenade goes off and it has an AEO sphere for which the effects are applied
 # It gets everything in that interaction area (its assumed that everything on that collision layer ...)
 # It then calls the method 
+
+# So, we have a marker 3d, and we set the hand to that position. 

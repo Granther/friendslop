@@ -30,6 +30,7 @@ var PUSH_FORCE = 4
 @onready var inter_manager = $PlayerInteractionScanner
 @onready var item_manager = $PlayerItemManager
 @onready var anim_manager = $PlayerAnimationHandler
+@onready var body_manager = $PlayerBodyHandler
 
 @export var interact_dist: float
 

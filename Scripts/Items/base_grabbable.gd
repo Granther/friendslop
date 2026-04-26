@@ -35,13 +35,13 @@ func _on_register():
 	# rotation = Vector3.ZERO
 	in_hand_rot = global_rotation
 	# rotation.y = global_rotation.y
-	item_comp.phys_func = func():
-		#global_rotation.y = item_comp.player_ref.global_rotation.y
-		#global_rotation.z = in_hand_rot.z
-		#global_rotation.x = in_hand_rot.x
-		look_at(item_comp.player_ref.global_position, Vector3.RIGHT)
-		item_comp.player_ref.left_arm.global_position = item_comp.left_hand_anchor.global_position
-		item_comp.player_ref.right_arm.global_position = item_comp.right_hand_anchor.global_position
+	#item_comp.phys_func = func():
+		##global_rotation.y = item_comp.player_ref.global_rotation.y
+		##global_rotation.z = in_hand_rot.z
+		##global_rotation.x = in_hand_rot.x
+		#look_at(item_comp.player_ref.global_position, Vector3.RIGHT)
+		#item_comp.player_ref.left_arm.global_position = item_comp.left_hand_anchor.global_position
+		#item_comp.player_ref.right_arm.global_position = item_comp.right_hand_anchor.global_position
 
 func _on_deregister():
 	_set_freeze(false)
