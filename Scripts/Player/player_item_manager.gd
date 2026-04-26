@@ -22,6 +22,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		drop_key_hit.emit()
 	if event.is_action_pressed("interact1"):
 		interact_key_hit.emit()
+	if event.is_action_pressed("left_mouse"):
+		leftm_key_hit.emit()
+	if event.is_action_pressed("right_mouse"):
+		rightm_key_hit.emit()
 
 func _on_int_scan_interacted_external_item(item: Node3D) -> void:
 	item.item_comp.register(player_ref)
@@ -50,7 +54,8 @@ func deregister_key_connects():
 
 func grab_item():
 	# Check if cur_item has interaction_component
-	cur_item.reparent(player_ref.springarm)
+	#cur_item.reparent(player_ref.springarm)
+	cur_item.reparent(player_ref.camera)
 	grabbed_item.emit(cur_item)
 
 func _deregister_item():

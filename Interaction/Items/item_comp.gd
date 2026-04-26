@@ -27,5 +27,8 @@ func deregister():
 func is_grabbable():
 	return is_grab
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	phys_func.call()
+
+#func _physics_process(delta: float) -> void:
+	#phys_func.call()

@@ -44,6 +44,8 @@ var STAND_STATE: int
 const CROUCHING = 0
 const STANDING = 1
 
+var pid = null
+
 func _enter_tree() -> void:
 	print("id: ", str(name).to_int())
 	set_multiplayer_authority(str(name).to_int())
@@ -55,10 +57,11 @@ func _ready():
 	# ItemManager.register_player(self)
 	# Ensures that the spawned characters have default animation blends when spawned in
 	anim_manager.set_default_anims()
-	print(" in ",  str(name).to_int(), " mul: ", get_multiplayer_authority())
+	# print(" in ",  str(name).to_int(), " mul: ", get_multiplayer_authority())
 	if not is_multiplayer_authority(): return
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	self.camera.current = true
+	if camera.current != true:
+		camera.current = true
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
@@ -193,7 +196,7 @@ func server_push_object(path, impulse):
 	if multiplayer.is_server():
 		var obj = get_node(path)
 		if obj is RigidBody3D:
-			print("applied inpusle")
+			#print("applied inpusle")
 			#obj.apply_central_impulse(impulse)
 			obj.apply_central_force(impulse)
 			await get_tree().create_timer(0.5).timeout

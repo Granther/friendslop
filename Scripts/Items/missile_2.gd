@@ -341,12 +341,12 @@ func setup_interact_callables():
 	item_comp.on_register = Callable(self, "_on_register")
 	item_comp.on_deregister = Callable(self, "_on_deregister")
 
-func _on_register():
-	rot_in_hand = global_rotation
-	item_comp.phys_func = func():
-		look_at(Vector3.UP)
-		item_comp.player_ref.left_arm.global_position = global_position
-		item_comp.player_ref.right_arm.global_position = global_position
+#func _on_register():
+	#rot_in_hand = global_rotation
+	#item_comp.phys_func = func():
+		#look_at(Vector3.UP)
+		#item_comp.player_ref.left_arm.global_position = global_position
+		#item_comp.player_ref.right_arm.global_position = global_position
 
 func _on_deregister():
 	item_comp.phys_func = func(): pass

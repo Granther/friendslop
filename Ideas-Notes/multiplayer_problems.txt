@@ -1,0 +1,3 @@
+# Ok, so when player 1 connects, we are hosting the server and are fine
+
+# but, when the seond player connects, we create a client

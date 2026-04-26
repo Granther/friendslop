@@ -13,10 +13,11 @@ func _process(delta: float) -> void:
 	proc_func.call()
 
 func set_hand_to_hold():
-	print("hiy")
-	print(player_ref.right_arm.position, holding_marker.position)
-	player_ref.right_arm.global_position = holding_marker.global_position
-	print(player_ref.right_arm.position, holding_marker.position)
+	pass
+	#print("hiy")
+	#print(player_ref.right_arm.position, holding_marker.position)
+	#player_ref.right_arm.global_position = holding_marker.global_position
+	#print(player_ref.right_arm.position, holding_marker.position)
 	
 func reset_hand():
 	player_ref.right_arm.position = Vector3.ZERO

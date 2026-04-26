@@ -46,9 +46,8 @@ func _input(event):
 			var object_collided = object_shape_cast.get_collision_result()[0]["collider"]
 			if object_collided in interactables:
 				can_interact = false
-				print("got inter")
-				player_ref.anim_manager.set_anim_players.rpc(false)
-				player_ref.body_manager.set_hand_to_hold()
+				# player_ref.anim_manager.set_anim_players.rpc(false)
+				# player_ref.body_manager.set_hand_to_hold()
 				# This erases the "interact" input, so it doesn't get passed to the item
 				get_viewport().set_input_as_handled()
-				# emit_signal("interacted_external_item", object_collided)
+				emit_signal("interacted_external_item", object_collided)

@@ -1,6 +1,10 @@
 extends Area3D
 class_name InteractionArea
 
+# Requires: 
+# - Label 3D. At (0,0,0)
+# - Collision shape for which the label shows up
+
 @export var label: Label3D
 @export var root_object: Node3D
 @export var action_name: String = "interact"

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b5j2rwhtj1y2b"]
+
+[ext_resource type="PackedScene" uid="uid://dgmk2ha5tbjx3" path="res://Scenes/Items/pistol.tscn" id="1_rj7pu"]
+[ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Items/ball.tscn" id="2_l30xs"]
+
+[node name="Skydive" type="Node3D" unique_id=1414049902]
+
+[node name="Pistol" parent="." unique_id=238356818 instance=ExtResource("1_rj7pu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4210205, 0, 0.7059326)
+
+[node name="Ball" parent="." unique_id=1482215681 instance=ExtResource("2_l30xs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9466553, 0, 1.3024902)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=937777950]
+_spawnable_scenes = PackedStringArray("uid://be8qbmt0fe144")
+spawn_path = NodePath("..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1170366320]
+transform = Transform3D(1, 0, 0, 0, 0.032910917, 0.9994583, 0, -0.9994583, 0.032910917, 0, 3.5800781, 0)

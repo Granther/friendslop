@@ -1,5 +1,4 @@
 extends Grabbable
-class_name Grenade
 
 @export var fuse_time: float
 @export var blast_force: float
