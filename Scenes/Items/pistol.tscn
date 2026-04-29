@@ -46,3 +46,6 @@ billboard = 1
 
 [node name="PhysItemMultiplayerComp" parent="." index="5" unique_id=295906544 node_paths=PackedStringArray("root_object") instance=ExtResource("5_1ral2")]
 root_object = NodePath("..")
+
+[node name="BulletSpawnMarker" type="Marker3D" parent="." index="6" unique_id=1238788509]
+transform = Transform3D(0.3, 0, 0, 0, 0.0012409163, 0.29999745, 0, -0.29999745, 0.0012409163, 0.00084741414, 0.072929665, -0.40421802)

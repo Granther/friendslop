@@ -7,7 +7,7 @@
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5ympv"]
 points = PackedVector3Array(0.95125294, 1, 0.95125294, 1, 0.95125294, 0.95125294, 0.95125294, 1, -0.9516445, -0.9516445, 1, 0.95125294, 0.95125294, 0.95125294, 1, 1, 0.95125294, -0.9516445, 1, -0.9516445, 0.95125294, 0.95125294, 0.95125294, -1, -0.9516445, 1, -0.9516445, -1, 0.95125294, 0.95125294, -0.9516445, 0.95125294, 1, 0.95125294, -0.9516445, 1, 1, -0.9516445, -0.9516445, 0.95125294, -1, 0.95125294, 0.95125294, -0.9516445, -1, -0.9516445, 0.95125294, -1, -1, 0.95125294, -0.9516445, -1, -0.9516445, 0.95125294, -0.9516445, -0.9516445, 1, 0.95125294, -1, -0.9516445, -0.9516445, -1, 0.95125294, -0.9516445, -0.9516445, -1, -1, -0.9516445, -0.9516445, -0.9516445, -1, -0.9516445)
 
-[node name="Dice" unique_id=993171236 node_paths=PackedStringArray("multiplayer_comp") instance=ExtResource("1_a6rv4")]
+[node name="Dice" unique_id=1589170228 node_paths=PackedStringArray("multiplayer_comp") instance=ExtResource("1_a6rv4")]
 script = ExtResource("2_w8aus")
 multiplayer_comp = NodePath("PhysItemMultiplayerComp")
 

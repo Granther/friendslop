@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dvlb8joxnsu6l"]
+
+[ext_resource type="PackedScene" uid="uid://mvwlbug7oi22" path="res://Blender/Items/Pistol/Bullet.glb" id="1_43l0m"]
+
+[node name="Bullet" unique_id=717654972 instance=ExtResource("1_43l0m")]

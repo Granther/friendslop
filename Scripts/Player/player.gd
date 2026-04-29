@@ -36,14 +36,11 @@ var PUSH_FORCE = 2.5
 @export var interact_dist: float
 
 # Player state machine
-var MOVE_STATE: int
-const IDLE = 0
-const SPRINTING = 1
-const WALKING = 2
+var MOVE_STATE: MOVE_STATE_MODE
+enum MOVE_STATE_MODE { IDLE, SPRINTING, WALKING }
 
-var STAND_STATE: int
-const CROUCHING = 0
-const STANDING = 1
+var STAND_STATE: STAND_STATE_MODE
+enum STAND_STATE_MODE { CROUCHING, STANDING }
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
@@ -104,33 +101,33 @@ func _physics_process(delta: float) -> void:
 		velocity.y += JUMP_VELOCITY
 		
 	if Input.is_action_pressed("crouch"):
-		STAND_STATE = CROUCHING
+		STAND_STATE = STAND_STATE_MODE.CROUCHING
 	else:
-		STAND_STATE = STANDING
+		STAND_STATE = STAND_STATE_MODE.STANDING
 
 	if Input.is_action_pressed("sprint"):
-		MOVE_STATE = SPRINTING
+		MOVE_STATE = MOVE_STATE_MODE.SPRINTING
 	elif input_dir != Vector2.ZERO: # sees if we are actually giving input from keyboard
-		MOVE_STATE = WALKING
+		MOVE_STATE = MOVE_STATE_MODE.WALKING
 	else:
-		MOVE_STATE = IDLE
+		MOVE_STATE = MOVE_STATE_MODE.IDLE
 	
 	match(MOVE_STATE):
-		SPRINTING:
-			if STAND_STATE == CROUCHING:
+		MOVE_STATE_MODE.SPRINTING:
+			if STAND_STATE == STAND_STATE_MODE.CROUCHING:
 				SPEED = 2.25
 				FOV_CHANGE = 1
 			else: # standing
 				SPEED = 5
 				FOV_CHANGE = 1.1
-		WALKING:
-			if STAND_STATE == CROUCHING:
+		MOVE_STATE_MODE.WALKING:
+			if STAND_STATE == STAND_STATE_MODE.CROUCHING:
 				SPEED = DEFAULT_SPEED/2
 				FOV_CHANGE = 1
 			else: # standing
 				SPEED = DEFAULT_SPEED
 				FOV_CHANGE = 1
-		IDLE:
+		MOVE_STATE_MODE.IDLE:
 			SPEED = DEFAULT_SPEED
 			FOV_CHANGE = 1
 
