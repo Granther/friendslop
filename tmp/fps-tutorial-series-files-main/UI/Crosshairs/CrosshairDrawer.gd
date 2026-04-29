@@ -1,7 +1,8 @@
 # CrosshairDrawer.gd
 @tool
-class_name CrosshairDrawer
 extends Control
+class_name CrosshairDrawer
+
 
 ## An enumeration to define the different crosshair styles.
 enum CrosshairType { PLUS, CIRCLE, CROSS }

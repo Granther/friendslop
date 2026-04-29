@@ -127,4 +127,4 @@ script = ExtResource("4_tckah")
 [connection signal="pressed" from="InGameUI/MarginContainer/VBoxContainer/BackBtn" to="InGameUI" method="_on_back_btn_pressed"]
 [connection signal="pressed" from="EntryMenu/MarginContainer/VBoxContainer/JoinBtn" to="EntryMenu" method="_on_join_btn_pressed"]
 [connection signal="pressed" from="EntryMenu/MarginContainer/VBoxContainer/HostBtn" to="EntryMenu" method="_on_host_btn_pressed"]
-[connection signal="pressed" from="EntryMenu/MarginContainer/VBoxContainer/LocalBtn" to="EntryMenu" method="_on_local_btn_pressed"]
+[connection signal="pressed" from="EntryMenu/MarginContainer/VBoxContainer/LocalBtn" to="." method="_on_local_btn_pressed"]

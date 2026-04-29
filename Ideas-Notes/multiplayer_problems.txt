@@ -23,3 +23,14 @@ Everytime a collision happens, we inform the server of the col and the force, di
 We then do the coll on each client 
 
 Dont forget about an interaction lock, in which we cannot play any kind of pick up animation unless we get confirmation from the server...? Maybe could scale with the chances that another player could interact at nearly the same time, maybe based off proximity
+
+Ok, so we should be syncing per tick, but how do we know that every player is on the same tick?
+We could do ticks after interaction?
+
+Player 2 kicks ball and starts recordiing a sliding window of 60 ticks around the balls position etc
+
+So, if all players sync the the server's phystick count when they join, not only will all players be just slightly off
+depending on latencty, but also, if the servr drops, skips, or takes longer, the count gets thrown off
+
+So, we need to sync frequently
+I 

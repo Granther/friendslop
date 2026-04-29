@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="CrosshairData" format=3 uid="uid://bewgsieffy8l3"]
+
+[ext_resource type="Script" uid="uid://b85shc5pxe5w1" path="res://Resources/Crosshair/crosshair_data.gd" id="1_avft6"]
+
+[resource]
+script = ExtResource("1_avft6")
+metadata/_custom_type_script = "uid://b85shc5pxe5w1"

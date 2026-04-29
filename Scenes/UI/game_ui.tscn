@@ -1,9 +1,6 @@
-[gd_scene format=3 uid="uid://d1ycggxkxp7sf"]
+[gd_scene format=3 uid="uid://bo8i6bctlug4s"]
 
 [ext_resource type="Script" uid="uid://sbx77vj1cdnk" path="res://Scripts/UI/game_ui.gd" id="1_6w80a"]
-[ext_resource type="Script" uid="uid://csojtyenqxdhc" path="res://Scripts/UI/player_ui.gd" id="2_lolt2"]
-[ext_resource type="Script" uid="uid://j5xlckjtyx57" path="res://Scripts/UI/in_game_ui.gd" id="3_tig4k"]
-[ext_resource type="Script" uid="uid://cm647lduix0e" path="res://tmp/fps-tutorial-series-files-main/UI/Crosshairs/CrosshairDrawer.gd" id="4_plf53"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p8jce"]
 
@@ -48,7 +45,6 @@ custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("2_lolt2")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/StartupMenu" unique_id=1871849108]
 layout_mode = 2
@@ -94,7 +90,6 @@ custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("3_tig4k")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PauseMenu" unique_id=38403245]
 layout_mode = 2
@@ -126,14 +121,9 @@ text = "Quit to Menu"
 layout_mode = 2
 text = "Back to Game"
 
-[node name="CrosshairDrawer" type="Control" parent="MarginContainer" unique_id=774019301]
-visible = false
-layout_mode = 2
-script = ExtResource("4_plf53")
-
 [connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/JoinBtn" to="MarginContainer/StartupMenu" method="_on_join_btn_pressed"]
 [connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/HostBtn" to="MarginContainer/StartupMenu" method="_on_host_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/LocalBtn" to="MarginContainer/StartupMenu" method="_on_local_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/LocalBtn" to="." method="_on_local_btn_pressed"]
 [connection signal="pressed" from="MarginContainer/PauseMenu/MarginContainer/VBoxContainer/QuitBtn" to="MarginContainer/PauseMenu" method="_on_quit_btn_pressed"]
 [connection signal="pressed" from="MarginContainer/PauseMenu/MarginContainer/VBoxContainer/QuitMenuBtn" to="MarginContainer/PauseMenu" method="_on_quit_menu_btn_pressed"]
 [connection signal="pressed" from="MarginContainer/PauseMenu/MarginContainer/VBoxContainer/BackBtn" to="MarginContainer/PauseMenu" method="_on_back_btn_pressed"]

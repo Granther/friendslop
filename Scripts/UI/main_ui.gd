@@ -11,3 +11,6 @@ func _ready():
 
 func is_menu_open() -> bool:
 	return (entry_menu.visible or game_menu.visible)
+
+func _on_local_btn_pressed() -> void:
+	pass # Replace with function body.

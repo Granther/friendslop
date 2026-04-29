@@ -20,7 +20,7 @@ var PUSH_FORCE = 2.5
 @export var grabbed_object:RigidBody3D = null
 @onready var stoneman = $Head/Stoneman
 @onready var springarm = $Head/Camera3D/SpringArm3D
-@onready var ui = UIHandler.get_ui()
+@onready var ui = get_tree().get_first_node_in_group("game_ui")
 @onready var sync = $MultiplayerSynchronizer
 
 @onready var leg_anim_tree = $Head/Stoneman/LegAnimTree
@@ -60,8 +60,6 @@ func _ready():
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
 	if ui.is_menu_open(): return
-	# if event is InputEventMouseButton:
-		#if Input.is_action_just_pressed("interact"):
 
 # Why does head move on y but camera on x
 # Oh! Cause we dont want the whole player to point downward, but we want him to spin
@@ -73,16 +71,11 @@ func _unhandled_input(event):
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
-func get_targ_fov(degrees: float) -> float:
-	return 0
-
 # We want to set FOV_CHANGE in such a way that it reaches the max fov for the particular state
 # ... when we are at the max speed
 
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority(): return
-	# Bug: Opening menu pauses you in game. Turns off physics lol
-	# if ui.is_menu_open(): return
 
 	springarm.set("spring_length", clamp(-camera.rotation.x,0.6,0.7))
 	

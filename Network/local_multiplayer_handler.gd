@@ -13,13 +13,13 @@ func start_server() -> int:
 	var err = peer.create_server(PORT)
 	if err != OK:
 		return start_client()
-	multiplayer.multiplayer_peer = peer
+	get_tree().get_multiplayer().multiplayer_peer = peer
 	print("Started local server")
 	return IS_SERVER
 	
 func start_client() -> int:
 	peer = ENetMultiplayerPeer.new()
 	peer.create_client(IP_A, PORT)
-	multiplayer.multiplayer_peer = peer
+	get_tree().get_multiplayer().multiplayer_peer = peer
 	print("Started local client")
 	return IS_CLIENT
