@@ -4,23 +4,17 @@
 [ext_resource type="Script" uid="uid://c4n6ru2e2thy7" path="res://Scripts/Items/pistol.gd" id="2_4fp42"]
 [ext_resource type="PackedScene" uid="uid://dd6wj0xef6dol" path="res://Interaction/Items/item_comp.tscn" id="2_77vle"]
 [ext_resource type="Script" uid="uid://bn4yh8pjsgo5" path="res://Interaction/interaction_area.gd" id="3_r54ov"]
+[ext_resource type="PackedScene" uid="uid://eopsev3enyxl" path="res://Multiplayer/phys_item_multiplayer_comp.tscn" id="5_1ral2"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_u7duq"]
 points = PackedVector3Array(-0.4708245, 4.5823035, 8.886225, -0.48021963, -1.1767726, -0.81232184, 0.43897024, -1.1853751, -0.82680887, 0.43102768, 4.4491014, -0.13784248, 1.2649668, 2.5359962, 8.910891, -1.2526754, 4.1958027, 0.23892552, -1.3075732, 2.6969256, 8.910891, 1.2885, 4.060828, 0.4497869, -0.824974, -1.3233175, 0.8714125, 0.78236765, -1.3233175, 0.8714125, 1.0661663, 4.2184725, 9.059017, 1.4262111, 2.6969256, -0.09384918, -1.3075732, 4.305621, 9.0721035, -1.4688175, 2.857257, 4.729435, -0.9862183, 2.2147357, 8.750687, -1.3075732, 2.5359962, -0.09384918, 1.4262111, 2.857257, 7.946637, 0.43594715, 4.631302, 0.27402583, -0.47805506, 4.628142, 0.27818236, -0.63117945, 2.9525373, -0.48823783, -0.824974, -1.3233175, -0.7366848, 0.9436119, 2.2147357, 8.750687, -0.18198067, -1.3233175, 1.1928303, 0.43186706, 4.605436, 8.925181, 0.59261394, 2.9606206, -0.51855254, 0.78236765, -1.3233175, -0.7366848, 1.3451098, 4.0089793, 7.7303953, -1.4688175, 2.857257, 7.946637, 0.8753811, 4.4227743, 0.50141966, -1.1468958, 2.3756652, 8.910891, -0.63206786, 3.718062, -0.3436848, 1.4262111, 2.857257, -0.09384918)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_u7duq"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_r54ov"]
 radius = 2.0
 
-[node name="Pistol" unique_id=238356818 node_paths=PackedStringArray("interaction_area", "item_comp") instance=ExtResource("1_u7duq")]
+[node name="Pistol" unique_id=238356818 node_paths=PackedStringArray("multiplayer_comp", "interaction_area", "item_comp") instance=ExtResource("1_u7duq")]
 script = ExtResource("2_4fp42")
+multiplayer_comp = NodePath("PhysItemMultiplayerComp")
 interaction_area = NodePath("InteractionArea")
 item_comp = NodePath("ItemComp")
 
@@ -31,13 +25,10 @@ transform = Transform3D(-0.05, 0, -4.371139e-09, 0, 0.05, 0, 4.371139e-09, 0, -0
 transform = Transform3D(-0.05, 0, -4.371139e-09, 0, 0.05, 0, 4.371139e-09, 0, -0.05, 0, -0.103552766, 0.098621726)
 shape = SubResource("ConvexPolygonShape3D_u7duq")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="2" unique_id=483119407]
-replication_config = SubResource("SceneReplicationConfig_u7duq")
-
-[node name="ItemComp" parent="." index="3" unique_id=1873508656 instance=ExtResource("2_77vle")]
+[node name="ItemComp" parent="." index="2" unique_id=1873508656 instance=ExtResource("2_77vle")]
 is_grab = true
 
-[node name="InteractionArea" type="Area3D" parent="." index="4" unique_id=844122104 node_paths=PackedStringArray("label", "root_object")]
+[node name="InteractionArea" type="Area3D" parent="." index="3" unique_id=844122104 node_paths=PackedStringArray("label", "root_object")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("3_r54ov")
@@ -49,6 +40,9 @@ metadata/_custom_type_script = "uid://bn4yh8pjsgo5"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" index="0" unique_id=885832270]
 shape = SubResource("SphereShape3D_r54ov")
 
-[node name="Label3D" type="Label3D" parent="." index="5" unique_id=192633416]
+[node name="Label3D" type="Label3D" parent="." index="4" unique_id=192633416]
 visible = false
 billboard = 1
+
+[node name="PhysItemMultiplayerComp" parent="." index="5" unique_id=295906544 node_paths=PackedStringArray("root_object") instance=ExtResource("5_1ral2")]
+root_object = NodePath("..")

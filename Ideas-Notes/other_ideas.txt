@@ -1,0 +1,6 @@
+Use to login to remote machine
+Have to navigate fantasy dungeon
+Mobs require commands
+
+Love the idea of overriding SSH
+Would run 

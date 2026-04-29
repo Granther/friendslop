@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dmrf38usahnjg" path="res://Scripts/Items/ball.gd" id="1_d60mj"]
 [ext_resource type="PackedScene" uid="uid://b3hcbfg4kp5bq" path="res://Interaction/InteractionArea.tscn" id="2_scegs"]
 [ext_resource type="PackedScene" uid="uid://dd6wj0xef6dol" path="res://Interaction/Items/item_comp.tscn" id="3_pa0wq"]
+[ext_resource type="PackedScene" uid="uid://eopsev3enyxl" path="res://Multiplayer/phys_item_multiplayer_comp.tscn" id="4_j6u8c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8j60k"]
 
@@ -14,22 +15,15 @@ albedo_color = Color(0.4083826, 0.13980448, 0, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_8j60k"]
 material = SubResource("StandardMaterial3D_d60mj")
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_d60mj"]
-properties/0/path = NodePath(".:rotation")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:position")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_scegs"]
 
-[node name="Ball" type="RigidBody3D" unique_id=1482215681 node_paths=PackedStringArray("interaction_area", "item_comp") groups=["interactable"]]
+[node name="Ball" type="RigidBody3D" unique_id=1482215681 node_paths=PackedStringArray("multiplayer_comp", "interaction_area", "item_comp") groups=["interactable"]]
 collision_layer = 48
 collision_mask = 7
 mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_8j60k")
 script = ExtResource("1_d60mj")
+multiplayer_comp = NodePath("PhysItemMultiplayerComp")
 interaction_area = NodePath("InteractionArea")
 item_comp = NodePath("ItemComp")
 
@@ -38,9 +32,6 @@ shape = SubResource("SphereShape3D_fo5ed")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=45361601]
 mesh = SubResource("SphereMesh_8j60k")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1379193455]
-replication_config = SubResource("SceneReplicationConfig_d60mj")
 
 [node name="InteractionArea" parent="." unique_id=151811882 node_paths=PackedStringArray("label", "root_object") instance=ExtResource("2_scegs")]
 collision_layer = 16
@@ -58,3 +49,6 @@ shaded = true
 
 [node name="ItemComp" parent="." unique_id=1873508656 instance=ExtResource("3_pa0wq")]
 is_grab = true
+
+[node name="PhysItemMultiplayerComp" parent="." unique_id=295906544 node_paths=PackedStringArray("root_object") instance=ExtResource("4_j6u8c")]
+root_object = NodePath("..")

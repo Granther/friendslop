@@ -1,3 +1,25 @@
 # Ok, so when player 1 connects, we are hosting the server and are fine
 
 # but, when the seond player connects, we create a client
+
+- So. player 1 opens the server and creates the player 
+
+What do we want the arch to look like?
+Player 1 creates server and listens for connecting players. When they connect we instance a player for them to 'inhabit'
+
+Say we are player2, we connect and add_player runs, we then create a new player and add them as a child of World. When this happens we 
+
+We also get thrown into the current game scene which contains 
+
+Well, so, when player2 hits a ball. It keeps hitting until the server moves it
+What if we had periodic tick, like once per second that fixed this 
+
+So the main peer, 1, runs an update func on every 30 frames
+
+When we interact with 
+
+
+Everytime a collision happens, we inform the server of the col and the force, dir ect
+We then do the coll on each client 
+
+Dont forget about an interaction lock, in which we cannot play any kind of pick up animation unless we get confirmation from the server...? Maybe could scale with the chances that another player could interact at nearly the same time, maybe based off proximity

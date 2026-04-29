@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c5iputjg23fqk"]
+
+[ext_resource type="PackedScene" uid="uid://cbgecho6j5f27" path="res://Blender/Dice.glb" id="1_a6rv4"]
+[ext_resource type="Script" uid="uid://cey14mam0dumx" path="res://Scripts/Items/dice.gd" id="2_w8aus"]
+[ext_resource type="PackedScene" uid="uid://eopsev3enyxl" path="res://Multiplayer/phys_item_multiplayer_comp.tscn" id="3_gxm8e"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5ympv"]
+points = PackedVector3Array(0.95125294, 1, 0.95125294, 1, 0.95125294, 0.95125294, 0.95125294, 1, -0.9516445, -0.9516445, 1, 0.95125294, 0.95125294, 0.95125294, 1, 1, 0.95125294, -0.9516445, 1, -0.9516445, 0.95125294, 0.95125294, 0.95125294, -1, -0.9516445, 1, -0.9516445, -1, 0.95125294, 0.95125294, -0.9516445, 0.95125294, 1, 0.95125294, -0.9516445, 1, 1, -0.9516445, -0.9516445, 0.95125294, -1, 0.95125294, 0.95125294, -0.9516445, -1, -0.9516445, 0.95125294, -1, -1, 0.95125294, -0.9516445, -1, -0.9516445, 0.95125294, -0.9516445, -0.9516445, 1, 0.95125294, -1, -0.9516445, -0.9516445, -1, 0.95125294, -0.9516445, -0.9516445, -1, -1, -0.9516445, -0.9516445, -0.9516445, -1, -0.9516445)
+
+[node name="Dice" unique_id=993171236 node_paths=PackedStringArray("multiplayer_comp") instance=ExtResource("1_a6rv4")]
+script = ExtResource("2_w8aus")
+multiplayer_comp = NodePath("PhysItemMultiplayerComp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=242238665]
+transform = Transform3D(0.58964485, 0, 0, 0, 0.58964485, 0, 0, 0, 0.58964485, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_5ympv")
+
+[node name="PhysItemMultiplayerComp" parent="." index="2" unique_id=295906544 node_paths=PackedStringArray("root_object") instance=ExtResource("3_gxm8e")]
+root_object = NodePath("..")

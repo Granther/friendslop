@@ -7,7 +7,8 @@ const JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.003
 var BASE_FOV = 90
 var FOV_CHANGE = 1
-var PUSH_FORCE = 4
+var PUSH_FORCE = 2.5
+
 
 @export var DEFAULT_SPEED: float = 3
 
@@ -44,10 +45,7 @@ var STAND_STATE: int
 const CROUCHING = 0
 const STANDING = 1
 
-var pid = null
-
 func _enter_tree() -> void:
-	print("id: ", str(name).to_int())
 	set_multiplayer_authority(str(name).to_int())
 	#assert(get_collision_layer_value(4), "must be on 'Expodables' (4) collision layer")
 
@@ -60,8 +58,7 @@ func _ready():
 	# print(" in ",  str(name).to_int(), " mul: ", get_multiplayer_authority())
 	if not is_multiplayer_authority(): return
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	if camera.current != true:
-		camera.current = true
+	camera.current = true
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
@@ -86,19 +83,12 @@ func get_targ_fov(degrees: float) -> float:
 # ... when we are at the max speed
 
 func _physics_process(delta: float) -> void:
-	springarm.set("spring_length", clamp(-camera.rotation.x,0.6,0.7))
-		
-	if not is_multiplayer_authority():
-		#move_and_collide
-		#if get_multiplayer_authority() != 1:
-			#print(get_slide_collision_count())
-		#for i in get_slide_collision_count():
-			#var c = get_slide_collision(i)
-			#if c.get_collider() is RigidBody3D:
-				#c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)
-		return
+	if not is_multiplayer_authority(): return
 	# Bug: Opening menu pauses you in game. Turns off physics lol
-	if ui.is_menu_open(): return
+	# if ui.is_menu_open(): return
+
+	springarm.set("spring_length", clamp(-camera.rotation.x,0.6,0.7))
+	
 	var velocity_clamp = clamp(velocity.length(), SPEED/DEFAULT_SPEED, SPEED/DEFAULT_SPEED)
 	var target_fov = BASE_FOV * FOV_CHANGE + velocity_clamp
 	camera.fov = lerp(camera.fov, target_fov, delta * 4)
@@ -168,51 +158,20 @@ func _physics_process(delta: float) -> void:
 	for i in get_slide_collision_count():
 		var col = get_slide_collision(i)
 		var body = col.get_collider()
-	
-		if body is RigidBody3D:
+		# See if the object is synced
+		if body.has_node("PhysItemMultiplayerComp"):
 			# a normal is a unit vector point perpendicular the surface of the object in the direction of collision
 			var impulse = -col.get_normal() * PUSH_FORCE
-			# And, a path is relative to our running scene, this makes sense since we cant serialize with RPC
-			server_push_object.rpc_id(1, body.get_path(), impulse)
-
-	#for i in get_slide_collision_count():
-		#var c = get_slide_collision(i)
-		#if c.get_collider() is RigidBody3D:
-			## c.get_collider().set_multiplayer_authority(get_multiplayer_authority())
-			#if multiplayer.is_server(): # ie, player is server
-				#c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)
-			#else:
-				## call as if you are the server
-				#apply_force_rpc.rpc_id(1, c.get_collider())
+			body.multiplayer_comp.apply_impulse(impulse)
 	
 	if is_on_floor():
 		anim_manager.play_walk_anims(velocity.length())
 	else:
 		anim_manager.play_jump_anims(velocity.length())
 
-# call local, pusher could be server
-@rpc("any_peer", "call_local")
-func server_push_object(path, impulse):
-	if multiplayer.is_server():
-		var obj = get_node(path)
-		if obj is RigidBody3D:
-			#print("applied inpusle")
-			#obj.apply_central_impulse(impulse)
-			obj.apply_central_force(impulse)
-			await get_tree().create_timer(0.5).timeout
-
-#@rpc("any_peer", "call_remote", "reliable")
-#@rpc
-#func apply_force_rpc(r: RigidBody3D):
-	#r.apply_central_impulse(-r.get_normal() * PUSH_FORCE)
-#
-#@rpc("any_peer", "call_local", "reliable")
-#func do_hit():
-	#for i in get_slide_collision_count():
-		#var c = get_slide_collision(i)
-		#if c.get_collider() is RigidBody3D:
-			#c.get_collider().set_multiplayer_authority(get_multiplayer_authority())
-			#c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)
+func _process(delta: float) -> void:
+	if not is_multiplayer_authority(): return
+	camera.current = true # <- this sucks im ngl, get this figured out grant
 
 func get_blasted(source: Vector3, force_mag: float):
 	# Get difference between player pos and grenade pos (this is our direction relative to grenade)

@@ -24,6 +24,7 @@ UIHandler="*uid://cel5867yqym8h"
 ItemManager="uid://b7hwknpwt0q0e"
 Err="*uid://cthij08lfg15p"
 WorldAPI="*uid://b0x20mw0x4g1s"
+MultiplayerObjectHandler="*uid://mlk34ddt2jvy"
 
 [editor]
 

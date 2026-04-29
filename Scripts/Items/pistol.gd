@@ -1,5 +1,7 @@
 extends Grabbable
 
+@export var multiplayer_comp: Node3D = null
+
 func _ready():
 	_runtime_checks()
 	item_comp.on_drop_key_hit = Callable(self, "_on_drop")
