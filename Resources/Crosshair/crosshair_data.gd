@@ -1,5 +1,5 @@
-class_name CrosshairData
 extends Resource
+class_name CrosshairData
 
 # Groups in editor
 @export_group("General Appearance")

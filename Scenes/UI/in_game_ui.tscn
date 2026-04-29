@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://j5xlckjtyx57" path="res://Scripts/UI/in_game_ui.gd" id="1_5x6se"]
 [ext_resource type="Script" uid="uid://iprk668hfq71" path="res://Scripts/UI/main_ui.gd" id="1_gtfj6"]
 [ext_resource type="Script" uid="uid://csojtyenqxdhc" path="res://Scripts/UI/player_ui.gd" id="2_ey7ub"]
+[ext_resource type="Script" uid="uid://bbtuf6wfsvhkw" path="res://Resources/Crosshair/crosshair_drawer.gd" id="4_tckah"]
 
 [node name="MainUI" type="CanvasLayer" unique_id=1330095474]
 script = ExtResource("1_gtfj6")
@@ -103,6 +104,23 @@ text = "Debug Locally (Run for Server & Client)
 [node name="RoomIDLabel" type="Label" parent="." unique_id=1984915359]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="CrosshairDrawer" type="Control" parent="." unique_id=1907762933]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.5
+offset_right = 24.0
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("4_tckah")
 
 [connection signal="pressed" from="InGameUI/MarginContainer/VBoxContainer/QuitBtn" to="InGameUI" method="_on_quit_btn_pressed"]
 [connection signal="pressed" from="InGameUI/MarginContainer/VBoxContainer/QuitMenuBtn" to="InGameUI" method="_on_quit_menu_btn_pressed"]
