@@ -23,6 +23,7 @@ func _ready():
 	startup_menu.show()
 	pause_menu.hide()
 	tablist.hide()
+	crosshair.hide()
 	
 	MENU_STATE = MENU_MODE.STARTUP
 
@@ -32,6 +33,7 @@ func _on_local_btn_pressed() -> void:
 	MENU_STATE = MENU_MODE.LOADING
 	await MultiplayerConnectionHandler.local_multiplayer_a()
 	MENU_STATE = MENU_MODE.NONE
+	crosshair.show()
 
 # Remote
 func _on_join_btn_pressed() -> void:
@@ -44,6 +46,7 @@ func _on_join_btn_pressed() -> void:
 	_loading()
 	await MultiplayerConnectionHandler.remote_multiplayer_join_a(room_id)
 	_done_loading()
+	crosshair.show()
 
 # Remote
 func _on_host_btn_pressed() -> void:
@@ -52,6 +55,7 @@ func _on_host_btn_pressed() -> void:
 	_loading()
 	var room_id = await MultiplayerConnectionHandler.remote_multiplayer_host_a()
 	_done_loading()
+	crosshair.show()
 	print("room_id: ", room_id)
 
 ## PauseMenu ##
@@ -75,11 +79,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			if event.is_action_pressed("escape"): _unpause()
 
 func _pause():
+	crosshair.hide()
 	pause_menu.show()
 	MENU_STATE = MENU_MODE.PAUSED
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _unpause():
+	crosshair.show()
 	pause_menu.hide()
 	MENU_STATE = MENU_MODE.NONE
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

@@ -44,6 +44,7 @@ action_name = "pickup"
 shape = SubResource("SphereShape3D_scegs")
 
 [node name="InteractionLabel" type="Label3D" parent="." unique_id=140624516]
+visible = false
 billboard = 1
 shaded = true
 

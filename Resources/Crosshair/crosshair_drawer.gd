@@ -27,8 +27,9 @@ func _set_and_redraw(value):
 
 func _process(delta):
 	# Slowly reduce recoil over time for a smooth recovery animation.
-	if recoil > 0:
-		recoil = move_toward(recoil, 0, delta * 2.0) # Recover in 0.5 seconds
+	#if recoil > 0:
+		#recoil = move_toward(recoil, 0, delta * 2.0) # Recover in 0.5 seconds
+	pass
 
 func _draw():
 	var center: Vector2 = size / 2.0

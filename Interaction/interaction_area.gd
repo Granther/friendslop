@@ -18,10 +18,11 @@ func _ready():
 	label.text = base_text + action_name
 
 func set_label_visible(setting: bool):
-	if setting:
-		label.show()
-	else:
-		label.hide()
+	pass
+	#if setting:
+		#label.show()
+	#else:
+		#label.hide()
 
 func interact(player):
 	interacted_with.emit(player)

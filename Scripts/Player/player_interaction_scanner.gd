@@ -54,7 +54,6 @@ func _input(event):
 
 func _process(delta: float) -> void:
 	if object_shape_cast.is_colliding():
-		print("here")
-		player_ref.ui.crosshair.base_size = 5
+		player_ref.ui.crosshair.recoil = 2
 	else:
-		player_ref.ui.crosshair.base_size = 2
+		player_ref.ui.crosshair.recoil = 0
