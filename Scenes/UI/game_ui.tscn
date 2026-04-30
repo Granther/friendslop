@@ -1,8 +1,30 @@
 [gd_scene format=3 uid="uid://bo8i6bctlug4s"]
 
 [ext_resource type="Script" uid="uid://sbx77vj1cdnk" path="res://Scripts/UI/game_ui.gd" id="1_6w80a"]
+[ext_resource type="FontFile" uid="uid://d2nhkxabybsjr" path="res://ExternalAssets/Fonts/Share_Tech_Mono_Font/ShareTechMono-Regular.ttf" id="2_6w80a"]
+[ext_resource type="FontFile" uid="uid://u671v6jg326t" path="res://tmp/fps-tutorial-series-files-main/UI/Share_Tech_Mono_Font/ShareTechMono-Regular.ttf" id="2_vo2tu"]
+[ext_resource type="Script" uid="uid://bbtuf6wfsvhkw" path="res://Resources/Crosshair/crosshair_drawer.gd" id="4_6w80a"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p8jce"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5b8pf"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0.0862745, 0.0901961, 0.101961, 0.705882)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.301961)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6w80a"]
+bg_color = Color(0.20784314, 0.20784314, 0.20784314, 1)
 
 [node name="GameUI" type="CanvasLayer" unique_id=858986954]
 script = ExtResource("1_6w80a")
@@ -59,18 +81,20 @@ theme_override_constants/separation = 15
 
 [node name="Label" type="Label" parent="MarginContainer/StartupMenu/MarginContainer/VBoxContainer" unique_id=1553397992]
 layout_mode = 2
-text = "Main Menu
-"
+theme_override_fonts/font = ExtResource("2_6w80a")
+text = "Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="JoinBtn" type="Button" parent="MarginContainer/StartupMenu/MarginContainer/VBoxContainer" unique_id=159527227]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6w80a")
 text = "Join Online (WAN)
 "
 
 [node name="RoomID" type="LineEdit" parent="MarginContainer/StartupMenu/MarginContainer/VBoxContainer" unique_id=602747150]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6w80a")
 placeholder_text = "Room ID"
 alignment = 1
 
@@ -104,26 +128,91 @@ theme_override_constants/separation = 15
 
 [node name="Label" type="Label" parent="MarginContainer/PauseMenu/MarginContainer/VBoxContainer" unique_id=132814214]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6w80a")
 text = "In-Game UI "
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="QuitBtn" type="Button" parent="MarginContainer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1904983187]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6w80a")
 text = "Quit Game
 "
 
 [node name="QuitMenuBtn" type="Button" parent="MarginContainer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1089032728]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6w80a")
 text = "Quit to Menu"
 
 [node name="BackBtn" type="Button" parent="MarginContainer/PauseMenu/MarginContainer/VBoxContainer" unique_id=663792957]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6w80a")
 text = "Back to Game"
 
-[connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/JoinBtn" to="MarginContainer/StartupMenu" method="_on_join_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/HostBtn" to="MarginContainer/StartupMenu" method="_on_host_btn_pressed"]
+[node name="LoadingPrompt" type="CenterContainer" parent="MarginContainer" unique_id=1375543842]
+visible = false
+layout_mode = 2
+
+[node name="PromptPanel" type="PanelContainer" parent="MarginContainer/LoadingPrompt" unique_id=186490114]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5b8pf")
+
+[node name="PromptLabel" type="Label" parent="MarginContainer/LoadingPrompt/PromptPanel" unique_id=564772622]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vo2tu")
+theme_override_font_sizes/font_size = 20
+text = "LOADING..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InfoPrompt" type="CenterContainer" parent="MarginContainer" unique_id=466694023]
+visible = false
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/InfoPrompt" unique_id=689344521]
+custom_minimum_size = Vector2(200, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6w80a")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/InfoPrompt/PanelContainer" unique_id=1809805678]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/InfoPrompt/PanelContainer/MarginContainer" unique_id=2073983974]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/InfoPrompt/PanelContainer/MarginContainer/VBoxContainer" unique_id=1418711644]
+layout_mode = 2
+
+[node name="OkBtn" type="Button" parent="MarginContainer/InfoPrompt/PanelContainer/MarginContainer/VBoxContainer" unique_id=363677352]
+layout_mode = 2
+text = "OK"
+
+[node name="Crosshair" type="Control" parent="." unique_id=1557974722]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+mouse_behavior_recursive = 1
+script = ExtResource("4_6w80a")
+
+[connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/JoinBtn" to="." method="_on_join_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/HostBtn" to="." method="_on_host_btn_pressed"]
 [connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/LocalBtn" to="." method="_on_local_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/PauseMenu/MarginContainer/VBoxContainer/QuitBtn" to="MarginContainer/PauseMenu" method="_on_quit_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/PauseMenu/MarginContainer/VBoxContainer/QuitMenuBtn" to="MarginContainer/PauseMenu" method="_on_quit_menu_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/PauseMenu/MarginContainer/VBoxContainer/BackBtn" to="MarginContainer/PauseMenu" method="_on_back_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/PauseMenu/MarginContainer/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/PauseMenu/MarginContainer/VBoxContainer/QuitMenuBtn" to="." method="_on_quit_menu_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/PauseMenu/MarginContainer/VBoxContainer/BackBtn" to="." method="_on_back_btn_pressed"]

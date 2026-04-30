@@ -12,13 +12,9 @@ func _ready():
 
 func _on_inter():
 	pass
-	#if armed:
-		#item_comp.on_drop_key_hit.call()
-	#else: # We are not armed, but its in our hand
-		#pass
 		
 func _on_leftm():
-	print("fifre")
+	item_comp.player_ref.ui.crosshair.recoil += 0.5
 		
 func _on_drop():
 	interaction_area.set_label_visible(true)

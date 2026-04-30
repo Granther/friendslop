@@ -51,3 +51,10 @@ func _input(event):
 				# This erases the "interact" input, so it doesn't get passed to the item
 				get_viewport().set_input_as_handled()
 				emit_signal("interacted_external_item", object_collided)
+
+func _process(delta: float) -> void:
+	if object_shape_cast.is_colliding():
+		print("here")
+		player_ref.ui.crosshair.base_size = 5
+	else:
+		player_ref.ui.crosshair.base_size = 2

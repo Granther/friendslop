@@ -37,6 +37,10 @@ enabled=PackedStringArray("res://addons/nodetunnel/plugin.cfg")
 
 interactable=""
 
+[gui]
+
+theme/custom_font="uid://d2nhkxabybsjr"
+
 [input]
 
 up={

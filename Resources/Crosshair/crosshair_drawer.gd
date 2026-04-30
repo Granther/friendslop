@@ -1,5 +1,9 @@
 # CrosshairDrawer.gd
-@tool
+
+# Full transparecny, this was found here: https://gameidea.org/2025/09/07/building-the-hud-dynamic-crosshair-fps-series-part-9
+
+# But, very good, because this makes the crosshair incredibly dynamic, we just load a different resource for every different type of thing we want
+
 extends Control
 class_name CrosshairDrawer
 
