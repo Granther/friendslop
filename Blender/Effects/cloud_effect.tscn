@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://edkcj2y7h5sn"]
+
+[ext_resource type="Shader" uid="uid://lb46d67hll6w" path="res://Blender/Effects/cloud1_shader.tres" id="1_gqpae"]
+[ext_resource type="ArrayMesh" uid="uid://wab8uy8k68s1" path="res://Blender/Effects/cloud_mesh.res" id="2_34sst"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4sj36"]
+render_priority = 0
+shader = ExtResource("1_gqpae")
+
+[sub_resource type="Curve" id="Curve_hkstl"]
+_data = [Vector2(0, 0.34067625), 0.0, 0.0, 0, 0, Vector2(1, 0.6869877), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4mk0i"]
+curve = SubResource("Curve_hkstl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eahq3"]
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 0.5
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 3.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 0, 0)
+scale_max = 1.1999999
+scale_curve = SubResource("CurveTexture_4mk0i")
+
+[node name="Node3D" type="Node3D" unique_id=1770806105]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=335903059]
+material_override = SubResource("ShaderMaterial_4sj36")
+amount = 20
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_eahq3")
+draw_pass_1 = ExtResource("2_34sst")

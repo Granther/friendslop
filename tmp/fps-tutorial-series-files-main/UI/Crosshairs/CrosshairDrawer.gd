@@ -1,7 +1,7 @@
 # CrosshairDrawer.gd
 @tool
 extends Control
-class_name CrosshairDrawer
+class_name CrosshairDrawer1
 
 
 ## An enumeration to define the different crosshair styles.
