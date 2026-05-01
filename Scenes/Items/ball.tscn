@@ -53,3 +53,6 @@ is_grab = true
 
 [node name="PhysItemMultiplayerComp" parent="." unique_id=295906544 node_paths=PackedStringArray("root_object") instance=ExtResource("4_j6u8c")]
 root_object = NodePath("..")
+
+[node name="GPUParticlesCollisionSphere3D" type="GPUParticlesCollisionSphere3D" parent="." unique_id=210256151]
+radius = 0.5

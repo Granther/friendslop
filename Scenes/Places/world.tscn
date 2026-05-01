@@ -51,6 +51,9 @@ use_collision = true
 size = Vector3(127.00293, 0.037902832, 20.154541)
 material = SubResource("StandardMaterial3D_a02cp")
 
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="CSGBox3D" unique_id=398881358]
+size = Vector3(127, 0.04, 20.12)
+
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1493753472]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.075478, 15.346161, -3)
 use_collision = true
@@ -93,11 +96,13 @@ collision_layer = 52
 mass = 1.0
 physics_material_override = SubResource("PhysicsMaterial_nfdff")
 
-[node name="missile2" parent="." unique_id=888320288 instance=ExtResource("2_xs3tu")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -3.4289742, 2.0438843, 1.931)
+[node name="missile2" parent="." unique_id=888320288 node_paths=PackedStringArray("target") instance=ExtResource("2_xs3tu")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -3.4289742, 3.45363, 1.931)
 collision_layer = 52
 physics_material_override = SubResource("PhysicsMaterial_mynff")
 gravity_scale = 1.0
+speed = 20.0
+target = NodePath("../CSGBox3D2")
 
 [node name="Grenade" parent="." unique_id=186504985 instance=ExtResource("4_xs3tu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.051452637, 0.6027832, -1.2580566)
