@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ecg54whw7gtp" path="res://Animations/Explosions pack/explosion-1-g/spritesheet.png" id="2_tbgkt"]
 [ext_resource type="PackedScene" uid="uid://dd6wj0xef6dol" path="res://Interaction/Items/item_comp.tscn" id="3_q6p5m"]
 [ext_resource type="PackedScene" uid="uid://b3hcbfg4kp5bq" path="res://Interaction/InteractionArea.tscn" id="5_iqm20"]
-[ext_resource type="PackedScene" uid="uid://edkcj2y7h5sn" path="res://Blender/Effects/cloud_effect.tscn" id="6_iqm20"]
+[ext_resource type="PackedScene" uid="uid://0p2dut3x3ke4" path="res://Blender/Effects/exhaust_effect.tscn" id="6_iqm20"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_swpy0"]
 radius = 0.1
@@ -161,7 +161,7 @@ transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
 is_grab = true
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1141618551]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 16, 0, 0, 0)
 visible = false
 billboard = 1
 texture_filter = 0
@@ -187,8 +187,8 @@ billboard = 1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=203334683]
 shape = SubResource("CylinderShape3D_q6p5m")
 
-[node name="ExhaustEffect" parent="." unique_id=1770806105 instance=ExtResource("6_iqm20")]
-transform = Transform3D(1, 0, 0, 0, -1, 1.509958e-07, 0, -1.509958e-07, -1, 0, -1.1218674, 0)
+[node name="ExhaustEffect" parent="." unique_id=479380938 instance=ExtResource("6_iqm20")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, -1.1154864, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1184356014]
 replication_config = SubResource("SceneReplicationConfig_q6p5m")

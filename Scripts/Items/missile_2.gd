@@ -252,6 +252,7 @@ var whitelist: Array[Node3D]
 @onready var mesh_inst = $MeshInstance3D
 @onready var rng = RandomNumberGenerator.new()
 @onready var kill_area = $KillArea
+@onready var exhaust_effect = $ExhaustEffect
 #@onready var item_comp = $ItemComp
 #@onready var interaction_area = $InteractionArea
 
@@ -282,11 +283,13 @@ func node_added(node: Node3D):
 func launch():
 	armed = true
 	lock_timer.start()
+	freeze = false
 	velocity = Vector3.ZERO
 	start_motor()
 
 func start_motor():
 	motor_timer.start()
+	exhaust_effect.emitting = true
 
 func update_motor_const_force():
 	# F = ma, end line.
@@ -321,7 +324,8 @@ func _on_lock_timer_timeout() -> void:
 	locked = true
 
 func _on_motor_timer_timeout() -> void:
-	steer_force = steer_force/2
+	steer_force = steer_force/4
+	exhaust_effect.emitting = false
 
 func _on_kill_area_body_entered(body: Node3D) -> void:
 	if armed and (body not in whitelist):

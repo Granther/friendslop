@@ -38,6 +38,10 @@ bounce = 0.5
 
 [node name="World" type="Node3D" unique_id=2063905397]
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1568990526]
+_spawnable_scenes = PackedStringArray("uid://be8qbmt0fe144")
+spawn_path = NodePath("..")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=989076872]
 transform = Transform3D(0.99950653, 0.03141076, 1.3730079e-09, 0, -4.371139e-08, 1, 0.03141076, -0.99950653, -4.368982e-08, 0, 0, 0)
 shadow_enabled = true
@@ -55,7 +59,7 @@ material = SubResource("StandardMaterial3D_a02cp")
 size = Vector3(127, 0.04, 20.12)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1493753472]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.075478, 15.346161, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.23951, 31.04279, -3)
 use_collision = true
 collision_layer = 5
 collision_mask = 0
@@ -96,14 +100,6 @@ collision_layer = 52
 mass = 1.0
 physics_material_override = SubResource("PhysicsMaterial_nfdff")
 
-[node name="missile2" parent="." unique_id=888320288 node_paths=PackedStringArray("target") instance=ExtResource("2_xs3tu")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -3.4289742, 3.45363, 1.931)
-collision_layer = 52
-physics_material_override = SubResource("PhysicsMaterial_mynff")
-gravity_scale = 1.0
-speed = 20.0
-target = NodePath("../CSGBox3D2")
-
 [node name="Grenade" parent="." unique_id=186504985 instance=ExtResource("4_xs3tu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.051452637, 0.6027832, -1.2580566)
 collision_layer = 52
@@ -116,6 +112,47 @@ collision_mask = 7
 [node name="Dice" parent="." unique_id=993171236 instance=ExtResource("6_2qjrm")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -5.3105164, 1, -1)
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1568990526]
-_spawnable_scenes = PackedStringArray("uid://be8qbmt0fe144")
-spawn_path = NodePath("..")
+[node name="missile2" parent="." unique_id=888320288 node_paths=PackedStringArray("target") instance=ExtResource("2_xs3tu")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -3.4289742, 3.45363, 1.931)
+collision_layer = 52
+physics_material_override = SubResource("PhysicsMaterial_mynff")
+gravity_scale = 1.0
+speed = 5.0
+steer_force = 3.0
+target = NodePath("../CSGBox3D2")
+lock_time = 0.5
+motor_time = 3.0
+
+[node name="missile3" parent="." unique_id=444960500 node_paths=PackedStringArray("target") instance=ExtResource("2_xs3tu")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -3.4289742, 3.45363, -3.4405124)
+collision_layer = 52
+physics_material_override = SubResource("PhysicsMaterial_mynff")
+gravity_scale = 1.0
+speed = 5.0
+steer_force = 3.0
+target = NodePath("../CSGBox3D2")
+lock_time = 0.5
+motor_time = 3.0
+
+[node name="missile4" parent="." unique_id=350910283 node_paths=PackedStringArray("target") instance=ExtResource("2_xs3tu")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 1.1847324, 3.45363, 1.931)
+collision_layer = 52
+physics_material_override = SubResource("PhysicsMaterial_mynff")
+gravity_scale = 1.0
+speed = 5.0
+steer_force = 3.0
+target = NodePath("../CSGBox3D2")
+lock_time = 0.5
+motor_time = 3.0
+
+[node name="missile5" parent="." unique_id=2121670758 node_paths=PackedStringArray("target") instance=ExtResource("2_xs3tu")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.29319382, 3.45363, -1.2562454)
+collision_layer = 52
+physics_material_override = SubResource("PhysicsMaterial_mynff")
+gravity_scale = 1.0
+speed = 5.0
+steer_force = 3.0
+target = NodePath("../CSGBox3D2")
+lock_time = 0.5
+motor_time = 3.0
+motor_gs = 5.0

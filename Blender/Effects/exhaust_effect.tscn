@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://0p2dut3x3ke4"]
+
+[ext_resource type="Shader" uid="uid://lb46d67hll6w" path="res://Blender/Effects/cloud1_shader.tres" id="1_bkwhs"]
+[ext_resource type="ArrayMesh" uid="uid://ch6frtbwo7wvw" path="res://Blender/Effects/cloud_mesh.res" id="2_81y6w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4sj36"]
+render_priority = 0
+shader = ExtResource("1_bkwhs")
+
+[sub_resource type="Curve" id="Curve_hkstl"]
+_data = [Vector2(0, 0.34067625), 0.0, 0.0, 0, 0, Vector2(1, 0.6869877), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4mk0i"]
+curve = SubResource("Curve_hkstl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eahq3"]
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 0.25
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 3.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.29999998
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_4mk0i")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[node name="ExhaustEffect" type="GPUParticles3D" unique_id=479380938]
+material_override = SubResource("ShaderMaterial_4sj36")
+emitting = false
+amount = 20
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_eahq3")
+draw_pass_1 = ExtResource("2_81y6w")
