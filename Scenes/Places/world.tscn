@@ -59,7 +59,7 @@ material = SubResource("StandardMaterial3D_a02cp")
 size = Vector3(127, 0.04, 20.12)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1493753472]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.23951, 31.04279, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.24718, 1.2187939, -3)
 use_collision = true
 collision_layer = 5
 collision_mask = 0
@@ -116,43 +116,11 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -5.3105164, 1, -1)
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -3.4289742, 3.45363, 1.931)
 collision_layer = 52
 physics_material_override = SubResource("PhysicsMaterial_mynff")
-gravity_scale = 1.0
-speed = 5.0
-steer_force = 3.0
+gravity_scale = 0.0
+speed = 100.0
+steer_force = 20.0
 target = NodePath("../CSGBox3D2")
-lock_time = 0.5
-motor_time = 3.0
-
-[node name="missile3" parent="." unique_id=444960500 node_paths=PackedStringArray("target") instance=ExtResource("2_xs3tu")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -3.4289742, 3.45363, -3.4405124)
-collision_layer = 52
-physics_material_override = SubResource("PhysicsMaterial_mynff")
-gravity_scale = 1.0
-speed = 5.0
-steer_force = 3.0
-target = NodePath("../CSGBox3D2")
-lock_time = 0.5
-motor_time = 3.0
-
-[node name="missile4" parent="." unique_id=350910283 node_paths=PackedStringArray("target") instance=ExtResource("2_xs3tu")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 1.1847324, 3.45363, 1.931)
-collision_layer = 52
-physics_material_override = SubResource("PhysicsMaterial_mynff")
-gravity_scale = 1.0
-speed = 5.0
-steer_force = 3.0
-target = NodePath("../CSGBox3D2")
-lock_time = 0.5
-motor_time = 3.0
-
-[node name="missile5" parent="." unique_id=2121670758 node_paths=PackedStringArray("target") instance=ExtResource("2_xs3tu")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.29319382, 3.45363, -1.2562454)
-collision_layer = 52
-physics_material_override = SubResource("PhysicsMaterial_mynff")
-gravity_scale = 1.0
-speed = 5.0
-steer_force = 3.0
-target = NodePath("../CSGBox3D2")
-lock_time = 0.5
-motor_time = 3.0
-motor_gs = 5.0
+lock_time = 0.1
+launch_time = 0.0
+motor_time = 5.0
+motor_gs = 4.0

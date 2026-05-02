@@ -133,6 +133,7 @@ collision_layer = 24
 collision_mask = 7
 gravity_scale = 0.3
 script = ExtResource("1_swpy0")
+speed = 10.0
 interaction_area = NodePath("InteractionArea")
 item_comp = NodePath("ItemComp")
 

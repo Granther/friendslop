@@ -281,20 +281,30 @@ func node_added(node: Node3D):
 		target = node
 
 func launch():
+	global_rotation_degrees = Vector3.ZERO
 	armed = true
 	lock_timer.start()
 	freeze = false
-	velocity = Vector3.ZERO
-	start_motor()
+	# velocity = Vector3.ZERO
+	var desired = (target.global_position - global_position).normalized()
+	var steer_vec = (desired - velocity).normalized() * steer_force
+	var rotAmount = velocity.normalized().cross(-global_transform.basis.y)
+	rot.z = rotAmount.z
+	rot.x = rotAmount.x
+	rotate(Vector3.BACK, rot.z)
+	rotate(Vector3.RIGHT, rot.x)
+	velocity = desired
+	# start_motor()
 
 func start_motor():
 	motor_timer.start()
+	add_constant_force(global_transform.basis.y * (mass * get_motor_accel()))
 	exhaust_effect.emitting = true
 
 func update_motor_const_force():
 	# F = ma, end line.
 	if not motor_timer.is_stopped(): # Motor is currently firing
-		constant_force = global_transform.basis.y * (mass * get_motor_accel())
+		constant_force = transform.basis.y * (mass * get_motor_accel())
 	else:
 		constant_force = Vector3.ZERO
 
@@ -302,7 +312,6 @@ func _physics_process(delta: float) -> void:
 	item_comp.phys_func.call()
 	if locked:
 		# Missile gets more accurate as time goes on
-		steer_force += delta**(1/3)
 		var desired = (target.global_position - global_position).normalized() * speed
 		var steer_vec = (desired - velocity).normalized() * steer_force
 		var rotAmount = velocity.normalized().cross(-global_transform.basis.y)
@@ -312,7 +321,7 @@ func _physics_process(delta: float) -> void:
 		rotate(Vector3.RIGHT, rot.x)
 		velocity += steer_vec * delta
 		global_translate(velocity * delta)
-	update_motor_const_force()
+	# update_motor_const_force()
 		
 func _on_launch_timer_timeout() -> void:
 	lock_timer.start()
@@ -324,7 +333,7 @@ func _on_lock_timer_timeout() -> void:
 	locked = true
 
 func _on_motor_timer_timeout() -> void:
-	steer_force = steer_force/4
+	# steer_force = steer_force/4
 	exhaust_effect.emitting = false
 
 func _on_kill_area_body_entered(body: Node3D) -> void:
@@ -352,8 +361,29 @@ func setup_interact_callables():
 		#item_comp.player_ref.left_arm.global_position = global_position
 		#item_comp.player_ref.right_arm.global_position = global_position
 
-func _on_deregister():
-	item_comp.phys_func = func(): pass
+func _on_register():
+	_set_col_layers(true)
+	interaction_area.set_label_visible(false)
+	_set_freeze(true)
+	# rotation = Vector3.ZERO
+	global_rotation_degrees = Vector3(-90,0,0)
+	# rotation.y = global_rotation.y
+	item_comp.phys_func = func():
+		#global_rotation.y = item_comp.player_ref.global_rotation.y
+		#global_rotation.z = in_hand_rot.z
+		#global_rotation.x = in_hand_rot.x
+		#look_at(item_comp.player_ref.global_position, Vector3.RIGHT)
+		#item_comp.player_ref.left_arm.global_position = item_comp.left_hand_anchor.global_position
+		#item_comp.player_ref.right_arm.global_position = item_comp.right_hand_anchor.global_position
+		
+		# Does the player have a front?
+		# Using camera, that makes sense
+		global_rotation.y = item_comp.player_ref.camera.global_rotation.y
+		global_rotation.z = item_comp.player_ref.camera.global_rotation.z
+		global_position = item_comp.player_ref.body_manager.holding_marker.global_position
+#
+#func _on_deregister():
+	#item_comp.phys_func = func(): pass
 
 func _on_inter():
 	whitelist.append(item_comp.player_ref)
