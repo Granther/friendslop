@@ -265,6 +265,10 @@ var whitelist: Array[Node3D]
 # Also, animated sprite cuts into mesh of what it collided with 
 
 func _ready():
+	var x = global_rotation_degrees.normalized().cross(-global_transform.basis.y)
+	print(x)
+	add_constant_force(-x)
+	
 	setup_interact_callables()
 	launch_timer.wait_time = launch_time
 	lock_timer.wait_time = lock_time

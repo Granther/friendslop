@@ -34,3 +34,9 @@ depending on latencty, but also, if the servr drops, skips, or takes longer, the
 
 So, we need to sync frequently
 I 
+
+Ok, so, the missile. 
+We launch the missile and apply a constant force to the transform.basis.y, which is the unit vector that goes through the vehicle
+
+I think its cause rotation and direction are inherently different, and I havent understood that. 
+We need to apply a force opposite direction of the vector which represents the difference from some Y vector

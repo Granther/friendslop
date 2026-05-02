@@ -113,7 +113,7 @@ collision_mask = 7
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -5.3105164, 1, -1)
 
 [node name="missile2" parent="." unique_id=888320288 node_paths=PackedStringArray("target") instance=ExtResource("2_xs3tu")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -3.4289742, 3.45363, 1.931)
+transform = Transform3D(0.99772555, 0.06644432, -0.011344408, -0.06740583, 0.98349375, -0.16791734, 0, 0.16830012, 0.9857358, -3.4289742, 3.45363, 1.931)
 collision_layer = 52
 physics_material_override = SubResource("PhysicsMaterial_mynff")
 gravity_scale = 0.0
