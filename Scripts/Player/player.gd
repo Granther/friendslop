@@ -10,14 +10,17 @@ var FOV_CHANGE = 1
 var PUSH_FORCE = 4
 
 @onready var head = $Head
-@onready var grabbed_anchor = $Head/Camera3D/SpringArm3D/GrabbedAnchor
-@onready var object_grabber_shape_cast = $Head/Camera3D/ObjectGrabberShapeCast
-@onready var camera = $Head/Camera3D
+# Yeah... These routes look ridiculous, sorry, but, it works. This is so the camera follows the neck of the ragdoll basically. I will clean this up later(tm)
+@onready var grabbed_anchor = $"Head/Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Neck/Camera3D/SpringArm3D/GrabbedAnchor"
+@onready var object_grabber_shape_cast = $"Head/Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Neck/Camera3D/ObjectGrabberShapeCast"
+@onready var camera = $"Head/Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Neck/Camera3D"
 @onready var animations = $AnimationPlayer
-@onready var nametag = $Nametag
+@onready var nametag = $"Head/Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Upper Chest/Nametag"
 @export var grabbed_object:RigidBody3D = null
 @onready var stoneman = $Head/Stoneman
-@onready var springarm = $Head/Camera3D/SpringArm3D
+@onready var ragdoll = $Head/Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D
+@onready var springarm = $"Head/Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Neck/Camera3D/SpringArm3D"
+
 # Is this ok? With godot I feel like I'm a fricken monkey electrician, just wiring up stuff as I go
 # Is there any real best practice here? Is it modular? Does it matter if it isnt?
 @onready var ui = UIHandler.get_ui()
@@ -79,8 +82,10 @@ func _unhandled_input(event):
 	if ui.is_menu_open(): return
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
-		camera.rotate_x(-event.relative.y * SENSITIVITY)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
+		camera.rotate_x(event.relative.y * SENSITIVITY)
+		camera.rotation.x = clamp(camera.rotation.x, 0.2, 1.6)
+	
+
 
 func _physics_process(delta: float) -> void:
 	springarm.set("spring_length", clamp(-camera.rotation.x,0.6,0.7))
@@ -92,6 +97,7 @@ func _physics_process(delta: float) -> void:
 	var target_fov = BASE_FOV * FOV_CHANGE * velocity_clamp
 	camera.fov = lerp(camera.fov, target_fov, delta * 4)
 	var input_dir = Input.get_vector("left", "right", "up", "down")
+	
 	if Input.is_action_pressed("ToggleMouseFocus"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	if not is_on_floor():
@@ -108,15 +114,18 @@ func _physics_process(delta: float) -> void:
 		FOV_CHANGE = 1
 		
 	var move_direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if move_direction and is_on_floor():
-		velocity.x = lerp(velocity.x, move_direction.x * SPEED, delta * 6) 
-		velocity.z = lerp(velocity.z, move_direction.z * SPEED, delta * 6) 
-	elif is_on_floor():
+	if !ragdoll.is_simulating_physics():
+		if move_direction and is_on_floor():
+			velocity.x = lerp(velocity.x, move_direction.x * SPEED, delta * 6) 
+			velocity.z = lerp(velocity.z, move_direction.z * SPEED, delta * 6) 
+		elif is_on_floor():
 			velocity.x = velocity.x/1.2
 			velocity.z = velocity.z/1.2
-	elif not is_on_floor():
-		velocity.x = lerp(velocity.x, move_direction.x * SPEED, delta * 0.5) 
-		velocity.z = lerp(velocity.z, move_direction.z * SPEED, delta * 0.5) 
+		elif not is_on_floor():
+			velocity.x = lerp(velocity.x, move_direction.x * SPEED, delta * 0.5) 
+			velocity.z = lerp(velocity.z, move_direction.z * SPEED, delta * 0.5) 
+	else:
+		velocity = $"Head/Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Upper Chest".linear_velocity
 	
 	# Hmmm, so, we essentially have a state machine, but I'm not into that, 
 	# So, 

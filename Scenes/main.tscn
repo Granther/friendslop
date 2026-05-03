@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://xwjcwb2sf4sf" path="res://Scenes/UI/in_game_ui.tscn" id="2_bo1nx"]
 
 [node name="main" type="Node3D" unique_id=1643921057]
+process_thread_group = 1
+process_thread_group_order = 0
+process_thread_messages = 0
 script = ExtResource("1_jjgbg")
 
 [node name="MainUI" parent="." unique_id=1330095474 instance=ExtResource("2_bo1nx")]

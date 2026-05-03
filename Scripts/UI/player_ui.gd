@@ -8,6 +8,11 @@ const Player = preload("res://Scenes/Player/player.tscn")
 @onready var ui_parent = get_parent().get_parent()
 @onready var room_id_box = $MarginContainer/VBoxContainer/RoomID
 @onready var room_id_label = $"../RoomIDLabel"
+@onready var box_collision = $CollisionShape3D
+@onready var leg_anim_player =  $LegAnimPlayer 
+@onready var leg_anim_tree =  $LegAnimTree 
+@onready var arm_anim_player =  $ArmAnimPlayer 
+@onready var arm_anim_tree =  $ArmAnimTree
 
 func _ready():
 	room_id_label.hide()
