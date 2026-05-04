@@ -29,6 +29,7 @@ func _set_col_layers(setting: bool):
 	interaction_area.set_collision_layer_value(5, not setting)
 
 func _on_register():
+	item_comp.player_ref.anim_manager.set_holding_arm_pose()
 	_set_col_layers(true)
 	interaction_area.set_label_visible(false)
 	_set_freeze(true)

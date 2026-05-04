@@ -25,6 +25,8 @@ var PUSH_FORCE = 2.5
 
 @onready var leg_anim_tree = $Head/Stoneman/LegAnimTree
 @onready var arm_anim_tree = $Head/Stoneman/ArmAnimTree
+@onready var leg_anim_player = $Head/Stoneman/LegAnimPlayer
+@onready var arm_anim_player = $Head/Stoneman/ArmAnimPlayer
 @onready var left_arm = $"Head/Stoneman/Left Arm Target"
 @onready var right_arm = $"Head/Stoneman/Right Arm Target"
 
@@ -56,6 +58,8 @@ func _ready():
 	if not is_multiplayer_authority(): return
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.current = true
+	
+	# arm_anim_player.play("Grab", 1)
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
@@ -66,6 +70,7 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
 	if ui.is_menu_open(): return
+	arm_anim_player.play("Grab", 1)
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)

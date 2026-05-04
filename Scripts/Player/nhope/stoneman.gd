@@ -41,7 +41,6 @@ func _process(delta):
 		lower_leg.transform = lower_leg_a.transform
 		ragdoll.physical_bones_stop_simulation()		
 	elif POLAR == true:
-		
 		ragdoll.influence = 1
 		ragdoll.physical_bones_start_simulation()
 
@@ -50,9 +49,8 @@ func toggleRagdoll():
 	#head.visible = !head.visible
 	#ragdoll.active = !ragdoll.active
 	if Input.is_action_just_pressed("ragdoll"):
-		
 		POLAR = !POLAR
-		
+
 func hookes_law(displacement: Vector3, current_velocity: Vector3, stiffness: float, dampening: float) -> Vector3:
 	return (stiffness * displacement) - (dampening * current_velocity)
 

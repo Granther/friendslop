@@ -108,7 +108,7 @@ filters = ["Left Leg Target:position", "Right Leg Target:position"]
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_e2y4b"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_t3qha"]
-graph_offset = Vector2(-201.62012, -202.06769)
+graph_offset = Vector2(-147.95117, -77.68851)
 nodes/output/position = Vector2(1160, -40)
 nodes/WalkSpeed/node = SubResource("AnimationNodeTimeScale_e2y4b")
 nodes/WalkSpeed/position = Vector2(620, 300)
@@ -124,9 +124,51 @@ nodes/Blend2/position = Vector2(1000, -60)
 "nodes/Animation 4/position" = Vector2(440, -60)
 node_connections = [&"output", 0, &"Blend2", &"WalkSpeed", 0, &"Animation 2", &"JumpBlend", 0, &"Animation 3", &"JumpBlend", 1, &"WalkSpeed", &"Blend2", 0, &"Animation 4", &"Blend2", 1, &"JumpBlend"]
 
+[sub_resource type="Animation" id="Animation_3tbdo"]
+resource_name = "Grab"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Right Arm Target:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 14.401913, 5.646963)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Left Arm Target:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(2.917, 5.917, 0.055), Vector3(2.917, 8.676, 0.055), Vector3(2.917, 5.917, 0.055)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Right Arm Target:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_5lhmr"]
 resource_name = "Idle"
 length = 2.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -152,7 +194,8 @@ tracks/1/keys = {
 "values": [Vector3(2.917, 5.917, 0.055), Vector3(2.917, 8.676, 0.055), Vector3(2.917, 5.917, 0.055)]
 }
 
-[sub_resource type="Animation" id="Animation_3eua4"]
+[sub_resource type="Animation" id="Animation_t3qha"]
+resource_name = "RESET"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -164,7 +207,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(-2.917, 5.917, 0.055)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -176,19 +219,21 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(2.917, 5.917, 0.055)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ryliy"]
 _data = {
+&"Grab": SubResource("Animation_3tbdo"),
 &"Idle": SubResource("Animation_5lhmr"),
-&"RESET": SubResource("Animation_3eua4")
+&"RESET": SubResource("Animation_t3qha")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5lhmr"]
 animation = &"Idle"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_q4fo0"]
+graph_offset = Vector2(101.781494, 114.60846)
 nodes/output/position = Vector2(920, 360)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_5lhmr")
 nodes/Animation/position = Vector2(600, 360)
@@ -222,22 +267,16 @@ transform = Transform3D(0.062123735, -0.03371945, 0.9974986, 0.059946578, -0.997
 transform = Transform3D(0.05800252, -0.35954028, 0.931325, 0.039733134, -0.93132484, -0.3620148, 0.9975253, 0.05800224, -0.03973359, -1.4150515, 4.402683, -1.2052085)
 
 [node name="Foot_l" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="9" unique_id=396274797]
-transform = Transform3D(0.000861885, 0.00302683, -0.99999505, -0.5528426, -0.8332811, -0.0029986333, -0.83330315, 0.55284715, 0.0009555137, 1.5059856, -9.59358, -2.024914)
+transform = Transform3D(0.00044841692, -0.0006740857, -0.99999964, -0.840671, -0.54154617, -1.1930242e-05, -0.5415555, 0.8406859, -0.00080951944, 1.4990752, -10.024387, -0.6970837)
 
 [node name="Lower Leg_l" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="10" unique_id=1360580049]
-transform = Transform3D(-0.0020123199, 0.031991303, -0.9994862, 0.3759144, -0.9261562, -0.030400958, -0.9266664, -0.37579405, -0.010162265, 1.3431165, -4.8784833, -0.111732006)
-
-[node name="Upper Leg_l" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="11" unique_id=1922271189]
-transform = Transform3D(0.01495239, 0.09082697, -0.9957545, -0.1617458, -0.9825306, -0.092049494, -0.9867374, 0.16243257, -4.7683716e-07, 0.93789095, -0.4949112, -0.83642685)
+transform = Transform3D(0.00080959674, 0.029562581, -0.9995627, -0.02735854, -0.9991881, -0.029573672, -0.9996432, 0.027371006, -1.3213392e-07, 1.3485708, -4.937482, -0.83643055)
 
 [node name="Foot_r" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="12" unique_id=279561999]
-transform = Transform3D(-0.0016536824, -0.004243655, -0.9999896, -0.48100442, -0.8767078, 0.004515767, -0.8767355, 0.48100853, -0.00059217215, -1.5435286, -9.381521, -2.2265635)
+transform = Transform3D(-0.00044823624, 0.00067417324, -0.9999997, -0.8406736, -0.54154235, 1.1736527e-05, -0.54155177, 0.8406885, 0.00080946996, -1.5330096, -10.024387, -0.6970416)
 
 [node name="Lower Leg_r" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="13" unique_id=265641217]
-transform = Transform3D(0.002569709, -0.033331133, -0.99944115, 0.45230424, -0.8913297, 0.03088843, -0.8918724, -0.45214462, 0.012785012, -1.3738385, -4.8437266, 0.07532227)
-
-[node name="Upper Leg_r" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="14" unique_id=1692920147]
-transform = Transform3D(-0.018811325, -0.09010686, -0.9957545, -0.2034948, -0.97474027, 0.092049435, -0.97891366, 0.20435877, -2.3841858e-07, -0.9718256, -0.4949112, -0.83642685)
+transform = Transform3D(-0.00080986286, -0.029562589, -0.9995627, -0.027365357, -0.999188, 0.029573686, -0.9996431, 0.027377827, 1.7229473e-07, -1.3825054, -4.937482, -0.83642316)
 
 [node name="Left Arm IK" type="CCDIK3D" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="16" unique_id=149266175]
 angular_delta_limit = 3.141592653589793
@@ -331,14 +370,14 @@ settings/0/joints/2/limitation = null
 [node name="Area3D" type="Area3D" parent="." index="5" unique_id=538554726]
 
 [node name="Left Arm Target" type="Node3D" parent="." index="6" unique_id=471309025]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.917, 5.917, 0.055)
 
 [node name="Right Arm Target" type="Node3D" parent="." index="7" unique_id=617302750]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.917, 5.917, 0.055)
 
 [node name="Left Leg Target" type="Node3D" parent="." index="8" unique_id=134990272]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.82080007, 3.6839457, -0.47493076)
 
 [node name="Right Leg Target" type="Node3D" parent="." index="9" unique_id=921146363]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.82080007, 3.7928343, -0.5067574)
 
 [node name="LegAnimPlayer" type="AnimationPlayer" parent="." index="10" unique_id=423592346]
 deterministic = true
@@ -350,8 +389,8 @@ autoplay = &"Idle"
 tree_root = SubResource("AnimationNodeBlendTree_t3qha")
 anim_player = NodePath("../LegAnimPlayer")
 parameters/WalkSpeed/scale = 12.700000000000005
-parameters/JumpBlend/blend_amount = 0.27
-parameters/Blend2/blend_amount = 0.6
+parameters/JumpBlend/blend_amount = 0.34
+parameters/Blend2/blend_amount = 0.66
 
 [node name="ArmAnimPlayer" type="AnimationPlayer" parent="." index="12" unique_id=37053031]
 deterministic = true

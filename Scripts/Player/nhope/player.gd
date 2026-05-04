@@ -10,7 +10,7 @@ var FOV_CHANGE = 1
 var PUSH_FORCE = 4
 
 @onready var head = $Head
-# Yeah... These routes look ridiculous, sorry, but, it works. This is so the camera follows the neck of the ragdoll basically. I will clean this up later(tm)
+# Yeah... These routes look ridiculous, sorry, but, it works. This is so the camera follows the neck of the ragoll basically. I will clean this up later(tm)
 @onready var grabbed_anchor = $"Head/Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Neck/Camera3D/SpringArm3D/GrabbedAnchor"
 @onready var object_grabber_shape_cast = $"Head/Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Neck/Camera3D/ObjectGrabberShapeCast"
 @onready var camera = $"Head/Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Neck/Camera3D"
