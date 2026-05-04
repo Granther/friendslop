@@ -59,7 +59,6 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.current = true
 	
-	# arm_anim_player.play("Grab", 1)
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
@@ -70,7 +69,6 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
 	if ui.is_menu_open(): return
-	arm_anim_player.play("Grab", 1)
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
