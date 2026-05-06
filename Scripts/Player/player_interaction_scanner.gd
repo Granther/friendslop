@@ -1,4 +1,4 @@
-extends Component
+extends PlayerComponent
 
 # This module deals with interacting with things that are "global"
 # Ie. they are not on the player and are to be taken in and processes
@@ -48,6 +48,7 @@ func _input(event):
 			var object_collided = object_shape_cast.get_collision_result()[0]["collider"]
 			if (object_collided is Interactable) and (object_collided in interactables):
 				can_interact = false
+				# Here! We should see if we are interacting with item or vehicle, cause those are separate
 				# This erases the "interact" input, so it doesn't get passed to the item
 				get_viewport().set_input_as_handled()
 				interacted_external_item.emit(object_collided)

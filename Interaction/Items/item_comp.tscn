@@ -2,5 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dnjx5imi7y4m2" path="res://Interaction/Items/item_comp.gd" id="1_g24oi"]
 
-[node name="ItemComp" type="Node3D" unique_id=1873508656]
+[node name="ItemComp" type="Node" unique_id=1570683865]
 script = ExtResource("1_g24oi")
+metadata/_custom_type_script = "uid://ds3cuvyi0mrna"

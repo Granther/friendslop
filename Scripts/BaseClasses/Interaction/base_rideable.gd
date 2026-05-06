@@ -1,20 +1,6 @@
 extends Interactable
 class_name Rideable
 
-# Grabbable
-# Used to be extended by grabbable items
-
-@export var interaction_area: Area3D
-@export var item_comp: Node3D
-
-var in_hand_rot = null
-
-func _runtime_checks():
-	# For picking up
-	Err.push_err_if(not interaction_area.get_collision_layer_value(5), "grabbable object's InteractionArea must be on the Interactables layer")
-	# For colliding with player and world
-	Err.push_err_if(not get_collision_layer_value(5), "grabbable object must be on the Interactables layer")
-
 # disables gravity and forces, when its in hands it accumulates a ton of velocity
 func _set_freeze(setting: bool):
 	if setting:

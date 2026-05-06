@@ -29,6 +29,8 @@ var PUSH_FORCE = 2.5
 @onready var arm_anim_player = $Head/Stoneman/ArmAnimPlayer
 @onready var left_arm = $"Head/Stoneman/Left Arm Target"
 @onready var right_arm = $"Head/Stoneman/Right Arm Target"
+@onready var hip_hold_marker: Marker3D = %HipHoldMarker
+@onready var center_hold_marker: Marker3D = %CenterHoldMarker
 # undef GLOBAL_TO_COMPS
 
 # Components

@@ -1,5 +1,5 @@
 extends Node
-class_name Component
+class_name PlayerComponent
 
 @export var player_ref: CharacterBody3D
 

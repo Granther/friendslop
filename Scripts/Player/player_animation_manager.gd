@@ -1,4 +1,4 @@
-extends Component
+extends PlayerComponent
 
 # Animation Handler component
 # We want to be able to set all animations from methods called on this
