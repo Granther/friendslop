@@ -229,16 +229,6 @@ _data = {
 &"RESET": SubResource("Animation_t3qha")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5lhmr"]
-animation = &"Idle"
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_q4fo0"]
-graph_offset = Vector2(101.781494, 114.60846)
-nodes/output/position = Vector2(920, 360)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_5lhmr")
-nodes/Animation/position = Vector2(600, 360)
-node_connections = [&"output", 0, &"Animation"]
-
 [node name="Stoneman" unique_id=316174631 instance=ExtResource("1_3tbdo")]
 script = ExtResource("2_t3qha")
 
@@ -258,25 +248,31 @@ transform = Transform3D(-0.9973729, 0.037269346, -0.06211549, -0.040989026, -0.9
 transform = Transform3D(-0.9301673, 0.3625368, -0.057929978, -0.3649997, -0.9301672, 0.03954729, -0.03954723, 0.057930026, 0.99753696, 1.3811173, 4.402683, -1.2052085)
 
 [node name="Hand_r" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="5" unique_id=1436059033]
-transform = Transform3D(0.062123735, -0.03371945, 0.9974986, 0.059946578, -0.9974984, -0.037452906, 0.9962664, 0.06212334, -0.059947018, -2.805344, -1.8694708, -0.81458366)
+transform = Transform3D(0.7825522, 0.60680085, 0.13929978, 0.27723825, -0.13930148, -0.95064896, -0.55745006, 0.7825519, -0.27723917, -0.32855594, 3.3763247, 4.5605817)
 
 [node name="Lower Arm_r" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="6" unique_id=649689457]
-transform = Transform3D(0.062123735, -0.03371945, 0.9974986, 0.059946578, -0.9974984, -0.037452906, 0.9962664, 0.06212334, -0.059947018, -2.7063932, 1.0576952, -0.99688506)
+transform = Transform3D(0.7825522, 0.60680085, 0.13929978, 0.27723825, -0.13930148, -0.95064896, -0.55745006, 0.7825519, -0.27723917, -2.1092172, 3.785105, 2.2641776)
 
 [node name="Upper Arm_r" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="7" unique_id=243567570]
-transform = Transform3D(0.05800252, -0.35954028, 0.931325, 0.039733134, -0.93132484, -0.3620148, 0.9975253, 0.05800224, -0.03973359, -1.4150515, 4.402683, -1.2052085)
+transform = Transform3D(0.96596026, -0.19327237, 0.17194821, 0.13919285, -0.1719487, -0.97522223, 0.21804984, 0.9659602, -0.1391935, -1.4150515, 4.402683, -1.2052085)
 
 [node name="Foot_l" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="9" unique_id=396274797]
-transform = Transform3D(0.00044841692, -0.0006740857, -0.99999964, -0.840671, -0.54154617, -1.1930242e-05, -0.5415555, 0.8406859, -0.00080951944, 1.4990752, -10.024387, -0.6970837)
+transform = Transform3D(-7.624924e-05, 0.0013653021, -0.9999989, -0.68307465, -0.7303482, -0.0009450428, -0.7303636, 0.68308383, 0.0009886734, 1.5011706, -9.8875475, -1.5550318)
 
 [node name="Lower Leg_l" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="10" unique_id=1360580049]
-transform = Transform3D(0.00080959674, 0.029562581, -0.9995627, -0.02735854, -0.9991881, -0.029573672, -0.9996432, 0.027371006, -1.3213392e-07, 1.3485708, -4.937482, -0.83643055)
+transform = Transform3D(-0.0011700913, 0.030280028, -0.99954075, 0.21744359, -0.9756177, -0.029809833, -0.9760888, -0.21738544, -0.0054424554, 1.3470137, -4.92064, -0.44831413)
+
+[node name="Upper Leg_l" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="11" unique_id=1922271189]
+transform = Transform3D(0.008008087, 0.0917005, -0.99575436, -0.08662348, -0.9919796, -0.092049494, -0.99622685, 0.086991295, -3.5762787e-07, 0.93789095, -0.4949112, -0.83642685)
 
 [node name="Foot_r" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="12" unique_id=279561999]
-transform = Transform3D(-0.00044823624, 0.00067417324, -0.9999997, -0.8406736, -0.54154235, 1.1736527e-05, -0.54155177, 0.8406885, 0.00080946996, -1.5330096, -10.024387, -0.6970416)
+transform = Transform3D(-0.012654178, -0.01986211, -0.9997227, -0.083300024, -0.9963119, 0.02084772, -0.99645823, 0.08352513, 0.01095181, -1.5777866, -7.4376764, -2.3648758)
 
 [node name="Lower Leg_r" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="13" unique_id=265641217]
-transform = Transform3D(-0.00080986286, -0.029562589, -0.9995627, -0.027365357, -0.999188, 0.029573686, -0.9996431, 0.027377827, 1.7229473e-07, -1.3825054, -4.937482, -0.83642316)
+transform = Transform3D(0.009255283, -0.051210947, -0.9986451, 0.77548444, -0.6301382, 0.039499816, -0.6312992, -0.7748153, 0.033880476, -1.3170696, -4.2296185, 1.5797392)
+
+[node name="Upper Leg_r" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="14" unique_id=1692920147]
+transform = Transform3D(-0.049850877, -0.07738271, -0.9957545, -0.53926814, -0.83709455, 0.092049435, -0.8406787, 0.54155767, -2.3841858e-07, -0.9718256, -0.4949112, -0.83642685)
 
 [node name="Left Arm IK" type="CCDIK3D" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(715983050) index="16" unique_id=149266175]
 angular_delta_limit = 3.141592653589793
@@ -373,11 +369,13 @@ settings/0/joints/2/limitation = null
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.917, 5.917, 0.055)
 
 [node name="Right Arm Target" type="Node3D" parent="." index="7" unique_id=617302750]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.917, 5.917, 0.055)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.401913, 5.646963)
 
 [node name="Left Leg Target" type="Node3D" parent="." index="8" unique_id=134990272]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90288013, 3.4149258, -0.39959782)
 
 [node name="Right Leg Target" type="Node3D" parent="." index="9" unique_id=921146363]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.90288013, 4.463899, -0.70619774)
 
 [node name="LegAnimPlayer" type="AnimationPlayer" parent="." index="10" unique_id=423592346]
 deterministic = true
@@ -393,9 +391,6 @@ parameters/JumpBlend/blend_amount = 0.34
 parameters/Blend2/blend_amount = 0.66
 
 [node name="ArmAnimPlayer" type="AnimationPlayer" parent="." index="12" unique_id=37053031]
-deterministic = true
+active = false
+reset_on_save = false
 libraries/ = SubResource("AnimationLibrary_ryliy")
-
-[node name="ArmAnimTree" type="AnimationTree" parent="." index="13" unique_id=661062360]
-tree_root = SubResource("AnimationNodeBlendTree_q4fo0")
-anim_player = NodePath("../ArmAnimPlayer")

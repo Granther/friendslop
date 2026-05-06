@@ -51,14 +51,11 @@ func _enter_tree() -> void:
 func _ready():
 	# Setting nametag of player, be sure to enable billboarding in the flags so it follows the camera
 	nametag.text = "Player: " + str(name)
-	# ItemManager.register_player(self)
 	# Ensures that the spawned characters have default animation blends when spawned in
 	anim_manager.set_default_anims()
-	# print(" in ",  str(name).to_int(), " mul: ", get_multiplayer_authority())
 	if not is_multiplayer_authority(): return
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.current = true
-	
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return

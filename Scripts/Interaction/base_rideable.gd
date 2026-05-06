@@ -1,5 +1,5 @@
-extends RigidBody3D
-class_name Grabbable
+extends Interactable
+class_name Rideable
 
 # Grabbable
 # Used to be extended by grabbable items
@@ -47,7 +47,7 @@ func _on_register():
 		# Does the player have a front?
 		# Using camera, that makes sense
 		global_rotation = item_comp.player_ref.camera.global_rotation
-		global_position = item_comp.player_ref.body_manager.holding_marker.global_position
+		global_position = item_comp.player_ref.body_manager.item_anchor.global_position
 
 func _on_deregister():
 	_set_freeze(false)

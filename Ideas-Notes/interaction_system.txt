@@ -55,3 +55,16 @@
 # It then calls the method 
 
 # So, we have a marker 3d, and we set the hand to that position. 
+
+# Could have Marker3D which sits in space in front of player, globally accessible in the scene and the hand is changed to this target once the item is reparented to some marker3d on the hand. So we keep the dependence in space, but don't have to deal with making a unique animation per holding mode
+
+# Could we attach metadata to each unique item in order to remove the need for the item to manage its own holding-type/state?
+
+# 3 systems
+# Item interaction and scanning
+# Body position handling/animation
+# Health and state 
+
+# Base interactable type
+# Grabbable and Ridable extends
+# 

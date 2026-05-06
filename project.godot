@@ -36,6 +36,7 @@ enabled=PackedStringArray("res://addons/nodetunnel/plugin.cfg")
 [global_group]
 
 interactable=""
+vehicles=""
 
 [gui]
 

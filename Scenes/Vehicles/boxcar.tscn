@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://diogj440g0jbo"]
+
+[ext_resource type="Script" uid="uid://c18epip58wyus" path="res://Scripts/Vehicles/boxcar.gd" id="1_pasxl"]
+
+[node name="Boxcar" type="Node3D" unique_id=656002090]
+script = ExtResource("1_pasxl")

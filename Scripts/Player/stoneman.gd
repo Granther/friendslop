@@ -78,7 +78,8 @@ func set_anim(path, arg):
 @rpc("any_peer", "call_local")
 func set_anim_players(setting: bool):
 	#animation_player.active = setting
-	arm_animations.active = setting
+	# arm_animations.active = setting
+	pass
 
 # Ok, I see, this is ... not exactly cohesive
 func _on_character_body_3d_grabbed(object: Variant) -> void:

@@ -25,8 +25,9 @@ func _on_inter():
 		armed = true
 
 func _on_fuse_timer_timeout() -> void:
-	if item_comp.player_ref != null and item_comp.player_ref.item_manager.has_item():
-		item_comp.player_ref.item_manager.remove_item()
+	#if item_comp.player_ref != null and item_comp.player_ref.item_manager.has_item():
+		#item_comp.player_ref.item_manager.remove_item()
+	item_comp.done.emit()
 	var aoe_effect = aoe_effect_scene.instantiate()
 	aoe_effect.effect_area = kill_area
 	aoe_effect.global_position = global_position
@@ -36,4 +37,5 @@ func _on_fuse_timer_timeout() -> void:
 
 func _on_drop():
 	interaction_area.set_label_visible(true)
-	item_comp.player_ref.item_manager.drop_item()
+	# item_comp.player_ref.item_manager.drop_item()
+	item_comp.done.emit()

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bqg3la1etwp7o" path="res://Scenes/Items/grenade.tscn" id="4_xs3tu"]
 [ext_resource type="PackedScene" uid="uid://dgmk2ha5tbjx3" path="res://Scenes/Items/pistol.tscn" id="5_xs3tu"]
 [ext_resource type="PackedScene" uid="uid://c5iputjg23fqk" path="res://Scenes/Items/dice.tscn" id="6_2qjrm"]
+[ext_resource type="PackedScene" uid="uid://dkg3sibbxhtvv" path="res://Scenes/Vehicles/wheel_chair.tscn" id="7_nfdff"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_go701"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)
@@ -100,10 +101,6 @@ collision_layer = 52
 mass = 1.0
 physics_material_override = SubResource("PhysicsMaterial_nfdff")
 
-[node name="Grenade" parent="." unique_id=186504985 instance=ExtResource("4_xs3tu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.051452637, 0.6027832, -1.2580566)
-collision_layer = 52
-
 [node name="Pistol" parent="." unique_id=238356818 instance=ExtResource("5_xs3tu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.222229, 0.11463298, -4.4526367)
 collision_layer = 52
@@ -124,3 +121,9 @@ lock_time = 0.1
 launch_time = 0.0
 motor_time = 5.0
 motor_gs = 4.0
+
+[node name="Grenade" parent="." unique_id=186504985 instance=ExtResource("4_xs3tu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4133904, 0)
+
+[node name="WheelChair" parent="." unique_id=1224734437 instance=ExtResource("7_nfdff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 2)
