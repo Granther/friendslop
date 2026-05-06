@@ -16,7 +16,8 @@ script = ExtResource("2_b8rfh")
 
 [node name="ItemComp" parent="." index="0" unique_id=1873508656 instance=ExtResource("3_46ck8")]
 
-[node name="InteractionArea" parent="." index="1" unique_id=151811882 node_paths=PackedStringArray("root_object") instance=ExtResource("4_17udj")]
+[node name="InteractionArea" parent="." index="1" unique_id=151811882 node_paths=PackedStringArray("label", "root_object") instance=ExtResource("4_17udj")]
+label = NodePath("../Label3D")
 root_object = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" index="0" unique_id=2093743101]
@@ -25,3 +26,5 @@ shape = SubResource("SphereShape3D_kte45")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3" unique_id=1793712517]
 transform = Transform3D(0.32951498, 0, 0, 0, 0.32951498, 0, 0, 0, 0.32951498, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_b8rfh")
+
+[node name="Label3D" type="Label3D" parent="." index="6" unique_id=917277611]

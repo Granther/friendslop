@@ -67,4 +67,10 @@
 
 # Base interactable type
 # Grabbable and Ridable extends
+
+# Say we are in a vehicle and also holding an item, how do we want to handle picking up and dropping items while also leaving/getting in the vehicle?
+# So, leaving the vehicle would be different than dropping an item
+# Maybe a state machine to interpret inputs all in one place
 # 
+
+# Every item should be throwable, but not all throwable items are shootable

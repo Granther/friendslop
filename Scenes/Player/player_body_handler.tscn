@@ -2,5 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cjf6fuashs13c" path="res://Scripts/Player/player_body_handler.gd" id="1_27ksx"]
 
-[node name="PlayerBodyHandler" type="Node3D" unique_id=1888441975]
+[node name="PlayerBodyHandler" type="Node" unique_id=270478860]
 script = ExtResource("1_27ksx")
+metadata/_custom_type_script = "uid://butpi0dfvlyt4"

@@ -38,4 +38,4 @@ func _on_fuse_timer_timeout() -> void:
 func _on_drop():
 	interaction_area.set_label_visible(true)
 	# item_comp.player_ref.item_manager.drop_item()
-	item_comp.done.emit()
+	item_comp.done_inter.emit()

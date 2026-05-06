@@ -2,5 +2,6 @@
 
 [ext_resource type="Script" uid="uid://brvt1shk0fcyi" path="res://Scripts/Player/player_animation_manager.gd" id="1_nk748"]
 
-[node name="PlayerAnimationManager" type="Node3D" unique_id=2014501900]
+[node name="PlayerAnimationManager" type="Node" unique_id=231627570]
 script = ExtResource("1_nk748")
+metadata/_custom_type_script = "uid://butpi0dfvlyt4"

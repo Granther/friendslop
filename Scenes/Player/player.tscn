@@ -44,17 +44,17 @@ script = ExtResource("1_xpcdj")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=91604768]
 replication_config = SubResource("SceneReplicationConfig_6t5aa")
 
-[node name="PlayerInteractionScanner" parent="." unique_id=519672205 node_paths=PackedStringArray("player_ref", "object_shape_cast") instance=ExtResource("4_mtuoh")]
-player_ref = NodePath("..")
+[node name="PlayerInteractionScanner" parent="." unique_id=957716532 node_paths=PackedStringArray("object_shape_cast", "player_ref") instance=ExtResource("4_mtuoh")]
 object_shape_cast = NodePath("../Head/Camera3D/ObjectGrabberShapeCast")
-
-[node name="PlayerItemManager" parent="." unique_id=1707946641 node_paths=PackedStringArray("player_ref") instance=ExtResource("5_htcer")]
 player_ref = NodePath("..")
 
-[node name="PlayerAnimationHandler" parent="." unique_id=2014501900 node_paths=PackedStringArray("player_ref") instance=ExtResource("6_dd0ac")]
+[node name="PlayerItemManager" parent="." unique_id=506252639 node_paths=PackedStringArray("player_ref") instance=ExtResource("5_htcer")]
 player_ref = NodePath("..")
 
-[node name="PlayerBodyHandler" parent="." unique_id=1888441975 node_paths=PackedStringArray("player_ref") instance=ExtResource("7_0u5uq")]
+[node name="PlayerAnimationManager" parent="." unique_id=231627570 node_paths=PackedStringArray("player_ref") instance=ExtResource("6_dd0ac")]
+player_ref = NodePath("..")
+
+[node name="PlayerBodyHandler" parent="." unique_id=270478860 node_paths=PackedStringArray("player_ref") instance=ExtResource("7_0u5uq")]
 player_ref = NodePath("..")
 
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="." unique_id=2126744791]
@@ -118,31 +118,31 @@ transform = Transform3D(0.062123735, -0.03371945, 0.9974986, 0.05994659, -0.9974
 transform = Transform3D(0.05800252, -0.35954028, 0.931325, 0.039733134, -0.93132484, -0.3620148, 0.9975253, 0.05800224, -0.03973359, -1.4150515, 4.402683, -1.2052085)
 
 [node name="Foot_l" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 715983050) index="9" unique_id=396274797]
-transform = Transform3D(0.0013664775, 0.0038365386, -0.9999917, -0.50379825, -0.86381304, -0.0040023904, -0.86383855, 0.50380224, 0.0007529445, 1.50835, -9.452573, -2.1680367)
+transform = Transform3D(0.0045898426, 0.00847844, -0.9999536, -0.30544066, -0.95216614, -0.009474935, -0.9522188, 0.30546415, -0.0017799176, 1.5213585, -8.722272, -2.5380554)
 
 [node name="Lower Leg_l" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 715983050) index="10" unique_id=1360580049]
-transform = Transform3D(-0.0023960061, 0.032864336, -0.999457, 0.42879754, -0.90287906, -0.030716479, -0.90341026, -0.4286513, -0.011928744, 1.3410363, -4.8559804, 0.014243603)
+transform = Transform3D(-0.0044090003, 0.038141545, -0.9992628, 0.61367834, -0.7888763, -0.032818552, -0.7895509, -0.61338764, -0.019928273, 1.3271782, -4.7060723, 0.584725)
 
 [node name="Upper Leg_l" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 715983050) index="11" unique_id=1922271189]
-transform = Transform3D(0.017551616, 0.090360716, -0.9957544, -0.1898625, -0.97748685, -0.09204949, -0.981672, 0.19066864, -4.7683716e-07, 0.93789095, -0.4949112, -0.83642685)
+transform = Transform3D(0.029321896, 0.08725459, -0.99575454, -0.3171892, -0.9438865, -0.09204951, -0.9479278, 0.31853592, -4.7683716e-07, 0.93789095, -0.4949112, -0.83642685)
 
 [node name="Foot_r" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 715983050) index="12" unique_id=279561999]
-transform = Transform3D(-0.006061053, -0.010501523, -0.9999265, -0.24682555, -0.96899223, 0.011672324, -0.9690591, 0.24686964, 0.0032800268, -1.5603852, -8.449429, -2.570811)
+transform = Transform3D(-0.0021379627, -0.0049859043, -0.9999852, -0.44334882, -0.8963338, 0.005416842, -0.89636546, 0.4433541, -0.0002947636, -1.5456579, -9.257526, -2.3169293)
 
 [node name="Lower Leg_r" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 715983050) index="13" unique_id=265641217]
-transform = Transform3D(0.0052485466, -0.040496185, -0.999166, 0.66064626, -0.7499363, 0.03386479, -0.75068396, -0.6602908, 0.02281706, -1.3542176, -4.6314735, 0.7907548)
+transform = Transform3D(0.0029091612, -0.034149323, -0.99941254, 0.48975706, -0.87130153, 0.031197336, -0.8718653, -0.48957485, 0.014189952, -1.3718023, -4.821697, 0.17551506)
 
 [node name="Upper Leg_r" parent="Head/Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 715983050) index="14" unique_id=1692920147]
-transform = Transform3D(-0.03357232, -0.08570905, -0.9957545, -0.36317337, -0.927166, 0.092049435, -0.9311357, 0.36471528, -2.3841858e-07, -0.9718256, -0.4949112, -0.83642685)
+transform = Transform3D(-0.02087833, -0.08965045, -0.9957544, -0.225857, -0.9698026, 0.09204943, -0.9739551, 0.22681591, -2.3841858e-07, -0.9718256, -0.4949112, -0.83642685)
 
 [node name="Right Arm Target" parent="Head/Stoneman" index="7" unique_id=617302750]
 transform = Transform3D(0.9999999, 0, -4.973799e-14, 0, 0.9999999, 0, 4.973799e-14, 0, 0.9999999, -2.917, 5.917, 0.055)
 
 [node name="Left Leg Target" parent="Head/Stoneman" index="8" unique_id=134990272]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90288013, 3.7576113, -0.4997599)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90288013, 4.034916, -0.580812)
 
 [node name="Right Leg Target" parent="Head/Stoneman" index="9" unique_id=921146363]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.90288013, 4.1212134, -0.60603565)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.90288013, 3.8439093, -0.5249835)
 
 [node name="Nametag" type="Label3D" parent="." unique_id=1452559245]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1281512, 0)
@@ -151,11 +151,9 @@ shaded = true
 text = "
 "
 
-[connection signal="grabbed" from="." to="Head/Stoneman" method="_on_character_body_3d_grabbed"]
-[connection signal="drop_item" from="PlayerInteractionScanner" to="PlayerItemManager" method="_on_int_scan_drop_item"]
 [connection signal="interacted_external_item" from="PlayerInteractionScanner" to="PlayerItemManager" method="_on_int_scan_interacted_external_item"]
-[connection signal="done_interacting" from="PlayerItemManager" to="PlayerInteractionScanner" method="_allow_interaction"]
-[connection signal="dropped_item" from="PlayerItemManager" to="PlayerAnimationHandler" method="set_idle_anims"]
-[connection signal="grabbed_item" from="PlayerItemManager" to="PlayerAnimationHandler" method="set_grabbed_item_anims"]
+[connection signal="allow_interaction" from="PlayerItemManager" to="PlayerInteractionScanner" method="_allow_interaction"]
+[connection signal="dropped_item" from="PlayerItemManager" to="PlayerBodyHandler" method="right_hand_idle"]
+[connection signal="grabbed_item" from="PlayerItemManager" to="PlayerBodyHandler" method="right_hand_holding"]
 
 [editable path="Head/Stoneman"]

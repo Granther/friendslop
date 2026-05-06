@@ -2,5 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cijb2jn406is5" path="res://Scripts/Player/player_item_manager.gd" id="1_xq2xi"]
 
-[node name="PlayerItemManager" type="Node3D" unique_id=1707946641]
+[node name="PlayerItemManager" type="Node" unique_id=506252639]
 script = ExtResource("1_xq2xi")
+metadata/_custom_type_script = "uid://butpi0dfvlyt4"

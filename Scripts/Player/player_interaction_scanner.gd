@@ -1,4 +1,4 @@
-extends Node3D
+extends Component
 
 # This module deals with interacting with things that are "global"
 # Ie. they are not on the player and are to be taken in and processes
@@ -8,13 +8,15 @@ extends Node3D
 # Takes items/interactions given to it be the scanner and manages them
 # outside -> player -> holds -> 
 
-signal interacted_external_item(item: Node3D)
-signal drop_item
+# Outputs
+signal interacted_external_item(item: Interactable) # -> ItemManager
+
+# Listens
+# ItemManager:signal -> _allow_interaction
 
 var can_interact: bool = true
 var interactables: Array[Node3D]
 
-@export var player_ref: CharacterBody3D
 @export var object_shape_cast: ShapeCast3D
 
 # Could we always be sorting the list to be the closest object at the front?
@@ -32,8 +34,8 @@ func _on_area_3d_area_exited(area: Area3D) -> void:
 
 # interactables.sort_custom(_sort_by_distance_to_player)
 func _sort_by_distance_to_player(area1, area2):
-	var area1_to_player = global_position.distance_to(area1.global_position)
-	var area2_to_player = global_position.distance_to(area2.global_position)
+	var area1_to_player = player_ref.global_position.distance_to(area1.global_position)
+	var area2_to_player = player_ref.global_position.distance_to(area2.global_position)
 	return area1_to_player < area2_to_player
 
 func _allow_interaction():
@@ -48,7 +50,7 @@ func _input(event):
 				can_interact = false
 				# This erases the "interact" input, so it doesn't get passed to the item
 				get_viewport().set_input_as_handled()
-				emit_signal("interacted_external_item", object_collided)
+				interacted_external_item.emit(object_collided)
 
 func _process(delta: float) -> void:
 	if object_shape_cast.is_colliding():

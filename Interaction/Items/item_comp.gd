@@ -1,6 +1,6 @@
 extends Node
 
-signal done
+signal done_inter
 
 var player_ref
 

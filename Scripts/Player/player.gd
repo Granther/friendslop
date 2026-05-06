@@ -1,6 +1,6 @@
 extends CharacterBody3D
-signal grabbed(object)
 
+# Movement
 var SPEED = 0
 const SPRINT = false
 const JUMP_VELOCITY = 4.5
@@ -8,34 +8,36 @@ const SENSITIVITY = 0.003
 var BASE_FOV = 90
 var FOV_CHANGE = 1
 var PUSH_FORCE = 2.5
-
-
 @export var DEFAULT_SPEED: float = 3
 
+@onready var ui = get_tree().get_first_node_in_group("game_ui")
+@onready var sync = $MultiplayerSynchronizer
+
+# def GLOBAL_TO_COMPS
 @onready var head = $Head
 @onready var grabbed_anchor = $Head/Camera3D/SpringArm3D/GrabbedAnchor
 @onready var object_grabber_shape_cast = $Head/Camera3D/ObjectGrabberShapeCast
 @onready var camera = $Head/Camera3D
 @onready var nametag = $Nametag
-@export var grabbed_object:RigidBody3D = null
 @onready var stoneman = $Head/Stoneman
 @onready var springarm = $Head/Camera3D/SpringArm3D
-@onready var ui = get_tree().get_first_node_in_group("game_ui")
-@onready var sync = $MultiplayerSynchronizer
 
+# Arms and Legs
 @onready var leg_anim_tree = $Head/Stoneman/LegAnimTree
 @onready var arm_anim_tree = $Head/Stoneman/ArmAnimTree
 @onready var leg_anim_player = $Head/Stoneman/LegAnimPlayer
 @onready var arm_anim_player = $Head/Stoneman/ArmAnimPlayer
 @onready var left_arm = $"Head/Stoneman/Left Arm Target"
 @onready var right_arm = $"Head/Stoneman/Right Arm Target"
+# undef GLOBAL_TO_COMPS
 
+# Components
 @onready var inter_manager = $PlayerInteractionScanner
 @onready var item_manager = $PlayerItemManager
-@onready var anim_manager = $PlayerAnimationHandler
+@onready var anim_manager = $PlayerAnimationManager
 @onready var body_manager = $PlayerBodyHandler
 
-@export var interact_dist: float
+@export var grabbed_object: RigidBody3D = null
 
 # Player state machine
 var MOVE_STATE: MOVE_STATE_MODE
@@ -75,8 +77,31 @@ func _unhandled_input(event):
 # ... when we are at the max speed
 
 func _physics_process(delta: float) -> void:
-	if not is_multiplayer_authority(): return
+	# Process for all our components
+	inter_manager.phys_func.call()
+	item_manager.phys_func.call()
+	anim_manager.phys_func.call()
+	body_manager.phys_func.call()
 
+	if not is_multiplayer_authority(): return
+	_movement_phys(delta)
+
+func _process(delta: float) -> void:
+	inter_manager.proc_func.call()
+	item_manager.proc_func.call()
+	anim_manager.proc_func.call()
+	body_manager.proc_func.call()
+	
+	if not is_multiplayer_authority(): return
+	_movement_proc(delta)
+#
+#func get_blasted(source: Vector3, force_mag: float):
+	## Get difference between player pos and grenade pos (this is our direction relative to grenade)
+	#print("got blasted")
+	#var force = (global_transform.origin - source).normalized()*force_mag
+	#velocity = (velocity + force)
+
+func _movement_phys(delta: float): 
 	springarm.set("spring_length", clamp(-camera.rotation.x,0.6,0.7))
 	
 	var velocity_clamp = clamp(velocity.length(), SPEED/DEFAULT_SPEED, SPEED/DEFAULT_SPEED)
@@ -134,14 +159,7 @@ func _physics_process(delta: float) -> void:
 	elif not is_on_floor():
 		velocity.x = lerp(velocity.x, move_direction.x * SPEED, delta * 0.5) 
 		velocity.z = lerp(velocity.z, move_direction.z * SPEED, delta * 0.5) 
-	
-	# Hmmm, so, we essentially have a state machine, but I'm not into that, 
-	# So, 
-	#if grenade_expl:
-		#grenade_expl = false
-		#print("Player val: ", velocity, " Val: ", val, " Total: ", (velocity + val))
-		#velocity = (velocity + val*5)
-		#
+
 	move_and_slide()
 	
 	# returns collisions in the last move_and_slide call
@@ -158,13 +176,7 @@ func _physics_process(delta: float) -> void:
 		anim_manager.play_walk_anims(velocity.length())
 	else:
 		anim_manager.play_jump_anims(velocity.length())
-
-func _process(delta: float) -> void:
-	if not is_multiplayer_authority(): return
+		
+func _movement_proc(delta: float):
 	camera.current = true # <- this sucks im ngl, get this figured out grant
-
-func get_blasted(source: Vector3, force_mag: float):
-	# Get difference between player pos and grenade pos (this is our direction relative to grenade)
-	print("got blasted")
-	var force = (global_transform.origin - source).normalized()*force_mag
-	velocity = (velocity + force)
+	
