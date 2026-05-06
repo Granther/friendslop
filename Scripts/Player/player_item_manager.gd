@@ -68,8 +68,6 @@ func grab_item():
 
 func ride(): pass
 
-
-
 func _deregister_item():
 	# cur_item.item_comp.deregister()
 	deregister_key_connects()
