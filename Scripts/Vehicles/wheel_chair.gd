@@ -1,4 +1,4 @@
-extends Rideable
+extends VehicleBody3D
 
 func _ready():
 	_runtime_checks()

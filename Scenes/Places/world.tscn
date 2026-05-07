@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://coar0w52ewb50"]
 
 [ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Textures/tiled-bg.png" id="3_nfdff"]
+[ext_resource type="PackedScene" uid="uid://cc23lnohhladi" path="res://Scenes/Vehicles/wheel_chair2.tscn" id="3_vfn8i"]
 [ext_resource type="PackedScene" uid="uid://bqg3la1etwp7o" path="res://Scenes/Items/grenade.tscn" id="4_xs3tu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_go701"]
@@ -88,3 +89,7 @@ material = SubResource("StandardMaterial3D_8j60k")
 [node name="Grenade" parent="." unique_id=186504985 instance=ExtResource("4_xs3tu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7396584, 2.6027975, 0)
 collision_layer = 17
+
+[node name="WheelChair" parent="." unique_id=425238809 instance=ExtResource("3_vfn8i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, 3)
+collision_mask = 7

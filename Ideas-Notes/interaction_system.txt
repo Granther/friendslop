@@ -74,3 +74,9 @@
 # 
 
 # Every item should be throwable, but not all throwable items are shootable
+
+# I am imagining a central place where input comes in, then signals or some kind of API is used to distribue
+# This makes it so input is very controlled
+# And, then we can use a state machine to process just the API
+# So we can say, move this body (ie, the veh or player) depending on the state
+# We can also modify how the input is recieved

@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/WheelChair.glb-2d7da6809140e33eef74b89f2f017b
 
 [params]
 
-nodes/root_type="RigidBody3D"
+nodes/root_type="VehicleBody3D"
 nodes/root_name="WheelChair"
 nodes/root_script=null
 nodes/apply_root_scale=true
