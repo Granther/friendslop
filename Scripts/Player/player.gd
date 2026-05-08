@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 # Movement
-var SPEED = 0
+var SPEED = 0 
 const SPRINT = false
 const JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.003
@@ -14,13 +14,13 @@ var PUSH_FORCE = 2.5
 @onready var sync = $MultiplayerSynchronizer
 
 # def GLOBAL_TO_COMPS
-@onready var head = %Head
-@onready var grabbed_anchor = %Head/Camera3D/SpringArm3D/GrabbedAnchor
-@onready var object_grabber_shape_cast = %Head/ObjectGrabberShapeCast
-@onready var camera = %Head/Camera3D
+@onready var head = %Stoneman/%Head
+@onready var grabbed_anchor = %Stoneman/%Head/Camera3D/SpringArm3D/GrabbedAnchor
+@onready var object_grabber_shape_cast = %Stoneman/%Head/ObjectGrabberShapeCast
+@onready var camera = %Stoneman/%Head/Camera3D
 @onready var nametag = $Nametag
 @onready var stoneman = %Stoneman
-@onready var springarm = %Head/SpringArm3D
+@onready var springarm = %Stoneman/%Head/SpringArm3D
 
 # Arms and Legs
 @onready var leg_anim_tree = %Stoneman/LegAnimTree
@@ -29,8 +29,9 @@ var PUSH_FORCE = 2.5
 @onready var arm_anim_player = %Stoneman/ArmAnimPlayer
 @onready var left_arm =  $"%Stoneman/Left Arm Target"
 @onready var right_arm = $"%Stoneman/Right Arm Target"
-@onready var hip_hold_marker: Marker3D = %HipHoldMarker
-@onready var center_hold_marker: Marker3D = %CenterHoldMarker
+@onready var hip_hold_marker: Marker3D = %Stoneman/%HipHoldMarker
+@onready var center_hold_marker: Marker3D = %Stoneman/%CenterHoldMarker
+@onready var idle_hand_marker: Marker3D = %Stoneman/%IdleHandMarker
 # undef GLOBAL_TO_COMPS
 
 # Components
@@ -72,9 +73,9 @@ func _unhandled_input(event):
 	if ui.is_menu_open(): return
 	if event is InputEventMouseMotion:
 		stoneman.rotate_y(-event.relative.x * SENSITIVITY)
-		head.rotate_x(-event.relative.y * SENSITIVITY)
-		# print(rad_to_deg(head.rotation.x))
-		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-80), deg_to_rad(80))
+		head.rotate_x(event.relative.y * SENSITIVITY)
+		## print(rad_to_deg(head.rotation.x))
+		head.rotation.x = clamp(head.rotation.x, deg_to_rad(0), deg_to_rad(180))
 
 # We want to set FOV_CHANGE in such a way that it reaches the max fov for the particular state
 # ... when we are at the max speed
@@ -110,7 +111,7 @@ func _movement_phys(delta: float):
 	var velocity_clamp = clamp(velocity.length(), SPEED/DEFAULT_SPEED, SPEED/DEFAULT_SPEED)
 	var target_fov = BASE_FOV * FOV_CHANGE + velocity_clamp
 	camera.fov = lerp(camera.fov, target_fov, delta * 4)
-	var input_dir = Input.get_vector("left", "right", "up", "down")
+	var input_dir = Input.get_vector("right", "left", "down", "up")
 	
 	if Input.is_action_pressed("ToggleMouseFocus"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

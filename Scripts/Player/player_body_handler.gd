@@ -15,5 +15,5 @@ func right_hand_holding():
 		player_ref.right_arm.global_position = player_ref.hip_hold_marker.global_position
 	
 func right_hand_idle():
-	player_ref.right_arm.position = Vector3.ZERO
+	player_ref.right_arm.position = player_ref.idle_hand_marker.global_position
 	proc_func = NULL_FUNC

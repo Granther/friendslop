@@ -17,8 +17,6 @@ signal interacted_external_item(item: Interactable) # -> ItemManager
 var can_interact: bool = true
 var interactables: Array[Node3D]
 
-@export var object_shape_cast: ShapeCast3D
-
 # Could we always be sorting the list to be the closest object at the front?
 # Probably too much compute
 
@@ -44,17 +42,11 @@ func _allow_interaction():
 # Should some signal fire here from the item_manager to scoop up the object and handle it from there?
 func _input(event):
 	if event.is_action_pressed("interact1"):
-		if can_interact and len(interactables) > 0 and object_shape_cast.is_colliding():
-			var object_collided = object_shape_cast.get_collision_result()[0]["collider"]
+		if can_interact and len(interactables) > 0 and player_ref.object_grabber_shape_cast.is_colliding():
+			var object_collided = player_ref.object_grabber_shape_cast.get_collision_result()[0]["collider"]
 			if (object_collided is Interactable) and (object_collided in interactables):
 				can_interact = false
 				# Here! We should see if we are interacting with item or vehicle, cause those are separate
 				# This erases the "interact" input, so it doesn't get passed to the item
 				get_viewport().set_input_as_handled()
 				interacted_external_item.emit(object_collided)
-
-func _process(delta: float) -> void:
-	if object_shape_cast.is_colliding():
-		player_ref.ui.crosshair.recoil = 2
-	else:
-		player_ref.ui.crosshair.recoil = 0
