@@ -1,87 +1,64 @@
 extends Node3D
 
+@export var angular_spring_stiffness: float = 4000.0
+@export var angular_spring_damping: float = 80.0
+@export var max_angular_force: float = 9999.0
+
+@onready var character = get_parent().get_parent()
 @onready var leg_animations = $"LegAnimTree"
 @onready var arm_animations = $"ArmAnimTree"
 @onready var animation_player = $LegAnimPlayer
-@onready var character = get_parent().get_parent()
 @onready var right_arm = $"Right Arm Target"
 @onready var left_arm = $"Left Arm Target"
-var grabbed_object = null
-	
+@onready var ragdoll = $Armature/Skeleton3D/PhysicalBoneSimulator3D
+@onready var box_collision  = $"../../CollisionShape3D"
+@onready var head_cam = $"Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Neck/Camera3D"
+@onready var head = $Armature/Skeleton3D/Head
+@onready var animated_skel = $Armature/Skeleton3D
+
+var physics_bones = []
+
 func _ready():
-	#leg_animations.set("parameters/JumpBlend/blend_amount", 0.2
-	pass
+	ragdoll.physical_bones_start_simulation()
+	ragdoll.influence = 0
+	physics_bones = ragdoll.get_children().filter(func(x): return x is PhysicalBone3D) # get all the physical bones
+
+func _process(delta):
+	if not ragdoll.influence:
+		var upper_leg = $"Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Upper Leg_r"
+		var lower_leg = $"Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Lower Leg_r"
+		var upper_leg_a = $"Armature/Skeleton3D/Upper Leg_r"
+		var lower_leg_a = $"Armature/Skeleton3D/Lower Leg_r"
+		upper_leg.transform = upper_leg_a.transform
+		lower_leg.transform = lower_leg_a.transform
+		ragdoll.physical_bones_stop_simulation()
+	else:
+		ragdoll.physical_bones_start_simulation()
+
+func set_ragdoll(setting: bool):
+	ragdoll.influence = setting
+
+func hookes_law(displacement: Vector3, current_velocity: Vector3, stiffness: float, dampening: float) -> Vector3:
+	return (stiffness * displacement) - (dampening * current_velocity)
 
 func _physics_process(delta: float) -> void:
-	if not is_multiplayer_authority(): return
-	if grabbed_object == null:
-		set_anim_players.rpc(true)
-		#leg_animations.set("parameters/Idle/blend_amount", 0)
-		set_anim.rpc("parameters/Idle/blend_amount", 0)
-	else:
-		left_arm.global_position = grabbed_object.global_position
-		right_arm.global_position = grabbed_object.global_position
-		set_anim_players.rpc(false)
-		#leg_animations.set("parameters/Idle/blend_amount", 1)
-		set_anim.rpc("parameters/Idle/blend_amount", 1)
-		
-	#var input_dir = Input.get_vector("left", "right", "up", "down")
-	#var direction = (Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	#var velocity = character.velocity.length()
-	#var animationScale = clamp(velocity*2, 0, 15)
-	#var animationSpeed = clamp(velocity/2, 0, 1)
-	#play_walk_anims.rpc(animationSpeed, animationScale)
-
-# So, when we walk on the client, these are called locally, but this is also called for 
-
-# Calls locally and remotely, this is required since the server is also a player
-# Some of these flags are experimental
-#@rpc("any_peer", "call_local", "unreliable_ordered")
-#func play_walk_anims(animationSpeed: int, animationScale: int):
-	#if !character.is_on_floor():
-		##if not is_multiplayer_authority(): print("not authority but not on floor")
-		#leg_animations.set("parameters/JumpBlend/blend_amount", 0.7)
-		##print(animationSpeed, animationScale)
-		##animationSpeed = 1
-		#if (animationSpeed == 0 or animationScale == 0):
-			#leg_animations.active = false
-			#animation_player.active = false
-	#else:
-		#leg_animations.set("parameters/JumpBlend/blend_amount", 0.2)
-	#
-	#leg_animations.set("parameters/WalkSpeed/scale", animationScale)
-	#leg_animations.set("parameters/Blend2/blend_amount", animationSpeed)
+	for b:PhysicalBone3D in physics_bones:
+		var target_transform: Transform3D = animated_skel.global_transform * animated_skel.get_bone_global_pose(b.get_bone_id())
+		var current_transform: Transform3D = ragdoll.global_transform * animated_skel.get_bone_global_pose(b.get_bone_id())
+		var rotation_difference: Basis = (target_transform.basis * current_transform.basis.inverse())
 
 # Ok, so when I have the rpc decorator here and not on the individual funcs, it does not work
 # I think this is partially because the the character.is_on_floor() method doesn't work
 # I think this is cause the required data for that is not synced, and cannot be synced (easily)
 # so, having a set_anim method which always considers the player's animation player works well
 #@rpc("any_peer", "call_local")
+#func _input(event: InputEvent) -> void:
+	#if not is_multiplayer_authority(): return
+	#if Input.is_action_just_pressed("ragdoll"):
+		#toggleRagdoll()
 
-func set_default_anim_blends():
-	set_anim.rpc("parameters/WalkSpeed/scale", 0)
-	set_anim.rpc("parameters/Blend2/blend_amount", 0)
-
-func play_walk_anims(animationScale: float, animationSpeed: float):
-	if !character.is_on_floor():
-		set_anim.rpc("parameters/JumpBlend/blend_amount", 0.2)
-		animationSpeed = 1
-	else:
-		set_anim.rpc("parameters/JumpBlend/blend_amount", 0.7)
-	set_anim.rpc("parameters/WalkSpeed/scale", animationScale)
-	set_anim.rpc("parameters/Blend2/blend_amount", animationSpeed)
-	
-@rpc("any_peer", "call_local")
-func set_anim(path, arg):
-	leg_animations.set(path, arg)
-
-@rpc("any_peer", "call_local")
-func set_anim_players(setting: bool):
-	#animation_player.active = setting
-	# arm_animations.active = setting
-	pass
-
-# Ok, I see, this is ... not exactly cohesive
-func _on_character_body_3d_grabbed(object: Variant) -> void:
-	if not is_multiplayer_authority(): return
-	grabbed_object = object
+#func _physics_process(delta):
+	#
+	#for b:PhysicalBone3D in physics_bones:
+		#var target_transform: Transform3D = animated_skel.global_transform * animated_skel.get_bone_global_pose(b.get_bone_id())
+		#var current_transform: Transform3D = physical_skel.global_transform * animated_skel.get_bone_global_pose(b.get_bone_id())

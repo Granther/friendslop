@@ -1,4 +1,9 @@
-extends VehicleBody3D
+extends Rideable
+
+# Rigidbody3D -> Interactable -> Ridable 
+# Rigidbody3D -> VehicleBody3D
+
+# .start_engine()
 
 func _ready():
 	_runtime_checks()

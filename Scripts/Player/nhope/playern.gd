@@ -10,7 +10,7 @@ var FOV_CHANGE = 1
 var PUSH_FORCE = 4
 
 @onready var head = $Head
-# Yeah... These routes look ridiculous, sorry, but, it works. This is so the camera follows the neck of the ragoll basically. I will clean this up later(tm)
+# Yeah... These routes look ridiculous, sorry, but, it works. This is so the camera follows the neck of the ragdoll basically. I will clean this up later(tm)
 @onready var grabbed_anchor = $"Head/Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Neck/Camera3D/SpringArm3D/GrabbedAnchor"
 @onready var object_grabber_shape_cast = $"Head/Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Neck/Camera3D/ObjectGrabberShapeCast"
 @onready var camera = $"Head/Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Neck/Camera3D"
@@ -23,7 +23,7 @@ var PUSH_FORCE = 4
 
 # Is this ok? With godot I feel like I'm a fricken monkey electrician, just wiring up stuff as I go
 # Is there any real best practice here? Is it modular? Does it matter if it isnt?
-# @onready var ui = UIHandler.get_ui()
+@onready var ui = UIHandler.get_ui()
 # get_parent().find_child("MainUI")
 #  # "$World/MainUI"
 @onready var sync = $MultiplayerSynchronizer
@@ -45,7 +45,7 @@ func _ready():
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
-	#if ui.is_menu_open(): return
+	if ui.is_menu_open(): return
 	if event is InputEventMouseButton:
 		if Input.is_action_just_pressed("interact"):
 			if grabbed_object:
@@ -79,7 +79,7 @@ func throw_object():
 # Oh! Cause we dont want the whole player to point downward, but we want him to spin
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
-	#if ui.is_menu_open(): return
+	if ui.is_menu_open(): return
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(event.relative.y * SENSITIVITY)
@@ -92,7 +92,7 @@ func _physics_process(delta: float) -> void:
 	
 	if not is_multiplayer_authority(): return
 	# Bug: Opening menu pauses you in game. Turns off physics lol
-	#if ui.is_menu_open(): return
+	if ui.is_menu_open(): return
 	var velocity_clamp = clamp(velocity.length(), SPEED/4.5, SPEED/4.5)
 	var target_fov = BASE_FOV * FOV_CHANGE * velocity_clamp
 	camera.fov = lerp(camera.fov, target_fov, delta * 4)

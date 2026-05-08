@@ -14,21 +14,21 @@ var PUSH_FORCE = 2.5
 @onready var sync = $MultiplayerSynchronizer
 
 # def GLOBAL_TO_COMPS
-@onready var head = $Head
-@onready var grabbed_anchor = $Head/Camera3D/SpringArm3D/GrabbedAnchor
-@onready var object_grabber_shape_cast = $Head/Camera3D/ObjectGrabberShapeCast
-@onready var camera = $Head/Camera3D
+@onready var head = %Head
+@onready var grabbed_anchor = %Head/Camera3D/SpringArm3D/GrabbedAnchor
+@onready var object_grabber_shape_cast = %Head/ObjectGrabberShapeCast
+@onready var camera = %Head/Camera3D
 @onready var nametag = $Nametag
-@onready var stoneman = $Head/Stoneman
-@onready var springarm = $Head/Camera3D/SpringArm3D
+@onready var stoneman = %Stoneman
+@onready var springarm = %Head/SpringArm3D
 
 # Arms and Legs
-@onready var leg_anim_tree = $Head/Stoneman/LegAnimTree
-@onready var arm_anim_tree = $Head/Stoneman/ArmAnimTree
-@onready var leg_anim_player = $Head/Stoneman/LegAnimPlayer
-@onready var arm_anim_player = $Head/Stoneman/ArmAnimPlayer
-@onready var left_arm = $"Head/Stoneman/Left Arm Target"
-@onready var right_arm = $"Head/Stoneman/Right Arm Target"
+@onready var leg_anim_tree = %Stoneman/LegAnimTree
+@onready var arm_anim_tree = %Stoneman/ArmAnimTree
+@onready var leg_anim_player = %Stoneman/LegAnimPlayer
+@onready var arm_anim_player = %Stoneman/ArmAnimPlayer
+@onready var left_arm =  $"%Stoneman/Left Arm Target"
+@onready var right_arm = $"%Stoneman/Right Arm Target"
 @onready var hip_hold_marker: Marker3D = %HipHoldMarker
 @onready var center_hold_marker: Marker3D = %CenterHoldMarker
 # undef GLOBAL_TO_COMPS
@@ -71,9 +71,10 @@ func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
 	if ui.is_menu_open(): return
 	if event is InputEventMouseMotion:
-		head.rotate_y(-event.relative.x * SENSITIVITY)
-		camera.rotate_x(-event.relative.y * SENSITIVITY)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
+		stoneman.rotate_y(-event.relative.x * SENSITIVITY)
+		head.rotate_x(-event.relative.y * SENSITIVITY)
+		# print(rad_to_deg(head.rotation.x))
+		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
 # We want to set FOV_CHANGE in such a way that it reaches the max fov for the particular state
 # ... when we are at the max speed
@@ -125,6 +126,9 @@ func _movement_phys(delta: float):
 	else:
 		STAND_STATE = STAND_STATE_MODE.STANDING
 
+	if Input.is_action_pressed("ragdoll"):
+		stoneman.set_ragdoll(true)
+
 	if Input.is_action_pressed("sprint"):
 		MOVE_STATE = MOVE_STATE_MODE.SPRINTING
 	elif input_dir != Vector2.ZERO: # sees if we are actually giving input from keyboard
@@ -151,7 +155,7 @@ func _movement_phys(delta: float):
 			SPEED = DEFAULT_SPEED
 			FOV_CHANGE = 1
 
-	var move_direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var move_direction = (stoneman.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if move_direction and is_on_floor():
 		velocity.x = lerp(velocity.x, move_direction.x * SPEED, delta * 6) 
 		velocity.z = lerp(velocity.z, move_direction.z * SPEED, delta * 6) 

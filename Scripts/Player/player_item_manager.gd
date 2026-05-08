@@ -35,6 +35,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("right_mouse"):
 		rightm_key_hit.emit()
 
+# Grabbable is an interactable 
 func _on_int_scan_interacted_external_item(inter: Interactable) -> void:
 	if inter is Rideable:
 		if not is_ride():
@@ -50,9 +51,11 @@ func _on_int_scan_interacted_external_item(inter: Interactable) -> void:
 
 func _register_ride(): 
 	if not is_ride(): return
+	cur_ride.register(player_ref.camera, player_ref.hip_hold_marker)
 
 func _deregister_ride():
 	if not is_ride(): return
+	cur_ride.degregister()
 
 func _register_grab():
 	if not is_grab(): return
