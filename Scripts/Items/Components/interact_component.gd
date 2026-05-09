@@ -26,8 +26,7 @@ func _ready():
 	Err.push_err_if(not interaction_area.get_collision_layer_value(5), "grabbable object's InteractionArea must be on the Interactables layer")
 	# For colliding with player and world
 	Err.push_err_if(not root_obj.get_collision_layer_value(5), "grabbable object must be on the Interactables layer")
-	inter_col_shape.shape.radius = 3
-	#(interact_data.interact_distance * 2)
+	inter_col_shape.shape.radius = (interact_data.interact_distance * 2)
 
 func register(camera: Camera3D, anchor: Marker3D):
 	type.register(camera, anchor)

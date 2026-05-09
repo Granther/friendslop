@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_pju3c")
+interact_distance = 1.5
 metadata/_custom_type_script = "uid://bp03l3mar6j1b"

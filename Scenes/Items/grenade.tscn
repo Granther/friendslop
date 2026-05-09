@@ -56,7 +56,7 @@ shape = SubResource("SphereShape3D_dkxgq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=697895492]
 shape = SubResource("SphereShape3D_22lk0")
 
-[node name="gernade" parent="." unique_id=50507065 instance=ExtResource("2_n8nsm")]
+[node name="gernade" parent="." unique_id=629535657 instance=ExtResource("2_n8nsm")]
 
 [node name="InteractLabel" type="Label3D" parent="." unique_id=1005970161]
 visible = false
