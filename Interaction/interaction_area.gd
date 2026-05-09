@@ -1,5 +1,5 @@
 extends Area3D
-class_name InteractionArea
+class_name InteractionArea2
 
 # Requires: 
 # - Label 3D. At (0,0,0)

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b364m4o4gkci7"]
+
+[ext_resource type="Script" uid="uid://c4jrh5nfsc37p" path="res://Scripts/Items/Components/interact_component.gd" id="1_lgacl"]
+[ext_resource type="Script" uid="uid://x4vsrxvv4rcl" path="res://Scripts/Items/Components/interaction_area.gd" id="2_of8hc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lgacl"]
+radius = 4.0
+
+[node name="InteractComponent" type="Node" unique_id=2005407017]
+script = ExtResource("1_lgacl")
+
+[node name="InteractionArea" type="Area3D" parent="." unique_id=1739025781]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("2_of8hc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=424467662]
+shape = SubResource("SphereShape3D_lgacl")

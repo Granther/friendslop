@@ -1,0 +1,5 @@
+# Ok, so each item would have an InteractComponent
+and each of those would require some kind of child component to describe the item
+Such as Grab or Ride
+
+And each InteractComponent takes a resource that tells it the interact distance etc
