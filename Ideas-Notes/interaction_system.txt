@@ -80,3 +80,9 @@
 # And, then we can use a state machine to process just the API
 # So we can say, move this body (ie, the veh or player) depending on the state
 # We can also modify how the input is recieved
+
+
+# Ok, lets talk through this. So, the grendade as has an interact coimponent and and a grab component
+The interact is the only interface between the player interaction system and the item. Does that make good sense
+I think so, we are then dealing with only one item, kind of like a class
+Am I not completely exploring composition by doing this? I dont think there is really a better way in this scenario

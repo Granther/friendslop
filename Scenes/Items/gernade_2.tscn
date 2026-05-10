@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://mgvlu6khb3g3"]
+[gd_scene format=3 uid="uid://dihy654wrlfg4"]
 
 [ext_resource type="PackedScene" uid="uid://bbns3sc7l3glg" path="res://Blender/Items/Grenade/gernade.glb" id="1_plwjn"]
-[ext_resource type="Script" uid="uid://cilpst8kdbw26" path="res://Scripts/Items/gernade_2.gd" id="2_dp18h"]
+[ext_resource type="Script" path="res://Scripts/Items/gernade_2.gd" id="2_dp18h"]
 [ext_resource type="PackedScene" uid="uid://b364m4o4gkci7" path="res://Scenes/Items/Components/InteractComponent.tscn" id="3_a2vsi"]
 [ext_resource type="Resource" uid="uid://dl0pi56weot2e" path="res://Scenes/Items/InteractResources/grenade.tres" id="4_4ongn"]
 [ext_resource type="PackedScene" uid="uid://b3di5ex5obuya" path="res://Scenes/Items/Components/GrabComponent.tscn" id="5_aym0u"]
@@ -21,8 +21,6 @@ properties/1/replication_mode = 1
 points = PackedVector3Array(0.034586083, -2.982628, 2.7188132, 0.46131718, -3.087003, 2.5972164, 0.784777, 0.8751899, -0.71235204, -2.7190669, -3.0832148, 0.13453634, 2.0795567, -5.245086, 0.039073914, -1.9145032, -5.3700852, 0.043175824, 0.60120827, -0.7494465, -3.764886, -0.7273581, 0.93263924, 0.7011937, 2.688974, -2.978318, 0.13668752, -0.5054244, -0.06760904, -2.984741, 0.9987356, 0.5516641, 1, 0.37589502, -4.020498, -3.8778627, -0.3955256, -5.243313, 1.9755235, -1.8934965, -3.0894327, 2.071456, 2.079534, -3.3071096, 1.9772046, 0.14178026, -5.9882193, -0.17710046, 2.0503857, -3.4030423, -1.9854679, -1.9764556, -3.2944295, -2.0866642, -0.18080619, -4.7146096, -3.414933, 1.6781571, -4.963332, 1.6932454, -0.72735184, 0.9326085, -0.71412724, 1.6730678, -4.956108, -1.6976656, -0.39802587, -1.580248, -3.9631925, -1.6984421, -4.937602, -1.6889076, -1.7025999, -4.9435024, 1.6749666, -2.1980796, -1.5983083, 0.031051904, 2.0337927, -1.2914351, -0.18522935, -1.7743884, -1.9165831, 1.7348204, 0.48855162, -3.0048323, -4.1038165, -0.5264845, -3.1179194, -4.103132, 2.7288425, -3.5232105, 0.039732467, 0.034535374, -1.2689894, 2.0724678)
 
 [node name="gernade2" unique_id=629535657 node_paths=PackedStringArray("icomp") instance=ExtResource("1_plwjn")]
-collision_layer = 16
-collision_mask = 7
 script = ExtResource("2_dp18h")
 icomp = NodePath("InteractComponent")
 

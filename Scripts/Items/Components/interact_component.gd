@@ -21,6 +21,8 @@ var phys_func = func(): pass
 var proc_func = func(): pass
 
 func _ready():
+	# What if we never even needed a method because the interaction area just directly got the Interaction...
+	# ... Component. So, we don't need to even depend on the item having these methods
 	Err.push_err_if(not root_obj.has_method("get_icomp"), "parent of InteractComponent MUST have method get_icomp() -> InteractComponent")
 	# For picking up
 	Err.push_err_if(not interaction_area.get_collision_layer_value(5), "grabbable object's InteractionArea must be on the Interactables layer")
@@ -31,6 +33,8 @@ func _ready():
 func register(camera: Camera3D, anchor: Marker3D):
 	type.register(camera, anchor)
 
+# We are assuming that ALL base grabbables need to run this and don't need it overriden
+# Humans are terrible at predicting the future
 func deregister():
 	type.deregister()
 
