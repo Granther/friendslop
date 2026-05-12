@@ -11,7 +11,7 @@ extends PlayerComponent
 signal allow_interaction # -> InteractionScanner
 signal grabbed_item      # -> BodyHandler
 signal dropped_item      # -> BodyHandler
-signal entered_ride      # -> BodyHandler
+signal entered_ride(phys_func: Callable)      # -> BodyHandler
 signal exited_ride       # -> BodyHandler
 
 # Listens
@@ -29,6 +29,7 @@ var cur_ride: InteractComponent = null
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("drop"):
 		if is_grab(): _deregister_grab()
+		elif is_ride(): _deregister_ride()
 	if event.is_action_pressed("interact1"):
 		interact_key_hit.emit()
 	if event.is_action_pressed("left_mouse"):
@@ -60,11 +61,11 @@ func _on_int_scan_interacted_external_item(inter: InteractComponent) -> void:
 func _register_ride(): 
 	if not is_ride(): return
 	cur_ride.register(player_ref)
-	entered_ride.emit()
+	entered_ride.emit(cur_ride.phys_movement_func)
 
 func _deregister_ride():
 	if not is_ride(): return
-	cur_ride.degregister(player_ref)
+	cur_ride.deregister(player_ref)
 	exited_ride.emit()
 
 func _register_grab():

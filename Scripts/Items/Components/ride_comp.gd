@@ -1,5 +1,7 @@
 class_name RideComponent extends InteractComponent
 
+var phys_movement_func: Callable = func(delta: float): pass
+
 # disables gravity and forces, when its in hands it accumulates a ton of velocity
 func _set_freeze(setting: bool):
 	if setting:
@@ -15,9 +17,11 @@ func _set_col_layers(setting: bool):
 
 func register(player_ref: CharacterBody3D):
 	player_ref.reparent(root_obj)
+	player_ref.global_position = root_obj.global_position
 	_set_col_layers(false)
 
 func deregister(player_ref: CharacterBody3D):
+	player_ref.reparent(WorldAPI.get_world())
 	_set_col_layers(true)
 
 func _on_inter():

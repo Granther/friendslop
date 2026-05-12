@@ -4,11 +4,12 @@ extends PlayerComponent
 # ItemManager:signal -> entered_ride
 # ItemManager:signal -> exited_ride
 
-var INPUT_DST: INPUT_OPT
+var INPUT_DST: INPUT_OPT = INPUT_OPT.PLAYER
 enum INPUT_OPT { PLAYER, NONE, VEHICLE }
 
+# In case we havent assigned yet
 var player_phys_func: Callable = func(delta: float): pass
-var vehicle_phys_func: Callable = func(delta: float): pass # In case we havent assigned yet
+var vehicle_phys_func: Callable = func(delta: float): pass
 
 func _ready():
 	phys_func = __phys
@@ -26,8 +27,10 @@ func __phys(delta: float):
 		INPUT_OPT.NONE:
 			pass
 	
-func _on_player_item_manager_entered_ride() -> void:
+func _on_player_item_manager_entered_ride(phys_func: Callable) -> void:
 	INPUT_DST = INPUT_OPT.VEHICLE
+	set_vehicle_phys(phys_func)
 
 func _on_player_item_manager_exited_ride() -> void:
 	INPUT_DST = INPUT_OPT.PLAYER
+	set_vehicle_phys(func(): pass)
