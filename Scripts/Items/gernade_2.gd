@@ -15,7 +15,7 @@ var aoe_effect_scene = preload("res://Scenes/Gameplay/AOE/AOEEffect.tscn")
 func _ready():
 	fuse_timer.set_wait_time(fuse_time)
 	icomp.on_inter_key_hit = Callable(self, "_on_inter")
-
+	
 func get_icomp() -> InteractComponent:
 	return icomp
 

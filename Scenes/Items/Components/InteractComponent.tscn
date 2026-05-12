@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://b364m4o4gkci7"]
 
-[ext_resource type="Script" uid="uid://c4jrh5nfsc37p" path="res://Scripts/Items/Components/interact_component.gd" id="1_lgacl"]
+[ext_resource type="Script" uid="uid://b13awvalng3nc" path="res://Scripts/Items/Components/interact_comp.gd" id="1_qjx70"]
 [ext_resource type="Script" uid="uid://x4vsrxvv4rcl" path="res://Scripts/Items/Components/interaction_area.gd" id="2_of8hc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lgacl"]
 radius = 4.0
 
 [node name="InteractComponent" type="Node" unique_id=2005407017]
-script = ExtResource("1_lgacl")
+script = ExtResource("1_qjx70")
 
 [node name="InteractionArea" type="Area3D" parent="." unique_id=1739025781]
 collision_layer = 16

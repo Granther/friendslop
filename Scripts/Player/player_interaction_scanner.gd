@@ -24,11 +24,13 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 	if area is InteractionArea:
 		# area.set_label_visible(true)
 		interactables.append(area.get_root_obj())
+		print("Added: ", area.get_root_obj().name)
 
 func _on_area_3d_area_exited(area: Area3D) -> void:
 	if area is InteractionArea:
 		# area.set_label_visible(false)
 		interactables.erase(area.get_root_obj())
+		print("Removed: ", area.get_root_obj().name)
 
 # interactables.sort_custom(_sort_by_distance_to_player)
 func _sort_by_distance_to_player(area1, area2):
@@ -42,14 +44,12 @@ func _allow_interaction():
 # Should some signal fire here from the item_manager to scoop up the object and handle it from there?
 func _input(event):
 	if event.is_action_pressed("interact1"):
-		print(interactables)
 		if can_interact and len(interactables) > 0 and player_ref.object_grabber_shape_cast.is_colliding():
 			var object_collided = player_ref.object_grabber_shape_cast.get_collision_result()[0]["collider"]
-			#if (object_collided is Interactable) and (object_collided in interactables):
 			print(object_collided in interactables)
-			if (object_collided.has_node("InteractComponent")) and (object_collided in interactables):
+			if (object_collided.has_node("GrabComponent")) and (object_collided in interactables):
 				can_interact = false
-				var object_interact_comp = object_collided.get_node("InteractComponent")
+				var object_interact_comp = object_collided.get_node("GrabComponent")
 				# Here! We should see if we are interacting with item or vehicle, cause those are separate
 				# This erases the "interact" input, so it doesn't get passed to the item
 				get_viewport().set_input_as_handled()

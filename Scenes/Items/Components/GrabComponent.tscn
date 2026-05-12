@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b3di5ex5obuya"]
 
-[ext_resource type="Script" uid="uid://2i23bf3vlp5r" path="res://Scripts/Items/Components/grab_component.gd" id="1_t0lc1"]
+[ext_resource type="PackedScene" uid="uid://b364m4o4gkci7" path="res://Scenes/Items/Components/InteractComponent.tscn" id="1_2muim"]
+[ext_resource type="Script" uid="uid://b2vwem747xkg8" path="res://Scripts/Items/Components/grab_comp.gd" id="1_t0lc1"]
 
-[node name="GrabComponent" type="Node" unique_id=1412665626]
+[node name="GrabComponent" unique_id=2005407017 instance=ExtResource("1_2muim")]
 script = ExtResource("1_t0lc1")

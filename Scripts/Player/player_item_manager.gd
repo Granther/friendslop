@@ -42,7 +42,7 @@ func _on_int_scan_interacted_external_item(inter: InteractComponent) -> void:
 		#if not is_ride():
 			#cur_ride = inter
 			#_register_ride()
-	if inter.type is GrabComponent:
+	if inter is GrabComponent:
 		cur_grab = inter
 		_register_grab()
 

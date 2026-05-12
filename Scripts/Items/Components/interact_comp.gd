@@ -1,9 +1,7 @@
-# class_name InteractComponent
-extends Node
+class_name InteractComponent extends Node
 
-@export var type: Node
 @export var interact_data: InteractResource
-@export var root_obj: Node
+@export var root_obj: RigidBody3D
 
 @onready var interaction_area: Area3D = $InteractionArea
 @onready var inter_col_shape: CollisionShape3D = $InteractionArea/CollisionShape3D
@@ -29,20 +27,6 @@ func _ready():
 	# For colliding with player and world
 	Err.push_err_if(not root_obj.get_collision_layer_value(5), "grabbable object must be on the Interactables layer")
 	inter_col_shape.shape.radius = (interact_data.interact_distance * 2)
-
-func register(camera: Camera3D, anchor: Marker3D):
-	if root_obj.has_method("register"):
-		root_obj.register()
-	else:
-		type.register(camera, anchor)
-
-# We are assuming that ALL base grabbables need to run this and don't need it overriden
-# Humans are terrible at predicting the future
-func deregister():
-	if root_obj.has_method("deregister"):
-		root_obj.deregister()
-	else:
-		type.deregister()
 
 func _process(delta: float) -> void:
 	proc_func.call()
