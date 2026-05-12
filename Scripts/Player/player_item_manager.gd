@@ -71,7 +71,6 @@ func _register_grab():
 	cur_grab.register(player_ref.camera, player_ref.hip_hold_marker)
 	_register_key_connects(cur_grab)
 	_register_force_connects(cur_grab)
-	cur_grab.reparent(player_ref.camera)
 	grabbed_item.emit()
 
 func _deregister_grab():
@@ -79,7 +78,6 @@ func _deregister_grab():
 	_deregister_key_connects(cur_grab)
 	_deregister_force_connects(cur_grab)
 	cur_grab.deregister()
-	cur_grab.reparent(WorldAPI.get_world())
 	cur_grab = null
 	allow_interaction.emit()
 	dropped_item.emit()

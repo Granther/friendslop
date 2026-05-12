@@ -20,6 +20,7 @@ func register(camera: Camera3D, anchor: Marker3D):
 	_set_col_layers(true)
 # 	icomp.interaction_area.set_label_visible(false)
 	_set_freeze(true)
+	root_obj.reparent(camera)
 	root_obj.global_rotation = Vector3.ZERO
 	icomp.proc_func = func():
 		root_obj.global_rotation = camera.global_rotation
@@ -28,6 +29,7 @@ func register(camera: Camera3D, anchor: Marker3D):
 func deregister():
 	_set_freeze(false)
 	_set_col_layers(false)
+	root_obj.reparent(WorldAPI.get_world())
 	icomp.proc_func = icomp.NULL_FUNC
 
 func _on_inter():

@@ -1,25 +1,12 @@
-extends Rideable
+extends VehicleBody3D
 
-# Rigidbody3D -> Interactable -> Ridable 
-# Rigidbody3D -> VehicleBody3D
-
-# .start_engine()
+@export var icomp: InteractComponent
 
 func _ready():
-	_runtime_checks()
-	item_comp.on_drop_key_hit = Callable(self, "_on_drop")
-	item_comp.on_inter_key_hit = Callable(self, "_on_inter")
-	item_comp.on_register = Callable(self, "_on_register")
-	item_comp.on_deregister = Callable(self, "_on_deregister")
-
-func _on_register():
-	pass # get in
+	icomp.on_inter_key_hit = Callable(self, "_on_inter")
 	
-func _on_deregister():
-	pass # get out
+func get_icomp() -> InteractComponent:
+	return icomp
 
 func _on_inter():
-	pass # speed up
-
-func _on_drop():
 	pass

@@ -2,29 +2,20 @@
 
 [ext_resource type="PackedScene" uid="uid://bdejeamns5gfk" path="res://Blender/Vehicles/WheelChair.glb" id="1_giug2"]
 [ext_resource type="Script" uid="uid://bns6l30vwpd0y" path="res://Scripts/Vehicles/wheel_chair.gd" id="2_b8rfh"]
-[ext_resource type="PackedScene" uid="uid://dd6wj0xef6dol" path="res://Interaction/Items/item_comp.tscn" id="3_46ck8"]
-[ext_resource type="PackedScene" uid="uid://b3hcbfg4kp5bq" path="res://Interaction/InteractionArea.tscn" id="4_17udj"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_kte45"]
-radius = 2.0
+[ext_resource type="PackedScene" uid="uid://d0f8sunmydhg6" path="res://Scenes/Items/Components/RideComponent.tscn" id="3_dlbmh"]
+[ext_resource type="Resource" uid="uid://d2ux7jiihj1fh" path="res://Scenes/Items/InteractResources/wheel_chair.tres" id="4_46ck8"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_b8rfh"]
 points = PackedVector3Array(-0.07886231, 2.0183284, 0.88373935, -0.07886231, 2.0183284, -0.8987012, -0.55741197, -0.45322517, -0.8689444, 2.4746904, -0.583207, 0.93188727, -0.60889053, -0.34197217, 0.93188727, 2.4746904, -0.583207, -0.9468491, 1.3663399, 1.0542662, 0.88373935, -0.44884115, 1.9527416, -0.90559995, 1.537445, -0.91767013, 0.8996735, 1.3663399, 1.0542662, -0.8987012, -0.4689968, 1.9735724, 0.9037391, -0.60889053, -0.34197217, -0.9468491, 0.017725945, 0.091373414, -0.9951904, -0.07886231, 0.043126434, 0.98022854, 1.5353091, -0.9125741, -0.9114304, -0.12685466, 2.0183284, -0.9468491, -0.53934526, -0.4413698, 0.88951534, -0.12685466, 2.0183284, 0.93188727, 2.4746904, -0.53496003, 0.88373935, 2.3286362, -0.6847895, -0.86819667, 1.3663399, 1.0060191, 0.93188727, 1.3452084, -0.8960725, -0.9010521, 2.4746904, -0.53496003, -0.8987012, 2.4291418, -0.64411914, 0.90413576, 1.2937667, -0.87473553, 0.87267095, 1.4864004, -0.6754353, -0.95378494, 1.4834479, -0.7147329, 0.9337755, 0.017725945, 0.091373414, 0.98022854, -0.07886231, 0.043126434, -0.9951904)
 
 [node name="WheelChair" unique_id=1224734437 instance=ExtResource("1_giug2")]
+collision_layer = 129
 script = ExtResource("2_b8rfh")
 
-[node name="ItemComp" parent="." index="0" unique_id=1873508656 instance=ExtResource("3_46ck8")]
+[node name="RideComponent" parent="." index="0" unique_id=2005407017 node_paths=PackedStringArray("root_obj") instance=ExtResource("3_dlbmh")]
+interact_data = ExtResource("4_46ck8")
+root_obj = NodePath("..")
 
-[node name="InteractionArea" parent="." index="1" unique_id=151811882 node_paths=PackedStringArray("label", "root_object") instance=ExtResource("4_17udj")]
-label = NodePath("../Label3D")
-root_object = NodePath("..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" index="0" unique_id=2093743101]
-shape = SubResource("SphereShape3D_kte45")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3" unique_id=1793712517]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2" unique_id=1793712517]
 transform = Transform3D(0.32951498, 0, 0, 0, 0.32951498, 0, 0, 0, 0.32951498, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_b8rfh")
-
-[node name="Label3D" type="Label3D" parent="." index="6" unique_id=917277611]

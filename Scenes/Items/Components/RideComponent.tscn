@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://d0f8sunmydhg6"]
+
+[ext_resource type="PackedScene" uid="uid://b364m4o4gkci7" path="res://Scenes/Items/Components/InteractComponent.tscn" id="1_tudxi"]
+[ext_resource type="Script" uid="uid://ct8t8yi8gls5k" path="res://Scripts/Items/Components/ride_comp.gd" id="2_pejq1"]
+
+[node name="RideComponent" unique_id=2005407017 instance=ExtResource("1_tudxi")]
+script = ExtResource("2_pejq1")

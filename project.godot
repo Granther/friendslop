@@ -129,6 +129,7 @@ ragdoll={
 3d_physics/layer_5="Interactables"
 3d_physics/layer_6="AOE"
 3d_physics/layer_7="Ragdolls"
+3d_physics/layer_8="Vehicles"
 
 [physics]
 
