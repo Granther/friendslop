@@ -15,11 +15,15 @@ var aoe_effect_scene = preload("res://Scenes/Gameplay/AOE/AOEEffect.tscn")
 func _ready():
 	fuse_timer.set_wait_time(fuse_time)
 	icomp.on_inter_key_hit = Callable(self, "_on_inter")
+	icomp.on_leftm_key_hit = Callable(self, "_on_leftm_key_hit")
 	
 func get_icomp() -> InteractComponent:
 	return icomp
 
 func _on_inter():
+	pass
+	
+func _on_leftm_key_hit():
 	if armed:
 		icomp.on_drop_key_hit.call()
 	else: # We are not armed, but its in our hand

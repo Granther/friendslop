@@ -17,11 +17,13 @@ func register(camera: Camera3D, anchor: Marker3D):
 	_set_col_layers(true)
 # 	icomp.interaction_area.set_label_visible(false)
 	_set_freeze(true)
+	# Sets the rotation
 	root_obj.reparent(camera)
 	root_obj.global_rotation = Vector3.ZERO
 	proc_func = func():
 		root_obj.global_rotation = camera.global_rotation
 		root_obj.global_position = anchor.global_position
+		# DebugDraw3D.draw_arrow(root_obj.position, Vector3(root_obj.position.x + 1, root_obj.position.y, root_obj.position.z), Color.RED, 0.05)
 
 func deregister():
 	_set_freeze(false)

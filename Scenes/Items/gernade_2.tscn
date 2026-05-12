@@ -43,5 +43,7 @@ transform = Transform3D(0.020542726, 0, 0, 0, 0.020542726, 0, 0, 0, 0.020542726,
 shape = SubResource("ConvexPolygonShape3D_dp18h")
 
 [node name="FuseTimer" type="Timer" parent="." index="5" unique_id=517354281]
-wait_time = 10.0
+wait_time = 3.0
 one_shot = true
+
+[connection signal="timeout" from="FuseTimer" to="." method="_on_fuse_timer_timeout"]

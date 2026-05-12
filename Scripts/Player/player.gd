@@ -74,7 +74,7 @@ func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
 	if ui.is_menu_open(): return
 	if event is InputEventMouseMotion:
-		stoneman.rotate_y(-event.relative.x * SENSITIVITY)
+		rotate_y(-event.relative.x * SENSITIVITY)
 		head.rotate_x(event.relative.y * SENSITIVITY)
 		## print(rad_to_deg(head.rotation.x))
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(0), deg_to_rad(180))
@@ -160,7 +160,7 @@ func _movement_phys(delta: float):
 			SPEED = DEFAULT_SPEED
 			FOV_CHANGE = 1
 
-	var move_direction = (stoneman.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var move_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if move_direction and is_on_floor():
 		velocity.x = lerp(velocity.x, move_direction.x * SPEED, delta * 6) 
 		velocity.z = lerp(velocity.z, move_direction.z * SPEED, delta * 6) 
@@ -190,3 +190,4 @@ func _movement_phys(delta: float):
 		
 func _movement_proc(delta: float):
 	camera.current = true # <- this sucks im ngl, get this figured out grant
+	# DebugDraw3D.draw_arrow(Vector3.ZERO, Vector3(velocity.x, 0, 0), Color.RED)
