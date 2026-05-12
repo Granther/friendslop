@@ -39,6 +39,7 @@ var PUSH_FORCE = 2.5
 @onready var item_manager = $PlayerItemManager
 @onready var anim_manager = $PlayerAnimationManager
 @onready var body_manager = $PlayerBodyHandler
+@onready var movement_manager = $PlayerMovementHandler
 
 @export var grabbed_object: RigidBody3D = null
 
@@ -59,6 +60,7 @@ func _ready():
 	# Ensures that the spawned characters have default animation blends when spawned in
 	anim_manager.set_default_anims()
 	if not is_multiplayer_authority(): return
+	movement_manager.set_player_phys(_movement_phys)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.current = true
 
@@ -82,13 +84,15 @@ func _unhandled_input(event):
 
 func _physics_process(delta: float) -> void:
 	# Process for all our components
+	# hollup, dont these all need delta?
 	inter_manager.phys_func.call()
 	item_manager.phys_func.call()
 	anim_manager.phys_func.call()
 	body_manager.phys_func.call()
 
 	if not is_multiplayer_authority(): return
-	_movement_phys(delta)
+	# _movement_phys(delta)
+	movement_manager.phys_func.call(delta)
 
 func _process(delta: float) -> void:
 	inter_manager.proc_func.call()
@@ -186,4 +190,3 @@ func _movement_phys(delta: float):
 		
 func _movement_proc(delta: float):
 	camera.current = true # <- this sucks im ngl, get this figured out grant
-	

@@ -38,7 +38,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 # Grabbable is an interactable 
 func _on_int_scan_interacted_external_item(inter: InteractComponent) -> void:
-	if inter.type is RideComponent:
+	if inter is RideComponent:
 		cur_ride = inter
 		_register_ride()
 	elif inter is GrabComponent:
@@ -59,11 +59,13 @@ func _on_int_scan_interacted_external_item(inter: InteractComponent) -> void:
 
 func _register_ride(): 
 	if not is_ride(): return
-	cur_ride.register()
+	cur_ride.register(player_ref)
+	entered_ride.emit()
 
 func _deregister_ride():
 	if not is_ride(): return
-	cur_ride.degregister()
+	cur_ride.degregister(player_ref)
+	exited_ride.emit()
 
 func _register_grab():
 	if not is_grab(): return

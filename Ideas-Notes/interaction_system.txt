@@ -86,3 +86,8 @@
 The interact is the only interface between the player interaction system and the item. Does that make good sense
 I think so, we are then dealing with only one item, kind of like a class
 Am I not completely exploring composition by doing this? I dont think there is really a better way in this scenario
+
+# Humans are terrible at predicting the future... so, if you fuck it up just be ready to fix it later lol
+
+# We want to pass intput from the player to other things
+But do we actually want to pass it so much as just change the function that checks for it

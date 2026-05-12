@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cmig72j5xmifs" path="res://Scenes/Player/stoneman.tscn" id="3_htcer"]
 [ext_resource type="PackedScene" uid="uid://cjhdkv3pjpfvs" path="res://Scenes/Player/player_interaction_scanner.tscn" id="4_mtuoh"]
 [ext_resource type="PackedScene" uid="uid://cyqno8xk8nd5s" path="res://Scenes/Player/player_item_manager.tscn" id="5_htcer"]
+[ext_resource type="PackedScene" uid="uid://cqimj1cfrloj4" path="res://Scenes/Player/player_movement_handler.tscn" id="6_0u5uq"]
 [ext_resource type="PackedScene" uid="uid://n4qtw8ywlvml" path="res://Scenes/Player/player_animation_handler.tscn" id="6_dd0ac"]
 [ext_resource type="PackedScene" uid="uid://dgda32g23vbly" path="res://Scenes/Player/player_body_handler.tscn" id="7_0u5uq"]
 
@@ -47,6 +48,9 @@ player_ref = NodePath("..")
 [node name="PlayerBodyHandler" parent="." unique_id=270478860 node_paths=PackedStringArray("player_ref") instance=ExtResource("7_0u5uq")]
 player_ref = NodePath("..")
 
+[node name="PlayerMovementHandler" parent="." unique_id=6041701 node_paths=PackedStringArray("player_ref") instance=ExtResource("6_0u5uq")]
+player_ref = NodePath("..")
+
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="." unique_id=2126744791]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 size = Vector3(0.3, 1.8, 0.3)
@@ -66,29 +70,29 @@ text = "
 unique_name_in_owner = true
 transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, 0, 0, 0)
 
-[node name="Hand_r" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 715983050) index="5" unique_id=1436059033]
+[node name="Hand_r" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 1584209903) index="5" unique_id=1516953787]
 transform = Transform3D(0.056323428, -0.032165527, 0.99789417, 0.054452952, -0.997894, -0.03523901, 0.99692625, 0.056323044, -0.05445328, -2.793171, -1.8747058, -0.85090035)
 
-[node name="Lower Arm_r" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 715983050) index="6" unique_id=649689457]
+[node name="Lower Arm_r" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 1584209903) index="6" unique_id=1262304219]
 transform = Transform3D(0.056323428, -0.032165527, 0.99789417, 0.054452952, -0.997894, -0.03523901, 0.99692625, 0.056323044, -0.05445328, -2.69878, 1.053621, -1.0161808)
 
-[node name="Foot_l" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 715983050) index="9" unique_id=396274797]
-transform = Transform3D(6.47679e-05, 0.0016647838, -0.99999857, -0.6555316, -0.75516725, -0.0012996122, -0.75518364, 0.65553945, 0.0010427018, 1.5019889, -9.836201, -1.6662682)
+[node name="Foot_l" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 1584209903) index="9" unique_id=220451107]
+transform = Transform3D(-0.00026110746, 0.0007560961, -0.9999997, -0.748016, -0.6636807, -0.0003065057, -0.66369367, 0.7480281, 0.0007390266, 1.4997354, -9.9808035, -1.2639781)
 
-[node name="Lower Leg_l" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 715983050) index="10" unique_id=1360580049]
-transform = Transform3D(-0.0013377443, 0.030565318, -0.9995319, 0.2534764, -0.9668795, -0.029906027, -0.9673568, -0.2534057, -0.006454089, 1.3463795, -4.9137793, -0.37617)
+[node name="Lower Leg_l" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 1584209903) index="10" unique_id=1881252062]
+transform = Transform3D(-0.00077149086, 0.02978386, -0.9995562, 0.12575765, -0.991618, -0.0296444, -0.99207824, -0.12572859, -0.0029804753, 1.3481045, -4.932438, -0.62388897)
 
-[node name="Upper Leg_l" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 715983050) index="11" unique_id=1922271189]
-transform = Transform3D(0.009496441, 0.09155834, -0.9957544, -0.10272545, -0.9904418, -0.09204949, -0.9946824, 0.103161626, -3.5762787e-07, 0.93789095, -0.4949112, -0.83642685)
+[node name="Upper Leg_l" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 1584209903) index="11" unique_id=943715444]
+transform = Transform3D(0.00438549, 0.09194496, -0.9957545, -0.04743664, -0.9946239, -0.09204949, -0.99888253, 0.04763808, -3.5762787e-07, 0.93789095, -0.4949112, -0.83642685)
 
-[node name="Foot_r" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 715983050) index="12" unique_id=279561999]
-transform = Transform3D(-0.011364954, -0.017934803, -0.9997746, -0.107239164, -0.9940556, 0.019050397, -0.99418324, 0.107416905, 0.009373013, -1.5750818, -7.6211576, -2.4318814)
+[node name="Foot_r" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 1584209903) index="12" unique_id=1738094402]
+transform = Transform3D(-0.016091974, -0.025661638, -0.9995412, -0.027074963, -0.99930024, 0.026090028, -0.99951524, 0.027465109, 0.015384724, -1.5830333, -6.9299183, -2.1500077)
 
-[node name="Lower Leg_r" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 715983050) index="13" unique_id=265641217]
-transform = Transform3D(0.008391783, -0.04906145, -0.9987606, 0.7601119, -0.64867264, 0.03825007, -0.64973897, -0.7595075, 0.0318481, -1.3253081, -4.3187404, 1.4348005)
+[node name="Lower Leg_r" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 1584209903) index="13" unique_id=280433568]
+transform = Transform3D(0.012102917, -0.057313878, -0.99828297, 0.8096818, -0.5852732, 0.043417033, -0.58674467, -0.80883014, 0.039321676, -1.2912462, -3.9502695, 1.9677778)
 
-[node name="Upper Leg_r" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 715983050) index="14" unique_id=1692920147]
-transform = Transform3D(-0.04686034, -0.07922928, -0.9957544, -0.506919, -0.8570702, 0.092049405, -0.86073977, 0.50907123, -2.3841858e-07, -0.9718256, -0.4949112, -0.83642685)
+[node name="Upper Leg_r" parent="Stoneman/Armature/Skeleton3D" parent_id_path=PackedInt32Array(316174631, 1584209903) index="14" unique_id=2004784748]
+transform = Transform3D(-0.057857, -0.071594656, -0.9957545, -0.6258751, -0.7744814, 0.09204948, -0.7777974, 0.62853235, -2.3841858e-07, -0.9718256, -0.4949112, -0.83642685)
 
 [node name="Physical Bone Lower Chest" parent="Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(316174631, 1072758212) index="0" unique_id=541152247]
 transform = Transform3D(11.111111, -6.953875e-06, 0, 0, 0, -11.111111, 6.953875e-06, 11.111111, 0, 3.2336102e-06, 0.6890793, -1.0260487)
@@ -101,9 +105,9 @@ joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5249598e-06, 4.2311267e
 body_offset = Transform3D(11.111111, -1.7713674e-05, -3.9451725e-06, -3.945121e-06, 3.2246113e-05, -11.111112, 1.7713686e-05, 11.111111, 3.2305717e-05, 1.7717539e-05, 2.178379, -5.3346157e-05)
 
 [node name="Physical Bone Neck" parent="Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(316174631, 1072758212) index="2" unique_id=1561817379]
-transform = Transform3D(11.111111, 5.2981904e-06, 8.1986423e-10, 8.198241e-10, 8.402169e-08, -11.111111, -5.2981904e-06, 11.111111, 8.402169e-08, -3.2776734e-07, 5.965536, -1.2295766)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9496833e-08, 2.810718e-06, 0.021092204)
-body_offset = Transform3D(11.111111, 2.6490952e-06, 8.198541e-10, 8.1988016e-10, 1.2374883e-09, -11.111112, -2.6490945e-06, 11.111108, 1.2541376e-07, -3.2776734e-07, 0.23435783, -3.1232834e-05)
+transform = Transform3D(11.111111, 5.2981904e-06, 8.1986506e-10, 8.198241e-10, 8.5851106e-08, -11.111111, -5.2981904e-06, 11.111111, 8.5851106e-08, -3.2776734e-07, 5.965536, -1.2295766)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9496833e-08, 2.8107145e-06, 0.021092204)
+body_offset = Transform3D(11.111111, 2.6490952e-06, 8.1985446e-10, 8.1988016e-10, 3.0669014e-09, -11.111112, -2.6490945e-06, 11.111108, 1.2724317e-07, -3.2776734e-07, 0.23435783, -3.1232834e-05)
 
 [node name="Head" parent="Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Neck" index="1" unique_id=1574753834]
 transform = Transform3D(-0.09, -1.3589623e-08, 0, 0, -3.934012e-09, -0.09, 1.3589623e-08, -0.09, 3.9340122e-09, 2.3028406e-08, 0.012766179, -0.075972795)
@@ -129,34 +133,36 @@ joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0003417591, -0.00070090
 body_offset = Transform3D(11.1111145, -0.0028146505, -0.0002002716, -0.00020003319, -0.00021605566, -11.111117, 0.002814114, 11.111114, -0.00021573156, 0.0038217902, 1.4668121, 0.007817268)
 
 [node name="Physical Bone Upper Leg_l" parent="Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(316174631, 1072758212) index="7" unique_id=1983502860]
-transform = Transform3D(0.10427674, -11.063976, -1.0170308, -1.1282964, -1.0223626, 11.006294, -11.053183, -1.6945462e-05, -1.1331048, 1.1432056, -2.6226768, -0.59581083)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0019230371, 0.0007796401, 0.19359224)
-body_offset = Transform3D(11.110904, -2.950548e-05, -0.013204694, -0.013205171, -0.00041039728, -11.111101, 2.8389808e-05, 11.111111, -0.0004102158, -0.018810332, 2.1510487, -0.008583307)
+transform = Transform3D(0.046822485, -11.063976, -1.0212898, -0.5067752, -1.0223626, 11.052363, -11.099449, 5.8683218e-06, -0.5089336, 1.1435021, -2.6002607, -0.7113653)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002523542, 0.0009918043, 0.19069609)
+body_offset = Transform3D(11.110894, -2.942207e-05, -0.020400286, -0.020400643, -0.000410277, -11.111092, 2.8616918e-05, 11.111111, -0.00041037714, -0.024148524, 2.1188936, -0.010941863)
 
 [node name="Physical Bone Lower Leg_l" parent="Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(316174631, 1072758212) index="8" unique_id=1423719608]
-transform = Transform3D(-0.014862296, -11.10591, -0.3396116, 2.8152094, -0.33229414, 10.743414, -10.748542, -0.07167653, 2.8143358, 1.4082494, -7.3063536, -1.0320591)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002538023, -0.0012549284, 0.22332768)
-body_offset = Transform3D(11.110936, -3.568828e-05, 0.0013194084, 0.0011897087, -4.224479e-06, -11.111086, 3.5084784e-05, 11.111111, -3.9804727e-06, 0.027905107, 2.481416, 0.013944626)
+transform = Transform3D(-0.008568698, -11.106178, -0.33092767, 1.3959962, -0.32938156, 11.018144, -11.023062, -0.033080637, 1.3956306, 1.4080986, -7.369795, -0.9699948)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0033379502, -0.0011985146, 0.22160013)
+body_offset = Transform3D(11.110917, -3.5386533e-05, 0.0013643503, 0.0012966394, -5.0915405e-06, -11.111104, 3.5360456e-05, 11.111109, -5.0417148e-06, 0.036785305, 2.4622264, 0.013318062)
 
 [node name="Physical Bone Upper Leg_r" parent="Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(316174631, 1072758212) index="9" unique_id=492667798]
-transform = Transform3D(-0.52176404, -11.063911, 0.88000757, -5.647238, 1.0230596, 9.514139, -9.55475, -0.00049292005, -5.6712904, -1.1673716, -2.3269157, 0.28202182)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0019335164, -0.0023384984, 0.1939551)
-body_offset = Transform3D(11.110899, 0.00027459153, 0.01736927, 0.01736927, -0.0004989208, -11.111095, -0.0002738067, 11.111111, -0.00049951446, -0.024851322, 2.1550188, 0.026080728)
+transform = Transform3D(-0.644273, -11.063918, 0.79460704, -6.972472, 1.0229797, 8.590397, -8.6270685, -0.0005233417, -7.002176, -1.1588068, -2.1163645, 0.5256044)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0026270957, -0.00331548, 0.19127896)
+body_offset = Transform3D(11.110888, 0.00027387985, 0.023785591, 0.023783684, -0.0004896177, -11.111084, -0.00027350892, 11.111109, -0.00049105514, -0.033738136, 2.1252522, 0.036933303)
 
 [node name="Physical Bone Lower Leg_r" parent="Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(316174631, 1072758212) index="10" unique_id=1824740642]
-transform = Transform3D(0.09306052, -11.097318, 0.54559445, 8.443032, 0.4253023, 7.2104864, -7.2224193, 0.3541914, 8.436112, -1.4472436, -5.76565, -0.27969468)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012567128, -0.0010572477, 0.20220129)
-body_offset = Transform3D(11.111103, 1.9013882e-05, 0.004149437, 0.0040841103, -0.00044247508, -11.110917, -1.8954277e-05, 11.111111, -0.00044250488, 0.013124466, 2.2466464, 0.011836648)
+transform = Transform3D(0.13419619, -11.092008, 0.637292, 8.993404, 0.48267275, 6.50711, -6.5236077, 0.43723765, 8.983772, -1.4310416, -5.236896, 0.1523009)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002053689, -0.0010999624, 0.2006463)
+body_offset = Transform3D(11.111108, 1.8268824e-05, 0.005200863, 0.0052223206, -0.00042140484, -11.110911, -1.8715858e-05, 11.111109, -0.00042030215, 0.021775246, 2.2293735, 0.012306094)
 
 [node name="Left Leg Target" parent="Stoneman" index="8" unique_id=134990272]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90288013, 3.4833682, -0.41960254)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90288013, 3.1983893, -0.33630732)
 
 [node name="Right Leg Target" parent="Stoneman" index="9" unique_id=921146363]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.90288013, 4.395457, -0.686193)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.90288013, 4.6804357, -0.7694883)
 
 [connection signal="interacted_external_item" from="PlayerInteractionScanner" to="PlayerItemManager" method="_on_int_scan_interacted_external_item"]
 [connection signal="allow_interaction" from="PlayerItemManager" to="PlayerInteractionScanner" method="_allow_interaction"]
 [connection signal="dropped_item" from="PlayerItemManager" to="PlayerBodyHandler" method="right_hand_idle"]
+[connection signal="entered_ride" from="PlayerItemManager" to="PlayerMovementHandler" method="_on_player_item_manager_entered_ride"]
+[connection signal="exited_ride" from="PlayerItemManager" to="PlayerMovementHandler" method="_on_player_item_manager_exited_ride"]
 [connection signal="grabbed_item" from="PlayerItemManager" to="PlayerBodyHandler" method="right_hand_holding"]
 
 [editable path="Stoneman"]

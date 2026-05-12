@@ -10,13 +10,14 @@ func _set_freeze(setting: bool):
 
 func _set_col_layers(setting: bool):
 	# So the player doesn't collide with the vehicle while in it
-	root_obj.set_collision_layer_value(8, setting)
+	root_obj.set_collision_layer_value(3, setting)
 	interaction_area.set_collision_layer_value(5, setting)
 
-func register():
+func register(player_ref: CharacterBody3D):
+	player_ref.reparent(root_obj)
 	_set_col_layers(false)
 
-func deregister():
+func deregister(player_ref: CharacterBody3D):
 	_set_col_layers(true)
 
 func _on_inter():

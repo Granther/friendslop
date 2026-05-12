@@ -44,10 +44,16 @@ func _input(event):
 	if event.is_action_pressed("interact1"):
 		if can_interact and len(interactables) > 0 and player_ref.object_grabber_shape_cast.is_colliding():
 			var object_collided = player_ref.object_grabber_shape_cast.get_collision_result()[0]["collider"]
-			if (object_collided.has_node("GrabComponent")) and (object_collided in interactables):
+			if object_collided in interactables:
+				var obj_inter_comp: InteractComponent
+				if object_collided.has_node("GrabComponent"):
+					obj_inter_comp = object_collided.get_node("GrabComponent")
+				elif object_collided.has_node("RideComponent"):
+					obj_inter_comp = object_collided.get_node("RideComponent")
+				else:
+					return
 				can_interact = false
-				var object_interact_comp = object_collided.get_node("GrabComponent")
 				# Here! We should see if we are interacting with item or vehicle, cause those are separate
 				# This erases the "interact" input, so it doesn't get passed to the item
 				get_viewport().set_input_as_handled()
-				interacted_external_item.emit(object_interact_comp)
+				interacted_external_item.emit(obj_inter_comp)

@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://coar0w52ewb50"]
 
-[ext_resource type="PackedScene" uid="uid://mgvlu6khb3g3" path="res://Scenes/Items/gernade_2.tscn" id="2_amper"]
+[ext_resource type="PackedScene" uid="uid://dihy654wrlfg4" path="res://Scenes/Items/gernade_2.tscn" id="2_amper"]
 [ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Textures/tiled-bg.png" id="3_nfdff"]
+[ext_resource type="PackedScene" uid="uid://dkg3sibbxhtvv" path="res://Scenes/Vehicles/wheel_chair.tscn" id="3_vfn8i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_go701"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)
@@ -87,3 +88,6 @@ material = SubResource("StandardMaterial3D_8j60k")
 
 [node name="gernade2" parent="." unique_id=629535657 instance=ExtResource("2_amper")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1596227, 1.0447121, 0)
+
+[node name="WheelChair" parent="." unique_id=1224734437 instance=ExtResource("3_vfn8i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5443068, 1.0340856, 6.565555)
