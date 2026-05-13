@@ -5,11 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://d0f8sunmydhg6" path="res://Scenes/Items/Components/RideComponent.tscn" id="3_dlbmh"]
 [ext_resource type="Resource" uid="uid://d2ux7jiihj1fh" path="res://Scenes/Items/InteractResources/wheel_chair.tres" id="4_46ck8"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_b8rfh"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_46ck8"]
 points = PackedVector3Array(-0.07886231, 2.0183284, 0.88373935, -0.07886231, 2.0183284, -0.8987012, -0.55741197, -0.45322517, -0.8689444, 2.4746904, -0.583207, 0.93188727, -0.60889053, -0.34197217, 0.93188727, 2.4746904, -0.583207, -0.9468491, 1.3663399, 1.0542662, 0.88373935, -0.44884115, 1.9527416, -0.90559995, 1.537445, -0.91767013, 0.8996735, 1.3663399, 1.0542662, -0.8987012, -0.4689968, 1.9735724, 0.9037391, -0.60889053, -0.34197217, -0.9468491, 0.017725945, 0.091373414, -0.9951904, -0.07886231, 0.043126434, 0.98022854, 1.5353091, -0.9125741, -0.9114304, -0.12685466, 2.0183284, -0.9468491, -0.53934526, -0.4413698, 0.88951534, -0.12685466, 2.0183284, 0.93188727, 2.4746904, -0.53496003, 0.88373935, 2.3286362, -0.6847895, -0.86819667, 1.3663399, 1.0060191, 0.93188727, 1.3452084, -0.8960725, -0.9010521, 2.4746904, -0.53496003, -0.8987012, 2.4291418, -0.64411914, 0.90413576, 1.2937667, -0.87473553, 0.87267095, 1.4864004, -0.6754353, -0.95378494, 1.4834479, -0.7147329, 0.9337755, 0.017725945, 0.091373414, 0.98022854, -0.07886231, 0.043126434, -0.9951904)
 
 [node name="WheelChair" unique_id=1224734437 node_paths=PackedStringArray("icomp") instance=ExtResource("1_giug2")]
 collision_layer = 17
+mass = 100.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0.2, 0.05, 0)
 script = ExtResource("2_b8rfh")
 icomp = NodePath("RideComponent")
 
@@ -17,6 +20,39 @@ icomp = NodePath("RideComponent")
 interact_data = ExtResource("4_46ck8")
 root_obj = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2" unique_id=1793712517]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2" unique_id=2001920283]
 transform = Transform3D(0.32951498, 0, 0, 0, 0.32951498, 0, 0, 0, 0.32951498, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_b8rfh")
+shape = SubResource("ConvexPolygonShape3D_46ck8")
+
+[node name="right" parent="." index="3" unique_id=648998586]
+transform = Transform3D(-4.3711385e-08, 0, 1.0000001, 0, 1, 0, -0.9999999, 0, -4.3711392e-08, 0.0059582265, -0.0011206983, 0.3241879)
+use_as_traction = true
+wheel_radius = 0.3
+suspension_travel = 0.1
+suspension_stiffness = 35.0
+
+[node name="right" parent="right" index="0" unique_id=811424698]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="left" parent="." index="4" unique_id=165733506]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.0059582265, -0.0011206983, -0.32519105)
+use_as_traction = true
+wheel_radius = 0.3
+suspension_travel = 0.1
+suspension_stiffness = 35.0
+
+[node name="left" parent="left" index="0" unique_id=795210107]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="frontRight" type="VehicleWheel3D" parent="." index="5" unique_id=356967833]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.48084942, -0.24163292, 0.28373072)
+use_as_steering = true
+wheel_radius = 0.06
+
+[node name="frontLeft" type="VehicleWheel3D" parent="." index="6" unique_id=124613157]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.48084942, -0.24163292, -0.28637725)
+use_as_steering = true
+wheel_radius = 0.06
+
+[node name="Marker3D" type="Marker3D" parent="." index="7" unique_id=1017404702]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.05, 0)

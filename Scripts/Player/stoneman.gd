@@ -35,8 +35,9 @@ func _process(delta):
 	else:
 		ragdoll.physical_bones_start_simulation()
 
-func set_ragdoll(setting: bool):
-	ragdoll.influence = setting
+@rpc("any_peer", "call_local")
+func toggle_ragdoll():
+	ragdoll.influence = not ragdoll.influence
 
 func hookes_law(displacement: Vector3, current_velocity: Vector3, stiffness: float, dampening: float) -> Vector3:
 	return (stiffness * displacement) - (dampening * current_velocity)

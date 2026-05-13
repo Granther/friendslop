@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://coar0w52ewb50"]
 
-[ext_resource type="PackedScene" uid="uid://dihy654wrlfg4" path="res://Scenes/Items/gernade_2.tscn" id="2_amper"]
 [ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Textures/tiled-bg.png" id="3_nfdff"]
-[ext_resource type="PackedScene" uid="uid://dkg3sibbxhtvv" path="res://Scenes/Vehicles/wheel_chair.tscn" id="3_vfn8i"]
-[ext_resource type="PackedScene" uid="uid://dhb1ixm3x31y2" path="res://Scenes/Vehicles/cart.tscn" id="4_mynff"]
+[ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Items/ball.tscn" id="3_vfn8i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_go701"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)
@@ -57,18 +55,6 @@ use_collision = true
 collision_layer = 5
 collision_mask = 0
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=927789115]
-transform = Transform3D(-1.24968e-06, 0, -0.99999994, 0, 3.064889, 0, 28.589348, 0, -4.3711385e-08, 15.882261, 4.792781, 0.3416224)
-use_collision = true
-size = Vector3(1, 3.2016602, 3.9370117)
-material = SubResource("StandardMaterial3D_8j60k")
-
-[node name="CSGBox3D7" type="CSGBox3D" parent="." unique_id=1566424442]
-transform = Transform3D(-1.24968e-06, 0, -0.99999994, 0, 3.064889, 0, 28.589348, 0, -4.3711385e-08, 15.882261, 14.394828, 0.3416224)
-use_collision = true
-size = Vector3(1, 3.2016602, 3.9370117)
-material = SubResource("StandardMaterial3D_8j60k")
-
 [node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=598362503]
 transform = Transform3D(28.589348, 0, 3.5527137e-15, 0, 3.064889, 0, -1.1368684e-13, 0, 0.99999994, 15.882261, 4.9307756, -11.321722)
 use_collision = true
@@ -87,17 +73,7 @@ use_collision = true
 size = Vector3(1, 3.2016602, 6.44812)
 material = SubResource("StandardMaterial3D_8j60k")
 
-[node name="gernade2" parent="." unique_id=629535657 instance=ExtResource("2_amper")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1596227, 1.0447121, 0)
+[node name="Ball" parent="." unique_id=1482215681 instance=ExtResource("3_vfn8i")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.3781631, 0.8319628, 3.3416271)
 
-[node name="WheelChair" parent="." unique_id=1224734437 instance=ExtResource("3_vfn8i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5443068, 1.0340856, 6.565555)
-
-[node name="Cart" parent="." unique_id=1683438010 instance=ExtResource("4_mynff")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15397549, 0.8176163, 5.619471)
-
-[node name="gernade4" parent="." unique_id=1247629187 instance=ExtResource("2_amper")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.4788685, 3.1341362, 0)
-
-[node name="gernade3" parent="." unique_id=1841791970 instance=ExtResource("2_amper")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3192453, 2.0894241, 0)
+[editable path="Ball"]

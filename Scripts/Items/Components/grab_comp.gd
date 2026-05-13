@@ -18,7 +18,7 @@ func register(camera: Camera3D, anchor: Marker3D):
 # 	icomp.interaction_area.set_label_visible(false)
 	_set_freeze(true)
 	# Sets the rotation
-	root_obj.reparent(camera)
+	root_obj.reparent(anchor)
 	root_obj.global_rotation = Vector3.ZERO
 	proc_func = func():
 		root_obj.global_rotation = camera.global_rotation

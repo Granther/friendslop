@@ -32,6 +32,7 @@ var PUSH_FORCE = 2.5
 @onready var hip_hold_marker: Marker3D = %Stoneman/%HipHoldMarker
 @onready var center_hold_marker: Marker3D = %Stoneman/%CenterHoldMarker
 @onready var idle_hand_marker: Marker3D = %Stoneman/%IdleHandMarker
+@onready var right_hand_obj_marker: Marker3D = %Stoneman/%RightHandObjectMarker
 # undef GLOBAL_TO_COMPS
 
 # Components
@@ -40,8 +41,6 @@ var PUSH_FORCE = 2.5
 @onready var anim_manager = $PlayerAnimationManager
 @onready var body_manager = $PlayerBodyHandler
 @onready var movement_manager = $PlayerMovementHandler
-
-@export var grabbed_object: RigidBody3D = null
 
 # Player state machine
 var MOVE_STATE: MOVE_STATE_MODE
@@ -132,7 +131,7 @@ func _movement_phys(delta: float):
 		STAND_STATE = STAND_STATE_MODE.STANDING
 
 	if Input.is_action_pressed("ragdoll"):
-		stoneman.set_ragdoll(true)
+		stoneman.toggle_ragdoll.rpc()
 
 	if Input.is_action_pressed("sprint"):
 		MOVE_STATE = MOVE_STATE_MODE.SPRINTING
@@ -178,10 +177,10 @@ func _movement_phys(delta: float):
 		var col = get_slide_collision(i)
 		var body = col.get_collider()
 		# See if the object is synced
-		if body.has_node("PhysItemMultiplayerComp"):
+		if body.has_node("PhysItemMultiComp"):
 			# a normal is a unit vector point perpendicular the surface of the object in the direction of collision
 			var impulse = -col.get_normal() * PUSH_FORCE
-			body.multiplayer_comp.apply_impulse(impulse)
+			body.get_multi_comp().apply_impulse(impulse)
 	
 	if is_on_floor():
 		anim_manager.play_walk_anims(velocity.length())

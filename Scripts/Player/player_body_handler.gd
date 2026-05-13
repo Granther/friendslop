@@ -7,9 +7,6 @@ extends PlayerComponent
 # ItemManager:signal grabbed_item -> right_hand_holding
 # ItemManager:signal dropped_item -> right_hand_idle
 
-@onready var holding_marker = %HoldingMarker
-@onready var item_anchor: Marker3D = %ItemGrabAnchor
-
 func right_hand_holding():
 	proc_func = func():
 		player_ref.right_arm.global_position = player_ref.hip_hold_marker.global_position

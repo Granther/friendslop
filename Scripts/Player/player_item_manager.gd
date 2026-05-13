@@ -70,7 +70,7 @@ func _deregister_ride():
 
 func _register_grab():
 	if not is_grab(): return
-	cur_grab.register(player_ref.camera, player_ref.hip_hold_marker)
+	cur_grab.register(player_ref.camera, player_ref.right_hand_obj_marker)
 	_register_key_connects(cur_grab)
 	_register_force_connects(cur_grab)
 	grabbed_item.emit()

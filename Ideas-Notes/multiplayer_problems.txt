@@ -40,3 +40,16 @@ We launch the missile and apply a constant force to the transform.basis.y, which
 
 I think its cause rotation and direction are inherently different, and I havent understood that. 
 We need to apply a force opposite direction of the vector which represents the difference from some Y vector
+
+# So, all rigidbodies need to have a PhysSyncComp
+
+# 2 different modes
+# Events that cause physics thing, but are never synced
+# 
+
+# How can all items easily become extensibly multiplayer?
+# Component, but how do we tie unique methods to this?
+# We sync every n ticks, but we need immediate "TCP" reliable events one-time
+# 
+
+# 

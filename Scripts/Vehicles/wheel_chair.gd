@@ -2,7 +2,8 @@ extends VehicleBody3D
 
 @export var icomp: InteractComponent
 
-var SPEED: float = 3
+var MAX_STEER: float = 0.9
+var ENGINE_POWER: float = 300
 
 func _ready():
 	icomp.on_inter_key_hit = Callable(self, "_on_inter")
@@ -14,11 +15,6 @@ func get_icomp() -> InteractComponent:
 func _on_inter():
 	pass
 
-func _phys_movement(delta: float):	
-	var input_dir = Input.get_vector("right", "left", "down", "up")
-	var move_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if move_direction:
-		linear_velocity.x = lerp(linear_velocity.x, move_direction.x * SPEED, delta * 6) 
-		linear_velocity.z = lerp(linear_velocity.z, move_direction.z * SPEED, delta * 6) 
-		linear_velocity.x = linear_velocity.x/1.2
-		linear_velocity.z = linear_velocity.z/1.2
+func _phys_movement(delta: float):
+	steering = move_toward(steering, Input.get_axis("right", "left") * MAX_STEER, delta * 10)
+	engine_force = Input.get_axis("down", "up") * ENGINE_POWER

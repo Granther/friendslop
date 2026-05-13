@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://5jm57oq5v6sc" path="res://Multiplayer/phys_item_multiplayer_comp.gd" id="1_sllpf"]
 
-[node name="PhysItemMultiplayerComp" type="Node3D" unique_id=295906544]
+[node name="PhysItemMultiComp" type="Node" unique_id=1202044427]
 script = ExtResource("1_sllpf")
