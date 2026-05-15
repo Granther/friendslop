@@ -54,6 +54,12 @@ func set_holding_arm_pose():
 	#set_anim_players(true)
 	player_ref.arm_anim_player.play("Grab")
 
+func _on_exited_ride() -> void:
+	pass # Replace with function body.
+
+func _on_entered_ride(phys_func: Callable) -> void:
+	pass # Replace with function body.
+
 @rpc("any_peer", "call_local")
 func set_anim(path, arg):
 	player_ref.leg_anim_tree.set(path, arg)

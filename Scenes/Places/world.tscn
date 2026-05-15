@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://coar0w52ewb50"]
 
+[ext_resource type="PackedScene" uid="uid://dhb1ixm3x31y2" path="res://Scenes/Vehicles/cart.tscn" id="3_mynff"]
 [ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Textures/tiled-bg.png" id="3_nfdff"]
 [ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Items/ball.tscn" id="3_vfn8i"]
+[ext_resource type="PackedScene" uid="uid://dihy654wrlfg4" path="res://Scenes/Items/gernade_2.tscn" id="4_2qjrm"]
+[ext_resource type="PackedScene" uid="uid://dkg3sibbxhtvv" path="res://Scenes/Vehicles/wheel_chair.tscn" id="4_xs3tu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_go701"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)
@@ -75,5 +78,20 @@ material = SubResource("StandardMaterial3D_8j60k")
 
 [node name="Ball" parent="." unique_id=1482215681 instance=ExtResource("3_vfn8i")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.3781631, 0.8319628, 3.3416271)
+collision_mask = 23
+
+[node name="Cart" parent="." unique_id=1683438010 instance=ExtResource("3_mynff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.821923, 0.68177754, 4.4254704)
+
+[node name="gernade2" parent="." unique_id=629535657 instance=ExtResource("4_2qjrm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.491081, 0.3931049, 0.03182888)
+
+[node name="WheelChair" parent="." unique_id=1224734437 instance=ExtResource("4_xs3tu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.491081, 0.3931049, 0.03182888)
+
+[node name="Ball2" parent="." unique_id=290589791 instance=ExtResource("3_vfn8i")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.4908226, 0.8319628, 1.3453321)
+collision_mask = 23
 
 [editable path="Ball"]
+[editable path="Ball2"]

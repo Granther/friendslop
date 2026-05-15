@@ -16,5 +16,8 @@ func _on_inter():
 	pass
 
 func _phys_movement(delta: float):
-	steering = move_toward(steering, Input.get_axis("right", "left") * MAX_STEER, delta * 10)
-	engine_force = Input.get_axis("down", "up") * ENGINE_POWER
+	if icomp.player_on_vehicle():
+		steering = move_toward(steering, Input.get_axis("right", "left") * MAX_STEER, delta * 10)
+		engine_force = Input.get_axis("down", "up") * ENGINE_POWER
+	else:
+		engine_force = 0
