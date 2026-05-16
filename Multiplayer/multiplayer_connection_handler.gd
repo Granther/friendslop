@@ -37,7 +37,7 @@ func remove_player(peer_id):
 func peer_connected(peer_id: int):
 	add_player(peer_id)
 	# Try to sync up phys times
-	set_phys_frame.rpc(MultiplayerObjectHandler.get_phys_frame())
+	# set_phys_frame.rpc(MultiplayerObjectHandler.get_phys_frame())
 
 @rpc("call_remote", "authority")
 func set_phys_frame(n: int):

@@ -52,4 +52,18 @@ We need to apply a force opposite direction of the vector which represents the d
 # We sync every n ticks, but we need immediate "TCP" reliable events one-time
 # 
 
-# 
+If we synced at the beginning, we would everntually desync, not to mention that we are always a few frames behind
+
+So, say P2 hits ball, all peers get informed, so their ball starts moving. P1 calls a sync on a sync frame, so, all Players' balls become in the same positon of P1. 
+
+But, on that sync call, we need to ensure that relative to the initial impulse, we are syncing the same
+Cause the phys frames could be different per client
+But all clients hit the ball at the same time on their screen, all the dts are different, but, are identical reltively, with respect to the client's own frame of time. \
+
+So, we need to correct relative to the initial impulse.
+
+So when P2 picks an item up, they are now the new owner, which means all clients get this position dat from that client
+
+Ok, so all items have an owner, which is the sole reporter of the position
+This owner can be changed so that when people pick up items they become the owner]
+So, all items need to be accessible by everyone

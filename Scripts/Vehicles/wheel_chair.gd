@@ -1,6 +1,7 @@
 extends VehicleBody3D
 
 @export var icomp: InteractComponent
+@export var multi_comp: PhysItemMultiComp
 
 var MAX_STEER: float = 0.9
 var ENGINE_POWER: float = 300
@@ -9,6 +10,9 @@ func _ready():
 	icomp.on_inter_key_hit = Callable(self, "_on_inter")
 	icomp.phys_movement_func = _phys_movement
 	
+func get_multi_comp() -> PhysItemMultiComp:
+	return multi_comp
+
 func get_icomp() -> InteractComponent:
 	return icomp
 
