@@ -12,6 +12,9 @@ var _owner_id: int = NO_OWNER
 
 func _ready() -> void:
 	Err.push_err_if(not root_obj.has_method("get_multi_comp"), "parent of PhysItemMultiComp MUST have method get_multi_comp() -> PhysItemMultiComp")
+	register_to_player()
+
+func register_to_player():
 	MultiplayerObjectHandler.register_object(root_obj)
 
 func apply_impulse(impulse: Vector3):
