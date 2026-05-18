@@ -69,3 +69,11 @@ This owner can be changed so that when people pick up items they become the owne
 So, all items need to be accessible by everyone
 
 It kind of doesnt matter so long as its in the player's hand in the scene tree for the peer on the main [current] player's system. So, then we just have to multiplayer sync the arm pos
+
+So, is it worth writing an entire network processing system from scratch?
+I would need custom messages etc
+Or is Godot's built in good enough?
+
+Rpc is good, so is the sync,
+RPC is just a little messier than I want
+Is it reall though, cause its just a decorator, I think this could work for .. a bit
