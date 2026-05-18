@@ -67,3 +67,5 @@ So when P2 picks an item up, they are now the new owner, which means all clients
 Ok, so all items have an owner, which is the sole reporter of the position
 This owner can be changed so that when people pick up items they become the owner]
 So, all items need to be accessible by everyone
+
+It kind of doesnt matter so long as its in the player's hand in the scene tree for the peer on the main [current] player's system. So, then we just have to multiplayer sync the arm pos

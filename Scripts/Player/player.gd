@@ -177,10 +177,10 @@ func _movement_phys(delta: float):
 		var col = get_slide_collision(i)
 		var body = col.get_collider()
 		# See if the object is synced
-		if body.has_node("PhysItemMultiComp"):
-			# a normal is a unit vector point perpendicular the surface of the object in the direction of collision
-			var impulse = -col.get_normal() * PUSH_FORCE
-			body.get_multi_comp().apply_impulse(impulse)
+		#if body.has_node("PhysItemMultiComp"):
+			## a normal is a unit vector point perpendicular the surface of the object in the direction of collision
+			#var impulse = -col.get_normal() * PUSH_FORCE
+			#body.get_multi_comp().apply_impulse(impulse)
 	
 	if is_on_floor():
 		anim_manager.play_walk_anims(velocity.length())
