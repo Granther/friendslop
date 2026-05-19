@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c5iputjg23fqk"]
 
-[ext_resource type="PackedScene" uid="uid://cbgecho6j5f27" path="res://Blender/Dice.glb" id="1_a6rv4"]
+[ext_resource type="PackedScene" uid="uid://cbgecho6j5f27" path="res://Blender/Items/Dice.glb" id="1_a6rv4"]
 [ext_resource type="Script" uid="uid://cey14mam0dumx" path="res://Scripts/Items/dice.gd" id="2_w8aus"]
 [ext_resource type="PackedScene" uid="uid://eopsev3enyxl" path="res://Multiplayer/phys_item_multiplayer_comp.tscn" id="3_gxm8e"]
 

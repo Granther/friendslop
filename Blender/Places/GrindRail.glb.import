@@ -3,17 +3,17 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cbgecho6j5f27"
-path="res://.godot/imported/Dice.glb-46a0908cd417373ecaf3c2d313901f6d.scn"
+uid="uid://bo7m1nquwwvim"
+path="res://.godot/imported/GrindRail.glb-2be63a4d83db8788f87ad3b4dc222ae6.scn"
 
 [deps]
 
-source_file="res://Blender/Dice.glb"
-dest_files=["res://.godot/imported/Dice.glb-46a0908cd417373ecaf3c2d313901f6d.scn"]
+source_file="res://Blender/Places/GrindRail.glb"
+dest_files=["res://.godot/imported/GrindRail.glb-2be63a4d83db8788f87ad3b4dc222ae6.scn"]
 
 [params]
 
-nodes/root_type="RigidBody3D"
+nodes/root_type=""
 nodes/root_name=""
 nodes/root_script=null
 nodes/apply_root_scale=true

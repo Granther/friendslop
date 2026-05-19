@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cde32pvbuo6m5"
-path.s3tc="res://.godot/imported/Dice_dice.png-861c9b34ac25ffa770b37a650630266d.s3tc.ctex"
+path.s3tc="res://.godot/imported/Dice_dice.png-e858b51d6770e0ef0bee7758b56a3e9b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Blender/Dice_dice.png"
-dest_files=["res://.godot/imported/Dice_dice.png-861c9b34ac25ffa770b37a650630266d.s3tc.ctex"]
+source_file="res://Blender/Items/Dice_dice.png"
+dest_files=["res://.godot/imported/Dice_dice.png-e858b51d6770e0ef0bee7758b56a3e9b.s3tc.ctex"]
 
 [params]
 

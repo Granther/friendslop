@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dq27veisdyh68"]
+
+[ext_resource type="PackedScene" uid="uid://b0tmc6hhsd00r" path="res://Blender/Places/Bowl.glb" id="1_f0xd6"]
+[ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Textures/tiled-bg.png" id="2_yehvm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btiye"]
+albedo_texture = ExtResource("2_yehvm")
+uv1_scale = Vector3(20, 20, 20)
+
+[node name="BowlProp" unique_id=1272740363 instance=ExtResource("1_f0xd6")]
+
+[node name="Cube" parent="." index="0" unique_id=1779993184]
+surface_material_override/0 = SubResource("StandardMaterial3D_btiye")
