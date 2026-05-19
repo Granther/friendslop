@@ -1,8 +1,22 @@
 [gd_scene format=3 uid="uid://dhb1ixm3x31y2"]
 
-[ext_resource type="Script" uid="uid://cu43i2ljf8cvm" path="res://Scripts/Vehicles/cart.gd" id="1_4r7df"]
+[ext_resource type="Script" path="res://Scripts/Vehicles/cart.gd" id="1_4r7df"]
 [ext_resource type="PackedScene" uid="uid://d0f8sunmydhg6" path="res://Scenes/Items/Components/RideComponent.tscn" id="2_b26ih"]
 [ext_resource type="Resource" uid="uid://d2ux7jiihj1fh" path="res://Scenes/Items/InteractResources/wheel_chair.tres" id="3_hj71o"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_b26ih"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("VehicleWheel3D:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("VehicleWheel3D2:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
 
 [sub_resource type="BoxMesh" id="BoxMesh_tll67"]
 
@@ -16,6 +30,9 @@ bottom_radius = 0.6
 collision_layer = 17
 script = ExtResource("1_4r7df")
 icomp = NodePath("RideComponent")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1191858044]
+replication_config = SubResource("SceneReplicationConfig_b26ih")
 
 [node name="RideComponent" parent="." unique_id=2005407017 node_paths=PackedStringArray("root_obj") instance=ExtResource("2_b26ih")]
 interact_data = ExtResource("3_hj71o")

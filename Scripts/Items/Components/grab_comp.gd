@@ -10,36 +10,35 @@ func _set_freeze(setting: bool):
 
 func _set_col_layers(setting: bool):
 	# Remove from Items and Interactibles. So it wont collide with player and be picked up as item from scanner
-	root_obj.set_collision_layer_value(3, not setting)
-	interaction_area.set_collision_layer_value(5, not setting)
+	root_obj.set_collision_mask_value(2, setting)
+	# root_obj.set_collision_layer_value(3, setting)
+	interaction_area.set_collision_layer_value(5, setting)
 
 func register(camera: Camera3D, anchor: Marker3D):
-	_set_col_layers(true)
-# 	icomp.interaction_area.set_label_visible(false)
-	_set_freeze(true)
-	# Sets the rotation
-	_multiplayer_reparent.rpc(camera.get_path(), anchor.get_path())
+	_multiplayer_register.rpc(camera.get_path(), anchor.get_path())
+
+func deregister():
+	_multiplayer_deregister.rpc()
 
 @rpc("call_local", "any_peer")
-func _multiplayer_reparent(cam_path: NodePath, anchor_path: NodePath):
+func _multiplayer_register(cam_path: NodePath, anchor_path: NodePath):
+	_set_freeze(true)
+	_set_col_layers(false)
 	var anchor: Marker3D = get_node(anchor_path)
 	var camera: Camera3D = get_node(cam_path)
 	root_obj.reparent(anchor)
 	root_obj.global_rotation = Vector3.ZERO
-	root_obj.position = Vector3.ZERO
+	# root_obj.position = Vector3.ZERO
 	proc_func = func():
 		root_obj.global_rotation = camera.global_rotation
-		root_obj.position = anchor.position
+		root_obj.global_position = anchor.global_position
 
 @rpc("call_local", "any_peer")
-func _multiplayer_deparent():
+func _multiplayer_deregister():
+	_set_freeze(false)
+	_set_col_layers(true)
 	root_obj.reparent(WorldAPI.get_world())
 	proc_func = NULL_FUNC
-
-func deregister():
-	_set_freeze(false)
-	_set_col_layers(false)
-	_multiplayer_deparent.rpc()
 
 func _on_inter():
 	print("unimplemented")
