@@ -1,7 +1,6 @@
-class_name InteractComponent extends Node
+class_name InteractComponent extends BaseComponent
 
 @export var interact_data: InteractResource
-@export var root_obj: RigidBody3D
 
 @onready var interaction_area: Area3D = $InteractionArea
 @onready var inter_col_shape: CollisionShape3D = $InteractionArea/CollisionShape3D

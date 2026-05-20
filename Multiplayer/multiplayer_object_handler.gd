@@ -15,6 +15,7 @@ func deregister_object(obj: Node3D):
 	tracked_objects.erase(obj)
 
 func _physics_process(delta: float) -> void:
+	return
 	if do_p_cnt:
 		phys_f_count += 1
 	# if multiplayer.is_server():

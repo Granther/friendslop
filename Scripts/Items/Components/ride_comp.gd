@@ -20,13 +20,33 @@ func player_on_vehicle() -> bool:
 	return _on_veh
 
 func register(player_ref: CharacterBody3D):
+	#player_ref.reparent(root_obj)
+	#player_ref.global_position = root_obj.global_position
+	#player_ref.global_rotation = Vector3.ZERO
+	#_on_veh = true
+	#_set_col_layers(false)
+	_multiplayer_register.rpc(player_ref.get_path())
+
+func deregister(player_ref: CharacterBody3D):
+	#player_ref.reparent(WorldAPI.get_world())
+	#player_ref.global_rotation = Vector3.ZERO
+	#_on_veh = false
+	#_set_col_layers(true)
+	_multiplayer_deregister.rpc(player_ref.get_path())
+
+# We can't pass the player over the network, its not serializable, must pass path
+@rpc("call_local", "any_peer")
+func _multiplayer_register(player_ref_p: NodePath):
+	var player_ref: CharacterBody3D = get_node(player_ref_p)
 	player_ref.reparent(root_obj)
 	player_ref.global_position = root_obj.global_position
 	player_ref.global_rotation = Vector3.ZERO
 	_on_veh = true
 	_set_col_layers(false)
 
-func deregister(player_ref: CharacterBody3D):
+@rpc("call_local", "any_peer")
+func _multiplayer_deregister(player_ref_p: NodePath):
+	var player_ref: CharacterBody3D = get_node(player_ref_p)
 	player_ref.reparent(WorldAPI.get_world())
 	player_ref.global_rotation = Vector3.ZERO
 	_on_veh = false

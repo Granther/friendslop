@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d3iyxpo5xppyc"]
+
+[ext_resource type="Script" uid="uid://cd4s1kqirfhgk" path="res://Scripts/Items/Components/aoe_component.gd" id="1_yicug"]
+
+[node name="AEOComponent" type="Node" unique_id=160898283]
+script = ExtResource("1_yicug")

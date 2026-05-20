@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://csveegcns6swl"]
+[gd_scene format=3 uid="uid://cchu66o57wy0t"]
 
 [ext_resource type="Script" uid="uid://d3ulbfw64fkfx" path="res://Scripts/Gameplay/AOE/aoe_effect.gd" id="1_yjcwf"]
 [ext_resource type="Texture2D" uid="uid://byp7jt2fiayx7" path="res://Animations/Explosions pack/explosion-1-d/spritsheet.png" id="2_fa1j8"]
@@ -109,8 +109,9 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="AoeEffect" type="Node3D" unique_id=1291121906]
+[node name="AoeEffect" type="Node3D" unique_id=404575189]
 script = ExtResource("1_yjcwf")
+metadata/_custom_type_script = "uid://d3ulbfw64fkfx"
 
 [node name="Area3D" type="Area3D" parent="." unique_id=443057212]
 collision_layer = 0
@@ -130,5 +131,3 @@ frame_progress = 1.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=687903891]
 replication_config = SubResource("SceneReplicationConfig_yjcwf")
-
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

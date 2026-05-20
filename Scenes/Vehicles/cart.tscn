@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dhb1ixm3x31y2"]
 
-[ext_resource type="Script" path="res://Scripts/Vehicles/cart.gd" id="1_4r7df"]
+[ext_resource type="Script" uid="uid://cu43i2ljf8cvm" path="res://Scripts/Vehicles/cart.gd" id="1_4r7df"]
 [ext_resource type="PackedScene" uid="uid://d0f8sunmydhg6" path="res://Scenes/Items/Components/RideComponent.tscn" id="2_b26ih"]
 [ext_resource type="Resource" uid="uid://d2ux7jiihj1fh" path="res://Scenes/Items/InteractResources/wheel_chair.tres" id="3_hj71o"]
 

@@ -15,7 +15,7 @@ enum STATE_MODE { CARRY, FREE }
 var _owner_id: int = HOST
 
 func _ready() -> void:
-	Err.push_err_if(not root_obj.has_method("get_multi_comp"), "parent of PhysItemMultiComp MUST have method get_multi_comp() -> PhysItemMultiComp")
+	#Err.push_err_if(not root_obj.has_method("get_multi_comp"), "parent of PhysItemMultiComp MUST have method get_multi_comp() -> PhysItemMultiComp")
 	register_to_player()
 
 func register_to_player():

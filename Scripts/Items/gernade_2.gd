@@ -10,7 +10,7 @@ extends RigidBody3D
 @onready var kill_area = $KillArea
 
 var armed: bool = false
-var aoe_effect_scene = preload("res://Scenes/Gameplay/AOE/AOEEffect.tscn")
+var aoe_effect_scene: PackedScene = preload("res://Scenes/Gameplay/AOE/AOEEffect2.tscn")
 
 func _ready():
 	fuse_timer.set_wait_time(fuse_time)
@@ -32,8 +32,8 @@ func _on_leftm_key_hit():
 
 func _on_fuse_timer_timeout() -> void:
 	icomp.force_done.emit()
-	var aoe_effect = aoe_effect_scene.instantiate()
-	aoe_effect.effect_area = kill_area
+	var aoe_effect: AOEEffect = aoe_effect_scene.instantiate()
+	#aoe_effect.effect_area = kill_area
 	aoe_effect.global_position = global_position
 	WorldAPI.get_world().add_child(aoe_effect)
 	aoe_effect.area_blast(blast_force)

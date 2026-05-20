@@ -60,11 +60,13 @@ func _on_int_scan_interacted_external_item(inter: InteractComponent) -> void:
 
 func _register_ride(): 
 	if not is_ride(): return
+	_set_auth_and_distrib.rpc(cur_ride.get_root_obj().get_path(), multiplayer.get_unique_id())
 	cur_ride.register(player_ref)
 	entered_ride.emit(cur_ride.phys_movement_func)
 
 func _deregister_ride():
 	if not is_ride(): return
+	_set_auth_and_distrib.rpc(cur_ride.get_root_obj().get_path()) # Return control to server
 	cur_ride.deregister(player_ref)
 	exited_ride.emit()
 
@@ -83,6 +85,10 @@ func _deregister_grab():
 	cur_grab = null
 	allow_interaction.emit()
 	dropped_item.emit()
+
+@rpc("call_local")
+func _set_auth_and_distrib(thing_p: NodePath, new_auth: int = 1):
+	get_node(thing_p).set_multiplayer_authority(new_auth)
 
 func is_grab() -> bool:
 	return (cur_grab != null)

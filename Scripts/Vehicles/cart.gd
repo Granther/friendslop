@@ -15,6 +15,6 @@ func get_icomp() -> InteractComponent:
 func _on_inter():
 	pass
 
-func _phys_movement(delta: float):	
+func _phys_movement(delta: float):
 	steering = move_toward(steering, Input.get_axis("right", "left") * MAX_STEER, delta * 10)
 	engine_force = Input.get_axis("down", "up") * ENGINE_POWER
