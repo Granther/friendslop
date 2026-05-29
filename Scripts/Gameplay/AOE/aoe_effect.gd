@@ -1,4 +1,4 @@
-class_name AOEEffect extends Node3D
+extends Node3D
 
 # I know, I know. I know that each object should only have one job, but this one will maybe play anims..
 
@@ -20,10 +20,6 @@ func _play_scaled_anim(name: String, scale: float):
 	await anims_sprite.animation_finished
 	anims_sprite.hide()
 
-func _init(_effect_area, _gpos) -> void:
-	effect_area = _effect_area
-	global_position = _gpos
-
 func area_blast(force_mag: float = 1):
 	var bodies = effect_area.get_overlapping_bodies()
 	print(bodies)
@@ -31,4 +27,4 @@ func area_blast(force_mag: float = 1):
 		if bod is RigidBody3D:
 			bod.apply_central_impulse((bod.global_transform.origin - global_position).normalized()*force_mag)
 	await _play_scaled_anim("area_blast", force_mag)
-	queue_free()
+	# queue_free()

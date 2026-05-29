@@ -4,3 +4,11 @@ Mobs require commands
 
 Love the idea of overriding SSH
 Would run 
+
+Hmm, we have some kind of effect, 
+Don't try to predict the future!
+
+We need a blast area, and we want it to be generalizable 
+Should we just make it a component?
+
+The thing is that we need it to continue to exist after the grenade is gone

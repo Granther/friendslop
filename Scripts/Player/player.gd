@@ -101,12 +101,6 @@ func _process(delta: float) -> void:
 	
 	if not is_multiplayer_authority(): return
 	_movement_proc(delta)
-#
-#func get_blasted(source: Vector3, force_mag: float):
-	## Get difference between player pos and grenade pos (this is our direction relative to grenade)
-	#print("got blasted")
-	#var force = (global_transform.origin - source).normalized()*force_mag
-	#velocity = (velocity + force)
 
 func _movement_phys(delta: float): 
 	springarm.set("spring_length", clamp(-camera.rotation.x,0.6,0.7))

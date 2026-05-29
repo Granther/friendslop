@@ -1,0 +1,24 @@
+# Matmaker
+
+2D style of old zelda (mayber 2.5D
+Have to go in to forest etc to collect materials to synthesize new materials
+
+The whole game revolves around synthesis
+
+Some way to see the material structure and try to get it to be stronger, lighter etc
+
+What do I feel like I can offer more in? Do I really thing that mechanical is the truly best feild to try to innovate in
+What about materials?
+
+Mechanics is limited by materials, its ultimatly an abstraction
+
+Print 256mm tall honeycomb tube with a "smooth" wall on the outside
+Layup CF or FG on the outside, use this to mate the pieces together
+Only problem is the heating from the charge at EJ
+I don't think it would be localized enough to actually cause problems
+
+We could print structural components of the vehicle into the design, such as the motor mount etc
+As well as the fins
+
+Chunks need to interface very well, most of the loads are going upward anyways
+And the fiber sould be able to handle most of the bending loads
