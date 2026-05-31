@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://xjrdwvf4hmve"]
+
+[ext_resource type="PackedScene" uid="uid://02u77k1bmmcl" path="res://Scenes/Items/Components/BaseComponent.tscn" id="1_kxq6h"]
+[ext_resource type="Script" uid="uid://cbffexvrxelan" path="res://Scripts/Items/Components/health_component.gd" id="2_ydpi0"]
+
+[node name="HealthComponent" unique_id=780604300 instance=ExtResource("1_kxq6h")]
+script = ExtResource("2_ydpi0")

@@ -5,6 +5,7 @@ extends RigidBody3D
 
 @onready var bullet_scene = preload("res://Scenes/Items/bullet.tscn")
 @onready var bullet_spawn_loc: Marker3D = $BulletSpawnLocation
+@onready var spawner = $MultiplayerSpawner
 
 func _ready():
 	icomp.on_inter_key_hit = Callable(self, "_on_inter")
@@ -22,4 +23,4 @@ func _on_inter():
 func _on_leftm_key_hit():
 	var bullet: Bullet = bullet_scene.instantiate()
 	WorldAPI.get_world().add_child(bullet)
-	bullet.initialize(bullet_spawn_loc.global_position, -global_transform.basis.z, 2)
+	bullet.initialize(bullet_spawn_loc.global_position, -global_transform.basis.z, 100)

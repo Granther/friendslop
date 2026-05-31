@@ -24,7 +24,7 @@ collision_mask = 7
 script = ExtResource("2_8pdl1")
 icomp = NodePath("GrabComponent")
 
-[node name="Pistol" parent="." index="0" unique_id=1217562658]
+[node name="Pistol" parent="." index="0" unique_id=1902967365]
 transform = Transform3D(-0.087465644, 0, -7.64649e-09, 0, 0.087465644, 0, 7.64649e-09, 0, -0.087465644, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=1884480181]
@@ -43,3 +43,7 @@ replication_config = SubResource("SceneReplicationConfig_v8vhn")
 
 [node name="BulletSpawnLocation" type="Marker3D" parent="." index="5" unique_id=1946057467]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.466142e-08, 0.30681205, -0.85402715)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." index="6" unique_id=113861038]
+_spawnable_scenes = PackedStringArray("uid://dvlb8joxnsu6l")
+spawn_path = NodePath("../BulletSpawnLocation")

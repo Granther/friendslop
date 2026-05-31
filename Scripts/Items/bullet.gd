@@ -27,13 +27,23 @@ func _physics_process(delta: float) -> void:
 	raycast.force_raycast_update() # We want to update halfway through the tick
 
 	if raycast.is_colliding():
+		var body: Node3D = raycast.get_collider()
+		_hit(body)
 		# We are hitting a wall, and our target is throuh the wall
-		print("ray hit")
-		queue_free()
 		return
-
+		
 	global_position += velocity * delta
 
 func _on_body_entered(body: Node3D) -> void:
-	print("hit suntin")
+	_hit(body)
+	
+func _hit(body: Node3D) -> void:
+	if body.has_node("HealthComponent"):
+		_multiplayer_hit.rpc(body.get_path())
+
+@rpc("call_local", "any_peer", "reliable")
+func _multiplayer_hit(body_path: NodePath):
+	print("called")
+	var body: Node3D = get_node(body_path)
+	body.get_node("HealthComponent").damage(30)
 	queue_free()

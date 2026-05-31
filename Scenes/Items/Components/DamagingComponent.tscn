@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dakmpc4q8kl5u"]
+
+[ext_resource type="PackedScene" uid="uid://02u77k1bmmcl" path="res://Scenes/Items/Components/BaseComponent.tscn" id="1_yoya0"]
+[ext_resource type="Script" uid="uid://dqu18ik27w711" path="res://Scripts/Items/Components/damaging_component.gd" id="2_wmkqd"]
+
+[node name="DamagingComp" unique_id=780604300 instance=ExtResource("1_yoya0")]
+script = ExtResource("2_wmkqd")

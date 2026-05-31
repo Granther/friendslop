@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://c0otao1r35fyi" path="res://Scripts/Places/world_flat.gd" id="2_xhy82"]
 [ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Items/ball.tscn" id="3_u1plk"]
 [ext_resource type="PackedScene" uid="uid://c5vhlyxd4rtl5" path="res://Scenes/Items/gun.tscn" id="4_u1plk"]
+[ext_resource type="PackedScene" uid="uid://xjrdwvf4hmve" path="res://Scenes/Items/Components/HealthComponent.tscn" id="6_7w0r2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0mah3"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)
@@ -37,6 +38,9 @@ uv2_scale = Vector3(5, 5, 5)
 
 [node name="WorldFlat" unique_id=607842282 instance=ExtResource("1_qd3hg")]
 script = ExtResource("2_xhy82")
+
+[node name="MultiplayerSpawner" parent="." index="0" unique_id=1018535175]
+_spawnable_scenes = PackedStringArray("uid://be8qbmt0fe144", "uid://dvlb8joxnsu6l")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="1" unique_id=1869069862]
 transform = Transform3D(0.99950653, 0.03141076, 1.3730079e-09, 0, -4.371139e-08, 1, 0.03141076, -0.99950653, -4.368982e-08, 0, 0, 0)
@@ -88,3 +92,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.132661, 0.8571634, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.539339, 2.6617622, 3.2299805)
 use_collision = true
 size = Vector3(0.001, 5.4483643, 7.459961)
+
+[node name="HealthComponent" parent="CSGBox3D3" index="0" unique_id=780604300 instance=ExtResource("6_7w0r2")]

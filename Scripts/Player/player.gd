@@ -8,6 +8,7 @@ const SENSITIVITY = 0.003
 var BASE_FOV = 90
 var FOV_CHANGE = 1
 var PUSH_FORCE = 2.5
+
 @export var DEFAULT_SPEED: float = 3
 
 @onready var ui = get_tree().get_first_node_in_group("game_ui")
