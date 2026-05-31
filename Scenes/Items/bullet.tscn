@@ -1,5 +1,30 @@
 [gd_scene format=3 uid="uid://dvlb8joxnsu6l"]
 
 [ext_resource type="PackedScene" uid="uid://mvwlbug7oi22" path="res://Blender/Items/Pistol/Bullet.glb" id="1_43l0m"]
+[ext_resource type="Script" uid="uid://bpb1qy3ssbquh" path="res://Scripts/Items/bullet.gd" id="2_hi0kv"]
 
-[node name="Bullet" unique_id=717654972 instance=ExtResource("1_43l0m")]
+[sub_resource type="SphereMesh" id="SphereMesh_hi0kv"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hi0kv"]
+radius = 0.2
+
+[node name="Bullet" unique_id=1327225665 instance=ExtResource("1_43l0m")]
+collision_layer = 0
+collision_mask = 7
+script = ExtResource("2_hi0kv")
+
+[node name="Bullet" parent="." index="0" unique_id=449667137]
+transform = Transform3D(-4.786243e-09, -0.109496474, 0, 0.109496474, -4.786243e-09, 0, 0, 0, 0.109496474, 0, 0, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="." index="1" unique_id=2138181944]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2" unique_id=1178504593]
+mesh = SubResource("SphereMesh_hi0kv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3" unique_id=520882039]
+shape = SubResource("SphereShape3D_hi0kv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
