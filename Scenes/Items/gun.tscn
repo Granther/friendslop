@@ -43,7 +43,3 @@ replication_config = SubResource("SceneReplicationConfig_v8vhn")
 
 [node name="BulletSpawnLocation" type="Marker3D" parent="." index="5" unique_id=1946057467]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.466142e-08, 0.30681205, -0.85402715)
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." index="6" unique_id=113861038]
-_spawnable_scenes = PackedStringArray("uid://dvlb8joxnsu6l")
-spawn_path = NodePath("../BulletSpawnLocation")

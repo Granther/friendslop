@@ -20,17 +20,17 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 	# Our current speed, the mag, times the ticklen, this is our distance between now and the end of next tick
-	var look_dist = velocity.length() * delta
-	
-	# Set the direction
-	raycast.target_position = velocity.normalized() * look_dist
-	raycast.force_raycast_update() # We want to update halfway through the tick
-
-	if raycast.is_colliding():
-		var body: Node3D = raycast.get_collider()
-		_hit(body)
-		# We are hitting a wall, and our target is throuh the wall
-		return
+	#var look_dist = velocity.length() * delta
+	#
+	## Set the direction
+	#raycast.target_position = velocity.normalized() * look_dist
+	#raycast.force_raycast_update() # We want to update halfway through the tick
+#
+	#if raycast.is_colliding():
+		#var body: Node3D = raycast.get_collider()
+		#_hit(body)
+		## We are hitting a wall, and our target is throuh the wall
+		#return
 		
 	global_position += velocity * delta
 

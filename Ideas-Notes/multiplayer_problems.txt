@@ -77,3 +77,10 @@ Or is Godot's built in good enough?
 Rpc is good, so is the sync,
 RPC is just a little messier than I want
 Is it reall though, cause its just a decorator, I think this could work for .. a bit
+
+Whats the best architecture for this setup? 
+So, a player fires a projectile. Does the projectil beling to the server now?
+Or does the player declare what it hit and how it will be handled.
+I think its asir in the begiining to have the projectile owned by the server, then we don't have any race condition problems
+Say 2 players shoot at the same thing and both declare that it died. Who killed it
+It will try to replicate across the peers that something is dead which is already dead

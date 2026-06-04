@@ -21,4 +21,5 @@ func get_health() -> int:
 
 func _process(delta: float) -> void:
 	if health <= 0:
+		# Utils.destroy_net.rpc(root_obj.get_path())
 		root_obj.queue_free()

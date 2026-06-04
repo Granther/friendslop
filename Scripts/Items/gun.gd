@@ -22,5 +22,8 @@ func _on_inter():
 	
 func _on_leftm_key_hit():
 	var bullet: Bullet = bullet_scene.instantiate()
-	WorldAPI.get_world().add_child(bullet)
+	# Must change some data or else we can't replicate (it would delete all of them)
+	bullet.name = str(randi_range(1, 1000)) # This is kinda dumb tho lol
+	Utils.add_child_multi.rpc(bullet.get_path())
+	#WorldAPI.get_world().add_child(bullet)
 	bullet.initialize(bullet_spawn_loc.global_position, -global_transform.basis.z, 100)
