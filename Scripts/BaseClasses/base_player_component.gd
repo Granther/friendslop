@@ -10,4 +10,6 @@ var phys_func = func(): pass
 var proc_func = func(): pass
 
 func _ready():
-	Err.push_err_if(player_ref == null, "player_ref exported var musn't be null for Component")
+	if player_ref == null:
+		player_ref = get_parent()
+		Err.push_warn_if(player_ref == null, "player_ref exported var musn't be null for Component")

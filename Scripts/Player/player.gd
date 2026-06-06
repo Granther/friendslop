@@ -42,6 +42,7 @@ var PUSH_FORCE = 2.5
 @onready var anim_manager = $PlayerAnimationManager
 @onready var body_manager = $PlayerBodyHandler
 @onready var movement_manager = $PlayerMovementHandler
+@onready var hud_manager = $PlayerHUDManager
 
 # Player state machine
 var MOVE_STATE: MOVE_STATE_MODE
@@ -122,6 +123,7 @@ func _movement_phys(delta: float):
 		
 	if Input.is_action_pressed("crouch"):
 		STAND_STATE = STAND_STATE_MODE.CROUCHING
+		# emission
 	else:
 		STAND_STATE = STAND_STATE_MODE.STANDING
 

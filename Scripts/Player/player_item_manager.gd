@@ -21,6 +21,7 @@ signal drop_key_hit
 signal leftm_key_hit
 signal rightm_key_hit
 signal interact_key_hit
+signal crouch_key_hit
 
 # These are the interact components OF THE ITEM, not the item. We don't touch the item, thats the beautiful part :>
 var cur_grab: InteractComponent = null
@@ -36,6 +37,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		leftm_key_hit.emit()
 	if event.is_action_pressed("right_mouse"):
 		rightm_key_hit.emit()
+	if event.is_action_released("crouch"):
+		crouch_key_hit.emit()
 
 # Grabbable is an interactable 
 func _on_int_scan_interacted_external_item(inter: InteractComponent) -> void:
@@ -45,15 +48,6 @@ func _on_int_scan_interacted_external_item(inter: InteractComponent) -> void:
 	elif inter is GrabComponent:
 		cur_grab = inter
 		_register_grab()
-
-	#if inter is Rideable:
-		#if not is_ride():
-			#cur_ride = inter
-			#_register_ride()
-	#elif inter is Grabbable:
-		#if not is_grab():
-			#cur_grab = inter
-			#_register_grab()
 	else:
 		push_error("item is not interactable, but not found to be specific: ", inter.name)
 		allow_interaction.emit()
@@ -69,6 +63,7 @@ func _deregister_ride():
 	_set_auth_and_distrib.rpc(cur_ride.get_root_obj().get_path()) # Return control to server
 	cur_ride.deregister(player_ref)
 	exited_ride.emit()
+	cur_ride = null
 
 func _register_grab():
 	if not is_grab(): return
@@ -82,9 +77,9 @@ func _deregister_grab():
 	_deregister_key_connects(cur_grab)
 	_deregister_force_connects(cur_grab)
 	cur_grab.deregister()
-	cur_grab = null
 	allow_interaction.emit()
 	dropped_item.emit()
+	cur_grab = null
 
 @rpc("call_local")
 func _set_auth_and_distrib(thing_p: NodePath, new_auth: int = 1):
@@ -100,11 +95,13 @@ func _register_key_connects(inter: InteractComponent):
 	leftm_key_hit.connect(inter.on_leftm_key_hit)
 	rightm_key_hit.connect(inter.on_rightm_key_hit)
 	interact_key_hit.connect(inter.on_inter_key_hit)
+	crouch_key_hit.connect(inter.on_crouch_key_hit)
 
 func _deregister_key_connects(inter: InteractComponent):
 	leftm_key_hit.disconnect(inter.on_leftm_key_hit)
 	rightm_key_hit.disconnect(inter.on_rightm_key_hit)
 	interact_key_hit.disconnect(inter.on_inter_key_hit)
+	crouch_key_hit.connect(inter.on_crouch_key_hit)
 	
 func _register_force_connects(inter: InteractComponent):
 	#var f

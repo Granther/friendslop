@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b20fnpc4c5be6"]
+
+[ext_resource type="Script" uid="uid://mf86f3i0487y" path="res://Scripts/Player/player_hud_manager.gd" id="1_t7075"]
+
+[node name="PlayerHUDManager" type="Node" unique_id=1363263910]
+script = ExtResource("1_t7075")
+metadata/_custom_type_script = "uid://butpi0dfvlyt4"

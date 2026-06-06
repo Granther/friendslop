@@ -5,23 +5,26 @@ var direction: Vector3
 var velocity: Vector3
 var lifetime: int = 500 # Amount of FRAMES the bullet is alive before getting culled
 var age: int = 0
+var local_damage: bool # Can either be "fake" or "real", used as a fake bullet to sync on net
+
+const DAMAGE = 30
 
 @onready var raycast: RayCast3D = $RayCast3D
 
-func initialize(_start_pos: Vector3, _start_dir: Vector3, _start_speed: float) -> void:
+func initialize(_start_pos: Vector3, _start_dir: Vector3, _start_speed: float, _local_damage: bool = false) -> void:
 	global_position = _start_pos
 	direction = _start_dir.normalized()
 	velocity = direction * _start_speed
 	speed = _start_speed
+	local_damage = _local_damage
  
 func _physics_process(delta: float) -> void:
 	age += 1
 	if age >= lifetime:
 		queue_free()
 
-	# Our current speed, the mag, times the ticklen, this is our distance between now and the end of next tick
+	 # Our current speed, the mag, times the ticklen, this is our distance between now and the end of next tick
 	#var look_dist = velocity.length() * delta
-	#
 	## Set the direction
 	#raycast.target_position = velocity.normalized() * look_dist
 	#raycast.force_raycast_update() # We want to update halfway through the tick
@@ -36,14 +39,14 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	_hit(body)
-	
+
 func _hit(body: Node3D) -> void:
-	if body.has_node("HealthComponent"):
-		_multiplayer_hit.rpc(body.get_path())
+	if local_damage:
+		if body.has_node("HealthComponent"):
+			_multiplayer_hit.rpc(body.get_path())
 
 @rpc("call_local", "any_peer", "reliable")
 func _multiplayer_hit(body_path: NodePath):
-	print("called")
 	var body: Node3D = get_node(body_path)
-	body.get_node("HealthComponent").damage(30)
+	body.get_node("HealthComponent").damage(DAMAGE)
 	queue_free()
