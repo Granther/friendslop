@@ -21,7 +21,6 @@ signal drop_key_hit
 signal leftm_key_hit
 signal rightm_key_hit
 signal interact_key_hit
-signal crouch_key_hit
 
 # These are the interact components OF THE ITEM, not the item. We don't touch the item, thats the beautiful part :>
 var cur_grab: InteractComponent = null
@@ -30,7 +29,6 @@ var cur_ride: InteractComponent = null
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("drop"):
 		if is_grab(): _deregister_grab()
-		elif is_ride(): _deregister_ride()
 	if event.is_action_pressed("interact1"):
 		interact_key_hit.emit()
 	if event.is_action_pressed("left_mouse"):
@@ -38,7 +36,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("right_mouse"):
 		rightm_key_hit.emit()
 	if event.is_action_released("crouch"):
-		crouch_key_hit.emit()
+		if is_ride(): _deregister_ride()
 
 # Grabbable is an interactable 
 func _on_int_scan_interacted_external_item(inter: InteractComponent) -> void:
@@ -95,14 +93,12 @@ func _register_key_connects(inter: InteractComponent):
 	leftm_key_hit.connect(inter.on_leftm_key_hit)
 	rightm_key_hit.connect(inter.on_rightm_key_hit)
 	interact_key_hit.connect(inter.on_inter_key_hit)
-	crouch_key_hit.connect(inter.on_crouch_key_hit)
 
 func _deregister_key_connects(inter: InteractComponent):
 	leftm_key_hit.disconnect(inter.on_leftm_key_hit)
 	rightm_key_hit.disconnect(inter.on_rightm_key_hit)
 	interact_key_hit.disconnect(inter.on_inter_key_hit)
-	crouch_key_hit.connect(inter.on_crouch_key_hit)
-	
+
 func _register_force_connects(inter: InteractComponent):
 	#var f
 	#if inter is Grabbable: f = _deregister_grab

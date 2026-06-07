@@ -12,7 +12,6 @@ var on_drop_key_hit: Callable = func(): pass
 var on_leftm_key_hit: Callable = func(): pass
 var on_rightm_key_hit: Callable = func(): pass
 var on_inter_key_hit: Callable = func(): pass
-var on_crouch_key_hit: Callable = func(): pass
 
 var NULL_FUNC = func(): pass
 var phys_func = func(): pass
