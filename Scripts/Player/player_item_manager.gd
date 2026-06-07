@@ -31,7 +31,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if is_grab(): _deregister_grab()
 		elif is_ride(): _deregister_ride()
 	if event.is_action_pressed("interact1"):
-		interact_key_hit.emit()
+		if is_ride(): _deregister_ride()
+		else: interact_key_hit.emit()
 	if event.is_action_pressed("left_mouse"):
 		leftm_key_hit.emit()
 	if event.is_action_pressed("right_mouse"):
@@ -58,7 +59,7 @@ func _on_int_scan_interacted_external_item(inter: InteractComponent) -> void:
 		push_error("item is not interactable, but not found to be specific: ", inter.name)
 		allow_interaction.emit()
 
-func _register_ride(): 
+func _register_ride():
 	if not is_ride(): return
 	cur_ride.register(player_ref)
 	entered_ride.emit(cur_ride.phys_movement_func)
@@ -66,6 +67,7 @@ func _register_ride():
 func _deregister_ride():
 	if not is_ride(): return
 	cur_ride.deregister(player_ref)
+	cur_ride = null
 	exited_ride.emit()
 
 func _register_grab():

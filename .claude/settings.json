@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/Zafir/.claude/**)",
+      "Bash(npx --yes @coding-solo/godot-mcp --version)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Users/Zafir/**)",
+      "PowerShell(Test-Path \"$env:APPDATA\\\\Claude\\\\claude_desktop_config.json\"; if \\(Test-Path \"$env:APPDATA\\\\Claude\\\\claude_desktop_config.json\"\\) { Get-Content \"$env:APPDATA\\\\Claude\\\\claude_desktop_config.json\" })",
+      "Read(//a/Godot Projects/**)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\Zafir\\AppData\\Roaming\\Claude"
+    ]
+  },
+  "mcpServers": {
+    "godot": {
+      "command": "npx",
+      "args": [
+        "@coding-solo/godot-mcp"
+      ],
+      "env": {
+        "GODOT_PATH": "A:/Godot Projects/Godot_v4.6.1-stable_win64.exe",
+        "DEBUG": "true"
+      }
+    }
+  }
+}

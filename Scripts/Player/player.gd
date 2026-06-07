@@ -8,6 +8,10 @@ const SENSITIVITY = 0.003
 var BASE_FOV = 90
 var FOV_CHANGE = 1
 var PUSH_FORCE = 2.5
+var head_yaw: float = 0.0
+var head_pitch: float = 0.0
+var is_riding: bool = false
+signal ragdoll_signal
 @export var DEFAULT_SPEED: float = 3
 
 @onready var ui = get_tree().get_first_node_in_group("game_ui")
@@ -15,12 +19,13 @@ var PUSH_FORCE = 2.5
 
 # def GLOBAL_TO_COMPS
 @onready var head = %Stoneman/%Head
-@onready var grabbed_anchor = %Stoneman/%Head/Camera3D/SpringArm3D/GrabbedAnchor
+@onready var grabbed_anchor = %Stoneman/%Head/SpringArm3D/GrabbedAnchor
 @onready var object_grabber_shape_cast = %Stoneman/%Head/ObjectGrabberShapeCast
 @onready var camera = %Stoneman/%Head/Camera3D
 @onready var nametag = $Nametag
 @onready var stoneman = %Stoneman
 @onready var springarm = %Stoneman/%Head/SpringArm3D
+
 
 # Arms and Legs
 @onready var leg_anim_tree = %Stoneman/LegAnimTree
@@ -73,10 +78,17 @@ func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
 	if ui.is_menu_open(): return
 	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * SENSITIVITY)
-		head.rotate_x(event.relative.y * SENSITIVITY)
-		## print(rad_to_deg(head.rotation.x))
-		head.rotation.x = clamp(head.rotation.x, deg_to_rad(0), deg_to_rad(180))
+		if is_riding:
+			springarm.rotate_y(-event.relative.x * SENSITIVITY)
+			springarm.rotation.y = clamp(springarm.rotation.y, deg_to_rad(-90), deg_to_rad(90))
+			head.rotate_x(event.relative.y * SENSITIVITY)
+			head.rotation.x = clamp(head.rotation.x, deg_to_rad(0), deg_to_rad(180))
+		else:
+			rotate_y(-event.relative.x * SENSITIVITY)
+			head.rotate_x(event.relative.y * SENSITIVITY)
+			head.rotation.x = clamp(head.rotation.x, deg_to_rad(0), deg_to_rad(180))
+		
+		
 
 # We want to set FOV_CHANGE in such a way that it reaches the max fov for the particular state
 # ... when we are at the max speed
@@ -92,6 +104,7 @@ func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority(): return
 	# _movement_phys(delta)
 	movement_manager.phys_func.call(delta)
+	_default_movement_phys(delta)
 
 func _process(delta: float) -> void:
 	inter_manager.proc_func.call()
@@ -130,8 +143,7 @@ func _movement_phys(delta: float):
 	else:
 		STAND_STATE = STAND_STATE_MODE.STANDING
 
-	if Input.is_action_pressed("ragdoll"):
-		stoneman.toggle_ragdoll.rpc()
+	
 
 	if Input.is_action_pressed("sprint"):
 		MOVE_STATE = MOVE_STATE_MODE.SPRINTING
@@ -190,3 +202,10 @@ func _movement_phys(delta: float):
 func _movement_proc(delta: float):
 	camera.current = true # <- this sucks im ngl, get this figured out grant
 	# DebugDraw3D.draw_arrow(Vector3.ZERO, Vector3(velocity.x, 0, 0), Color.RED)
+
+	
+func _default_movement_phys(delta: float):
+	if Input.is_action_just_pressed("ragdoll"):
+		ragdoll_signal.emit()
+		stoneman.toggle_ragdoll.rpc()
+	pass

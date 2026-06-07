@@ -34,3 +34,11 @@ func _on_player_item_manager_entered_ride(phys_func: Callable) -> void:
 func _on_player_item_manager_exited_ride() -> void:
 	INPUT_DST = INPUT_OPT.PLAYER
 	set_vehicle_phys(func(): pass)
+
+
+func _on_player_ragdoll_signal() -> void:
+	if INPUT_DST == INPUT_OPT.NONE:
+		INPUT_DST = INPUT_OPT.PLAYER
+	else:
+		INPUT_DST = INPUT_OPT.NONE
+	pass # Replace with function body.

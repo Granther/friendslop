@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://bua7hhpvad6m6"]
+
+[ext_resource type="PackedScene" uid="uid://bdejeamns5gfk" path="res://Blender/Vehicles/WheelChair.glb" id="1_giug2"]
+[ext_resource type="Script" uid="uid://dng3pqwux2xrp" path="res://Scripts/Vehicles/wheel_chair.gd" id="2_46ck8"]
+[ext_resource type="PackedScene" uid="uid://d0f8sunmydhg6" path="res://Scenes/Items/Components/RideComponent.tscn" id="2_dlbmh"]
+[ext_resource type="Resource" uid="uid://d2ux7jiihj1fh" path="res://Scenes/Items/InteractResources/wheel_chair.tres" id="3_46ck8"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b8rfh"]
+friction = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b8rfh"]
+size = Vector3(0.47625732, 0.04052246, 0.5223633)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dlbmh"]
+size = Vector3(0.040167235, 0.398, 0.54439455)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_46ck8"]
+size = Vector3(0.030508652, 0.77604675, 0.026794434)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_17udj"]
+points = PackedVector3Array(0, 0, 0, 0.05, 0.28, 0, 0.215, 0.2, 0, -0.245, 0.28, 0, -0.245, -0.06, 0, 0.275, 0.03, 0, 0.275, -0.055, 0, 0.275, -0.055, -0.03, 0.275, 0.03, -0.03, -0.245, -0.06, -0.03, -0.245, 0.28, -0.03, 0.215, 0.2, -0.03, 0.05, 0.28, -0.03)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kte45"]
+points = PackedVector3Array(0, 0, 0, 0.05, 0.28, 0, 0.215, 0.2, 0, -0.245, 0.28, 0, -0.245, -0.06, 0, 0.275, 0.03, 0, 0.275, -0.055, 0, 0.275, -0.055, -0.03, 0.275, 0.03, -0.03, -0.245, -0.06, -0.03, -0.245, 0.28, -0.03, 0.215, 0.2, -0.03, 0.05, 0.28, -0.03)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dlbmh"]
+height = 0.032
+radius = 0.074
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_17udj"]
+size = Vector3(0.19743347, 0.029296875, 0.5966797)
+
+[node name="WheelChair" unique_id=44113497 node_paths=PackedStringArray("icomp") instance=ExtResource("1_giug2")]
+collision_layer = 17
+physics_material_override = SubResource("PhysicsMaterial_b8rfh")
+center_of_mass_mode = 1
+center_of_mass = Vector3(0.35, 0.17, 0)
+inertia = Vector3(31.65, 0, 0)
+script = ExtResource("2_46ck8")
+icomp = NodePath("RideComponent")
+
+[node name="Marker3D" type="Marker3D" parent="." index="0" unique_id=465306947]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1320022, -0.7019197, 0)
+gizmo_extents = 0.0
+
+[node name="right" parent="." index="2" unique_id=127689161]
+transform = Transform3D(7.54979e-08, 8.742278e-08, 1, 0, 1, -8.742278e-08, -1, 6.600236e-15, 7.54979e-08, -0.0012228824, -0.009298459, 0.3241879)
+use_as_traction = true
+wheel_roll_influence = 1.0
+wheel_radius = 0.315
+wheel_rest_length = 0.052
+wheel_friction_slip = 1.0
+suspension_travel = 0.1
+suspension_stiffness = 50.0
+damping_compression = 0.6
+damping_relaxation = 0.9
+
+[node name="right" parent="right" index="0" unique_id=1663765624]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 0, 0)
+
+[node name="left" parent="." index="3" unique_id=1648009511]
+transform = Transform3D(7.54979e-08, 8.742278e-08, 1, 0, 1, -8.742278e-08, -1, 6.600236e-15, 7.54979e-08, -0.0012228824, -0.009298459, -0.32519105)
+use_as_traction = true
+wheel_roll_influence = 1.0
+wheel_radius = 0.315
+wheel_rest_length = 0.052
+wheel_friction_slip = 1.0
+suspension_travel = 0.1
+suspension_stiffness = 50.0
+damping_compression = 0.6
+damping_relaxation = 0.9
+
+[node name="left" parent="left" index="0" unique_id=477125702]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0, 0, 0)
+
+[node name="Seat Cushion" type="CollisionShape3D" parent="." index="4" unique_id=1549315547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20803833, 0.11696046, 0.0014160275)
+shape = SubResource("BoxShape3D_b8rfh")
+
+[node name="Seat Back Support" type="CollisionShape3D" parent="." index="5" unique_id=1436032666]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04847961, 0.37075564, 0.00026369095)
+shape = SubResource("BoxShape3D_dlbmh")
+
+[node name="Rail" type="CollisionShape3D" parent="." index="6" unique_id=796648119]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.035084225, 0.23940037, -0.28582397)
+shape = SubResource("BoxShape3D_46ck8")
+
+[node name="Rail2" type="CollisionShape3D" parent="." index="7" unique_id=1272588919]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.035, 0.239, 0.286)
+shape = SubResource("BoxShape3D_46ck8")
+
+[node name="Rail3" type="CollisionShape3D" parent="." index="8" unique_id=1915465545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22357878, 0.13056913, 0.30212468)
+shape = SubResource("ConvexPolygonShape3D_17udj")
+
+[node name="Rail4" type="CollisionShape3D" parent="." index="9" unique_id=440027976]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0.224, 0.131, -0.302)
+shape = SubResource("ConvexPolygonShape3D_kte45")
+
+[node name="Wheel2" type="CollisionShape3D" parent="." index="10" unique_id=1388130058]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.479, -0.237, -0.285)
+shape = SubResource("CylinderShape3D_dlbmh")
+
+[node name="Wheel" type="CollisionShape3D" parent="." index="11" unique_id=157926048]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.47929078, -0.2372378, 0.28535205)
+shape = SubResource("CylinderShape3D_dlbmh")
+
+[node name="Foot Rest" type="CollisionShape3D" parent="." index="12" unique_id=882728026]
+transform = Transform3D(0.9815439, -0.1912373, 0, 0.1912373, 0.9815439, 0, 0, 0, 1, 0.707767, -0.22240682, 0)
+shape = SubResource("BoxShape3D_17udj")
+
+[node name="RideComponent" parent="." index="13" unique_id=2005407017 node_paths=PackedStringArray("root_obj") instance=ExtResource("2_dlbmh")]
+interact_data = ExtResource("3_46ck8")
+root_obj = NodePath("..")

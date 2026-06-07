@@ -1,7 +1,9 @@
 class_name RideComponent extends InteractComponent
 
+
 var phys_movement_func: Callable = func(delta: float): pass
 var _on_veh: bool = false
+@onready var sit_position = $"../Marker3D"
 
 # disables gravity and forces, when its in hands it accumulates a ton of velocity
 func _set_freeze(setting: bool):
@@ -21,8 +23,8 @@ func player_on_vehicle() -> bool:
 
 func register(player_ref: CharacterBody3D):
 	player_ref.reparent(root_obj)
-	player_ref.global_position = root_obj.global_position
-	player_ref.global_rotation = Vector3.ZERO
+	player_ref.global_position = sit_position.global_position
+	player_ref.rotation = Vector3.ZERO
 	_on_veh = true
 	_set_col_layers(false)
 
@@ -34,3 +36,4 @@ func deregister(player_ref: CharacterBody3D):
 
 func _on_inter():
 	pass
+	
