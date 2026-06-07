@@ -5,7 +5,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_tocvx"]
 radius = 3.0
 
-[node name="PlayerInteractionScanner" type="Node" unique_id=957716532]
+[node name="PlayerInteractionScanner" type="Node3D" unique_id=166616822]
 script = ExtResource("1_8k6yi")
 metadata/_custom_type_script = "uid://butpi0dfvlyt4"
 

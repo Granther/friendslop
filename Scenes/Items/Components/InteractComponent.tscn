@@ -6,8 +6,9 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_lgacl"]
 radius = 4.0
 
-[node name="InteractComponent" type="Node" unique_id=2005407017]
+[node name="InteractComponent" type="Node3D" unique_id=421232319]
 script = ExtResource("1_qjx70")
+metadata/_custom_type_script = "uid://cv3mfamuxm53d"
 
 [node name="InteractionArea" type="Area3D" parent="." unique_id=1739025781]
 collision_layer = 16

@@ -12,3 +12,10 @@ We need a blast area, and we want it to be generalizable
 Should we just make it a component?
 
 The thing is that we need it to continue to exist after the grenade is gone
+
+Get grandpa to his retirement home
+Have to take him through some kind of warzone etc
+Have to give him meds
+One player pushes him, the other gets him the meds, we have to defend grandpa
+Grandpa mumbles and tries getting away due to dementia
+Sometimes he dies, have to revive him

@@ -22,11 +22,14 @@ var _interactables: Array[Node3D]
 # Probably too much compute
 
 func _on_area_3d_area_entered(area: Area3D) -> void:
+	print("entered")
+	print(area.name)
 	if area is InteractionArea:
 		# area.set_label_visible(true)
 		_interactables.append(area.get_root_obj())
 
 func _on_area_3d_area_exited(area: Area3D) -> void:
+	print("exited")
 	if area is InteractionArea:
 		# area.set_label_visible(false)
 		_interactables.erase(area.get_root_obj())

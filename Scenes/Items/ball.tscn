@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dmrf38usahnjg" path="res://Scripts/Items/ball.gd" id="1_d60mj"]
 [ext_resource type="PackedScene" uid="uid://b3di5ex5obuya" path="res://Scenes/Items/Components/GrabComponent.tscn" id="2_j6u8c"]
 [ext_resource type="Resource" uid="uid://dl0pi56weot2e" path="res://Scenes/Items/InteractResources/grenade.tres" id="3_biw3j"]
-[ext_resource type="PackedScene" path="res://Scenes/Items/Components/AOEComponent.tscn" id="4_j6u8c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8j60k"]
 
@@ -34,9 +33,6 @@ icomp = NodePath("GrabComponent")
 
 [node name="GrabComponent" parent="." unique_id=2005407017 node_paths=PackedStringArray("root_obj") instance=ExtResource("2_j6u8c")]
 interact_data = ExtResource("3_biw3j")
-root_obj = NodePath("..")
-
-[node name="AEOComponent" parent="." unique_id=160898283 node_paths=PackedStringArray("root_obj") instance=ExtResource("4_j6u8c")]
 root_obj = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=536040832]

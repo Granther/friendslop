@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 class_name PlayerComponent
 
 @export var player_ref: CharacterBody3D
