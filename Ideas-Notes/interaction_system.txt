@@ -91,3 +91,8 @@ Am I not completely exploring composition by doing this? I dont think there is r
 
 # We want to pass intput from the player to other things
 But do we actually want to pass it so much as just change the function that checks for it
+
+So, we have this springarm which sticks out and touches things. We need a way to always readwhat it touches and
+... "activate" 
+such as, when we are touching an NPC, we can tell the NPC what we are holding and if it can take it
+then it will show a gui message 

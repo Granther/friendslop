@@ -21,15 +21,15 @@ var _interactables: Array[Node3D]
 # Could we always be sorting the list to be the closest object at the front?
 # Probably too much compute
 
+func _ready():
+	proc_func = _proc_func
+
 func _on_area_3d_area_entered(area: Area3D) -> void:
-	print("entered")
-	print(area.name)
 	if area is InteractionArea:
 		# area.set_label_visible(true)
 		_interactables.append(area.get_root_obj())
 
 func _on_area_3d_area_exited(area: Area3D) -> void:
-	print("exited")
 	if area is InteractionArea:
 		# area.set_label_visible(false)
 		_interactables.erase(area.get_root_obj())
@@ -65,3 +65,10 @@ func _input(event):
 				# This erases the "interact" input, so it doesn't get passed to the item
 				get_viewport().set_input_as_handled()
 				interacted_external_item.emit(obj_inter_comp)
+
+func _proc_func() -> void:
+	if player_ref.object_grabber_shape_cast.is_colliding():
+		var obj_collided: Node3D = player_ref.object_grabber_shape_cast.get_collision_result()[0]["collider"]
+		if obj_collided.has_node("NPCComponent"):
+			print("hit npv")
+		

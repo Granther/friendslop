@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://y3iufer3kyi5"]
+
+[ext_resource type="PackedScene" uid="uid://b364m4o4gkci7" path="res://Scenes/Items/Components/InteractComponent.tscn" id="1_dwtda"]
+[ext_resource type="Script" uid="uid://bgjyyt3rcxuby" path="res://Scripts/Items/Components/npc_touch_component.gd" id="2_dwtda"]
+
+[node name="NPCTouchComponent" unique_id=779592482 instance=ExtResource("1_dwtda")]
+script = ExtResource("2_dwtda")

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Textures/tiled-bg.png" id="2_vrhiu"]
 [ext_resource type="Script" uid="uid://c0otao1r35fyi" path="res://Scripts/Places/world_flat.gd" id="2_xhy82"]
 [ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Items/ball.tscn" id="3_u1plk"]
+[ext_resource type="PackedScene" uid="uid://bde51bujtieqr" path="res://Scenes/NPCs/wobanger.tscn" id="5_0mah3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0mah3"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)
@@ -79,3 +80,6 @@ material = SubResource("StandardMaterial3D_ck1w6")
 
 [node name="Ball" parent="." index="8" unique_id=1482215681 instance=ExtResource("3_u1plk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.219421, 0.58177423, -1.4894295)
+
+[node name="Wobanger" parent="." index="9" unique_id=945226893 instance=ExtResource("5_0mah3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2865963, 0.08177447, 0.97179055)
