@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dvutaajxvrp7"]
+
+[ext_resource type="PackedScene" uid="uid://bdejeamns5gfk" path="res://Blender/Vehicles/WheelChair.glb" id="1_dbsth"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dbsth"]
+size = Vector3(3.035415, 2.9392583, 1.9362202)
+
+[node name="WheelChair" unique_id=941593515 instance=ExtResource("1_dbsth")]
+
+[node name="main frame" parent="." index="0" unique_id=47889994]
+transform = Transform3D(0.32951498, 0, 0, 0, 0.32951498, 0, 0, 0, 0.32951498, 0, 0.31009457, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=1378306370]
+transform = Transform3D(0.32951498, 0, 0, 0, 0.32951498, 0, 0, 0, 0.32951498, 0.3074043, 0.48303014, -0.0009746856)
+shape = SubResource("BoxShape3D_dbsth")
+
+[node name="right" parent="right" parent_id_path=PackedInt32Array(468550679) index="0" unique_id=862377917]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.31009457)
+
+[node name="left" parent="left" parent_id_path=PackedInt32Array(1496386251) index="0" unique_id=924475251]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 4.3244304e-21, 0, 1, 5.029142e-08, 0, -0.31009457)
+
+[node name="RightHandleMarker" type="Marker3D" parent="." index="4" unique_id=256976445]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.152, 0.95066804, 0.288)
+
+[node name="LeftHandleMarker" type="Marker3D" parent="." index="5" unique_id=1915620783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1521424, 0.95066804, -0.28334793)

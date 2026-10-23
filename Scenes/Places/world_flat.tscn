@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://c0otao1r35fyi" path="res://Scripts/Places/world_flat.gd" id="2_xhy82"]
 [ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Items/ball.tscn" id="3_u1plk"]
 [ext_resource type="PackedScene" uid="uid://bde51bujtieqr" path="res://Scenes/NPCs/wobanger.tscn" id="5_0mah3"]
+[ext_resource type="PackedScene" uid="uid://b04i0md4nwlxf" path="res://Scenes/Vehicles/cart2.tscn" id="6_7w0r2"]
+[ext_resource type="PackedScene" uid="uid://dvutaajxvrp7" path="res://Scenes/NPCs/grandpa.tscn" id="7_xhy82"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0mah3"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)
@@ -83,3 +85,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.219421, 0.58177423, -1.489
 
 [node name="Wobanger" parent="." index="9" unique_id=945226893 instance=ExtResource("5_0mah3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2865963, 0.08177447, 0.97179055)
+
+[node name="Cart" parent="." index="10" unique_id=1683438010 instance=ExtResource("6_7w0r2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9375196, 0.6093708, 0.21827507)
+
+[node name="WheelChair" parent="." index="11" unique_id=941593515 instance=ExtResource("7_xhy82")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13585114, 0.08300915, 3.073265)
+collision_layer = 257
+collision_mask = 257

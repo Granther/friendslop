@@ -1,7 +1,7 @@
 extends RigidBody3D
 
 @export var icomp: InteractComponent
-@export var multi_comp: PhysItemMultiComp
+#@export var multi_comp: PhysItemMultiComp
 
 @onready var bullet_scene = preload("res://Scenes/Items/bullet.tscn")
 @onready var bullet_spawn_loc: Marker3D = $BulletSpawnLocation
@@ -14,8 +14,8 @@ func _ready():
 func get_icomp() -> InteractComponent:
 	return icomp
 
-func get_multi_comp() -> PhysItemMultiComp: 
-	return multi_comp
+#func get_multi_comp() -> PhysItemMultiComp: 
+	#return multi_comp
 
 func _on_inter():
 	pass
