@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Items/ball.tscn" id="3_u1plk"]
 [ext_resource type="PackedScene" uid="uid://bde51bujtieqr" path="res://Scenes/NPCs/wobanger.tscn" id="5_0mah3"]
 [ext_resource type="PackedScene" uid="uid://b04i0md4nwlxf" path="res://Scenes/Vehicles/cart2.tscn" id="6_7w0r2"]
-[ext_resource type="PackedScene" uid="uid://dvutaajxvrp7" path="res://Scenes/NPCs/grandpa.tscn" id="7_xhy82"]
+[ext_resource type="PackedScene" uid="uid://c5vhlyxd4rtl5" path="res://Scenes/Items/gun.tscn" id="7_xhy82"]
+[ext_resource type="PackedScene" uid="uid://dvutaajxvrp7" path="res://Scenes/NPCs/grandpa.tscn" id="8_ck1w6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0mah3"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)
@@ -89,7 +90,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2865963, 0.08177447, 0.971
 [node name="Cart" parent="." index="10" unique_id=1683438010 instance=ExtResource("6_7w0r2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9375196, 0.6093708, 0.21827507)
 
-[node name="WheelChair" parent="." index="11" unique_id=941593515 instance=ExtResource("7_xhy82")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13585114, 0.08300915, 3.073265)
-collision_layer = 257
-collision_mask = 257
+[node name="Gun" parent="." index="11" unique_id=238356818 instance=ExtResource("7_xhy82")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.6168146, 0.19048704, 2.8168464)
+
+[node name="Grandpa" parent="." index="12" unique_id=941593515 instance=ExtResource("8_ck1w6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27965075, 0.08300915, 2.799141)
+collision_layer = 48
+collision_mask = 7

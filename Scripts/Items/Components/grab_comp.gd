@@ -24,14 +24,19 @@ func deregister():
 func _multiplayer_register(cam_path: NodePath, anchor_path: NodePath):
 	_set_freeze(true)
 	_set_col_layers(false)
+	# We have to pass in paths, because the path will be different for different clients. Also, not serializeable otherwise
 	var anchor: Marker3D = get_node(anchor_path)
 	var camera: Camera3D = get_node(cam_path)
 	root_obj.reparent(anchor)
 	root_obj.global_rotation = Vector3.ZERO
-	# root_obj.position = Vector3.ZERO
+	
+	# Get the difference between the objs zero point and the desired grab pos
+	var offset = (root_obj.global_position - root_obj.handle_marker.global_position)
+	
 	proc_func = func():
 		root_obj.global_rotation = camera.global_rotation
-		root_obj.global_position = anchor.global_position
+		#root_obj.global_position = anchor.global_position
+		root_obj.global_position = (anchor.global_position + offset)
 
 @rpc("call_local", "any_peer")
 func _multiplayer_deregister():

@@ -6,6 +6,7 @@ extends RigidBody3D
 @onready var bullet_scene = preload("res://Scenes/Items/bullet.tscn")
 @onready var bullet_spawn_loc: Marker3D = $BulletSpawnLocation
 @onready var spawner = $MultiplayerSpawner
+@onready var handle_marker: Marker3D = $HandleMarker
 
 func _ready():
 	icomp.on_inter_key_hit = Callable(self, "_on_inter")

@@ -1,6 +1,6 @@
 extends Grabbable
 
-@export var multiplayer_comp: Node3D = null
+#@export var multiplayer_comp: Node3D = null
 
 func _ready():
 	_runtime_checks()

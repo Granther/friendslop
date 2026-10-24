@@ -56,6 +56,10 @@ func _enter_tree() -> void:
 	#assert(get_collision_layer_value(4), "must be on 'Expodables' (4) collision layer")
 
 func _ready():
+	#var a = Vector3(2, 0, 0)
+	#var b = Vector3(-1, 0, 0)
+	#print(a - b)
+	#
 	# Setting nametag of player, be sure to enable billboarding in the flags so it follows the camera
 	nametag.text = "Player: " + str(name)
 	# Ensures that the spawned characters have default animation blends when spawned in
