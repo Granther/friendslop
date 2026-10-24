@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bdejeamns5gfk" path="res://Blender/Vehicles/WheelChair.glb" id="1_dbsth"]
 [ext_resource type="Script" uid="uid://b01usttonjgsb" path="res://Scripts/NPCs/grandpa.gd" id="2_o14il"]
-[ext_resource type="PackedScene" uid="uid://b3di5ex5obuya" path="res://Scenes/Items/Components/GrabComponent.tscn" id="3_f4mgk"]
+[ext_resource type="PackedScene" uid="uid://cwk0ebrnxd6ac" path="res://Scenes/Items/Components/PushComponent.tscn" id="3_f4mgk"]
 [ext_resource type="Resource" uid="uid://dl0pi56weot2e" path="res://Scenes/Items/InteractResources/grenade.tres" id="4_f4mgk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dbsth"]
@@ -10,19 +10,19 @@ size = Vector3(3.035415, 2.9392583, 1.9362202)
 
 [node name="Grandpa" unique_id=941593515 node_paths=PackedStringArray("icomp") instance=ExtResource("1_dbsth")]
 script = ExtResource("2_o14il")
-icomp = NodePath("GrabComponent")
+icomp = NodePath("PushComponent")
 
-[node name="main frame" parent="." index="0" unique_id=1344210910]
+[node name="main frame" parent="." index="0" unique_id=654609583]
 transform = Transform3D(0.32951498, 0, 0, 0, 0.32951498, 0, 0, 0, 0.32951498, 0, 0.31009457, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=1378306370]
 transform = Transform3D(0.32951498, 0, 0, 0, 0.32951498, 0, 0, 0, 0.32951498, 0.3074043, 0.48303014, -0.0009746856)
 shape = SubResource("BoxShape3D_dbsth")
 
-[node name="right" parent="right" parent_id_path=PackedInt32Array(726710752) index="0" unique_id=813284929]
+[node name="right" parent="right" parent_id_path=PackedInt32Array(124032367) index="0" unique_id=1487806788]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.31009457)
 
-[node name="left" parent="left" parent_id_path=PackedInt32Array(2061180345) index="0" unique_id=1658802892]
+[node name="left" parent="left" parent_id_path=PackedInt32Array(2107044527) index="0" unique_id=2077742121]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 4.3244304e-21, 0, 1, 5.029142e-08, 0, -0.31009457)
 
 [node name="RightHandleMarker" type="Marker3D" parent="." index="4" unique_id=256976445]
@@ -31,6 +31,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.152, 0.95066804, 0.288)
 [node name="LeftHandleMarker" type="Marker3D" parent="." index="5" unique_id=1915620783]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1521424, 0.95066804, -0.28334793)
 
-[node name="GrabComponent" parent="." index="6" unique_id=2005407017 node_paths=PackedStringArray("root_obj") instance=ExtResource("3_f4mgk")]
+[node name="PushComponent" parent="." index="6" unique_id=779592482 node_paths=PackedStringArray("root_obj") instance=ExtResource("3_f4mgk")]
 interact_data = ExtResource("4_f4mgk")
 root_obj = NodePath("..")

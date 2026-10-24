@@ -32,8 +32,10 @@ var PUSH_FORCE = 2.5
 @onready var right_arm = $"%Stoneman/Right Arm Target"
 @onready var hip_hold_marker: Marker3D = %Stoneman/%HipHoldMarker
 @onready var center_hold_marker: Marker3D = %Stoneman/%CenterHoldMarker
-@onready var idle_hand_marker: Marker3D = %Stoneman/%IdleHandMarker
+@onready var right_hand_idle_marker: Marker3D = %Stoneman/%RightHandIdleMarker
+@onready var left_hand_idle_marker: Marker3D = %Stoneman/%LeftHandIdleMarker
 @onready var right_hand_obj_marker: Marker3D = %Stoneman/%RightHandObjectMarker
+@onready var left_hand_obj_marker: Marker3D = %Stoneman/%LeftHandObjectMarker
 # undef GLOBAL_TO_COMPS
 
 # Components
@@ -43,6 +45,11 @@ var PUSH_FORCE = 2.5
 @onready var body_manager = $PlayerBodyHandler
 @onready var movement_manager = $PlayerMovementHandler
 @onready var hud_manager = $PlayerHUDManager
+
+# Extra
+@onready var grandpa_wheelchair_anchor: Marker3D = %GrandpaWheelchairMarker
+@onready var grandpa_wheelchair_left_anchor: Marker3D = %GrandpaWheelchairLeftHandleMarker
+@onready var grandpa_wheelchair_right_anchor: Marker3D = %GrandpaWheelchairRightHandleMarker
 
 # Player state machine
 var MOVE_STATE: MOVE_STATE_MODE
@@ -66,6 +73,7 @@ func _ready():
 	anim_manager.set_default_anims()
 	if not is_multiplayer_authority(): return
 	movement_manager.set_player_phys(_movement_phys)
+	body_manager.idle() # Set arms to idle pos in case they ain't in the editor
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.current = true
 

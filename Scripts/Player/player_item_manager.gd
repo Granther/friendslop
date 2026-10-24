@@ -9,7 +9,7 @@ extends PlayerComponent
 
 # Outputs
 signal allow_interaction # -> InteractionScanner
-signal grabbed_item      # -> BodyHandler
+signal grabbed_item(left_anchor: Marker3D, right_anchor: Marker3D)      # -> BodyHandler
 signal dropped_item      # -> BodyHandler
 signal entered_ride(phys_func: Callable)      # -> BodyHandler
 signal exited_ride       # -> BodyHandler
@@ -25,6 +25,9 @@ signal interact_key_hit
 # These are the interact components OF THE ITEM, not the item. We don't touch the item, thats the beautiful part :>
 var cur_grab: InteractComponent = null
 var cur_ride: InteractComponent = null
+
+@onready var IDLE_RIGHT_HAND_MARKER: Marker3D = player_ref.right_hand_idle_marker
+@onready var IDLE_LEFT_HAND_MARKER: Marker3D = player_ref.left_hand_idle_marker
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("drop"):
@@ -43,6 +46,9 @@ func _on_int_scan_interacted_external_item(inter: InteractComponent) -> void:
 	if inter is RideComponent:
 		cur_ride = inter
 		_register_ride()
+	elif inter is PushComponent:
+		cur_grab = inter
+		_register_push()
 	elif inter is GrabComponent:
 		cur_grab = inter
 		_register_grab()
@@ -65,12 +71,31 @@ func _deregister_ride():
 
 func _register_grab():
 	if not is_grab(): return
-	cur_grab.register(player_ref.camera, player_ref.right_hand_obj_marker)
+	var right_anchor = player_ref.right_hand_obj_marker
+	cur_grab.register(player_ref.camera, right_anchor)
 	_register_key_connects(cur_grab)
 	_register_force_connects(cur_grab)
-	grabbed_item.emit()
+	grabbed_item.emit(player_ref.left_hand_idle_marker, right_anchor)
 
 func _deregister_grab():
+	if not is_grab(): return
+	_deregister_key_connects(cur_grab)
+	_deregister_force_connects(cur_grab)
+	cur_grab.deregister()
+	allow_interaction.emit()
+	dropped_item.emit()
+	cur_grab = null
+
+func _register_push():
+	if not is_grab(): return
+	var right_anchor = player_ref.grandpa_wheelchair_right_anchor
+	var left_anchor = player_ref.grandpa_wheelchair_left_anchor
+	cur_grab.register(player_ref.grandpa_wheelchair_anchor)
+	_register_key_connects(cur_grab)
+	_register_force_connects(cur_grab)
+	grabbed_item.emit(left_anchor, right_anchor)
+
+func _deregister_push():
 	if not is_grab(): return
 	_deregister_key_connects(cur_grab)
 	_deregister_force_connects(cur_grab)

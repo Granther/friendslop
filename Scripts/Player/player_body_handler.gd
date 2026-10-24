@@ -4,13 +4,15 @@ extends PlayerComponent
 # Managing animations
 
 # Listens
-# ItemManager:signal grabbed_item -> right_hand_holding
-# ItemManager:signal dropped_item -> right_hand_idle
+# ItemManager:signal grabbed_item -> set_hands(a, b)
+# ItemManager:signal dropped_item -> idle
 
-func right_hand_holding():
+func set_hands(left_anchor: Marker3D, right_anchor: Marker3D):
 	proc_func = func():
-		player_ref.right_arm.global_position = player_ref.hip_hold_marker.global_position
-	
-func right_hand_idle():
-	player_ref.right_arm.global_position = player_ref.idle_hand_marker.global_position
+		player_ref.right_arm.global_position = right_anchor.global_position
+		player_ref.left_arm.global_position = left_anchor.global_position
+
+func idle():
+	player_ref.right_arm.global_position = player_ref.right_hand_idle_marker.global_position
+	player_ref.left_arm.global_position = player_ref.left_hand_idle_marker.global_position
 	proc_func = NULL_FUNC

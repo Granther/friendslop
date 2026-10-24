@@ -3,7 +3,8 @@ extends RigidBody3D
 @export var icomp: InteractComponent
 #@export var multi_comp: PhysItemMultiComp
 
-@onready var handle_marker: Marker3D = $RightHandleMarker
+@onready var r_handle_marker: Marker3D = $RightHandleMarker
+@onready var l_handle_marker: Marker3D = $LeftHandleMarker
 
 func _ready():
 	icomp.on_inter_key_hit = Callable(self, "_on_inter")

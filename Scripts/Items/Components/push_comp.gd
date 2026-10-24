@@ -1,8 +1,5 @@
 class_name PushComponent extends InteractComponent
 
-var phys_movement_func: Callable = func(delta: float): pass
-var _on_veh: bool = false
-
 # disables gravity and forces, when its in hands it accumulates a ton of velocity
 func _set_freeze(setting: bool):
 	if setting:
@@ -12,36 +9,39 @@ func _set_freeze(setting: bool):
 		root_obj.freeze = false
 
 func _set_col_layers(setting: bool):
-	# So the player doesn't collide with the vehicle while in it
-	root_obj.set_collision_layer_value(3, setting)
+	# Remove from Items and Interactibles. So it wont collide with player and be picked up as item from scanner
+	root_obj.set_collision_mask_value(2, setting)
+	# root_obj.set_collision_layer_value(3, setting)
 	interaction_area.set_collision_layer_value(5, setting)
 
-func player_on_vehicle() -> bool:
-	return _on_veh
+func register(anchor: Marker3D):
+	_multiplayer_register.rpc(anchor.get_path())
 
-func register(player_ref: CharacterBody3D):
-	_multiplayer_register.rpc(player_ref.get_path())
+func deregister():
+	_multiplayer_deregister.rpc()
 
-func deregister(player_ref: CharacterBody3D):
-	_multiplayer_deregister.rpc(player_ref.get_path())
-
-# We can't pass the player over the network, its not serializable, must pass path
 @rpc("call_local", "any_peer")
-func _multiplayer_register(player_ref_p: NodePath):
-	var player_ref: CharacterBody3D = get_node(player_ref_p)
-	player_ref.reparent(root_obj)
-	player_ref.global_position = root_obj.global_position
-	player_ref.global_rotation = Vector3.ZERO
-	_on_veh = true
+func _multiplayer_register(anchor_path: NodePath):
+	_set_freeze(true)
 	_set_col_layers(false)
+	# We have to pass in paths, because the path will be different for different clients. Also, not serializeable otherwise
+	var anchor: Marker3D = get_node(anchor_path)
+	root_obj.reparent(anchor)
+	
+	root_obj.global_rotation = Vector3.ZERO
+	proc_func = func():
+		root_obj.global_rotation = anchor.global_rotation
+		root_obj.global_position = anchor.global_position
 
 @rpc("call_local", "any_peer")
-func _multiplayer_deregister(player_ref_p: NodePath):
-	var player_ref: CharacterBody3D = get_node(player_ref_p)
-	player_ref.reparent(WorldAPI.get_world())
-	player_ref.global_rotation = Vector3.ZERO
-	_on_veh = false
+func _multiplayer_deregister():
+	_set_freeze(false)
 	_set_col_layers(true)
+	root_obj.reparent(WorldAPI.get_world())
+	proc_func = NULL_FUNC
 
 func _on_inter():
-	pass
+	print("unimplemented")
+
+func _on_drop():
+	interaction_area.set_label_visible(true)
