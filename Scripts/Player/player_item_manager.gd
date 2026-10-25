@@ -71,7 +71,7 @@ func _deregister_ride():
 
 func _register_grab():
 	if not is_grab(): return
-	var right_anchor = player_ref.right_hand_obj_marker
+	var right_anchor = player_ref.right_hand_in_view_marker
 	cur_grab.register(player_ref.camera, right_anchor)
 	_register_key_connects(cur_grab)
 	_register_force_connects(cur_grab)

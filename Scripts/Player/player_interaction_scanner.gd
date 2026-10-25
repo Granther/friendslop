@@ -49,19 +49,21 @@ func _allow_ride():
 # Should some signal fire here from the item_manager to scoop up the object and handle it from there?
 func _input(event):
 	if event.is_action_pressed("interact1"):
-		if (_can_ride or _can_grab) and len(_interactables) > 0 and player_ref.object_grabber_shape_cast.is_colliding():
+		if len(_interactables) > 0 and player_ref.object_grabber_shape_cast.is_colliding():
 			var object_collided = player_ref.object_grabber_shape_cast.get_collision_result()[0]["collider"]
 			if object_collided in _interactables:
 				var obj_inter_comp: InteractComponent
-				if object_collided.has_node("GrabComponent"):
-					obj_inter_comp = object_collided.get_node("GrabComponent")
-					_can_grab = false
-				elif object_collided.has_node("PushComponent"):
-					obj_inter_comp = object_collided.get_node("PushComponent")
-					_can_grab = false
-				elif object_collided.has_node("RideComponent"):
-					obj_inter_comp = object_collided.get_node("RideComponent")
-					_can_ride = false
+				if _can_grab:
+					if object_collided.has_node("GrabComponent"):
+						obj_inter_comp = object_collided.get_node("GrabComponent")
+						_can_grab = false
+					elif object_collided.has_node("PushComponent"):
+						obj_inter_comp = object_collided.get_node("PushComponent")
+						_can_grab = false
+				elif _can_ride:
+					if object_collided.has_node("RideComponent"):
+						obj_inter_comp = object_collided.get_node("RideComponent")
+						_can_ride = false
 				else:
 					return
 				# Here! We should see if we are interacting with item or vehicle, cause those are separate
