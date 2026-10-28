@@ -7,6 +7,7 @@ extends PlayerComponent
 # ItemManager:signal grabbed_item -> set_hands(a, b)
 # ItemManager:signal dropped_item -> idle
 
+
 func set_hands(left_anchor: Marker3D, right_anchor: Marker3D):
 	proc_func = func():
 		player_ref.right_arm.global_position = right_anchor.global_position

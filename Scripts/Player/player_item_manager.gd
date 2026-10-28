@@ -13,6 +13,7 @@ signal grabbed_item(left_anchor: Marker3D, right_anchor: Marker3D)      # -> Bod
 signal dropped_item      # -> BodyHandler
 signal entered_ride(phys_func: Callable)      # -> BodyHandler
 signal exited_ride       # -> BodyHandler
+signal mvmnt_pushing_item(pushing: bool) # -> Player
 
 # Listens
 # InteractionScanner:signal -> interacted_external_item
@@ -31,7 +32,11 @@ var cur_ride: InteractComponent = null
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("drop"):
-		if is_grab(): _deregister_grab()
+		if not is_grab(): return # Yes, I know this is redundant, but what if I change the fn later
+		if cur_grab is GrabComponent:
+			_deregister_grab()
+		elif cur_grab is PushComponent:
+			_deregister_push() 
 	if event.is_action_pressed("interact1"):
 		interact_key_hit.emit()
 	if event.is_action_pressed("left_mouse"):
@@ -94,6 +99,7 @@ func _register_push():
 	_register_key_connects(cur_grab)
 	_register_force_connects(cur_grab)
 	grabbed_item.emit(left_anchor, right_anchor)
+	mvmnt_pushing_item.emit(true)
 
 func _deregister_push():
 	if not is_grab(): return
@@ -102,6 +108,7 @@ func _deregister_push():
 	cur_grab.deregister()
 	allow_interaction.emit()
 	dropped_item.emit()
+	mvmnt_pushing_item.emit(false)
 	cur_grab = null
 
 @rpc("call_local")

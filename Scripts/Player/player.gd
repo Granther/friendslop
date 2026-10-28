@@ -58,6 +58,12 @@ enum MOVE_STATE_MODE { IDLE, SPRINTING, WALKING }
 var STAND_STATE: STAND_STATE_MODE
 enum STAND_STATE_MODE { CROUCHING, STANDING }
 
+# Listens
+# InteractionScanner:mvmnt_pushing_item -> _set_can_jump
+
+# Set by recieving signals from components
+var _can_jump: bool = true
+
 func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
 	#assert(get_collision_layer_value(4), "must be on 'Expodables' (4) collision layer")
@@ -130,7 +136,7 @@ func _movement_phys(delta: float):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if _can_jump and Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y += JUMP_VELOCITY
 		
 	if Input.is_action_pressed("crouch"):
@@ -199,3 +205,11 @@ func _movement_phys(delta: float):
 func _movement_proc(delta: float):
 	camera.current = true # <- this sucks im ngl, get this figured out grant
 	# DebugDraw3D.draw_arrow(Vector3.ZERO, Vector3(velocity.x, 0, 0), Color.RED)
+
+func _set_can_jump(pushing: bool):
+	_can_jump = not pushing
+
+# Public helper fn to ensure a function is being run only by the player of this local instance
+func ensure_event_local(f, ...args):
+	if is_multiplayer_authority():
+		return f.callv(args)

@@ -4,9 +4,9 @@
 # Instantiate, we are "starting" the world before we load it
 extends Node
 
-const Player = preload("res://Scenes/Player/player.tscn")
-
 var player: CharacterBody3D = null
+
+signal connected_new_player(peer_id: int)
 
 func _ready():
 	pass
@@ -27,10 +27,8 @@ func remote_multiplayer_host_a() -> String:
 	return room_id
 
 func add_player(peer_id):
-	var player = Player.instantiate()
-	player.name = str(peer_id)
-	WorldAPI.get_world().add_child(player)
-	
+	connected_new_player.emit(peer_id)
+
 func remove_player(peer_id):
 	WorldAPI.get_world().remove_child(WorldAPI.get_world().get_node(str(peer_id)))
 
