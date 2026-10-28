@@ -9,7 +9,7 @@ func _ready() -> void:
 	WorldAPI.set_world(scene_inst)
 	add_child(scene_inst)
 	
-	MultiplayerConnectionHandler.connected_new_player.connect(_setup_new_player)
+	#MultiplayerConnectionHandler.connected_new_player.connect(_setup_new_player)
 
 func _setup_new_player(peer_id: int):
 	#print("here")
