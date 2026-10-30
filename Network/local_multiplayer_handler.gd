@@ -8,6 +8,8 @@ const IS_CLIENT: int = 90
 
 var peer: ENetMultiplayerPeer
 
+# this looks weird because it is made to behave like a client if the server is already running, and a server otherise
+
 func start_server() -> int:
 	peer = ENetMultiplayerPeer.new()
 	var err = peer.create_server(PORT)

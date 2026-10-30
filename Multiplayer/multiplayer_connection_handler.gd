@@ -5,7 +5,9 @@
 extends Node
 
 var player: CharacterBody3D = null
+const player_scene = preload("res://Scenes/Player/player.tscn")
 
+# used by spawners to ensure players are setup and spawned correctly
 signal connected_new_player(peer_id: int)
 
 func _ready():
@@ -30,9 +32,10 @@ func add_player(peer_id):
 	connected_new_player.emit(peer_id)
 
 func remove_player(peer_id):
+	# ... removed_player.emit(peer_id)
 	WorldAPI.get_world().remove_child(WorldAPI.get_world().get_node(str(peer_id)))
 
-func peer_connected(peer_id: int):
+func peer_connected(peer_id: int): # them, this gets run only by the server
 	add_player(peer_id)
 	# Try to sync up phys times
 	# set_phys_frame.rpc(MultiplayerObjectHandler.get_phys_frame())

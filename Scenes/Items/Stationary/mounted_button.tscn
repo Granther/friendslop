@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cmvoucm8lib6v"]
+
+[ext_resource type="Script" uid="uid://cwjqicv15vomf" path="res://Scripts/Items/Stationary/mounted_button.gd" id="1_cc32f"]
+
+[node name="MountedButton" type="Node3D" unique_id=1673098747]
+script = ExtResource("1_cc32f")

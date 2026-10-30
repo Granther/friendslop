@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://d03wx600khrql" path="res://Scripts/Places/lobby.gd" id="2_08ikc"]
 [ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Textures/tiled-bg.png" id="3_k0mp4"]
 [ext_resource type="PackedScene" uid="uid://c5vhlyxd4rtl5" path="res://Scenes/Items/gun.tscn" id="4_581p2"]
+[ext_resource type="Script" uid="uid://cqdwu05lh13u1" path="res://Scripts/Places/Components/level_component.gd" id="5_lrmw4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0mah3"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)
@@ -36,9 +37,6 @@ uv2_scale = Vector3(5, 5, 5)
 
 [node name="Lobby" unique_id=607842282 instance=ExtResource("1_k2kbv")]
 script = ExtResource("2_08ikc")
-
-[node name="MultiplayerSpawner" parent="." index="0" unique_id=1018535175]
-_spawnable_scenes = PackedStringArray()
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="1" unique_id=1869069862]
 transform = Transform3D(0.99950653, 0.03141076, 1.3730079e-09, 0, -4.371139e-08, 1, 0.03141076, -0.99950653, -4.368982e-08, 0, 0, 0)
@@ -85,3 +83,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.898088, 3.953167, 0)
 
 [node name="Gun" parent="." index="9" unique_id=238356818 instance=ExtResource("4_581p2")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 9.293741, 2.685058, 0)
+
+[node name="LevelComponent" type="Node3D" parent="." index="10" unique_id=640487550 node_paths=PackedStringArray("multiplayer_spawner", "root_obj")]
+script = ExtResource("5_lrmw4")
+multiplayer_spawner = NodePath("../MultiplayerSpawner")
+root_obj = NodePath("..")
+metadata/_custom_type_script = "uid://cqdwu05lh13u1"

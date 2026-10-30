@@ -12,3 +12,12 @@ Should every thing that can be in the world posess some component for syncing
 Thinking about it, for every grab comp etc we are just running a register func to apply it, so, if 
 an item is registered when a player joins, we just simply register it again, but only call that on the 
 newly joined player
+
+Need to make it easy to move players between nodes. 
+And dont forget, when we adda player to a child scene, it auto spawns them
+The replicated, auto, scenes are more of a "if child added of this type, then replicated across nodes"
+I think it keeps its identity
+
+Maybe we have an rpc func that sets the current world scene, well, it allows a change. 
+
+Rememeber the arch, every player must perform the operations themselves though rpc calls. So, dot rely on one host to access its files
