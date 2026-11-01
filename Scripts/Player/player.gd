@@ -8,6 +8,7 @@ const SENSITIVITY = 0.003
 var BASE_FOV = 90
 var FOV_CHANGE = 1
 var PUSH_FORCE = 2.5
+const GRAB_DIST = 25
 
 @export var DEFAULT_SPEED: float = 3
 
@@ -18,6 +19,7 @@ var PUSH_FORCE = 2.5
 @onready var head = %Stoneman/%Head
 @onready var grabbed_anchor = %Stoneman/%Head/Camera3D/SpringArm3D/GrabbedAnchor
 @onready var object_grabber_shape_cast = %Stoneman/%Head/ObjectGrabberShapeCast
+@onready var object_grab_raycast = %Stoneman/%Head/ObjectGrabRayCast
 @onready var camera = %Stoneman/%Head/Camera3D
 @onready var nametag = $Nametag
 @onready var stoneman = %Stoneman
@@ -69,19 +71,20 @@ func _enter_tree() -> void:
 	#assert(get_collision_layer_value(4), "must be on 'Expodables' (4) collision layer")
 
 func _ready():
-	#var a = Vector3(2, 0, 0)
-	#var b = Vector3(-1, 0, 0)
-	#print(a - b)
-	#
 	# Setting nametag of player, be sure to enable billboarding in the flags so it follows the camera
-	nametag.text = "Player: " + str(name)
 	# Ensures that the spawned characters have default animation blends when spawned in
+	_setup()
 	anim_manager.set_default_anims()
 	if not is_multiplayer_authority(): return
 	movement_manager.set_player_phys(_movement_phys)
 	body_manager.idle() # Set arms to idle pos in case they ain't in the editor
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.current = true
+
+func _setup():
+	nametag.text = "Player: " + str(name)
+	# set grab dist from raycast
+	object_grab_raycast.target_position = Vector3(0, -GRAB_DIST, 0)
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return

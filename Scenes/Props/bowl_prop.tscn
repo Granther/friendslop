@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dq27veisdyh68"]
 
 [ext_resource type="PackedScene" uid="uid://b0tmc6hhsd00r" path="res://Blender/Places/Bowl.glb" id="1_f0xd6"]
-[ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Textures/tiled-bg.png" id="2_yehvm"]
+[ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Resources/Textures/tiled-bg.png" id="2_yehvm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btiye"]
 albedo_texture = ExtResource("2_yehvm")

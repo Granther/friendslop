@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://djji8kmfadpdm"]
 
 [ext_resource type="PackedScene" uid="uid://bpy2yfcfp51dy" path="res://Scenes/Places/base_place.tscn" id="1_qd3hg"]
-[ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Textures/tiled-bg.png" id="2_vrhiu"]
+[ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Resources/Textures/tiled-bg.png" id="2_vrhiu"]
 [ext_resource type="Script" uid="uid://c0otao1r35fyi" path="res://Scripts/Places/world_flat.gd" id="2_xhy82"]
 [ext_resource type="PackedScene" uid="uid://bde51bujtieqr" path="res://Scenes/NPCs/wobanger.tscn" id="5_0mah3"]
 [ext_resource type="PackedScene" uid="uid://b04i0md4nwlxf" path="res://Scenes/Vehicles/cart2.tscn" id="6_7w0r2"]
-[ext_resource type="PackedScene" uid="uid://c5vhlyxd4rtl5" path="res://Scenes/Items/gun.tscn" id="7_xhy82"]
+[ext_resource type="PackedScene" uid="uid://c5vhlyxd4rtl5" path="res://Scenes/Equippables/gun.tscn" id="7_xhy82"]
 [ext_resource type="PackedScene" uid="uid://dvutaajxvrp7" path="res://Scenes/NPCs/grandpa.tscn" id="8_ck1w6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0mah3"]

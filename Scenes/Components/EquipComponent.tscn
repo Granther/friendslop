@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b364m4o4gkci7"]
+
+[ext_resource type="Script" uid="uid://b13awvalng3nc" path="res://Scripts/Components/equip_comp.gd" id="1_ftli2"]
+
+[node name="EquipComponent" type="Node3D" unique_id=779592482]
+script = ExtResource("1_ftli2")
+metadata/_custom_type_script = "uid://cv3mfamuxm53d"

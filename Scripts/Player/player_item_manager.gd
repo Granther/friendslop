@@ -48,6 +48,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 # Grabbable is an interactable 
 func _on_int_scan_interacted_external_item(inter: InteractComponent) -> void:
+	if not inter.is_interactable:
+		return
 	if inter is RideComponent:
 		cur_ride = inter
 		_register_ride()
@@ -57,6 +59,8 @@ func _on_int_scan_interacted_external_item(inter: InteractComponent) -> void:
 	elif inter is GrabComponent:
 		cur_grab = inter
 		_register_grab()
+	elif inter is HoverInteractComponent:
+		inter.interact()
 	else:
 		push_error("item is not interactable, but not found to be specific: ", inter.name)
 		allow_interaction.emit()

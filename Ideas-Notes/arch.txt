@@ -21,3 +21,5 @@ I think it keeps its identity
 Maybe we have an rpc func that sets the current world scene, well, it allows a change. 
 
 Rememeber the arch, every player must perform the operations themselves though rpc calls. So, dot rely on one host to access its files
+
+Should the only things on the interactables layer be things that are interact components

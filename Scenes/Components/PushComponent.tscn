@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cwk0ebrnxd6ac"]
+
+[ext_resource type="PackedScene" uid="uid://cqhchuybwhy7u" path="res://Scenes/Components/InteractComponent.tscn" id="1_t8wgl"]
+[ext_resource type="Script" uid="uid://p5ra4n4dq38h" path="res://Scripts/Components/push_comp.gd" id="2_exwj0"]
+
+[node name="PushComponent" unique_id=779592482 instance=ExtResource("1_t8wgl")]
+script = ExtResource("2_exwj0")

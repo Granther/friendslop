@@ -27,21 +27,21 @@ func _ready():
 # the architecture is that all things that the player can interact with are in this list
 # why? well, not everything on a layer may be interactable
 
-func _on_area_3d_area_entered(area: Area3D) -> void:
-	if area is InteractionArea:
-		# area.set_label_visible(true)
-		_interactables.append(area.get_root_obj())
-
-func _on_area_3d_area_exited(area: Area3D) -> void:
-	if area is InteractionArea:
-		# area.set_label_visible(false)
-		_interactables.erase(area.get_root_obj())
-
-# interactables.sort_custom(_sort_by_distance_to_player)
-func _sort_by_distance_to_player(area1, area2):
-	var area1_to_player = player_ref.global_position.distance_to(area1.global_position)
-	var area2_to_player = player_ref.global_position.distance_to(area2.global_position)
-	return area1_to_player < area2_to_player
+#func _on_area_3d_area_entered(area: Area3D) -> void:
+	#if area is InteractionArea:
+		## area.set_label_visible(true)
+		#_interactables.append(area.get_root_obj())
+#
+#func _on_area_3d_area_exited(area: Area3D) -> void:
+	#if area is InteractionArea:
+		## area.set_label_visible(false)
+		#_interactables.erase(area.get_root_obj())
+#
+## interactables.sort_custom(_sort_by_distance_to_player)
+#func _sort_by_distance_to_player(area1, area2):
+	#var area1_to_player = player_ref.global_position.distance_to(area1.global_position)
+	#var area2_to_player = player_ref.global_position.distance_to(area2.global_position)
+	#return area1_to_player < area2_to_player
 
 func _allow_grab():
 	_can_grab = true
@@ -53,36 +53,42 @@ func _allow_ride():
 func _input(event):
 	if player_ref.ensure_event_local(event.is_action_pressed, "interact1"):
 	#if event.is_action_pressed("interact1") and is_multiplayer_authority():
-		if len(_interactables) > 0 and player_ref.object_grabber_shape_cast.is_colliding():
-			var object_collided = player_ref.object_grabber_shape_cast.get_collision_result()[0]["collider"]
-			if object_collided in _interactables:
-				var obj_inter_comp: InteractComponent
-				if object_collided.has_node("HoverInteractComponent"):
-					object_collided.get_node("HoverInteractComponent").interact()
-					return
-				elif _can_grab:
-					if object_collided.has_node("GrabComponent"):
-						obj_inter_comp = object_collided.get_node("GrabComponent")
-						_can_grab = false
-					elif object_collided.has_node("PushComponent"):
-						obj_inter_comp = object_collided.get_node("PushComponent")
-						_can_grab = false
-					else: return
-				elif _can_ride:
-					if object_collided.has_node("RideComponent"):
-						obj_inter_comp = object_collided.get_node("RideComponent")
-						_can_ride = false
-					else: return
-				else:
-					return
-				# Here! We should see if we are interacting with item or vehicle, cause those are separate
-				# This erases the "interact" input, so it doesn't get passed to the item
-				get_viewport().set_input_as_handled()
+		#if len(_interactables) > 0 and 
+		#if player_ref.object_grabber_shape_cast.is_colliding():
+		if player_ref.object_grab_raycast.is_colliding():
+			# onbject grabber can only collide with interactables, but what if its not allowed?
+			#var object_collided = player_ref.object_grabber_shape_cast.get_collision_result()[0]["collider"]
+			
+			# give object, any, that it hits 
+			var object_collided = player_ref.object_grab_raycast.get_collider()
+
+
+			#if object_collided in _interactables:
+			var obj_inter_comp: InteractComponent
+			# check if we actually can interact before even seeing if the thing can be
+			if object_collided.has_node("HoverInteractComponent"):
+				obj_inter_comp = object_collided.get_node("HoverInteractComponent")
+			elif _can_grab:
+				if object_collided.has_node("GrabComponent"):
+					obj_inter_comp = object_collided.get_node("GrabComponent")
+					_can_grab = false
+				elif object_collided.has_node("PushComponent"):
+					obj_inter_comp = object_collided.get_node("PushComponent")
+					_can_grab = false
+			elif _can_ride:
+				if object_collided.has_node("RideComponent"):
+					obj_inter_comp = object_collided.get_node("RideComponent")
+					_can_ride = false
+			# why is this here? i forgor
+			get_viewport().set_input_as_handled()
+			if obj_inter_comp != null: # ensure we actually habe an object
 				interacted_external_item.emit(obj_inter_comp)
+			else: return # nothing happens, the interact was attempted but nothing happened
 
 func _proc_func() -> void:
-	if player_ref.object_grabber_shape_cast.is_colliding():
-		var obj_collided: Node3D = player_ref.object_grabber_shape_cast.get_collision_result()[0]["collider"]
-		if obj_collided.has_node("NPCComponent"):
-			print("hit npv")
-		
+	pass
+	#if player_ref.object_grabber_shape_cast.is_colliding():
+		#var obj_collided: Node3D = player_ref.object_grabber_shape_cast.get_collision_result()[0]["collider"]
+		#if obj_collided.has_node("NPCComponent"):
+			#print("hit npv")
+		#

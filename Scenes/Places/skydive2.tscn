@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://o0ux5038jpmx"]
 
-[ext_resource type="PackedScene" uid="uid://n3oq7tlymf2k" path="res://Scenes/Items/missile_2.tscn" id="2_xs3tu"]
-[ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Items/ball.tscn" id="4_sj6h3"]
-[ext_resource type="PackedScene" uid="uid://bqg3la1etwp7o" path="res://Scenes/Items/grenade.tscn" id="4_xs3tu"]
-[ext_resource type="PackedScene" uid="uid://dgmk2ha5tbjx3" path="res://Scenes/Items/pistol.tscn" id="5_xs3tu"]
+[ext_resource type="PackedScene" uid="uid://n3oq7tlymf2k" path="res://Scenes/Equippables/missile_2.tscn" id="2_xs3tu"]
+[ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Equippables/ball.tscn" id="4_sj6h3"]
+[ext_resource type="PackedScene" uid="uid://bqg3la1etwp7o" path="res://Scenes/Equippables/grenade.tscn" id="4_xs3tu"]
+[ext_resource type="PackedScene" uid="uid://dgmk2ha5tbjx3" path="res://Scenes/Equippables/pistol.tscn" id="5_xs3tu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_go701"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)

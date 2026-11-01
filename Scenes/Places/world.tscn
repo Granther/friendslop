@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://coar0w52ewb50"]
 
-[ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Textures/tiled-bg.png" id="3_nfdff"]
-[ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Items/ball.tscn" id="3_vfn8i"]
+[ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Resources/Textures/tiled-bg.png" id="3_nfdff"]
+[ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Equippables/ball.tscn" id="3_vfn8i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_go701"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)

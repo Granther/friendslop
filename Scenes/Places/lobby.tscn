@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://bpy2yfcfp51dy" path="res://Scenes/Places/base_place.tscn" id="1_k2kbv"]
 [ext_resource type="Script" uid="uid://d03wx600khrql" path="res://Scripts/Places/lobby.gd" id="2_08ikc"]
-[ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Textures/tiled-bg.png" id="3_k0mp4"]
-[ext_resource type="PackedScene" uid="uid://c5vhlyxd4rtl5" path="res://Scenes/Items/gun.tscn" id="4_581p2"]
-[ext_resource type="Script" uid="uid://cqdwu05lh13u1" path="res://Scripts/Places/Components/level_component.gd" id="5_lrmw4"]
-[ext_resource type="PackedScene" uid="uid://rr6mya2u1jw4" path="res://Scenes/Items/Stationary/hover_interact_component.tscn" id="6_yn1b5"]
+[ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Resources/Textures/tiled-bg.png" id="3_k0mp4"]
+[ext_resource type="PackedScene" uid="uid://c5vhlyxd4rtl5" path="res://Scenes/Equippables/gun.tscn" id="4_581p2"]
+[ext_resource type="Script" uid="uid://cqdwu05lh13u1" path="res://Scripts/Components/Places/level_component.gd" id="5_lrmw4"]
+[ext_resource type="PackedScene" uid="uid://rr6mya2u1jw4" path="res://Scenes/Components/HoverInterComponent.tscn" id="6_yn1b5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0mah3"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)
@@ -82,19 +82,19 @@ material = SubResource("StandardMaterial3D_ck1w6")
 [node name="SpawnLocation" type="Marker3D" parent="." index="8" unique_id=1066010860]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.898088, 3.953167, 0)
 
-[node name="Gun" parent="." index="9" unique_id=238356818 instance=ExtResource("4_581p2")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 9.293741, 2.685058, 0)
-
-[node name="LevelComponent" type="Node3D" parent="." index="10" unique_id=640487550 node_paths=PackedStringArray("multiplayer_spawner", "root_obj")]
+[node name="LevelComponent" type="Node3D" parent="." index="9" unique_id=640487550 node_paths=PackedStringArray("multiplayer_spawner", "root_obj")]
 script = ExtResource("5_lrmw4")
 multiplayer_spawner = NodePath("../MultiplayerSpawner")
 root_obj = NodePath("..")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="." index="11" unique_id=1970045247]
+[node name="CSGBox3D2" type="CSGBox3D" parent="." index="10" unique_id=1970045247]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.58433, 0.784883, -8.070192)
 use_collision = true
 collision_layer = 16
-collision_mask = 3
+collision_mask = 7
 
 [node name="HoverInteractComponent" parent="CSGBox3D2" index="0" unique_id=1931502930 node_paths=PackedStringArray("root_obj") instance=ExtResource("6_yn1b5")]
 root_obj = NodePath("..")
+
+[node name="Gun" parent="." index="11" unique_id=238356818 instance=ExtResource("4_581p2")]
+transform = Transform3D(-0.9970644, -0.064271934, -0.041613635, -0.065710954, 0.9972528, 0.034187924, 0.03930198, 0.036822047, -0.9985487, 3.7083578, 1.429575, 0)

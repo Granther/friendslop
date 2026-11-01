@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b5j2rwhtj1y2b"]
 
-[ext_resource type="PackedScene" uid="uid://dgmk2ha5tbjx3" path="res://Scenes/Items/pistol.tscn" id="1_rj7pu"]
-[ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Items/ball.tscn" id="2_l30xs"]
+[ext_resource type="PackedScene" uid="uid://dgmk2ha5tbjx3" path="res://Scenes/Equippables/pistol.tscn" id="1_rj7pu"]
+[ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Equippables/ball.tscn" id="2_l30xs"]
 
 [node name="Skydive" type="Node3D" unique_id=1414049902]
 

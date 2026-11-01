@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://rr6mya2u1jw4"]
+
+[ext_resource type="Script" uid="uid://br52aybikqgdq" path="res://Scripts/Components/hover_interact_component.gd" id="1_wp2no"]
+
+[node name="HoverInteractComponent" type="Node3D" unique_id=1931502930]
+script = ExtResource("1_wp2no")

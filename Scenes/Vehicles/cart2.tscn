@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b04i0md4nwlxf"]
 
 [ext_resource type="Script" uid="uid://dycg25uswnid6" path="res://Scenes/Vehicles/cart_2.gd" id="1_ggmat"]
-[ext_resource type="PackedScene" uid="uid://d0f8sunmydhg6" path="res://Scenes/Items/Components/RideComponent.tscn" id="2_efqhp"]
-[ext_resource type="Resource" uid="uid://d2ux7jiihj1fh" path="res://Scenes/Items/InteractResources/wheel_chair.tres" id="3_pyap6"]
+[ext_resource type="PackedScene" uid="uid://d0f8sunmydhg6" path="res://Scenes/Components/RideComponent.tscn" id="2_efqhp"]
+[ext_resource type="Resource" uid="uid://d2ux7jiihj1fh" path="res://Resources/InteractResources/wheel_chair.tres" id="3_pyap6"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_b26ih"]
 properties/0/path = NodePath(".:position")
