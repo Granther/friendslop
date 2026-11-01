@@ -24,6 +24,9 @@ var _interactables: Array[Node3D]
 func _ready():
 	proc_func = _proc_func
 
+# the architecture is that all things that the player can interact with are in this list
+# why? well, not everything on a layer may be interactable
+
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	if area is InteractionArea:
 		# area.set_label_visible(true)
@@ -54,7 +57,10 @@ func _input(event):
 			var object_collided = player_ref.object_grabber_shape_cast.get_collision_result()[0]["collider"]
 			if object_collided in _interactables:
 				var obj_inter_comp: InteractComponent
-				if _can_grab:
+				if object_collided.has_node("HoverInteractComponent"):
+					object_collided.get_node("HoverInteractComponent").interact()
+					return
+				elif _can_grab:
 					if object_collided.has_node("GrabComponent"):
 						obj_inter_comp = object_collided.get_node("GrabComponent")
 						_can_grab = false
