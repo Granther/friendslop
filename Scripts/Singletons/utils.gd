@@ -10,3 +10,8 @@ func destroy_net(body_p: NodePath):
 func add_child_multi(thing_p: NodePath): 
 	if thing_p != null:
 		WorldAPI.get_world().add_child(get_node(thing_p))
+
+func find_node_cur_world(sought_node_name: String):
+	if WorldAPI.get_world().has_node(sought_node_name):
+		return WorldAPI.get_world().get_node(sought_node_name)
+	else: return null

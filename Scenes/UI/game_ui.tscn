@@ -212,6 +212,24 @@ script = ExtResource("4_6w80a")
 crosshair_type = 1
 plus_gap = 10
 
+[node name="PromptPanel" type="PanelContainer" parent="Crosshair" unique_id=612374688]
+visible = false
+layout_mode = 0
+offset_left = -54.0
+offset_top = 30.0
+offset_right = 74.0
+offset_bottom = 63.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5b8pf")
+
+[node name="PromptLabel" type="Label" parent="Crosshair/PromptPanel" unique_id=921778953]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vo2tu")
+theme_override_font_sizes/font_size = 20
+text = "LOADING..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/JoinBtn" to="." method="_on_join_btn_pressed"]
 [connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/HostBtn" to="." method="_on_host_btn_pressed"]
 [connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/LocalBtn" to="." method="_on_local_btn_pressed"]

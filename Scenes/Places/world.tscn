@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://coar0w52ewb50"]
 
+[ext_resource type="Script" uid="uid://cqdwu05lh13u1" path="res://Scripts/Components/Places/level_component.gd" id="3_mynff"]
 [ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Resources/Textures/tiled-bg.png" id="3_nfdff"]
 [ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Equippables/ball.tscn" id="3_vfn8i"]
 
@@ -76,5 +77,11 @@ material = SubResource("StandardMaterial3D_8j60k")
 [node name="Ball" parent="." unique_id=1482215681 instance=ExtResource("3_vfn8i")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.3781631, 0.8319628, 3.3416271)
 collision_mask = 23
+
+[node name="LevelComponent" type="Node3D" parent="." unique_id=288812564 node_paths=PackedStringArray("multiplayer_spawner", "root_obj")]
+script = ExtResource("3_mynff")
+multiplayer_spawner = NodePath("../MultiplayerSpawner")
+root_obj = NodePath("..")
+metadata/_custom_type_script = "uid://cqdwu05lh13u1"
 
 [editable path="Ball"]

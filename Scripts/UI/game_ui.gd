@@ -7,6 +7,7 @@ extends CanvasLayer
 @onready var pause_menu: PanelContainer = $MarginContainer/PauseMenu
 @onready var room_id_box: LineEdit = $MarginContainer/StartupMenu/MarginContainer/VBoxContainer/RoomID
 @onready var loading_prompt: CenterContainer = $MarginContainer/LoadingPrompt
+@onready var crosshair_prompt_label: Label = $Crosshair/PromptPanel/PromptLabel
 @onready var info_prompt: CenterContainer = $MarginContainer/InfoPrompt
 @onready var info_prompt_btn: Button = $MarginContainer/InfoPrompt/PanelContainer/MarginContainer/VBoxContainer/OkBtn
 @onready var info_prompt_label: Label = $MarginContainer/InfoPrompt/PanelContainer/MarginContainer/VBoxContainer/Label
@@ -104,6 +105,13 @@ func _show_info_msg_a(msg: String):
 	info_prompt.show()
 	await info_prompt_btn.button_down
 	info_prompt.hide()
+
+#func _show_crosshair_prompt(s: String):
+	#crosshair_prompt_label.text = s
+	#crosshair_prompt_label.show()
+#
+#func _hide_crosshair_prompt():
+	#crosshair_prompt_label.hide()
 
 func is_menu_open() -> bool:
 	# returns true if we are anything but NONE for the state

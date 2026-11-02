@@ -10,12 +10,14 @@ extends PlayerComponent
 
 # Outputs
 signal interacted_external_item(item: InteractComponent) # -> ItemManager
+signal looking_interactable_changed(looking: bool) # -> HUDManager
 
 # Listens
 # ItemManager:signal -> _allow_interaction
 
 var _can_ride: bool = true
 var _can_grab: bool = true
+var _looking_at_inter: bool = false
 var _interactables: Array[Node3D]
 
 # Could we always be sorting the list to be the closest object at the front?
@@ -52,18 +54,9 @@ func _allow_ride():
 # Should some signal fire here from the item_manager to scoop up the object and handle it from there?
 func _input(event):
 	if player_ref.ensure_event_local(event.is_action_pressed, "interact1"):
-	#if event.is_action_pressed("interact1") and is_multiplayer_authority():
-		#if len(_interactables) > 0 and 
-		#if player_ref.object_grabber_shape_cast.is_colliding():
-		if player_ref.object_grab_raycast.is_colliding():
-			# onbject grabber can only collide with interactables, but what if its not allowed?
-			#var object_collided = player_ref.object_grabber_shape_cast.get_collision_result()[0]["collider"]
-			
+		if _looking_at_inter:
 			# give object, any, that it hits 
 			var object_collided = player_ref.object_grab_raycast.get_collider()
-
-
-			#if object_collided in _interactables:
 			var obj_inter_comp: InteractComponent
 			# check if we actually can interact before even seeing if the thing can be
 			if object_collided.has_node("HoverInteractComponent"):
@@ -85,10 +78,17 @@ func _input(event):
 				interacted_external_item.emit(obj_inter_comp)
 			else: return # nothing happens, the interact was attempted but nothing happened
 
+func _set_looking_state():
+	if player_ref.object_grab_raycast.is_colliding():
+		if _looking_at_inter: pass
+		elif not _looking_at_inter:
+			_looking_at_inter = true
+			looking_interactable_changed.emit(true)
+	else:
+		if _looking_at_inter: 
+			_looking_at_inter = false
+			looking_interactable_changed.emit(false) 
+		elif not _looking_at_inter: pass 
+
 func _proc_func() -> void:
-	pass
-	#if player_ref.object_grabber_shape_cast.is_colliding():
-		#var obj_collided: Node3D = player_ref.object_grabber_shape_cast.get_collision_result()[0]["collider"]
-		#if obj_collided.has_node("NPCComponent"):
-			#print("hit npv")
-		#
+	_set_looking_state()

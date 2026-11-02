@@ -12,7 +12,7 @@ const GRAB_DIST = 25
 
 @export var DEFAULT_SPEED: float = 3
 
-@onready var ui = get_tree().get_first_node_in_group("game_ui")
+@onready var ui = get_tree().get_first_node_in_group("game_ui") # fuck it
 @onready var sync = $MultiplayerSynchronizer
 
 # def GLOBAL_TO_COMPS
