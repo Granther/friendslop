@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bl3h3qpq62nfv"]
+
+[ext_resource type="Script" uid="uid://cpcwkoljc6dr2" path="res://Scripts/Props/dummy.gd" id="1_bp80y"]
+[ext_resource type="Script" uid="uid://cbffexvrxelan" path="res://Scripts/Components/health_component.gd" id="2_5f41s"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_r3aqm"]
+radius = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jfrif"]
+albedo_color = Color(1, 0.4117647, 1, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5qsip"]
+radius = 0.4
+
+[node name="Dummy" type="StaticBody3D" unique_id=966509726]
+script = ExtResource("1_bp80y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1036360912]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_r3aqm")
+surface_material_override/0 = SubResource("StandardMaterial3D_jfrif")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=510510202]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_5qsip")
+
+[node name="HealthComponent" type="Node3D" parent="." unique_id=1329009554 node_paths=PackedStringArray("root_obj")]
+script = ExtResource("2_5f41s")
+health = 200
+root_obj = NodePath("..")
+metadata/_custom_type_script = "uid://cbffexvrxelan"
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

@@ -33,3 +33,7 @@ but, about moving the player, we need to despawn the player and
 Ok, hmmm, so when we interact, we want to move all players to a new scene. Ideally, each player should do this on their own
 
 Player 1 clicks on obj, that obj then calls a synced func which calls on both players
+
+Ok, so, a player shoots another player. That player takes damage, does predator report damage
+or the victim? The health component of the victim is connected to all other instances of the 
+player's health component, so it handles decreasing the health on all instances. I think this works for now

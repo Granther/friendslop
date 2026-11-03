@@ -132,6 +132,7 @@ ragdoll={
 3d_physics/layer_7="Ragdolls"
 3d_physics/layer_8="Vehicles"
 3d_physics/layer_9="NPC"
+3d_physics/layer_10="ShootDamagable"
 
 [physics]
 

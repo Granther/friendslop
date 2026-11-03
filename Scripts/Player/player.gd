@@ -24,6 +24,7 @@ const GRAB_DIST = 25
 @onready var camera = %Stoneman/%Head/Camera3D
 @onready var nametag = $"Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Upper Chest/Nametag"
 @onready var stoneman = %Stoneman
+@onready var stoneman_dead = $StonemanDead
 @onready var springarm = %Stoneman/%Head/SpringArm3D
 
 # Arms and Legs
@@ -96,6 +97,7 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
 	if ui.is_menu_open(): return
+	if movement_manager.INPUT_DST == movement_manager.INPUT_OPT.NONE: return
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * SENSITIVITY)
 		head.rotate_x(event.relative.y * SENSITIVITY)

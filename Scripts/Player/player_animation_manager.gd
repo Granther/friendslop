@@ -60,6 +60,10 @@ func _on_exited_ride() -> void:
 func _on_entered_ride(phys_func: Callable) -> void:
 	set_idle_anims()
 
+func _on_player_died() -> void:
+	player_ref.stoneman.visible = false
+	player_ref.stoneman_dead.visible = true
+
 @rpc("any_peer", "call_local")
 func set_anim(path, arg):
 	player_ref.leg_anim_tree.set(path, arg)

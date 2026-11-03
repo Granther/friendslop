@@ -10,6 +10,7 @@ signal revived
 #func initialize(_health: int) -> void:
 	#health = _health
 
+@rpc("call_local", "any_peer", "reliable")
 func damage(n: int):
 	health -= n
 	damaged.emit()
@@ -17,6 +18,7 @@ func damage(n: int):
 		health = 0
 		died.emit()
 
+@rpc("call_local", "any_peer", "reliable")
 func heal(n: int):
 	health += n
 	healed.emit()

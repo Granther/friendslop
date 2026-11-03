@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://t03r8ska0opf" path="res://Scenes/Props/SceneChanger.tscn" id="6_yn1b5"]
 [ext_resource type="PackedScene" uid="uid://be8qbmt0fe144" path="res://Scenes/Player/player.tscn" id="7_ec3hp"]
 [ext_resource type="PackedScene" uid="uid://bquifffx5b7ha" path="res://Scenes/Equippables/hitscan_gun.tscn" id="7_k2kbv"]
+[ext_resource type="PackedScene" uid="uid://bl3h3qpq62nfv" path="res://Scenes/Props/dummy.tscn" id="8_ec3hp"]
+[ext_resource type="PackedScene" uid="uid://c5vhlyxd4rtl5" path="res://Scenes/Equippables/gun.tscn" id="9_k0mp4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0mah3"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)
@@ -89,5 +91,22 @@ root_obj = NodePath("..")
 [node name="SceneChangerBox" parent="." index="9" unique_id=1786140083 instance=ExtResource("6_yn1b5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3742256, 1.2207146, -9.029382)
 
-[node name="HitscanGun" parent="." index="10" unique_id=238356818 instance=ExtResource("7_k2kbv")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 7.420293, 1.8283634, 0)
+[node name="Dummy" parent="." index="10" unique_id=966509726 instance=ExtResource("8_ec3hp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.875717, 0, -4.4388103)
+collision_layer = 513
+collision_mask = 0
+
+[node name="Dummy2" parent="." index="11" unique_id=869242394 instance=ExtResource("8_ec3hp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.528242, 0, 0)
+collision_layer = 513
+collision_mask = 0
+
+[node name="Dummy3" parent="." index="12" unique_id=1194041840 instance=ExtResource("8_ec3hp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.896116, 0, 4.880051)
+collision_layer = 513
+collision_mask = 0
+
+[node name="HitscanGun" parent="." index="13" unique_id=238356818 instance=ExtResource("7_k2kbv")]
+
+[node name="Gun" parent="." index="14" unique_id=1371250526 instance=ExtResource("9_k0mp4")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.8837018, 0.60972714, 5.7150283)

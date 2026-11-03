@@ -3,7 +3,7 @@ class_name EquipComponent extends InteractComponent
 #@export var interact_data: InteractResource
 
 #@onready var interaction_area: Area3D = $InteractionArea
-@onready var inter_col_shape: CollisionShape3D = $InteractionArea/CollisionShape3D
+#@onready var inter_col_shape: CollisionShape3D = $InteractionArea/CollisionShape3D
 
 # Emitted to the player when we want to be dropped or generally done with
 signal force_done
