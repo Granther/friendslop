@@ -1,9 +1,7 @@
-extends Node3D
-
-@onready var spawn_loc: Marker3D = $SpawnLocation
-@onready var multiplayer_spawner: MultiplayerSpawner = $MultiplayerSpawner
-
-const player_scene = preload("res://Scenes/Player/player.tscn")
+extends BaseWorld
 
 func _ready() -> void:
-	pass
+	MultiplayerConnectionHandler.connected_new_player.connect(_setup_player)
+	
+func _setup_player(peer_id: int) -> void:
+	spawnpoint_comp.spawn_new_player(peer_id)

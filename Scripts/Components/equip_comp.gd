@@ -17,6 +17,9 @@ var NULL_FUNC = func(): pass
 var phys_func = func(): pass
 var proc_func = func(): pass
 
+# set at register time, so the equipped item knows who is using it
+var player_ref: Node3D
+
 func _ready():
 	# What if we never even needed a method because the interaction area just directly got the Interaction...
 	# ... Component. So, we don't need to even depend on the item having these methods

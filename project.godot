@@ -24,6 +24,7 @@ WorldAPI="*uid://b0x20mw0x4g1s"
 MultiplayerObjectHandler="*uid://mlk34ddt2jvy"
 MultiplayerConnectionHandler="*uid://dhk2xega716s5"
 Utils="*uid://bfbf4oyslsq5y"
+MultiplayerApi="*uid://dmmg085od4v5x"
 
 [debug_draw_3d]
 

@@ -1,1 +1,1 @@
-class_name DamagingComponent extends BaseComponent
+class_name DamageComponent extends BaseComponent

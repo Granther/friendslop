@@ -23,3 +23,13 @@ Maybe we have an rpc func that sets the current world scene, well, it allows a c
 Rememeber the arch, every player must perform the operations themselves though rpc calls. So, dot rely on one host to access its files
 
 Should the only things on the interactables layer be things that are interact components
+
+
+Hmm, simply moving all the players is a little harder than I thought.
+So, just for one player, say we click the scene changer, then we know the next scene. So we need to instance the new scene
+then move the player to that scene, then set the world api to point to that scene
+but, about moving the player, we need to despawn the player and
+
+Ok, hmmm, so when we interact, we want to move all players to a new scene. Ideally, each player should do this on their own
+
+Player 1 clicks on obj, that obj then calls a synced func which calls on both players

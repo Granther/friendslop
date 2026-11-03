@@ -5,3 +5,4 @@
 
 [node name="HealthComponent" unique_id=780604300 instance=ExtResource("1_kxq6h")]
 script = ExtResource("2_ydpi0")
+health = 100

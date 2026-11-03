@@ -31,19 +31,19 @@ var cur_ride: InteractComponent = null
 @onready var IDLE_LEFT_HAND_MARKER: Marker3D = player_ref.left_hand_idle_marker
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("drop"):
+	if player_ref.ensure_event_local(event.is_action_pressed, "drop"):
 		if not is_grab(): return # Yes, I know this is redundant, but what if I change the fn later
 		if cur_grab is GrabComponent:
 			_deregister_grab()
 		elif cur_grab is PushComponent:
 			_deregister_push() 
-	if event.is_action_pressed("interact1"):
+	if player_ref.ensure_event_local(event.is_action_pressed, "interact1"):
 		interact_key_hit.emit()
-	if event.is_action_pressed("left_mouse"):
+	if player_ref.ensure_event_local(event.is_action_pressed, "left_mouse"):
 		leftm_key_hit.emit()
-	if event.is_action_pressed("right_mouse"):
+	if player_ref.ensure_event_local(event.is_action_pressed, "right_mouse"):
 		rightm_key_hit.emit()
-	if event.is_action_released("crouch"):
+	if player_ref.ensure_event_local(event.is_action_pressed, "crouch"):
 		if is_ride(): _deregister_ride()
 
 # Grabbable is an interactable 
@@ -60,7 +60,7 @@ func _on_int_scan_interacted_external_item(inter: InteractComponent) -> void:
 		cur_grab = inter
 		_register_grab()
 	elif inter is HoverInteractComponent:
-		inter.interact()
+		inter.interact(player_ref)
 	else:
 		push_error("item is not interactable, but not found to be specific: ", inter.name)
 		allow_interaction.emit()
@@ -81,7 +81,7 @@ func _deregister_ride():
 func _register_grab():
 	if not is_grab(): return
 	var right_anchor = player_ref.right_hand_in_view_marker
-	cur_grab.register(player_ref.camera, right_anchor)
+	cur_grab.register(player_ref, player_ref.camera, right_anchor)
 	_register_key_connects(cur_grab)
 	_register_force_connects(cur_grab)
 	grabbed_item.emit(player_ref.left_hand_idle_marker, right_anchor)

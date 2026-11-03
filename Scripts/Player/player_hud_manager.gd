@@ -2,9 +2,6 @@ extends PlayerComponent
 
 # Manages HUD and health reactions of player
 
-# Outputs
-signal player_died # -> MovementManager
-
 # Listens
 # InterScanner:looking_state_changed -> _set_inter_prompt
 
@@ -15,7 +12,8 @@ func _on_health_healed() -> void:
 	pass 
 
 func _on_health_died() -> void:
-	player_died.emit()
+	pass
+	#player_died.emit()
 	
 func _set_interact_prompt(setting: bool) -> void:
 	if setting: _show_interact_prompt()

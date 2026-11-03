@@ -14,11 +14,13 @@ func _set_col_layers(setting: bool):
 	# root_obj.set_collision_layer_value(3, setting)
 	#interaction_area.set_collision_layer_value(5, setting)
 
-func register(camera: Camera3D, anchor: Marker3D):
+func register(player: Node3D, camera: Camera3D, anchor: Marker3D):
+	player_ref = player
 	_multiplayer_register.rpc(camera.get_path(), anchor.get_path())
 
 func deregister():
 	_multiplayer_deregister.rpc()
+	player_ref = null
 
 @rpc("call_local", "any_peer")
 func _multiplayer_register(cam_path: NodePath, anchor_path: NodePath):
@@ -46,8 +48,7 @@ func _multiplayer_deregister():
 	proc_func = NULL_FUNC
 
 func _on_inter():
-	print("unimplemented")
+	pass
 
 func _on_drop():
 	pass
-	#interaction_area.set_label_visible(true)

@@ -9,3 +9,5 @@ script = ExtResource("1_jjgbg")
 chosen_scene = ExtResource("2_8gbba")
 
 [node name="GameUI" parent="." unique_id=516938190 instance=ExtResource("3_8gbba")]
+
+[node name="level_parent" type="Node3D" parent="." unique_id=562507085]

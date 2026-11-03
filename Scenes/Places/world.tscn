@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://coar0w52ewb50"]
 
-[ext_resource type="Script" uid="uid://cqdwu05lh13u1" path="res://Scripts/Components/Places/level_component.gd" id="3_mynff"]
+[ext_resource type="Script" uid="uid://b1dp2wl7wbva" path="res://Scripts/Places/world.gd" id="1_mynff"]
+[ext_resource type="Script" uid="uid://bmr837pmca6bw" path="res://Scripts/Components/Places/spawnpoint_component.gd" id="2_vfn8i"]
+[ext_resource type="PackedScene" uid="uid://2umtxl6w0bt2" path="res://playern.tscn" id="3_mynff"]
 [ext_resource type="Texture2D" uid="uid://bhtpc1y36gq6p" path="res://Resources/Textures/tiled-bg.png" id="3_nfdff"]
-[ext_resource type="PackedScene" uid="uid://cupyerhyeiyue" path="res://Scenes/Equippables/ball.tscn" id="3_vfn8i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_go701"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)
@@ -28,7 +29,9 @@ uv1_scale = Vector3(40, 15, 1)
 uv1_triplanar_sharpness = 1.6245052
 uv2_scale = Vector3(5, 5, 5)
 
-[node name="World" type="Node3D" unique_id=2063905397]
+[node name="World" type="Node3D" unique_id=2063905397 node_paths=PackedStringArray("spawnpoint_comp")]
+script = ExtResource("1_mynff")
+spawnpoint_comp = NodePath("SpawnpointComponent")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1568990526]
 _spawnable_scenes = PackedStringArray("uid://be8qbmt0fe144")
@@ -74,14 +77,9 @@ use_collision = true
 size = Vector3(1, 3.2016602, 6.44812)
 material = SubResource("StandardMaterial3D_8j60k")
 
-[node name="Ball" parent="." unique_id=1482215681 instance=ExtResource("3_vfn8i")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.3781631, 0.8319628, 3.3416271)
-collision_mask = 23
-
-[node name="LevelComponent" type="Node3D" parent="." unique_id=288812564 node_paths=PackedStringArray("multiplayer_spawner", "root_obj")]
-script = ExtResource("3_mynff")
+[node name="SpawnpointComponent" type="Node3D" parent="." unique_id=1046072065 node_paths=PackedStringArray("multiplayer_spawner", "root_obj")]
+script = ExtResource("2_vfn8i")
 multiplayer_spawner = NodePath("../MultiplayerSpawner")
+player_scene = ExtResource("3_mynff")
 root_obj = NodePath("..")
-metadata/_custom_type_script = "uid://cqdwu05lh13u1"
-
-[editable path="Ball"]
+metadata/_custom_type_script = "uid://bmr837pmca6bw"

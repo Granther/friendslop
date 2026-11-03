@@ -3,7 +3,7 @@ extends PlayerComponent
 # Listens
 # ItemManager:signal -> entered_ride
 # ItemManager:signal -> exited_ride
-# HUDManage:signal   -> player_died
+# HealthComp:signal   -> died
 
 var INPUT_DST: INPUT_OPT = INPUT_OPT.PLAYER
 enum INPUT_OPT { PLAYER, NONE, VEHICLE }
@@ -26,7 +26,7 @@ func __phys(delta: float):
 		INPUT_OPT.VEHICLE:
 			vehicle_phys_func.call(delta)
 		INPUT_OPT.NONE:
-			pass
+			return
 	
 func _on_player_item_manager_entered_ride(phys_func: Callable) -> void:
 	INPUT_DST = INPUT_OPT.VEHICLE
@@ -36,5 +36,5 @@ func _on_player_item_manager_exited_ride() -> void:
 	INPUT_DST = INPUT_OPT.PLAYER
 	set_vehicle_phys(func(): pass)
 
-func _on_player_hud_player_died() -> void:
+func _on_player_died() -> void:
 	INPUT_DST = INPUT_OPT.NONE
