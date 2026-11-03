@@ -76,12 +76,17 @@ func _ready():
 	# Setting nametag of player, be sure to enable billboarding in the flags so it follows the camera
 	# Ensures that the spawned characters have default animation blends when spawned in
 	_setup()
+	_set_visibilities()
 	anim_manager.set_default_anims()
 	if not is_multiplayer_authority(): return
 	movement_manager.set_player_phys(_movement_phys)
 	body_manager.idle() # Set arms to idle pos in case they ain't in the editor
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.current = true
+
+func _set_visibilities():
+	if is_multiplayer_authority(): 
+		nametag.set_layer_mask_value(1, false)
 
 func _setup():
 	nametag.text = "Player: " + str(name)

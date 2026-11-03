@@ -7,7 +7,6 @@ extends RigidBody3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready():
-	#animation_player.stop()
 	equip_comp.on_inter_key_hit = Callable(self, "_on_inter")
 	equip_comp.on_leftm_key_hit = Callable(self, "_on_leftm_key_hit")
 	 

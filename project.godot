@@ -123,6 +123,8 @@ ragdoll={
 
 [layer_names]
 
+3d_render/layer_2="PeerNametags"
+3d_render/layer_3="LocalNametag"
 3d_physics/layer_1="World"
 3d_physics/layer_2="Players"
 3d_physics/layer_3="Items"

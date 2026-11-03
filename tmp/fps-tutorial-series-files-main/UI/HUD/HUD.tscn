@@ -74,22 +74,28 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_oab2y")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HealthPanel" unique_id=1677117604]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HealthPanel" unique_id=1321488488]
+custom_maximum_size = Vector2(200, -1)
 layout_mode = 2
+
+[node name="VBoxEnergy" type="VBoxContainer" parent="MarginContainer/HealthPanel/VBoxContainer" unique_id=1677117604]
+custom_maximum_size = Vector2(100, -1)
+layout_mode = 2
+size_flags_horizontal = 0
 theme_override_constants/separation = 4
 
-[node name="HealthLabel" type="Label" parent="MarginContainer/HealthPanel/VBoxContainer" unique_id=1368406967]
+[node name="EnergyLabel" type="Label" parent="MarginContainer/HealthPanel/VBoxContainer/VBoxEnergy" unique_id=1368406967]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.6)
 theme_override_fonts/font = ExtResource("2_2415p")
 theme_override_font_sizes/font_size = 14
-text = "HEALTH"
+text = "Energy"
 
-[node name="HealthBarContainer" type="Control" parent="MarginContainer/HealthPanel/VBoxContainer" unique_id=1431109397]
+[node name="HealthBarContainer" type="Control" parent="MarginContainer/HealthPanel/VBoxContainer/VBoxEnergy" unique_id=1431109397]
 custom_minimum_size = Vector2(250, 16)
 layout_mode = 2
 
-[node name="GhostHealthBar" type="ProgressBar" parent="MarginContainer/HealthPanel/VBoxContainer/HealthBarContainer" unique_id=1104683921]
+[node name="GhostHealthBar" type="ProgressBar" parent="MarginContainer/HealthPanel/VBoxContainer/VBoxEnergy/HealthBarContainer" unique_id=1104683921]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -102,8 +108,49 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_gqdxh")
 value = 100.0
 show_percentage = false
 
-[node name="HealthBar" type="ProgressBar" parent="MarginContainer/HealthPanel/VBoxContainer/HealthBarContainer" unique_id=29685898]
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/HealthPanel/VBoxContainer/VBoxEnergy/HealthBarContainer" unique_id=29685898]
 unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_2lq7a")
+step = 1.0
+value = 70.0
+show_percentage = false
+
+[node name="VBoxHealth" type="VBoxContainer" parent="MarginContainer/HealthPanel/VBoxContainer" unique_id=792773575]
+custom_maximum_size = Vector2(100, -1)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 4
+
+[node name="HealthLabel" type="Label" parent="MarginContainer/HealthPanel/VBoxContainer/VBoxHealth" unique_id=1920629567]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+theme_override_fonts/font = ExtResource("2_2415p")
+theme_override_font_sizes/font_size = 14
+text = "Health"
+
+[node name="HealthBarContainer" type="Control" parent="MarginContainer/HealthPanel/VBoxContainer/VBoxHealth" unique_id=2050442176]
+custom_minimum_size = Vector2(250, 16)
+layout_mode = 2
+
+[node name="GhostHealthBar" type="ProgressBar" parent="MarginContainer/HealthPanel/VBoxContainer/VBoxHealth/HealthBarContainer" unique_id=1330439525]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_2lq7a")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gqdxh")
+value = 100.0
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/HealthPanel/VBoxContainer/VBoxHealth/HealthBarContainer" unique_id=1250177492]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -121,6 +168,8 @@ layout_mode = 2
 [node name="PromptPanel" type="PanelContainer" parent="MarginContainer/CenterPrompt" unique_id=812087124]
 unique_name_in_owner = true
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -10)
 theme_override_styles/panel = SubResource("StyleBoxFlat_7t87y")
 
 [node name="PromptLabel" type="Label" parent="MarginContainer/CenterPrompt/PromptPanel" unique_id=725108709]

@@ -15,7 +15,7 @@ const PROMPT_FADE_SPEED = 0.3       # Seconds for prompts to fade in/out
 @onready var reserve_ammo_label: Label = %ReserveAmmoLabel
 @onready var prompt_panel: PanelContainer = %PromptPanel
 
-@onready var crosshair: CrosshairDrawer = $CrosshairDrawer
+@onready var crosshair: CrosshairDrawer1 = $CrosshairDrawer
 
 # --- STATE VARIABLES ---
 var current_weapon_name: String = ""

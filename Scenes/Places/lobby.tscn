@@ -72,7 +72,7 @@ size = Vector3(1, 3.2016602, 3.9370117)
 material = SubResource("StandardMaterial3D_ck1w6")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="." index="6" unique_id=1869629026]
-transform = Transform3D(-1.24968e-06, 0, -0.99999994, 0, 3.064889, 0, 28.589348, 0, -4.3711385e-08, -1.0363579, 4.9307756, 0.34162223)
+transform = Transform3D(-1.24968e-06, 0, -0.99999994, 0, 3.064889, 0, 28.589348, 0, -4.3711385e-08, -11.898993, 4.9307756, 0.34162223)
 use_collision = true
 size = Vector3(1, 3.2016602, 6.44812)
 material = SubResource("StandardMaterial3D_ck1w6")
@@ -107,6 +107,7 @@ collision_layer = 513
 collision_mask = 0
 
 [node name="HitscanGun" parent="." index="13" unique_id=238356818 instance=ExtResource("7_k2kbv")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 4.1063232, 1.0749183, 5.3457813)
 
 [node name="Gun" parent="." index="14" unique_id=1371250526 instance=ExtResource("9_k0mp4")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.8837018, 0.60972714, 5.7150283)
