@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://7bptp4sj7rfo" path="res://tmp/fps-tutorial-series-files-main/UI/HUD/HUD.gd" id="1_k663y"]
 [ext_resource type="FontFile" uid="uid://u671v6jg326t" path="res://tmp/fps-tutorial-series-files-main/UI/Share_Tech_Mono_Font/ShareTechMono-Regular.ttf" id="2_2415p"]
-[ext_resource type="Script" uid="uid://cm647lduix0e" path="res://tmp/fps-tutorial-series-files-main/UI/Crosshairs/CrosshairDrawer.gd" id="3_m5m4x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oab2y"]
 bg_color = Color(0.0862745, 0.0901961, 0.101961, 0.705882)
@@ -230,12 +229,3 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/TabList/VBoxContainer" unique_id=1192142714]
 layout_mode = 2
-
-[node name="CrosshairDrawer" type="Control" parent="." unique_id=567075730]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("3_m5m4x")

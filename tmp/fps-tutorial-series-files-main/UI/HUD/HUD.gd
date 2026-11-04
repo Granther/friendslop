@@ -15,7 +15,7 @@ const PROMPT_FADE_SPEED = 0.3       # Seconds for prompts to fade in/out
 @onready var reserve_ammo_label: Label = %ReserveAmmoLabel
 @onready var prompt_panel: PanelContainer = %PromptPanel
 
-@onready var crosshair: CrosshairDrawer1 = $CrosshairDrawer
+#@onready var crosshair: CrosshairDrawer1 = $CrosshairDrawer
 
 # --- STATE VARIABLES ---
 var current_weapon_name: String = ""
@@ -78,7 +78,7 @@ func update_weapon(weapon_name: String, mag_ammo: int, reserve_ammo: int, animat
 var prompt_tween: Tween
 
 func show_prompt(text: String):
-	crosshair.visible = false
+	#crosshair.visible = false
 	%PromptLabel.text = text
 	prompt_panel.show()
 
@@ -92,7 +92,7 @@ func show_prompt(text: String):
 
 
 func hide_prompt():
-	crosshair.visible = true
+	#crosshair.visible = true
 
 	# Kill old tween if exists
 	if prompt_tween and prompt_tween.is_valid():

@@ -3,7 +3,7 @@ extends Node
 #const chosen_scene = preload("res://Scenes/Places/lobby.tscn")
 @export var chosen_scene: PackedScene
 
-@onready var level_parent := $level_parent
+@onready var level_parent := $LevelParent
 
 func _ready() -> void:
 	WorldAPI.level_parent = level_parent

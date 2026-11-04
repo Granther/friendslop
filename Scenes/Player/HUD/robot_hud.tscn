@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://dplcec4uuttme"]
+
+[node name="RobotHUD" type="Container" unique_id=1742908309]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1059096108]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HealthContainer" type="PanelContainer" parent="MarginContainer" unique_id=1980410148]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HealthContainer" unique_id=1384359846]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HealthContainer/VBoxContainer" unique_id=1672552890]
+layout_mode = 2
+text = "Health"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HealthContainer/VBoxContainer" unique_id=323345595]
+layout_mode = 2
+
+[node name="PanelContainer" type="Control" parent="MarginContainer" unique_id=212375747]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Control" type="Control" parent="." unique_id=1430680740]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=2015914908]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -186.0
+offset_right = 186.0
+offset_bottom = 90.0
+grow_horizontal = 2
+offset_transform_enabled = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer" unique_id=1305230575]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Panel" type="Panel" parent="Control/HBoxContainer/MarginContainer" unique_id=507422002]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/HBoxContainer" unique_id=827412715]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Panel" type="Panel" parent="Control/HBoxContainer/MarginContainer2" unique_id=1454730150]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="Control/HBoxContainer" unique_id=1799040739]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Panel" type="Panel" parent="Control/HBoxContainer/MarginContainer3" unique_id=2014881172]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="Control/HBoxContainer" unique_id=1368691769]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Panel" type="Panel" parent="Control/HBoxContainer/MarginContainer4" unique_id=842373140]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2

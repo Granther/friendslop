@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://boscdao2rwqo3"]
+
+[node name="HotbarSlot" type="Control" unique_id=1113133962]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1607749524]
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=598684798]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="CenterContainer" unique_id=1569510394]
+layout_mode = 2

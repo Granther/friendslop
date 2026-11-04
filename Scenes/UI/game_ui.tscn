@@ -210,7 +210,12 @@ mouse_filter = 2
 mouse_behavior_recursive = 1
 script = ExtResource("4_6w80a")
 crosshair_type = 1
+color = null
+line_thickness = null
+base_size = null
+max_recoil_multiplier = null
 plus_gap = 10
+recoil = null
 
 [node name="PromptPanel" type="PanelContainer" parent="Crosshair" unique_id=612374688]
 visible = false
