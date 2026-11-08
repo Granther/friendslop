@@ -1,4 +1,4 @@
-extends CharacterBody3D
+class_name BasePlayer extends CharacterBody3D
 
 # Movement
 var SPEED = 0 
@@ -10,9 +10,14 @@ var FOV_CHANGE = 1
 var PUSH_FORCE = 2.5
 const GRAB_DIST = 25
 
+# be careful what you add to the player, because this is created for all peer-nodes locally.
+# so, like, dont have the full UI attached as a child of the player, cause then all your local
+# instances controlled by remotes will have it...
+
 @export var DEFAULT_SPEED: float = 3
 
 @onready var ui = get_tree().get_first_node_in_group("game_ui") # fuck it
+@onready var menu = ui.pause_menu
 @onready var sync = $MultiplayerSynchronizer
 
 # def GLOBAL_TO_COMPS
@@ -51,9 +56,9 @@ const GRAB_DIST = 25
 @onready var hud_manager = $PlayerHUDManager
 
 # Extra
-@onready var grandpa_wheelchair_anchor: Marker3D = %GrandpaWheelchairMarker
-@onready var grandpa_wheelchair_left_anchor: Marker3D = %GrandpaWheelchairLeftHandleMarker
-@onready var grandpa_wheelchair_right_anchor: Marker3D = %GrandpaWheelchairRightHandleMarker
+#@onready var grandpa_wheelchair_anchor: Marker3D = %GrandpaWheelchairMarker
+#@onready var grandpa_wheelchair_left_anchor: Marker3D = %GrandpaWheelchairLeftHandleMarker
+#@onready var grandpa_wheelchair_right_anchor: Marker3D = %GrandpaWheelchairRightHandleMarker
 
 # Player state machine
 var MOVE_STATE: MOVE_STATE_MODE
@@ -67,6 +72,9 @@ enum STAND_STATE_MODE { CROUCHING, STANDING }
 
 # Set by recieving signals from components
 var _can_jump: bool = true
+# Just to make it easier to reason through authorities etc, if this is true, the code being run
+# is for a full controlled player, else, only peer instance stuff
+#var is_ctrl_player: bool = is_multiplayer_authority()
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
@@ -76,17 +84,16 @@ func _ready():
 	# Setting nametag of player, be sure to enable billboarding in the flags so it follows the camera
 	# Ensures that the spawned characters have default animation blends when spawned in
 	_setup()
-	_set_visibilities()
 	anim_manager.set_default_anims()
 	if not is_multiplayer_authority(): return
+	_set_visibilities()
 	movement_manager.set_player_phys(_movement_phys)
 	body_manager.idle() # Set arms to idle pos in case they ain't in the editor
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.current = true
 
 func _set_visibilities():
-	if is_multiplayer_authority(): 
-		nametag.set_layer_mask_value(1, false)
+	nametag.set_layer_mask_value(1, false)
 
 func _setup():
 	nametag.text = "Player: " + str(name)
@@ -95,13 +102,14 @@ func _setup():
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
-	if ui.is_menu_open(): return
+	if menu.is_menu_open(): return
 
 # Why does head move on y but camera on x
 # Oh! Cause we dont want the whole player to point downward, but we want him to spin
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
-	if ui.is_menu_open(): return
+	#print(menu.is_menu_open())
+	if menu.is_menu_open(): return
 	if movement_manager.INPUT_DST == movement_manager.INPUT_OPT.NONE: return
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * SENSITIVITY)

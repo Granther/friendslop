@@ -1,0 +1,206 @@
+[gd_scene format=3 uid="uid://y5d8hxg8vk7b"]
+
+[ext_resource type="FontFile" uid="uid://d2nhkxabybsjr" path="res://ExternalAssets/Fonts/Share_Tech_Mono_Font/ShareTechMono-Regular.ttf" id="1_8rf44"]
+[ext_resource type="Script" uid="uid://v3wf76kb5y8u" path="res://Scripts/UI/pause_menu.gd" id="1_r2i2h"]
+[ext_resource type="FontFile" uid="uid://u671v6jg326t" path="res://tmp/fps-tutorial-series-files-main/UI/Share_Tech_Mono_Font/ShareTechMono-Regular.ttf" id="2_r2i2h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oykix"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdnb7"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0.0862745, 0.0901961, 0.101961, 0.705882)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.301961)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_702e2"]
+bg_color = Color(0.20784314, 0.20784314, 0.20784314, 1)
+
+[node name="PauseMenu" type="Control" unique_id=783120037]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_r2i2h")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1185452126]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TabList" type="PanelContainer" parent="MarginContainer" unique_id=2093526762]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oykix")
+
+[node name="TablistVbox" type="VBoxContainer" parent="MarginContainer/TabList" unique_id=1799761207]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabList/TablistVbox" unique_id=2106123734]
+layout_mode = 2
+
+[node name="Label1" type="Label" parent="MarginContainer/TabList/TablistVbox/HBoxContainer" unique_id=1633477833]
+layout_mode = 2
+text = "Grant"
+
+[node name="Label2" type="Label" parent="MarginContainer/TabList/TablistVbox/HBoxContainer" unique_id=671401236]
+layout_mode = 2
+text = "52"
+
+[node name="StartupMenu" type="PanelContainer" parent="MarginContainer" unique_id=1578977358]
+visible = false
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/StartupMenu" unique_id=829185835]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/StartupMenu/MarginContainer" unique_id=1486547772]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="MarginContainer/StartupMenu/MarginContainer/VBoxContainer" unique_id=511777546]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8rf44")
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="JoinBtn" type="Button" parent="MarginContainer/StartupMenu/MarginContainer/VBoxContainer" unique_id=614193601]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8rf44")
+text = "Join Online (WAN)
+"
+
+[node name="RoomID" type="LineEdit" parent="MarginContainer/StartupMenu/MarginContainer/VBoxContainer" unique_id=2001760324]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8rf44")
+placeholder_text = "Room ID"
+alignment = 1
+
+[node name="HostBtn" type="Button" parent="MarginContainer/StartupMenu/MarginContainer/VBoxContainer" unique_id=1570281870]
+layout_mode = 2
+text = "Host Online (WAN)
+"
+
+[node name="LocalBtn" type="Button" parent="MarginContainer/StartupMenu/MarginContainer/VBoxContainer" unique_id=1974447053]
+layout_mode = 2
+text = "Debug Locally (Run for Server & Client)
+"
+
+[node name="PauseMenu" type="PanelContainer" parent="MarginContainer" unique_id=952299057]
+visible = false
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PauseMenu" unique_id=38346738]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PauseMenu/MarginContainer" unique_id=1620559185]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="MarginContainer/PauseMenu/MarginContainer/VBoxContainer" unique_id=721876460]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8rf44")
+text = "In-Game UI "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitBtn" type="Button" parent="MarginContainer/PauseMenu/MarginContainer/VBoxContainer" unique_id=2068133254]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8rf44")
+text = "Quit Game
+"
+
+[node name="QuitMenuBtn" type="Button" parent="MarginContainer/PauseMenu/MarginContainer/VBoxContainer" unique_id=796022253]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8rf44")
+text = "Quit to Menu"
+
+[node name="BackBtn" type="Button" parent="MarginContainer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1329004600]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8rf44")
+text = "Back to Game"
+
+[node name="LoadingPrompt" type="CenterContainer" parent="MarginContainer" unique_id=33947021]
+visible = false
+layout_mode = 2
+
+[node name="PromptPanel" type="PanelContainer" parent="MarginContainer/LoadingPrompt" unique_id=845043409]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kdnb7")
+
+[node name="PromptLabel" type="Label" parent="MarginContainer/LoadingPrompt/PromptPanel" unique_id=2083282474]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_r2i2h")
+theme_override_font_sizes/font_size = 20
+text = "LOADING..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InfoPrompt" type="CenterContainer" parent="MarginContainer" unique_id=804329117]
+visible = false
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/InfoPrompt" unique_id=683223380]
+custom_minimum_size = Vector2(200, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_702e2")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/InfoPrompt/PanelContainer" unique_id=2123734385]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/InfoPrompt/PanelContainer/MarginContainer" unique_id=2057920525]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/InfoPrompt/PanelContainer/MarginContainer/VBoxContainer" unique_id=626253668]
+layout_mode = 2
+
+[node name="OkBtn" type="Button" parent="MarginContainer/InfoPrompt/PanelContainer/MarginContainer/VBoxContainer" unique_id=1182686572]
+layout_mode = 2
+text = "OK"
+
+[connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/JoinBtn" to="." method="_on_join_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/HostBtn" to="." method="_on_host_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/LocalBtn" to="." method="_on_local_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/PauseMenu/MarginContainer/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/PauseMenu/MarginContainer/VBoxContainer/QuitMenuBtn" to="." method="_on_quit_menu_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/PauseMenu/MarginContainer/VBoxContainer/BackBtn" to="." method="_on_back_btn_pressed"]

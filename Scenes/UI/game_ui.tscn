@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://bo8i6bctlug4s"]
 
 [ext_resource type="Script" uid="uid://sbx77vj1cdnk" path="res://Scripts/UI/game_ui.gd" id="1_6w80a"]
-[ext_resource type="FontFile" uid="uid://d2nhkxabybsjr" path="res://ExternalAssets/Fonts/Share_Tech_Mono_Font/ShareTechMono-Regular.ttf" id="2_6w80a"]
+[ext_resource type="PackedScene" uid="uid://y5d8hxg8vk7b" path="res://Scenes/UI/pause_menu.tscn" id="2_lolt2"]
 [ext_resource type="FontFile" uid="uid://u671v6jg326t" path="res://tmp/fps-tutorial-series-files-main/UI/Share_Tech_Mono_Font/ShareTechMono-Regular.ttf" id="2_vo2tu"]
 [ext_resource type="Script" uid="uid://bbtuf6wfsvhkw" path="res://Resources/Crosshair/crosshair_drawer.gd" id="4_6w80a"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p8jce"]
+[ext_resource type="PackedScene" uid="uid://dplcec4uuttme" path="res://Scenes/Player/HUD/robot_hud.tscn" id="5_lolt2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5b8pf"]
 content_margin_left = 10.0
@@ -23,175 +22,15 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6w80a"]
-bg_color = Color(0.20784314, 0.20784314, 0.20784314, 1)
-
-[node name="GameUI" type="CanvasLayer" unique_id=858986954]
+[node name="GameUI" type="CanvasLayer" unique_id=1476528222]
 script = ExtResource("1_6w80a")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=235035168]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+[node name="PlayerHUD" parent="." unique_id=1837187557 instance=ExtResource("5_lolt2")]
 
-[node name="TabList" type="PanelContainer" parent="MarginContainer" unique_id=1806934626]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_p8jce")
-
-[node name="TablistVbox" type="VBoxContainer" parent="MarginContainer/TabList" unique_id=1956613539]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabList/TablistVbox" unique_id=989634169]
-layout_mode = 2
-
-[node name="Label1" type="Label" parent="MarginContainer/TabList/TablistVbox/HBoxContainer" unique_id=193296178]
-layout_mode = 2
-text = "Grant"
-
-[node name="Label2" type="Label" parent="MarginContainer/TabList/TablistVbox/HBoxContainer" unique_id=1421757612]
-layout_mode = 2
-text = "52"
-
-[node name="StartupMenu" type="PanelContainer" parent="MarginContainer" unique_id=1657474941]
-visible = false
-custom_minimum_size = Vector2(350, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/StartupMenu" unique_id=1871849108]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/StartupMenu/MarginContainer" unique_id=882703661]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Label" type="Label" parent="MarginContainer/StartupMenu/MarginContainer/VBoxContainer" unique_id=1553397992]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6w80a")
-text = "Main Menu"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="JoinBtn" type="Button" parent="MarginContainer/StartupMenu/MarginContainer/VBoxContainer" unique_id=159527227]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6w80a")
-text = "Join Online (WAN)
-"
-
-[node name="RoomID" type="LineEdit" parent="MarginContainer/StartupMenu/MarginContainer/VBoxContainer" unique_id=602747150]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6w80a")
-placeholder_text = "Room ID"
-alignment = 1
-
-[node name="HostBtn" type="Button" parent="MarginContainer/StartupMenu/MarginContainer/VBoxContainer" unique_id=1980918242]
-layout_mode = 2
-text = "Host Online (WAN)
-"
-
-[node name="LocalBtn" type="Button" parent="MarginContainer/StartupMenu/MarginContainer/VBoxContainer" unique_id=1770527082]
-layout_mode = 2
-text = "Debug Locally (Run for Server & Client)
-"
-
-[node name="PauseMenu" type="PanelContainer" parent="MarginContainer" unique_id=812047430]
-visible = false
-custom_minimum_size = Vector2(350, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PauseMenu" unique_id=38403245]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PauseMenu/MarginContainer" unique_id=1995392950]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Label" type="Label" parent="MarginContainer/PauseMenu/MarginContainer/VBoxContainer" unique_id=132814214]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6w80a")
-text = "In-Game UI "
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="QuitBtn" type="Button" parent="MarginContainer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1904983187]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6w80a")
-text = "Quit Game
-"
-
-[node name="QuitMenuBtn" type="Button" parent="MarginContainer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1089032728]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6w80a")
-text = "Quit to Menu"
-
-[node name="BackBtn" type="Button" parent="MarginContainer/PauseMenu/MarginContainer/VBoxContainer" unique_id=663792957]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6w80a")
-text = "Back to Game"
-
-[node name="LoadingPrompt" type="CenterContainer" parent="MarginContainer" unique_id=1375543842]
-visible = false
-layout_mode = 2
-
-[node name="PromptPanel" type="PanelContainer" parent="MarginContainer/LoadingPrompt" unique_id=186490114]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_5b8pf")
-
-[node name="PromptLabel" type="Label" parent="MarginContainer/LoadingPrompt/PromptPanel" unique_id=564772622]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_vo2tu")
-theme_override_font_sizes/font_size = 20
-text = "LOADING..."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="InfoPrompt" type="CenterContainer" parent="MarginContainer" unique_id=466694023]
-visible = false
-layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/InfoPrompt" unique_id=689344521]
-custom_minimum_size = Vector2(200, 70)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_6w80a")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/InfoPrompt/PanelContainer" unique_id=1809805678]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/InfoPrompt/PanelContainer/MarginContainer" unique_id=2073983974]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/InfoPrompt/PanelContainer/MarginContainer/VBoxContainer" unique_id=1418711644]
-layout_mode = 2
-
-[node name="OkBtn" type="Button" parent="MarginContainer/InfoPrompt/PanelContainer/MarginContainer/VBoxContainer" unique_id=363677352]
-layout_mode = 2
-text = "OK"
+[node name="PauseMenu" parent="." unique_id=1749578590 instance=ExtResource("2_lolt2")]
 
 [node name="Crosshair" type="Control" parent="." unique_id=1557974722]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -234,10 +73,3 @@ theme_override_font_sizes/font_size = 20
 text = "LOADING..."
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/JoinBtn" to="." method="_on_join_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/HostBtn" to="." method="_on_host_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/StartupMenu/MarginContainer/VBoxContainer/LocalBtn" to="." method="_on_local_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/PauseMenu/MarginContainer/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/PauseMenu/MarginContainer/VBoxContainer/QuitMenuBtn" to="." method="_on_quit_menu_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/PauseMenu/MarginContainer/VBoxContainer/BackBtn" to="." method="_on_back_btn_pressed"]

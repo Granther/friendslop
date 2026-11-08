@@ -1,7 +1,7 @@
 class_name HealthComponent extends BaseComponent
 
-signal damaged
-signal healed
+signal damaged(health: int)
+signal healed(health: int)
 signal died
 signal revived
 
@@ -13,7 +13,7 @@ signal revived
 @rpc("call_local", "any_peer", "reliable")
 func damage(n: int):
 	health -= n
-	damaged.emit()
+	damaged.emit(health)
 	if health <= 0:
 		health = 0
 		died.emit()
@@ -21,7 +21,7 @@ func damage(n: int):
 @rpc("call_local", "any_peer", "reliable")
 func heal(n: int):
 	health += n
-	healed.emit()
+	healed.emit(health)
 
 func get_health() -> int:
 	return health

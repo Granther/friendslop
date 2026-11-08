@@ -4,16 +4,18 @@ extends PlayerComponent
 
 # Listens
 # InterScanner:looking_state_changed -> _set_inter_prompt
+# HealthComp:died
+# HealthComp:healed
+# HealthComp:damaged
 
-func _on_health_damaged() -> void:
-	pass 
+func _on_health_damaged(new_health: int) -> void:
+	player_ref.ui.player_hud.set_health_lvl(new_health)
 
-func _on_health_healed() -> void:
-	pass 
+func _on_health_healed(new_health: int) -> void:
+	player_ref.ui.player_hud.set_health_lvl(new_health)
 
 func _on_health_died() -> void:
-	pass
-	#player_died.emit()
+	player_ref.ui.player_hud.set_health_lvl(0)
 	
 func _set_interact_prompt(setting: bool) -> void:
 	if setting: _show_interact_prompt()

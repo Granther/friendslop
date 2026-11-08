@@ -37,3 +37,15 @@ Player 1 clicks on obj, that obj then calls a synced func which calls on both pl
 Ok, so, a player shoots another player. That player takes damage, does predator report damage
 or the victim? The health component of the victim is connected to all other instances of the 
 player's health component, so it handles decreasing the health on all instances. I think this works for now
+
+So, we need a robust way to separate the multiplayer and non multiplayer components. because this isnt 
+really a problem, it just could be one. So, if we had all the player input captured in a singleton
+we would have to ensure that no input was handled by any nodes before that point
+
+How do I plit up separate multiplayer and multiplayer-peer players? 
+Mayber the controllable player inhertis from a base player, the peer player inherts as well. 
+Because, no doubt, some similar stuff happens between peer and user, but they start to diverge..
+And this needs to be a little robust
+Also, keep in mind, there is such as thing as being too general. You have to find the happy
+medium between generalizing nodes and actually being efficient, ding dong
+The human desire for order is so strong sometimes, I, I just cant help but want to generalize it all
