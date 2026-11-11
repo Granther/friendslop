@@ -25,6 +25,9 @@ MultiplayerObjectHandler="*uid://mlk34ddt2jvy"
 MultiplayerConnectionHandler="*uid://dhk2xega716s5"
 Utils="*uid://bfbf4oyslsq5y"
 MultiplayerApi="*uid://dmmg085od4v5x"
+GrelpNetHandler="*uid://1lvbudsb87up"
+GrelpIdAssign="*uid://bv1ef5r0ix2y7"
+GrelpMultiplayer="*uid://bbk85u4kypuc4"
 
 [debug_draw_3d]
 

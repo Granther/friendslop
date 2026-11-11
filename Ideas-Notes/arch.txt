@@ -55,3 +55,7 @@ Player 1 starts the server and adds themsevles, which, since they are an authori
 Then, when player 2 joins, player 1 gets a signal that another player has joined
 so player 1's machine runs add_player which causes a new peer to spawn because they arent
 an authority. A peer now spawns in player 1's scene. 
+
+Player starts server by clicking local button, server starts and player ctrl is spawned
+Need a way to sync the spawning
+Every time we spawn a ctrl, we need to let all peers know, so those peers can spawn a peer_player and link it to the new ctrl.

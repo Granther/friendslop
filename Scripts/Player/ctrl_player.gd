@@ -41,6 +41,8 @@ func _unhandled_input(event):
 # ... when we are at the max speed
 
 func _physics_process(delta: float) -> void:
+	_post_pos_rot()
+	
 	# Process for all our components
 	# hollup, dont these all need delta?
 	inter_manager.phys_func.call()
@@ -49,12 +51,15 @@ func _physics_process(delta: float) -> void:
 	body_manager.phys_func.call()
 	movement_manager.phys_func.call(delta)
 
-func _process(delta: float) -> void:
+func _process(delta: float) -> void:	
 	inter_manager.proc_func.call()
 	item_manager.proc_func.call()
 	anim_manager.proc_func.call()
 	body_manager.proc_func.call()
 	_movement_proc(delta)
+
+func _post_pos_rot():
+	MultiplayerApi.post_multiplayer_pos(global_position, global_rotation)
 
 func _movement_phys(delta: float): 
 	springarm.set("spring_length", clamp(-camera.rotation.x,0.6,0.7))

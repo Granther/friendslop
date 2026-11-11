@@ -26,10 +26,17 @@ func _ready():
 	MENU_STATE = MENU_MODE.STARTUP
 
 ## Startup Menu ##
+# for debug, this is the only thing we use
 func _on_local_btn_pressed() -> void:
 	startup_menu.hide()
 	MENU_STATE = MENU_MODE.LOADING
-	await MultiplayerConnectionHandler.local_multiplayer_a()
+	#await MultiplayerConnectionHandler.local_multiplayer_a()
+	#await GrelpNetHandler.local_multiplayer_a()
+	GrelpNetHandler.start_client()
+	var peer_id: int = await MultiplayerApi.handle_local_peer_assign
+	MultiplayerApi.setup_ctrl_player(peer_id)
+	#print("peer_id got: ", peer_id)
+	#await MultiplayerApi.get_peer_id
 	MENU_STATE = MENU_MODE.NONE
 	#crosshair.show()
 
@@ -48,13 +55,14 @@ func _on_join_btn_pressed() -> void:
 
 # Remote
 func _on_host_btn_pressed() -> void:
-	startup_menu.hide()
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	_loading()
-	var room_id = await MultiplayerConnectionHandler.remote_multiplayer_host_a()
-	_done_loading()
-	#crosshair.show()
-	print("room_id: ", room_id)
+	GrelpNetHandler.start_server()
+	#startup_menu.hide()
+	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#_loading()
+	#var room_id = await MultiplayerConnectionHandler.remote_multiplayer_host_a()
+	#_done_loading()
+	##crosshair.show()
+	#print("room_id: ", room_id)
 
 ## PauseMenu ##
 func _on_quit_btn_pressed() -> void:

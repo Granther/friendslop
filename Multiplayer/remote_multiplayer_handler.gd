@@ -33,7 +33,6 @@ func host_room() -> String:
 	var room_id: String = peer.room_id
 	print("Connected to room: ", room_id)
 	return room_id
-#test
 
 func join_room(room_id) -> void:
 	peer.join_room(room_id)
