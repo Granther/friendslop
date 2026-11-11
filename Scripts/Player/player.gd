@@ -26,7 +26,6 @@ const GRAB_DIST = 25
 @onready var object_grabber_shape_cast = %Stoneman/%Head/ObjectGrabberShapeCast
 @onready var object_grab_raycast = %Stoneman/%Head/ObjectGrabRayCast
 @onready var ranged_raycast = %Stoneman/%Head/RangedRayCast
-@onready var camera = %Stoneman/%Head/Camera3D
 @onready var nametag = $"Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Upper Chest/Nametag"
 @onready var stoneman = %Stoneman
 @onready var stoneman_dead = $StonemanDead

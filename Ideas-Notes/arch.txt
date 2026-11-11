@@ -50,4 +50,8 @@ Also, keep in mind, there is such as thing as being too general. You have to fin
 medium between generalizing nodes and actually being efficient, ding dong
 The human desire for order is so strong sometimes, I, I just cant help but want to generalize it all
 
-So, player 1 joins, calls all that, spawns at 0,0,0. Do we need to sync w/ rpc
+So, player 1 joins, calls all that, spawns at 0,0,0. 
+Player 1 starts the server and adds themsevles, which, since they are an authority, spawns them as a ctrl player
+Then, when player 2 joins, player 1 gets a signal that another player has joined
+so player 1's machine runs add_player which causes a new peer to spawn because they arent
+an authority. A peer now spawns in player 1's scene. 

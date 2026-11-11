@@ -16,7 +16,15 @@ func _ready():
 func local_multiplayer_a():
 	var status = LocalMultiplayerHandler.start_server()
 	if status == LocalMultiplayerHandler.IS_SERVER:
-		add_player(multiplayer.get_unique_id())
+		#add_player(multiplayer.get_unique_id())
+		pass
+	# every main player on each machine must be a ctrl_player
+	# so, every player now has a controllable host
+	# but, we need to sync 
+	# oh, its not gonna work with the sync, cause its not the same node!
+	# a ctrl_player is controlling a peer_player on another system.
+	# maybe this is a good time to start working with sending unreliable by hand etc
+	WorldAPI.current_world.spawn_ctrl_player(multiplayer.get_unique_id())
 	_setup_peer_host_signals()
 	
 func remote_multiplayer_join_a(room_id: String):
@@ -31,7 +39,8 @@ func remote_multiplayer_host_a() -> String:
 func add_player(peer_id):
 	#connected_new_player.emit(peer_id)
 	#print("adding player, peer_id: ", peer_id)
-	MultiplayerApi.connect_new_player(peer_id)
+	#MultiplayerApi.connect_new_player(peer_id)
+	WorldAPI.current_world.spawn_peer_player(peer_id)
 
 func remove_player(peer_id):
 	# ... removed_player.emit(peer_id)

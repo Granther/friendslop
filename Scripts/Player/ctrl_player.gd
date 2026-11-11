@@ -2,6 +2,8 @@ extends BasePlayer
 
 # Controller player, only controlled by the player actually on the computer running program
 
+@onready var camera = $"Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Neck/Head/Camera3D"
+
 # Components
 @onready var inter_manager = $PlayerInteractionScanner
 @onready var item_manager = $PlayerItemManager
