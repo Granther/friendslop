@@ -53,7 +53,7 @@ func _allow_ride():
 
 # Should some signal fire here from the item_manager to scoop up the object and handle it from there?
 func _input(event):
-	if player_ref.ensure_event_local(event.is_action_pressed, "interact1"):
+	if event.is_action_pressed("interact1"):
 		if _looking_at_inter:
 			# give object, any, that it hits 
 			var object_collided = player_ref.object_grab_raycast.get_collider()
@@ -73,6 +73,7 @@ func _input(event):
 					obj_inter_comp = object_collided.get_node("RideComponent")
 					_can_ride = false
 			# why is this here? i forgor
+			# this means that we catch the input, it wont propagate anymore
 			get_viewport().set_input_as_handled()
 			if obj_inter_comp != null: # ensure we actually habe an object
 				interacted_external_item.emit(obj_inter_comp)

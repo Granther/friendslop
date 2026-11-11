@@ -11,3 +11,9 @@ func _ready() -> void:
 # we cab use this to spawn other players in the world from another
 func get_spawnpoint_comp() -> SpawnpointComponent:
 	return spawnpoint_comp
+
+func spawn_ctrl_player(peer_id: int) -> void:
+	spawnpoint_comp.spawn_ctrl_player(peer_id)
+
+func spawn_peer_player(peer_id: int) -> void:
+	spawnpoint_comp.spawn_peer_player(peer_id)

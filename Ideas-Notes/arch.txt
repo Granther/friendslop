@@ -49,3 +49,5 @@ And this needs to be a little robust
 Also, keep in mind, there is such as thing as being too general. You have to find the happy
 medium between generalizing nodes and actually being efficient, ding dong
 The human desire for order is so strong sometimes, I, I just cant help but want to generalize it all
+
+So, player 1 joins, calls all that, spawns at 0,0,0. Do we need to sync w/ rpc

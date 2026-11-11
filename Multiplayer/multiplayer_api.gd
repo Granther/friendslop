@@ -7,8 +7,12 @@ var my_player: Node3D
 func _ready() -> void:
 	pass
 
-func add_player(player: Node3D, peer_id: int) -> void:
-	sync_add.rpc(player.get_path(), peer_id)
+func connect_new_player(peer_id: int) -> void:
+	if is_multiplayer_authority():
+		# we add mindless body
+		WorldAPI.current_world.spawn_ctrl_player(peer_id)
+	else: # is peer
+		WorldAPI.current_world.spawn_peer_player(peer_id)
 
 func remove_player(peer_id: int) -> void:
 	pass

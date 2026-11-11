@@ -16,9 +16,9 @@ func _ready():
 func local_multiplayer_a():
 	var status = LocalMultiplayerHandler.start_server()
 	if status == LocalMultiplayerHandler.IS_SERVER:
-		_setup_peer_host_signals()
 		add_player(multiplayer.get_unique_id())
-		
+	_setup_peer_host_signals()
+	
 func remote_multiplayer_join_a(room_id: String):
 	await RemoteMultiplayerHandler.start_client(room_id)
 
@@ -29,7 +29,9 @@ func remote_multiplayer_host_a() -> String:
 	return room_id
 
 func add_player(peer_id):
-	connected_new_player.emit(peer_id)
+	#connected_new_player.emit(peer_id)
+	#print("adding player, peer_id: ", peer_id)
+	MultiplayerApi.connect_new_player(peer_id)
 
 func remove_player(peer_id):
 	# ... removed_player.emit(peer_id)
