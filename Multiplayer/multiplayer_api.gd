@@ -2,7 +2,7 @@ extends Node
 
 # This is just an intermediate API between the caller (the player ususally) and the network, worldapi etc
 
-var players: Dictionary = {}
+var peer_dict: Dictionary = {}
 var peer_id: int = -1 # -1 means we dont have an id yet, so if we get a broadcast, it is for us
 # peer_id of the local player on this mchine
 # var my_player: Node3D
@@ -34,14 +34,14 @@ func setup_ctrl_player(peer_id: int) -> void:
 func post_multiplayer_pos(pos: Vector3, rot: Vector3):
 	GrelpMultiplayer.post_pos_rot(peer_id, pos, rot)
 
-@rpc("call_local", "any_peer")
-func sync_add(p_path: NodePath, peer_id: int):
-	players[peer_id] = get_node(p_path)
-
-func get_player_by_peer_id(peer_id: int) -> Node3D:
-	if players.has(peer_id):
-		return players[peer_id]
-	else: return null
-
-func get_players() -> Dictionary:
-	return players
+#@rpc("call_local", "any_peer")
+#func sync_add(p_path: NodePath, peer_id: int):
+	#players[peer_id] = get_node(p_path)
+#
+#func get_player_by_peer_id(peer_id: int) -> Node3D:
+	#if players.has(peer_id):
+		#return players[peer_id]
+	#else: return null
+#
+#func get_players() -> Dictionary:
+	#return players

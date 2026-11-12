@@ -21,11 +21,13 @@ func move_player(player: Node):
 func spawn_ctrl_player(peer_id: int):
 	var player = ctrl_scene.instantiate()
 	player.name = str(peer_id)
+	MultiplayerApi.peer_dict[peer_id] = player
 	_spawn_base_player(player)
 
 func spawn_peer_player(peer_id: int):
 	var player = peer_scene.instantiate()
 	player.name = str(peer_id)
+	MultiplayerApi.peer_dict[peer_id] = player
 	_spawn_base_player(player)
 
 func _spawn_base_player(player: Node3D):

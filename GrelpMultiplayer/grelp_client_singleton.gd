@@ -23,10 +23,18 @@ func on_client_packet(data: PackedByteArray) -> void:
 			_handle_id_assign(data)
 		BasePacket.PACKET_TYPE.PLAYER_TRANSFORM: # we always get this from the server
 			_handle_player_trans(data)
-			print("got player transform")
 
 func _handle_player_trans(data: PackedByteArray) -> void:
-	pass
+	var info: PlayerTransPacket = PlayerTransPacket.create_from_data(data)
+	if info.id == MultiplayerApi.peer_id: return
+	var pos: Vector3 = Vector3(info.pos.x, info.pos.y, info.pos.z)
+	var rot: Vector3 = Vector3(info.rot.x, info.rot.y, info.rot.z)
+	print(pos, rot, info.id)
+	#var player: Node3D = get_node(MultiplayerApi.peer_dict[info.id])
+	#get_tree().root.find_child(str(info.id))
+	#print(player)
+	# we get pos packet from server, if its for us, drop
+	# if its not, set that for the appropiete peer on the game
 
 func _handle_id_assign(data: PackedByteArray):
 	var info: IDPacket = IDPacket.create_from_data(data)
