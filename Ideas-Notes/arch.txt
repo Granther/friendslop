@@ -59,3 +59,8 @@ an authority. A peer now spawns in player 1's scene.
 Player starts server by clicking local button, server starts and player ctrl is spawned
 Need a way to sync the spawning
 Every time we spawn a ctrl, we need to let all peers know, so those peers can spawn a peer_player and link it to the new ctrl.
+
+How do we know which player to move, ooh, maybe instead of reaching out and calling a repos method on the object directly, could have the player obj attach to the multiplayer api through a signal. 
+
+Player scene posts pos to server, server then broadcasts position to all peers
+All peers see the positions. If its themselves, drop, if not, sends out signal to reposition all peers of that id 

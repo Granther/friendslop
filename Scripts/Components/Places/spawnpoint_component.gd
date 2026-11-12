@@ -28,6 +28,7 @@ func spawn_peer_player(peer_id: int):
 	var player = peer_scene.instantiate()
 	player.name = str(peer_id)
 	MultiplayerApi.peer_dict[peer_id] = player
+	player.ctrl_id = peer_id
 	_spawn_base_player(player)
 
 func _spawn_base_player(player: Node3D):

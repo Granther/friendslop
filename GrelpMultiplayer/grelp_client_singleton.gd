@@ -26,10 +26,11 @@ func on_client_packet(data: PackedByteArray) -> void:
 
 func _handle_player_trans(data: PackedByteArray) -> void:
 	var info: PlayerTransPacket = PlayerTransPacket.create_from_data(data)
-	if info.id == MultiplayerApi.peer_id: return
+	if info.id == MultiplayerApi.peer_id: return # return if its outselves
 	var pos: Vector3 = Vector3(info.pos.x, info.pos.y, info.pos.z)
 	var rot: Vector3 = Vector3(info.rot.x, info.rot.y, info.rot.z)
-	print(pos, rot, info.id)
+	MultiplayerApi.reposition_shell_peer.emit(info.id, pos, rot)
+	# print(pos, rot, info.id)
 	#var player: Node3D = get_node(MultiplayerApi.peer_dict[info.id])
 	#get_tree().root.find_child(str(info.id))
 	#print(player)
@@ -38,19 +39,26 @@ func _handle_player_trans(data: PackedByteArray) -> void:
 
 func _handle_id_assign(data: PackedByteArray):
 	var info: IDPacket = IDPacket.create_from_data(data)
+	#print(info.peer_ids)
 	if MultiplayerApi.peer_id == -1:
 		MultiplayerApi.peer_id = info.id
 		MultiplayerApi.peer_ids = info.peer_ids
 		MultiplayerApi.handle_local_peer_assign.emit(info.id)
+		info.peer_ids.erase(info.id)
+		print(info.peer_ids, " for peer_id: ", info.id)
 		for peer_id in info.peer_ids:
+			#if peer_id == info.id: continue
 			# the new player gets all of the already present players handled
 			#MultiplayerApi.handle_remote_peer_assign.emit(info.id)
 			MultiplayerApi.handle_remote_peer_assign(info.id)
+			print("handle for: ", info.id)
 	else: # already have peer_id, but now we know new player has spawned, setup..
 		# now we, the people already w/ ids handle the new player
 		MultiplayerApi.peer_ids.append(info.id)
 		#MultiplayerApi.handle_remote_peer_assign.emit(info.id)
 		MultiplayerApi.handle_remote_peer_assign(info.id)
+		
+	print("new peer_id: ", MultiplayerApi.peer_id)
 
 #func on_peer_disconnected(peer_id: int) -> void:
 	#peer_ids.erase(peer_id)

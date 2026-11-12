@@ -11,6 +11,7 @@ var peer_ids: Array[int]
 # emitted when the peer_id has been set for the client
 #signal handle_remote_peer_assign(peer_id: int)
 signal handle_local_peer_assign(peer_id: int)
+signal reposition_shell_peer(peer_id: int, pos: Vector3, rot: Vector3)
 
 func _ready() -> void:
 	pass
