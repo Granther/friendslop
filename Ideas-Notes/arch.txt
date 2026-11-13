@@ -64,3 +64,12 @@ How do we know which player to move, ooh, maybe instead of reaching out and call
 
 Player scene posts pos to server, server then broadcasts position to all peers
 All peers see the positions. If its themselves, drop, if not, sends out signal to reposition all peers of that id 
+
+Should player be told of new state and then have it act on for
+Or should all players be told that player N is playing an animation. Or, since the state accompanies the animation (or vice versa), the ctrl_player can infer the animation from the state of the player.
+So we need only hcnage the state of the player. Ie, HOLDING_ITEM, with the passed item. Should the item even be specific? 
+
+Rely on the same item being on all clients, or, create a new one with the same data...
+Probably smaller, and makes less assumptions
+So, we DO know that all clients have the same local resources, because they are copies. So, maybe just pass a name? 
+Maybe all inventory items have a name attached, this is then used...

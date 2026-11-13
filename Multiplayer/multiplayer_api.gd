@@ -12,6 +12,7 @@ var peer_ids: Array[int]
 #signal handle_remote_peer_assign(peer_id: int)
 signal handle_local_peer_assign(peer_id: int)
 signal reposition_shell_peer(peer_id: int, pos: Vector3, rot: Vector3)
+signal remove_shell_peer(peer_id: int)
 
 func _ready() -> void:
 	pass
@@ -23,7 +24,7 @@ func connect_new_player(peer_id: int) -> void:
 	else: # is peer
 		WorldAPI.current_world.spawn_peer_player(peer_id)
 
-func handle_remote_peer_assign(peer_id: int) -> void:
+func setup_new_peer_shell(peer_id: int) -> void:
 	WorldAPI.current_world.spawn_peer_player(peer_id)
 
 func remove_player(peer_id: int) -> void:

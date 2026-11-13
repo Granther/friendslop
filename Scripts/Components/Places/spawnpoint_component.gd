@@ -28,6 +28,7 @@ func spawn_peer_player(peer_id: int):
 	var player = peer_scene.instantiate()
 	player.name = str(peer_id)
 	MultiplayerApi.peer_dict[peer_id] = player
+	print("Spawning peer shell with id: ", peer_id)
 	player.ctrl_id = peer_id
 	_spawn_base_player(player)
 

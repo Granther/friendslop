@@ -29,6 +29,7 @@ GrelpNetHandler="*uid://1lvbudsb87up"
 GrelpIdAssign="*uid://bv1ef5r0ix2y7"
 GrelpMultiplayer="*uid://bbk85u4kypuc4"
 GrelpServerSingle="*uid://budcgkbdjlxs3"
+ResPreloader="*uid://dd6tcrmkx2txv"
 
 [debug_draw_3d]
 

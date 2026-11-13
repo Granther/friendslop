@@ -6,11 +6,16 @@ var ctrl_id: int = -1
 func _ready() -> void:
 	basic_setup()
 	MultiplayerApi.reposition_shell_peer.connect(_reposition_peer)
+	MultiplayerApi.remove_shell_peer.connect(_remove_self)
 
 func _reposition_peer(peer_id: int, pos: Vector3, rot: Vector3) -> void:
 	if peer_id != ctrl_id: return # not the right peer
 	global_position = pos
 	global_rotation = rot
+
+func _remove_self(peer_id: int):
+	if peer_id == ctrl_id:
+		queue_free()
 
 # so, every peer_player has a cooresponding ctrl_player
 # so we need to have peer_player be linked to the properties of its corresponding ctrler

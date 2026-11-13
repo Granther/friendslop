@@ -68,6 +68,7 @@ func _movement_phys(delta: float):
 	var target_fov = BASE_FOV * FOV_CHANGE + velocity_clamp
 	camera.fov = lerp(camera.fov, target_fov, delta * 4)
 	var input_dir = Input.get_vector("right", "left", "down", "up")
+	# could get key pressed and send THAT over the network, would cut out the latency of the middle man position etc
 	
 	if Input.is_action_pressed("ToggleMouseFocus"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

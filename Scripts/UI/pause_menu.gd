@@ -67,6 +67,7 @@ func _on_host_btn_pressed() -> void:
 ## PauseMenu ##
 func _on_quit_btn_pressed() -> void:
 	multiplayer.peer_disconnected.emit()
+	GrelpNetHandler.disconnect_client()
 	get_tree().quit()
 
 func _on_quit_menu_btn_pressed() -> void:
