@@ -2,8 +2,9 @@ class_name BasePacket
 
 # Don't make values above 255, since we send "packet_type" as a single byte
 enum PACKET_TYPE {
-	ID_ASSIGNMENT = 0,
-	PLAYER_TRANSFORM = 10,
+	ID_ASSIGNMENT,
+	PLAYER_TRANSFORM,
+	INVENTORY,
 }
 
 var packet_type: PACKET_TYPE

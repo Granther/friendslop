@@ -12,6 +12,13 @@ func _on_client_packet(data: PackedByteArray) -> void:
 			_handle_id_assign(data)
 		BasePacket.PACKET_TYPE.PLAYER_TRANSFORM: # we always get this from the server
 			_handle_player_trans(data)
+		BasePacket.PACKET_TYPE.INVENTORY: # we always get this from the server
+			_handle_inv(data)
+
+func _handle_inv(data: PackedByteArray) -> void:
+	var info: InvPacket = InvPacket.create_from_data(data)
+	if info.player_id == MultiplayerApi.peer_id: return
+	print("client got other client's inv update")
 
 func _handle_player_trans(data: PackedByteArray) -> void:
 	var info: PlayerTransPacket = PlayerTransPacket.create_from_data(data)

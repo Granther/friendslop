@@ -1,25 +1,5 @@
 class_name BasePlayer extends CharacterBody3D
 
-# Movement
-var SPEED = 0 
-const SPRINT = false
-const JUMP_VELOCITY = 4.5
-const SENSITIVITY = 0.003
-var BASE_FOV = 90
-var FOV_CHANGE = 1
-var PUSH_FORCE = 2.5
-const GRAB_DIST = 25
-
-# be careful what you add to the player, because this is created for all peer-nodes locally.
-# so, like, dont have the full UI attached as a child of the player, cause then all your local
-# instances controlled by remotes will have it...
-
-@export var DEFAULT_SPEED: float = 3
-
-@onready var ui = get_tree().get_first_node_in_group("game_ui") # fuck it
-@onready var menu = ui.pause_menu
-@onready var sync = $MultiplayerSynchronizer
-
 # def GLOBAL_TO_COMPS
 @onready var head = %Stoneman/%Head
 @onready var grabbed_anchor = %Stoneman/%Head/Camera3D/SpringArm3D/GrabbedAnchor
@@ -49,11 +29,6 @@ const GRAB_DIST = 25
 # Components
 @onready var anim_manager = $PlayerAnimationManager
 
-# Extra
-#@onready var grandpa_wheelchair_anchor: Marker3D = %GrandpaWheelchairMarker
-#@onready var grandpa_wheelchair_left_anchor: Marker3D = %GrandpaWheelchairLeftHandleMarker
-#@onready var grandpa_wheelchair_right_anchor: Marker3D = %GrandpaWheelchairRightHandleMarker
-
 # Player state machine
 var MOVE_STATE: MOVE_STATE_MODE
 enum MOVE_STATE_MODE { IDLE, SPRINTING, WALKING }
@@ -77,7 +52,7 @@ func _enter_tree() -> void:
 func _ready():
 	Err.push_err_if(true, "scene inhertiing from BasePlayer must override _ready method")
 
-func basic_setup():
+func _basic_setup():
 	# Setting nametag of player, be sure to enable billboarding in the flags so it follows the camera
 	# Ensures that the spawned characters have default animation blends when spawned in
 	#_setup()

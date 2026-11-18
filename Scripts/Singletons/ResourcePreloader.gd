@@ -4,8 +4,8 @@ extends Node
 
 @onready var gun: Resource = preload("res://Scripts/Equippables/hitscan_gun.gd")
 
-enum ITEM {
-	GUN = 0,
+enum ITEM { 
+	GUN = 1,
 }
 
 var items_dict: Dictionary = {

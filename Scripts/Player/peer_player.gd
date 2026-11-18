@@ -4,7 +4,7 @@ extends BasePlayer
 var ctrl_id: int = -1
 
 func _ready() -> void:
-	basic_setup()
+	_basic_setup()
 	MultiplayerApi.reposition_shell_peer.connect(_reposition_peer)
 	MultiplayerApi.remove_shell_peer.connect(_remove_self)
 

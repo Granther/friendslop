@@ -2,6 +2,18 @@ extends BasePlayer
 
 # Controller player, only controlled by the player actually on the computer running program
 
+# Movement
+var SPEED = 0 
+const SPRINT = false
+const JUMP_VELOCITY = 4.5
+const SENSITIVITY = 0.003
+var BASE_FOV = 90
+var FOV_CHANGE = 1
+var PUSH_FORCE = 2.5
+const GRAB_DIST = 25
+
+@export var DEFAULT_SPEED: float = 3
+
 @onready var camera = $"Stoneman/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Neck/Head/Camera3D"
 
 # Components
@@ -11,9 +23,14 @@ extends BasePlayer
 @onready var movement_manager = $PlayerMovementHandler
 @onready var hud_manager = $PlayerHUDManager
 
+@onready var ui = get_tree().get_first_node_in_group("game_ui") # fuck it
+@onready var menu = ui.pause_menu
+@onready var hud = ui.player_hud
+
+# we check and see if we can pick something up, if we can, we tell the inv, it sends the packet etc, then it auto selects the one it landed it etc, makes it easy for player
+
 func _ready():
-	#print("in ctrl")
-	basic_setup() # common to base_player
+	_basic_setup() # common to base_player
 	_set_visibilities()
 	movement_manager.set_player_phys(_movement_phys)
 	body_manager.idle() # Set arms to idle pos in case they ain't in the editor

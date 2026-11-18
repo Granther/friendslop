@@ -79,6 +79,7 @@ func _deregister_ride():
 	cur_ride = null
 
 func _register_grab():
+	player_ref.hud.add_to_inv(0)
 	if not is_grab(): return
 	var right_anchor = player_ref.right_hand_in_view_marker
 	cur_grab.register(player_ref, player_ref.camera, right_anchor)

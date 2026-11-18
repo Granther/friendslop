@@ -36,6 +36,9 @@ func setup_ctrl_player(peer_id: int) -> void:
 func post_multiplayer_pos(pos: Vector3, rot: Vector3):
 	GrelpMultiplayer.post_pos_rot(peer_id, pos, rot)
 
+func client2server(packet: BasePacket):
+	GrelpMultiplayer.client2server(packet)
+
 #@rpc("call_local", "any_peer")
 #func sync_add(p_path: NodePath, peer_id: int):
 	#players[peer_id] = get_node(p_path)

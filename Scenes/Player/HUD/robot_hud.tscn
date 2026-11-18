@@ -14,12 +14,11 @@ script = ExtResource("1_str3p")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1059096108]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -66.0
-offset_right = 220.0
-grow_vertical = 0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -43,10 +42,32 @@ horizontal_alignment = 1
 layout_mode = 2
 value = 30.0
 
-[node name="PanelContainer" type="Control" parent="MarginContainer" unique_id=212375747]
+[node name="InvContainer" type="MarginContainer" parent="MarginContainer" unique_id=1934779452]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="InvSlots" type="VBoxContainer" parent="MarginContainer/InvContainer" unique_id=2114739183]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="Item1" type="Label" parent="MarginContainer/InvContainer/InvSlots" unique_id=1763408791]
+layout_mode = 2
+text = "item 1"
+horizontal_alignment = 1
+
+[node name="Item2" type="Label" parent="MarginContainer/InvContainer/InvSlots" unique_id=2061624216]
+layout_mode = 2
+text = "item 2"
+horizontal_alignment = 1
+
+[node name="Item3" type="Label" parent="MarginContainer/InvContainer/InvSlots" unique_id=404539483]
+layout_mode = 2
+text = "item 3"
+horizontal_alignment = 1
 
 [node name="Control" type="Control" parent="." unique_id=1430680740]
 visible = false
