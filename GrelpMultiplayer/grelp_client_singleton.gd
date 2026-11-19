@@ -11,18 +11,27 @@ func _on_client_packet(data: PackedByteArray) -> void:
 		BasePacket.PACKET_TYPE.ID_ASSIGNMENT:
 			_handle_id_assign(data)
 		BasePacket.PACKET_TYPE.PLAYER_TRANSFORM: # we always get this from the server
+			#print("got player trans 2")
 			_handle_player_trans(data)
 		BasePacket.PACKET_TYPE.INVENTORY: # we always get this from the server
 			_handle_inv(data)
+		BasePacket.PACKET_TYPE.ITEM_UPDATE: # we always get this from the server
+			_handle_item_up(data)
 
+# these are inv updates for our peers, not us, so we always update the shell here
 func _handle_inv(data: PackedByteArray) -> void:
-	var info: InvPacket = InvPacket.create_from_data(data)
-	if info.player_id == MultiplayerApi.peer_id: return
-	print("client got other client's inv update")
+	match data[2]: # our array looks like [pack_type, id, INV_OPT]
+		InvPacket.INV_OPT.PICKUP:
+			var info: InvPickupPacket = InvPickupPacket.create_from_data(data)
+			MultiplayerApi.inv_pickup_shell_peer.emit(info.id, info.item)
+
+func _handle_item_up(data: PackedByteArray) -> void:
+	var info: ItemPacket = ItemPacket.create_from_data(data)
+	var item_opt: ItemPacket.ITEM_OPT = data[2] as ItemPacket.ITEM_OPT
+	MultiplayerApi.item_updated.emit(info.id, info.item, item_opt, info.pos, info.rot)
 
 func _handle_player_trans(data: PackedByteArray) -> void:
 	var info: PlayerTransPacket = PlayerTransPacket.create_from_data(data)
-	if info.id == MultiplayerApi.peer_id: return # return if its outselves
 	var pos: Vector3 = Vector3(info.pos.x, info.pos.y, info.pos.z)
 	var rot: Vector3 = Vector3(info.rot.x, info.rot.y, info.rot.z)
 	MultiplayerApi.reposition_shell_peer.emit(info.id, pos, rot)

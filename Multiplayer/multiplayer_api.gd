@@ -13,6 +13,8 @@ var peer_ids: Array[int]
 signal handle_local_peer_assign(peer_id: int)
 signal reposition_shell_peer(peer_id: int, pos: Vector3, rot: Vector3)
 signal remove_shell_peer(peer_id: int)
+signal inv_pickup_shell_peer(peer_id: int, item: ResPreloader.ITEM)
+signal item_updated(item_id: int, item: ResPreloader.ITEM, option: ItemPacket.ITEM_OPT, pos: Vector3, rot: Vector3)
 
 func _ready() -> void:
 	pass

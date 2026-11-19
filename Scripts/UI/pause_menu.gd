@@ -42,15 +42,27 @@ func _on_local_btn_pressed() -> void:
 
 # Remote
 func _on_join_btn_pressed() -> void:
-	var room_id = room_id_box.text.to_upper()
-	if room_id == "":
-		await _show_info_msg_a("Must enter room ID to play online")
-		return
+	GrelpNetHandler.start_server()
+	
 	startup_menu.hide()
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	_loading()
-	await MultiplayerConnectionHandler.remote_multiplayer_join_a(room_id)
-	_done_loading()
+	MENU_STATE = MENU_MODE.LOADING
+	#await MultiplayerConnectionHandler.local_multiplayer_a()
+	#await GrelpNetHandler.local_multiplayer_a()
+	GrelpNetHandler.start_client()
+	var peer_id: int = await MultiplayerApi.handle_local_peer_assign
+	MultiplayerApi.setup_ctrl_player(peer_id)
+	#print("peer_id got: ", peer_id)
+	#await MultiplayerApi.get_peer_id
+	MENU_STATE = MENU_MODE.NONE
+	#var room_id = room_id_box.text.to_upper()
+	#if room_id == "":
+		#await _show_info_msg_a("Must enter room ID to play online")
+		#return
+	#startup_menu.hide()
+	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#_loading()
+	#await MultiplayerConnectionHandler.remote_multiplayer_join_a(room_id)
+	#_done_loading()
 	#crosshair.show()
 
 # Remote

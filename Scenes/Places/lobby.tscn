@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bquifffx5b7ha" path="res://Scenes/Equippables/hitscan_gun.tscn" id="7_k2kbv"]
 [ext_resource type="PackedScene" uid="uid://bl3h3qpq62nfv" path="res://Scenes/Props/dummy.tscn" id="8_ec3hp"]
 [ext_resource type="PackedScene" uid="uid://c5vhlyxd4rtl5" path="res://Scenes/Equippables/gun.tscn" id="9_k0mp4"]
+[ext_resource type="PackedScene" uid="uid://cgkon4osdyjgq" path="res://Scenes/Equippables/hitscan_gun_inv.tscn" id="11_divr5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0mah3"]
 sky_top_color = Color(0.14009982, 0.8224713, 0.9418637, 1)
@@ -116,3 +117,6 @@ transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 4.1063232, 
 
 [node name="Gun" parent="." index="14" unique_id=1371250526 instance=ExtResource("9_k0mp4")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.8837018, 0.60972714, 5.7150283)
+
+[node name="HitscanGunInv" parent="." index="15" unique_id=498742213 instance=ExtResource("11_divr5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.364445, 4.960933, 0)

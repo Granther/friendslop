@@ -6,7 +6,8 @@ const new_scene = preload("res://Scenes/Places/world.tscn")
 
 func _ready() -> void:
 	#hover_icomp.interact_func = _switch_scenes
-	hover_icomp.interact_func = _spawn_peer
+	#hover_icomp.interact_func = _spawn_peer
+	hover_icomp.interact_func = _spawn_item_multi
 	
 func _switch_scenes(interactor: Node) -> void:
 	#print("switching scene from ", str(MultiplayerApi.my_peer_id))
@@ -22,6 +23,12 @@ func _switch_scenes(interactor: Node) -> void:
 	new_spawnpoint.move_player(MultiplayerApi.my_player)
 	old_level.queue_free()
 	WorldAPI.set_world(new)
+
+func _spawn_item_multi(interactor: Node) -> void:
+	print("spawned")
+	MultiplayerApi.client2server(ItemPacket.create(
+		-1, ItemPacket.ITEM_OPT.SPAWN, ResPreloader.ITEM.GUN, Vector3(0, 5, 0)
+	))
 
 func _spawn_peer(interactor: Node) -> void:
 	#MultiplayerApi.connect_new_player(2)

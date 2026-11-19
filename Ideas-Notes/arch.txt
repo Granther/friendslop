@@ -75,3 +75,15 @@ Rely on the same item being on all clients, or, create a new one with the same d
 Probably smaller, and makes less assumptions
 So, we DO know that all clients have the same local resources, because they are copies. So, maybe just pass a name? 
 Maybe all inventory items have a name attached, this is then used...
+
+I'm getting a little hung up on the multiplayer stuff rn. So, the server is a deditated server, all it does is listen and respond. All the players actually have the game resources.
+So, what makes sense. Peer to peer, or dedicated. Def dedicated. Why? Well, it centralizes all the server logic and we dont have to deal with players connecting to eachother which can be problematic and reuqire relay servers if NAT blah blah...
+So, dedicated server. We trust all players. All players contribute to game state. So all players tell server when game state changes locally, then server accepts that as new gamestate and tells all other clients of the change. So, a packet is always a delta. 
+So, I think our current arch is working well rn. A player moves, they then tell the server that they moved. 
+I think the only thing we are missing is the server actually setting some sort of gamestate variable and then once that is changed a change is pushed down to players. 
+The server may know someting we dont, like, what if we think we can pickup an item, but cant, so we tell the server we changed the gamestate, but it comes back and tells us we didnt, so we must reverse it.
+
+Client -> Update -> Server -> Change internal GS -> Share with all peers except one who shared
+					  |
+					  V
+				Invalid for GS -> Tells offending peer to reverse

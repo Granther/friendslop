@@ -9,7 +9,8 @@ extends RigidBody3D
 func _ready():
 	equip_comp.on_inter_key_hit = Callable(self, "_on_inter")
 	equip_comp.on_leftm_key_hit = Callable(self, "_on_leftm_key_hit")
-	 
+	
+ 
 func get_icomp() -> InteractComponent:
 	return equip_comp
 

@@ -65,6 +65,9 @@ func _input(event):
 				if object_collided.has_node("GrabComponent"):
 					obj_inter_comp = object_collided.get_node("GrabComponent")
 					_can_grab = false
+				elif object_collided.has_node("PickupComponent"):
+					obj_inter_comp = object_collided.get_node("PickupComponent")
+					_can_grab = false
 				elif object_collided.has_node("PushComponent"):
 					obj_inter_comp = object_collided.get_node("PushComponent")
 					_can_grab = false

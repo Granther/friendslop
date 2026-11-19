@@ -31,25 +31,26 @@ var cur_ride: InteractComponent = null
 @onready var IDLE_LEFT_HAND_MARKER: Marker3D = player_ref.left_hand_idle_marker
 
 func _unhandled_input(event: InputEvent) -> void:
-	if player_ref.ensure_event_local(event.is_action_pressed, "drop"):
+	if event.is_action_pressed("drop"):
 		if not is_grab(): return # Yes, I know this is redundant, but what if I change the fn later
 		if cur_grab is GrabComponent:
 			_deregister_grab()
+		elif cur_grab is PickupComponent:
+			_deregister_pickup()
 		elif cur_grab is PushComponent:
 			_deregister_push() 
-	if player_ref.ensure_event_local(event.is_action_pressed, "interact1"):
+	if event.is_action_pressed("interact1"):
 		interact_key_hit.emit()
-	if player_ref.ensure_event_local(event.is_action_pressed, "left_mouse"):
+	if event.is_action_pressed("left_mouse"):
 		leftm_key_hit.emit()
-	if player_ref.ensure_event_local(event.is_action_pressed, "right_mouse"):
+	if event.is_action_pressed("right_mouse"):
 		rightm_key_hit.emit()
-	if player_ref.ensure_event_local(event.is_action_pressed, "crouch"):
+	if event.is_action_pressed("crouch"):
 		if is_ride(): _deregister_ride()
 
 # Grabbable is an interactable 
 func _on_int_scan_interacted_external_item(inter: InteractComponent) -> void:
-	if not inter.is_interactable:
-		return
+	if not inter.is_interactable: return
 	if inter is RideComponent:
 		cur_ride = inter
 		_register_ride()
@@ -59,10 +60,13 @@ func _on_int_scan_interacted_external_item(inter: InteractComponent) -> void:
 	elif inter is GrabComponent:
 		cur_grab = inter
 		_register_grab()
+	elif inter is PickupComponent:
+		cur_grab = inter
+		_register_pickup()
 	elif inter is HoverInteractComponent:
 		inter.interact(player_ref)
 	else:
-		push_error("item is not interactable, but not found to be specific: ", inter.name)
+		push_error("item is interactable, but not found to be specific: ", inter.name)
 		allow_interaction.emit()
 
 func _register_ride(): 
@@ -77,6 +81,22 @@ func _deregister_ride():
 	cur_ride.deregister(player_ref)
 	exited_ride.emit()
 	cur_ride = null
+
+func _register_pickup():
+	player_ref.hud.add_to_inv(0)
+	if not is_grab(): return
+	cur_grab.register(player_ref)
+	_register_key_connects(cur_grab)
+	_register_force_connects(cur_grab)
+
+func _deregister_pickup():
+	if not is_grab(): return
+	_deregister_key_connects(cur_grab)
+	_deregister_force_connects(cur_grab)
+	cur_grab.deregister()
+	allow_interaction.emit()
+	dropped_item.emit()
+	cur_grab = null
 
 func _register_grab():
 	player_ref.hud.add_to_inv(0)

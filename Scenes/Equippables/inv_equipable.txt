@@ -1,0 +1,15 @@
+The idea is that an item would extend InvEquippable
+which means it is an item that can be used, dropped, and can be in a player's inventory
+
+So, it needs to be attached to the ResourcePreloader enum
+It needs to have functionality through the grab components etc
+It needs to have a ground model, for when it is lying on the ground, prob same model just rotated
+It needs to have a model for when the player is holding it, likely with an arm included
+It needs to have a 2d sprite and visual name for being in the inv
+
+This is all attached per item for ease of use
+
+Does this make sense?
+We don't want physics on objects. Player interacts with them and they get registered through their grab comps, altthough, we do need a coll mesh for thet, can we use a meshinstance?
+Wtvr, we register the item, and by doing so we setup some visual prfab for showing the arm and item in arm.
+It will be different on the player vs on the shell. 

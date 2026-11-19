@@ -27,7 +27,7 @@ func _ready():
 	# For picking up
 	#Err.push_err_if(not interaction_area.get_collision_layer_value(5), "grabbable object's InteractionArea must be on the Interactables layer")
 	# For colliding with player and world
-	Err.push_err_if(not root_obj.get_collision_layer_value(5), "grabbable object must be on the Interactables layer")
+	#Err.push_err_if(not root_obj.get_collision_layer_value(5), "grabbable object must be on the Interactables layer")
 	#inter_col_shape.shape.radius = (interact_data.interact_distance * 2)
 
 func _process(delta: float) -> void:

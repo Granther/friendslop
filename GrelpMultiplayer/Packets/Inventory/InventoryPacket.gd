@@ -8,12 +8,11 @@ enum INV_OPT {
 }
 
 var option: int
-var player_id: int
 
-static func create(player_id: int, option: INV_OPT) -> InvPacket:
+static func create(id: int, option: INV_OPT) -> InvPacket:
 	var info: InvPacket = InvPacket.new()
 	info.option = option
-	info.player_id = player_id
+	info.id = id
 	return info
 
 # unloads into packet
@@ -28,11 +27,9 @@ static func create_from_data(data: PackedByteArray) -> InvPacket:
 func encode() -> PackedByteArray:
 	var data: PackedByteArray = super.encode()
 	data.resize(6) # we make this is largest of all options, then resize in derived
-	data.encode_u8(1, player_id)
 	data.encode_u8(2, option)
 	return data
 
 func decode(data: PackedByteArray) -> void:
 	super.decode(data)
-	player_id = data.decode_u8(1)
 	option = data.decode_u8(2)

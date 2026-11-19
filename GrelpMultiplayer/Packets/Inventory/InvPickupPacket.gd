@@ -2,10 +2,11 @@ class_name InvPickupPacket extends InvPacket
 
 var item: ResPreloader.ITEM
 
-static func create_pickup(player_id: int, item: ResPreloader.ITEM) -> InvPickupPacket:
+static func create_pickup(id: int, item: ResPreloader.ITEM) -> InvPickupPacket:
 	var info: InvPickupPacket = InvPickupPacket.new()
 	info.packet_type = PACKET_TYPE.INVENTORY
-	info.player_id = player_id
+	info.flag = ENetPacketPeer.FLAG_RELIABLE
+	info.id = id
 	info.option = INV_OPT.PICKUP
 	info.item = item
 	return info

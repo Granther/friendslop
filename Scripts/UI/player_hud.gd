@@ -19,9 +19,7 @@ func inv_space_avail() -> bool:
 
 func add_to_inv(item_id: int) -> void:
 	print("aded to inv etc")
-	MultiplayerApi.client2server(
-		InvPickupPacket.create_pickup(MultiplayerApi.peer_id, ResPreloader.ITEM.GUN)
-	)
+	pass
 	
 func remove_item() -> void:
 	pass

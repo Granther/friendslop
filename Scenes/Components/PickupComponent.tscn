@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dlby5awq55v0l"]
+
+[ext_resource type="PackedScene" uid="uid://b364m4o4gkci7" path="res://Scenes/Components/EquipComponent.tscn" id="1_eo4tj"]
+[ext_resource type="Script" uid="uid://clymf43hjeou4" path="res://Scripts/Components/pickup_component.gd" id="2_euc5n"]
+
+[node name="PickupComponent" unique_id=779592482 instance=ExtResource("1_eo4tj")]
+script = ExtResource("2_euc5n")
