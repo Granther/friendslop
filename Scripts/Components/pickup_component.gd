@@ -11,18 +11,28 @@ func register(player: BasePlayer):
 	root_obj.reparent(player)
 	root_obj.global_position = player.right_hand_obj_marker.global_position
 	registered.emit()
+	#MultiplayerApi.client2server(
+		#InvPickupPacket.create_pickup(MultiplayerApi.peer_id, MultiplayerApi.peer_id, ResPreloader.ITEM.GUN)
+	#)
 	
+	#WorldAPI.get_world().delete_item_loc(root_obj.id)
 	MultiplayerApi.client2server(
-		InvPickupPacket.create_pickup(MultiplayerApi.peer_id, ResPreloader.ITEM.GUN)
-	)
-	MultiplayerApi.client2server(
-		ItemPacket.create(root_obj.id, ItemPacket.ITEM_OPT.DELETE, ResPreloader.ITEM.GUN
+		ItemPacket.create(root_obj.id, MultiplayerApi.peer_id, ItemPacket.ITEM_OPT.DELETE, ResPreloader.ITEM.GUN
 	))
 
 func deregister():
 	# then rm it
 	root_obj.reparent(WorldAPI.get_world())
 	deregistered.emit()
+	
+	#MultiplayerApi.client2server(
+		#InvPickupPacket.create_drop(MultiplayerApi.peer_id, MultiplayerApi.peer_id, ResPreloader.ITEM.GUN)
+	#)
+	
+	#WorldAPI.get_world().spawn_item_loc(0, MultiplayerApi.peer_id, ResPreloader.ITEM.GUN, root_obj.global_position, root_obj.global_rotation)
+	MultiplayerApi.client2server(
+		ItemPacket.create(0, MultiplayerApi.peer_id, ItemPacket.ITEM_OPT.SPAWN, ResPreloader.ITEM.GUN, root_obj.global_position, root_obj.global_rotation
+	))
 	
 	#MultiplayerApi.client2server(
 		#InvPickupPacket.create_drop(MultiplayerApi.peer_id, ResPreloader.ITEM.GUN)

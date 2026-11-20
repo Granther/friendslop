@@ -12,9 +12,11 @@ var peer_ids: Array[int]
 #signal handle_remote_peer_assign(peer_id: int)
 signal handle_local_peer_assign(peer_id: int)
 signal reposition_shell_peer(peer_id: int, pos: Vector3, rot: Vector3)
+signal reposition_head_shell_peer(peer_id: int, x_rot: float)
 signal remove_shell_peer(peer_id: int)
 signal inv_pickup_shell_peer(peer_id: int, item: ResPreloader.ITEM)
-signal item_updated(item_id: int, item: ResPreloader.ITEM, option: ItemPacket.ITEM_OPT, pos: Vector3, rot: Vector3)
+signal item_updated(item_id: int, peer_id: int, item: ResPreloader.ITEM, option: ItemPacket.ITEM_OPT, pos: Vector3, rot: Vector3)
+signal item_id_updated(new_item_id: int, item: ResPreloader.ITEM)
 
 func _ready() -> void:
 	pass
@@ -37,6 +39,9 @@ func setup_ctrl_player(peer_id: int) -> void:
 
 func post_multiplayer_pos(pos: Vector3, rot: Vector3):
 	GrelpMultiplayer.post_pos_rot(peer_id, pos, rot)
+
+func post_multiplayer_head_rot(x_rot: float):
+	GrelpMultiplayer.post_head_rot(peer_id, x_rot)
 
 func client2server(packet: BasePacket):
 	GrelpMultiplayer.client2server(packet)

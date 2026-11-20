@@ -2,7 +2,12 @@ extends Node
 
 func post_pos_rot(peer_id: int, pos: Vector3, rot: Vector3):
 	PlayerTransPacket.create(
-		peer_id, pos, rot
+		peer_id, peer_id, pos, rot
+	).send(GrelpNetHandler.server_peer)
+
+func post_head_rot(peer_id: int, x_rot: float):
+	PlayerHeadTransPacket.create(
+		peer_id, x_rot
 	).send(GrelpNetHandler.server_peer)
 
 func client2server(packet: BasePacket):

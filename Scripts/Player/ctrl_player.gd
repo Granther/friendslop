@@ -29,6 +29,8 @@ const GRAB_DIST = 25
 
 # we check and see if we can pick something up, if we can, we tell the inv, it sends the packet etc, then it auto selects the one it landed it etc, makes it easy for player
 
+var _head_moved: bool = false
+
 func _ready():
 	_basic_setup() # common to base_player
 	_set_visibilities()
@@ -49,17 +51,21 @@ func _unhandled_input(event):
 	if menu.is_menu_open(): return
 	if movement_manager.INPUT_DST == movement_manager.INPUT_OPT.NONE: return
 	if event is InputEventMouseMotion:
+		_head_moved = true
 		rotate_y(-event.relative.x * SENSITIVITY)
 		head.rotate_x(event.relative.y * SENSITIVITY)
 		## print(rad_to_deg(head.rotation.x))
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(0), deg_to_rad(180))
+		#print(rad_to_deg(head.rotation.x))
 
 # We want to set FOV_CHANGE in such a way that it reaches the max fov for the particular state
 # ... when we are at the max speed
 
 func _physics_process(delta: float) -> void:
-	_post_pos_rot()
-	
+	MultiplayerApi.post_multiplayer_pos(global_position, global_rotation)
+	if _head_moved: # only send if head moved
+		MultiplayerApi.post_multiplayer_head_rot(head.global_rotation.x)
+		_head_moved = false
 	# Process for all our components
 	# hollup, dont these all need delta?
 	inter_manager.phys_func.call()
@@ -74,9 +80,6 @@ func _process(delta: float) -> void:
 	anim_manager.proc_func.call()
 	body_manager.proc_func.call()
 	_movement_proc(delta)
-
-func _post_pos_rot():
-	MultiplayerApi.post_multiplayer_pos(global_position, global_rotation)
 
 func _movement_phys(delta: float): 
 	springarm.set("spring_length", clamp(-camera.rotation.x,0.6,0.7))

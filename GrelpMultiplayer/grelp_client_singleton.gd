@@ -13,6 +13,9 @@ func _on_client_packet(data: PackedByteArray) -> void:
 		BasePacket.PACKET_TYPE.PLAYER_TRANSFORM: # we always get this from the server
 			#print("got player trans 2")
 			_handle_player_trans(data)
+		BasePacket.PACKET_TYPE.PLAYER_HEAD_TRANSFORM: # we always get this from the server
+			#print("got player trans 2")
+			_handle_player_head_trans(data)
 		BasePacket.PACKET_TYPE.INVENTORY: # we always get this from the server
 			_handle_inv(data)
 		BasePacket.PACKET_TYPE.ITEM_UPDATE: # we always get this from the server
@@ -20,23 +23,29 @@ func _on_client_packet(data: PackedByteArray) -> void:
 
 # these are inv updates for our peers, not us, so we always update the shell here
 func _handle_inv(data: PackedByteArray) -> void:
-	match data[2]: # our array looks like [pack_type, id, INV_OPT]
+	match data[3]: # our array looks like [pack_type, id, INV_OPT]
 		InvPacket.INV_OPT.PICKUP:
 			var info: InvPickupPacket = InvPickupPacket.create_from_data(data)
 			MultiplayerApi.inv_pickup_shell_peer.emit(info.id, info.item)
 
 func _handle_item_up(data: PackedByteArray) -> void:
 	var info: ItemPacket = ItemPacket.create_from_data(data)
-	var item_opt: ItemPacket.ITEM_OPT = data[2] as ItemPacket.ITEM_OPT
-	MultiplayerApi.item_updated.emit(info.id, info.item, item_opt, info.pos, info.rot)
+	var item_opt: ItemPacket.ITEM_OPT = data[3] as ItemPacket.ITEM_OPT
+	#MultiplayerApi.item_id_updated.emit(info.id, info.item) # if we are the org peer that spawned the item, out item will be waiting for this update to change its id to the correct one
+	MultiplayerApi.item_updated.emit(info.id, info.peer_id, info.item, item_opt, info.pos, info.rot)
 
 func _handle_player_trans(data: PackedByteArray) -> void:
 	var info: PlayerTransPacket = PlayerTransPacket.create_from_data(data)
 	var pos: Vector3 = Vector3(info.pos.x, info.pos.y, info.pos.z)
 	var rot: Vector3 = Vector3(info.rot.x, info.rot.y, info.rot.z)
-	MultiplayerApi.reposition_shell_peer.emit(info.id, pos, rot)
+	MultiplayerApi.reposition_shell_peer.emit(info.peer_id, pos, rot)
 	# we get pos packet from server, if its for us, drop
 	# if its not, set that for the appropiete peer on the game
+
+func _handle_player_head_trans(data: PackedByteArray) -> void:
+	var info: PlayerHeadTransPacket = PlayerHeadTransPacket.create_from_data(data)
+	var x_rot: float = info.x_rot
+	MultiplayerApi.reposition_head_shell_peer.emit(info.peer_id, x_rot)
 
 func _handle_id_assign(data: PackedByteArray):
 	var info: IDPacket = IDPacket.create_from_data(data)

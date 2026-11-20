@@ -23,25 +23,46 @@ func spawn_ctrl_player(peer_id: int) -> void:
 func spawn_peer_player(peer_id: int) -> void:
 	spawnpoint_comp.spawn_peer_player(peer_id)
 
-func _item_updated(item_id: int, item: ResPreloader.ITEM, option: ItemPacket.ITEM_OPT, pos: Vector3, rot: Vector3):
+func _item_updated(item_id: int, peer_id: int, item: ResPreloader.ITEM, option: ItemPacket.ITEM_OPT, pos: Vector3, rot: Vector3):
 	match option:
 		ItemPacket.ITEM_OPT.SPAWN:
-			var item_scn: PackedScene = ResPreloader.items_dict[item]
-			var inst: Node3D = item_scn.instantiate() # is this in the heirarchy yet? or not?
-			inst.id = item_id
-			add_child(inst) # first we add as a child, cause these are then set these, they are relative
-			items[item_id] = inst
-			inst.global_position = pos
-			inst.global_rotation = rot
+			if MultiplayerApi.peer_id == peer_id: 
+				_update_item_id(item_id, item)
+			else: spawn_item_loc(item_id, peer_id, item, pos, rot)
 		ItemPacket.ITEM_OPT.DELETE: 
-			print("got delete from client")
-			var inst: Node3D = items.get(item_id)
-			print(inst, item_id)
-			if null: return
-			remove_child(inst)
-			inst.queue_free()
+			if MultiplayerApi.peer_id == peer_id: return
+			else: delete_item_loc(item_id)
 		ItemPacket.ITEM_OPT.TRANSFORM: 
 			var inst: Node3D = items.get(item_id)
-			if null: return
+			if inst == null: return
 			inst.global_position = pos
 			inst.global_rotation = rot
+
+func delete_item_loc(item_id: int):
+	var inst: Node3D = items.get(item_id)
+	if inst == null: return
+	remove_child(inst)
+	inst.queue_free()
+
+# should await_id_from_srv if spawned manually, when bounces back, will get correct id
+# this measn the id should also be 
+# if peer_id == multiplayer.peer_id, we already spawned it, jst need to update id
+
+func spawn_item_loc(item_id: int, peer_id: int, item: ResPreloader.ITEM, pos: Vector3, rot: Vector3):
+	var item_scn: PackedScene = ResPreloader.items_dict[item]
+	var inst: InvEquip = item_scn.instantiate() # is this in the heirarchy yet? onot?
+	inst.id = item_id
+	add_child(inst) # first we add as a child, cause these are then set thesethey are relative
+	items[item_id] = inst
+	inst.global_position = pos
+	inst.global_rotation = rot
+
+func _update_item_id(new_item_id: int, item: ResPreloader.ITEM):
+	var inst: InvEquip = items.get(0)
+	if inst == null: return
+	if inst.type == item:
+		inst.id = new_item_id
+		items.erase(0)
+		items[new_item_id] = inst
+	else:
+		Err.push_err_if(true, "got item id update but for the wrong item type")

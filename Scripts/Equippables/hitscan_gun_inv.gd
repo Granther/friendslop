@@ -9,6 +9,7 @@ var in_hand: bool = false
 func _ready() -> void:
 	super._ready()
 	equip_comp.on_leftm_key_hit = Callable(self, "_on_leftm_key_hit")
+	type = ResPreloader.ITEM.GUN
 
 func get_icomp() -> InteractComponent:
 	return equip_comp

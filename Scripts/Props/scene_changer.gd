@@ -26,9 +26,11 @@ func _switch_scenes(interactor: Node) -> void:
 
 func _spawn_item_multi(interactor: Node) -> void:
 	print("spawned")
+	WorldAPI.get_world().spawn_item_loc(0, MultiplayerApi.peer_id, ResPreloader.ITEM.GUN, Vector3(0, 5, 0), Vector3.ZERO)
 	MultiplayerApi.client2server(ItemPacket.create(
-		-1, ItemPacket.ITEM_OPT.SPAWN, ResPreloader.ITEM.GUN, Vector3(0, 5, 0)
+		0, MultiplayerApi.peer_id, ItemPacket.ITEM_OPT.SPAWN, ResPreloader.ITEM.GUN, Vector3(0, 5, 0)
 	))
+	
 
 func _spawn_peer(interactor: Node) -> void:
 	#MultiplayerApi.connect_new_player(2)

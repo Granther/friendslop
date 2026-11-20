@@ -87,3 +87,5 @@ Client -> Update -> Server -> Change internal GS -> Share with all peers except 
 					  |
 					  V
 				Invalid for GS -> Tells offending peer to reverse
+
+Ok, so we pickup item on client 1, item 1, and register the item, on all peers we want to delete the ground item and 
